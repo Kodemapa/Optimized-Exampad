@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Student{% endblock %}
+
+{% block styles %}
+<style>
+.card {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.required::after {
+    content: " *";
+    color: #dc3545;
+}
+
+.info-box {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-user-edit"></i> Edit Student</h2>
+                <a href="{{ url_for('admin.students') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Students
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-user"></i> Student Information - {{ student.username }}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <strong>Student ID:</strong> {{ student.id }}
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Created:</strong> {{ student.created_at.strftime('%Y-%m-%d %H:%M') }}
+                            </div>
+                            <div class="col-md-4">
+                                <strong>Status:</strong> 
+                                {% if student.is_active %}
+                                    <span class="badge badge-success">Active</span>
+                                {% else %}
+                                    <span class="badge badge-danger">Inactive</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="POST" novalidate>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="username" class="form-label required">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" 
+                                           placeholder="Enter username" required maxlength="80"
+                                           value="{{ request.form.get('username', student.username) }}">
+                                    <small class="form-text text-muted">
+                                        Unique identifier for the student (3-80 characters)
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label required">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           placeholder="Enter email address" required maxlength="120"
+                                           value="{{ request.form.get('email', student.email) }}">
+                                    <small class="form-text text-muted">
+                                        Valid email address for communication
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password" class="form-label">New Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" 
+                                           placeholder="Leave blank to keep current password" minlength="6">
+                                    <small class="form-text text-muted">
+                                        Only enter if you want to change the password (minimum 6 characters)
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="confirm_password" class="form-label">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" 
+                                           placeholder="Confirm new password" minlength="6">
+                                    <small class="form-text text-muted">
+                                        Re-enter the new password to confirm
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active" 
+                                       {% if request.form.get('is_active') == 'on' or (not request.form and student.is_active) %}checked{% endif %}>
+                                <label class="form-check-label" for="is_active">
+                                    Active Account
+                                </label>
+                                <small class="form-text text-muted d-block">
+                                    Active students can log in and take exams
+                                </small>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin.students') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Update Student
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Quick Statistics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <h4 class="text-primary">{{ student_stats.completed_sessions }}</h4>
+                            <p class="text-muted">Completed Exams</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-success">
+                                {% if student_stats.avg_score > 0 %}
+                                    {{ student_stats.avg_score }}%
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </h4>
+                            <p class="text-muted">Average Score</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-info">{{ student_stats.recent_sessions }}</h4>
+                            <p class="text-muted">Recent Activity (7 days)</p>
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="text-warning">{{ student_stats.in_progress_sessions }}</h4>
+                            <p class="text-muted">In Progress</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Password confirmation validation
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm_password');
+    
+    function validatePassword() {
+        if (password.value && password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity("Passwords don't match");
+        } else {
+            confirmPassword.setCustomValidity('');
+        }
+    }
+    
+    password.addEventListener('change', validatePassword);
+    confirmPassword.addEventListener('keyup', validatePassword);
+    
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const pass = document.getElementById('password').value;
+        const confirmPass = document.getElementById('confirm_password').value;
+        
+        if (!username || !email) {
+            e.preventDefault();
+            alert('Username and email are required.');
+            return false;
+        }
+        
+        if (pass && pass !== confirmPass) {
+            e.preventDefault();
+            alert('Passwords do not match.');
+            return false;
+        }
+        
+        if (pass && pass.length < 6) {
+            e.preventDefault();
+            alert('Password must be at least 6 characters long.');
+            return false;
+        }
+    });
+});
+</script>
+{% endblock %}

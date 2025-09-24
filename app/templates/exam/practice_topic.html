@@ -1,0 +1,1665 @@
+{% extends "base.html" %}
+
+{% block title %}Practice {{ topic.name }} - AKSHARASHREE{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="py-4 text-white" style="background: linear-gradient(120deg, #35cfc2 0%, #8ee8f5 100%);">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb text-white-50">
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('main.index') }}" class="text-white">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('main.subjects', class_level=topic.subject.class_level) }}" class="text-white">
+                        Class {{ topic.subject.class_level }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ url_for('main.topics', subject_id=topic.subject.id) }}" class="text-white">
+                        {{ topic.subject.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active">{{ topic.name }}</li>
+            </ol>
+        </nav>
+        <h1 class="h3 mb-0">
+            <i class="bi bi-play-circle me-2"></i>Practice: {{ topic.name }}
+        </h1>
+    </div>
+</section>
+
+<!-- Practice Interface -->
+<div class="container py-4">
+    <div class="row">
+        <!-- Practice Controls -->
+        <div class="col-lg-3 mb-4">
+            <div class="card sticky-top" style="top: 1rem;">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="bi bi-gear me-2"></i>Practice Settings</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label class="form-label">Number of Questions</label>
+                        <select class="form-select" id="questionCount">
+                            <option value="5">5 Questions</option>
+                            <option value="10" selected>10 Questions</option>
+                            <option value="15">15 Questions</option>
+                            <option value="20">20 Questions</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Difficulty Level</label>
+                        <select class="form-select" id="difficultyLevel">
+                            <option value="">All Levels</option>
+                            
+                            <option value="easy">Easy</option>
+                            <option value="moderate">Moderate</option>
+                            <option value="difficult">Difficult</option>
+                            
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Practice Mode</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="practiceMode" id="instantFeedback" value="instant" checked>
+                            <label class="form-check-label" for="instantFeedback">
+                                Instant Feedback
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="practiceMode" id="testMode" value="test">
+                            <label class="form-check-label" for="testMode">
+                                Test Mode
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary w-100" id="startPractice">
+                        <i class="bi bi-play-fill me-2"></i>Start Practice
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Practice Area -->
+        <div class="col-lg-9">
+            <!-- Welcome Message -->
+            <div id="welcomeMessage" class="card">
+                <div class="card-body text-center py-5">
+                    <i class="bi bi-lightbulb text-warning" style="font-size: 4rem;"></i>
+                    <h3 class="mt-3">Ready to Practice {{ topic.name }}?</h3>
+                    <p class="text-muted lead">
+                        Configure your practice settings and click "Start Practice" to begin.
+                    </p>
+                    <p class="text-muted">
+                        <strong>Topic:</strong> {{ topic.name }}<br>
+                        <strong>Subject:</strong> {{ topic.subject.name }} (Class {{ topic.subject.class_level }})<br>
+                        <strong>Available Questions:</strong> {{ topic.questions.count() }}
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Practice Container (Hidden initially) -->
+            <div id="practiceContainer" style="display: none;">
+                <!-- Progress Bar -->
+                <div class="card mb-3">
+                    <div class="card-body p-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="text-muted">Progress</span>
+                            <span id="progressText" class="text-muted">0 / 0</span>
+                        </div>
+                        <div class="progress">
+                            <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Enhanced Navigation Panel -->
+                <div class="card mb-3">
+                    <div class="card-body p-3">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <div id="questionNavigator" class="question-navigator">
+                                    <span class="text-muted me-2">Questions:</span>
+                                    <div id="questionButtons" class="d-inline-block"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" id="prevQuestionNav" disabled>
+                                        <i class="bi bi-chevron-left"></i> Previous
+                                    </button>
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" id="nextQuestionNav" disabled>
+                                        Next <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                </div>
+                                <div class="ms-2 d-inline-block">
+                                    <div class="badge bg-light text-dark">
+                                        <i class="bi bi-clock"></i> <span id="currentQuestionTimer">0:00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Question Status Legend -->
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-center gap-3">
+                                    <small class="text-muted">
+                                        <span class="badge bg-secondary me-1">●</span>Not Visited
+                                    </small>
+                                    <small class="text-muted">
+                                        <span class="badge bg-warning me-1">●</span>Visited
+                                    </small>
+                                    <small class="text-muted">
+                                        <span class="badge bg-primary me-1">●</span>Answered
+                                    </small>
+                                    <small class="text-muted">
+                                        <span class="badge bg-success me-1">●</span>Correct
+                                    </small>
+                                    <small class="text-muted">
+                                        <span class="badge bg-danger me-1">●</span>Incorrect
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question Card -->
+                <div id="questionCard" class="question-card card mb-4">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <h5 class="mb-0">Question <span id="questionNumber">1</span></h5>
+                            <span id="questionDifficulty" class="badge bg-secondary">Moderate</span>
+                        </div>
+                        
+                        <div id="questionText" class="question-text"></div>
+                        
+                        <div id="optionsContainer" class="mt-4"></div>
+                        
+                        <div id="feedbackContainer" class="mt-4" style="display: none;">
+                            <div id="feedback" class="alert"></div>
+                            <div id="explanation" class="card">
+                                <div class="card-body">
+                                    <h6 class="card-title">
+                                        <i class="bi bi-lightbulb me-2"></i>Detailed Explanation
+                                    </h6>
+                                    <div id="explanationText" class="explanation-content"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <button id="submitAnswer" class="btn btn-primary me-2" disabled>
+                                <i class="bi bi-check-circle me-1"></i>Submit Answer
+                            </button>
+                            <button id="nextQuestion" class="btn btn-outline-primary me-2" style="display: none;">
+                                <i class="bi bi-arrow-right me-1"></i>Next Question
+                            </button>
+                            <button id="finishPractice" class="btn btn-success" style="display: none;">
+                                <i class="bi bi-flag-checkered me-1"></i>Finish Practice
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results Container (Hidden initially) -->
+            <div id="resultsContainer" style="display: none;">
+                <div class="card mb-4">
+                    <div class="card-header text-center">
+                        <h4><i class="bi bi-trophy me-2"></i>Practice Results</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row text-center mb-4">
+                            <div class="col-md-3">
+                                <div class="stats-card success">
+                                    <div id="correctCount" class="stats-number">0</div>
+                                    <h6>Correct</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card danger">
+                                    <div id="incorrectCount" class="stats-number">0</div>
+                                    <h6>Incorrect</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card warning">
+                                    <div id="scorePercentage" class="stats-number">0%</div>
+                                    <h6>Score</h6>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stats-card">
+                                    <div id="timeTaken" class="stats-number">0m</div>
+                                    <h6>Time</h6>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mb-4">
+                            <button class="btn btn-primary me-2" onclick="location.reload()">
+                                <i class="bi bi-arrow-clockwise me-2"></i>Practice Again
+                            </button>
+                            <a href="{{ url_for('main.topics', subject_id=topic.subject.id) }}" class="btn btn-outline-primary">
+                                <i class="bi bi-arrow-left me-2"></i>Back to Topics
+                            </a>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <button class="btn btn-outline-warning" type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#detailedReview" aria-expanded="false">
+                                <i class="bi bi-eye me-1"></i> Show Detailed Review & Explanations
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Detailed Review Section (collapsible) -->
+                <div class="collapse" id="detailedReview">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="bi bi-list-ol me-2"></i>Question by Question Review</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="detailedQuestionList">
+                                <!-- Questions will be loaded here dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentQuestions = [];
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let practiceMode = 'instant';
+let startTime = null;
+
+// Initialize practice
+document.getElementById('startPractice').addEventListener('click', startPractice);
+
+async function startPractice() {
+    const questionCount = document.getElementById('questionCount').value;
+    const difficulty = document.getElementById('difficultyLevel').value;
+    practiceMode = document.querySelector('input[name="practiceMode"]:checked').value;
+    
+    try {
+        // Show loading
+        document.getElementById('startPractice').innerHTML = '<span class="spinner me-2"></span>Loading...';
+        
+        // Fetch questions
+        const response = await fetch('/api/questions/practice', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                topic_id: {{ topic.id }},
+                count: parseInt(questionCount),
+                difficulty: difficulty || null
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch questions');
+        }
+        
+        const data = await response.json();
+        currentQuestions = data.questions;
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        startTime = new Date();
+        
+        // Hide welcome, show practice
+        document.getElementById('welcomeMessage').style.display = 'none';
+        document.getElementById('practiceContainer').style.display = 'block';
+        
+        // Initialize question navigation
+        initializeQuestionNavigation();
+        
+        // Load first question
+        loadQuestion();
+        
+    } catch (error) {
+        console.error('Error starting practice:', error);
+        alert('Failed to start practice. Please try again.');
+        document.getElementById('startPractice').innerHTML = '<i class="bi bi-play-fill me-2"></i>Start Practice';
+    }
+}
+
+function loadQuestion() {
+    if (currentQuestionIndex >= currentQuestions.length) {
+        showResults();
+        return;
+    }
+    
+    const question = currentQuestions[currentQuestionIndex];
+    
+    // Update progress
+    updateProgress();
+    
+    // Update question display
+    document.getElementById('questionNumber').textContent = currentQuestionIndex + 1;
+    document.getElementById('questionDifficulty').textContent = question.difficulty_level || 'Moderate';
+    document.getElementById('questionDifficulty').className = `badge bg-${getDifficultyColor(question.difficulty_level)}`;
+    
+    // Safely render question text (handle HTML content properly)
+    document.getElementById('questionText').innerHTML = sanitizeAndFormatQuestion(question.question);
+    
+    // Load options
+    const optionsContainer = document.getElementById('optionsContainer');
+    optionsContainer.innerHTML = '';
+    
+    question.options.forEach((option, index) => {
+        const optionLetter = String.fromCharCode(65 + index); // A, B, C, D
+        const optionElement = document.createElement('div');
+        optionElement.className = 'option-card';
+        optionElement.setAttribute('data-answer', optionLetter);
+        optionElement.innerHTML = `
+            <div class="d-flex align-items-center">
+                <strong class="me-3">${optionLetter}.</strong>
+                <div>${sanitizeAndFormatQuestion(option)}</div>
+            </div>
+        `;
+        
+        optionElement.addEventListener('click', () => selectOption(optionLetter, optionElement));
+        optionsContainer.appendChild(optionElement);
+    });
+    
+    // Reset feedback and buttons
+    document.getElementById('feedbackContainer').style.display = 'none';
+    document.getElementById('submitAnswer').style.display = 'inline-block';
+    document.getElementById('submitAnswer').disabled = true;
+    document.getElementById('nextQuestion').style.display = 'none';
+    document.getElementById('finishPractice').style.display = 'none';
+    
+    // Re-render math
+    if (window.MathJax) {
+        MathJax.typesetPromise();
+    }
+}
+
+function selectOption(answer, element) {
+    // Remove previous selections
+    document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    // Select current option
+    element.classList.add('selected');
+    document.getElementById('submitAnswer').disabled = false;
+    
+    // Store selected answer
+    currentQuestions[currentQuestionIndex].selectedAnswer = answer;
+}
+
+function submitAnswer() {
+    const question = currentQuestions[currentQuestionIndex];
+    const selectedAnswer = question.selectedAnswer;
+    const correctAnswer = question.correct_answer;
+    const isCorrect = selectedAnswer === correctAnswer;
+    
+    // Store answer with full details for detailed review later
+    userAnswers.push({
+        question_id: question.id,
+        answer: selectedAnswer,
+        correct: isCorrect,
+        question: question.question,
+        options: question.options,
+        correct_answer: correctAnswer,
+        explanation: question.explanation,
+        difficulty_level: question.difficulty_level
+    });
+    
+    console.log(`Question ${currentQuestionIndex + 1} answered: ${selectedAnswer}, Correct: ${isCorrect}`);
+    
+    // Show feedback if in instant mode
+    if (practiceMode === 'instant') {
+        showFeedback(isCorrect, correctAnswer, question.explanation);
+    }
+    
+    // Update button visibility
+    document.getElementById('submitAnswer').style.display = 'none';
+    
+    if (currentQuestionIndex < currentQuestions.length - 1) {
+        document.getElementById('nextQuestion').style.display = 'inline-block';
+    } else {
+        document.getElementById('finishPractice').style.display = 'inline-block';
+    }
+}
+
+function showFeedback(isCorrect, correctAnswer, explanation) {
+    const feedbackContainer = document.getElementById('feedbackContainer');
+    const feedback = document.getElementById('feedback');
+    const explanationText = document.getElementById('explanationText');
+    
+    // Update option colors
+    document.querySelectorAll('.option-card').forEach(card => {
+        const answer = card.getAttribute('data-answer');
+        if (answer === correctAnswer) {
+            card.classList.add('correct');
+        } else if (card.classList.contains('selected') && !isCorrect) {
+            card.classList.add('incorrect');
+        }
+    });
+    
+    // Show feedback message
+    feedback.className = `alert ${isCorrect ? 'alert-success' : 'alert-danger'}`;
+    feedback.innerHTML = `
+        <i class="bi bi-${isCorrect ? 'check-circle' : 'x-circle'} me-2"></i>
+        ${isCorrect ? 'Correct!' : 'Incorrect.'} The correct answer is <strong>${correctAnswer}</strong>.
+    `;
+    
+    // Show explanation
+    if (explanation && explanation.trim()) {
+        explanationText.innerHTML = formatExplanation(explanation);
+    } else {
+        explanationText.innerHTML = '<p class="text-muted fst-italic">No detailed explanation is available for this question.</p>';
+    }
+    
+    feedbackContainer.style.display = 'block';
+    
+    // Re-render math
+    if (window.MathJax) {
+        MathJax.typesetPromise();
+    }
+}
+
+function nextQuestion() {
+    // Save time spent on current question before navigating
+    saveCurrentQuestionTime();
+    currentQuestionIndex++;
+    loadQuestion();
+    // Start timing for the new current question
+    startQuestionTimer();
+}
+
+function finishPractice() {
+    // Save time spent on the current question before finishing
+    saveCurrentQuestionTime();
+    if (currentQuestionTimer) {
+        clearInterval(currentQuestionTimer);
+        currentQuestionTimer = null;
+    }
+    // Process test results for test mode if needed
+    if (practiceMode === 'test') {
+        // For test mode, process all questions at once
+        const correctAnswers = [];
+        currentQuestions.forEach((question, index) => {
+            const selectedAnswer = question.selectedAnswer || '';
+            const correctAnswer = question.correct_answer;
+            const isCorrect = selectedAnswer === correctAnswer;
+            
+            // Build up the userAnswers array for test mode
+            userAnswers.push({
+                question_id: question.id,
+                answer: selectedAnswer,
+                correct: isCorrect,
+                question: question.question,
+                options: question.options,
+                correct_answer: correctAnswer,
+                explanation: question.explanation,
+                difficulty_level: question.difficulty_level
+            });
+        });
+    }
+    
+    // Save results to server (this will work for both modes)
+    saveTestResults();
+}
+
+// Save test results to server (used for both instant and test mode)
+async function saveTestResults() {
+    try {
+        const endTime = new Date();
+        const durationSeconds = Math.round((endTime - startTime) / 1000);
+        
+        // Enhanced answer collection with timing and navigation data
+        const answers = [];
+        const questionTimings = {};
+        const navigationData = {
+            question_visits: {},
+            total_navigation_events: 0,
+            time_per_question: {}
+        };
+        
+        // In test mode, we need to collect answers from the currentQuestions array
+        // In instant mode, we've already built up userAnswers during practice
+        if (practiceMode === 'test') {
+            currentQuestions.forEach((question, index) => {
+                const isAttempted = question.selectedAnswer && question.selectedAnswer.trim() !== '';
+                answers.push({
+                    question_id: question.id,
+                    answer: question.selectedAnswer || "",
+                    is_attempted: isAttempted,
+                    time_spent: question.timeSpent || 0
+                });
+                
+                questionTimings[question.id] = question.timeSpent || 0;
+                navigationData.time_per_question[question.id] = question.timeSpent || 0;
+                navigationData.question_visits[question.id] = question.visitCount || 1;
+            });
+        } else {
+            // For instant mode, userAnswers already contains the correct data
+            userAnswers.forEach((answer, index) => {
+                const isAttempted = answer.answer && answer.answer.trim() !== '';
+                answers.push({
+                    question_id: answer.question_id,
+                    answer: answer.answer || "",
+                    is_attempted: isAttempted,
+                    time_spent: answer.timeSpent || 0
+                });
+                
+                questionTimings[answer.question_id] = answer.timeSpent || 0;
+                navigationData.time_per_question[answer.question_id] = answer.timeSpent || 0;
+                navigationData.question_visits[answer.question_id] = 1;
+            });
+        }
+        
+        // Enhanced submission data
+        const submissionData = {
+            answers: answers,
+            duration_seconds: durationSeconds,
+            question_timings: questionTimings,
+            navigation_data: navigationData,
+            test_info: {
+                topic_id: {{ topic.id }},
+                topic_name: "{{ topic.name }}",
+                practice_mode: practiceMode,
+                difficulty: document.getElementById('difficultyLevel').value || 'all',
+                question_count: currentQuestions.length,
+                test_type: 'practice'
+            }
+        };
+        
+        // Submit enhanced test results
+        const response = await fetch('/exam/api/submit-test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify(submissionData),
+            credentials: 'same-origin'
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            const errorMessage = errorData.error || 'Failed to save test results';
+            console.error('Server error:', errorData);
+            throw new Error(errorMessage);
+        }
+        
+        const data = await response.json();
+        
+        console.log('Enhanced test results saved successfully:', data);
+        
+        // Redirect to enhanced results page if available
+        if (data.redirect_url) {
+            window.location.href = data.redirect_url;
+        } else {
+            // Fallback to showing results in current page with enhanced information
+            showEnhancedResults(data);
+        }
+        const progressInterval = setInterval(() => {
+            progress += 2;
+            progressBar.style.width = progress + '%';
+            if (progress >= 100) {
+                clearInterval(progressInterval);
+                window.location.href = '/exam/results?auto_refresh=true#auto-refresh';
+            }
+        }, 100); // 5 seconds total
+        
+        // Add auto-refresh parameter to the URL to trigger automatic refresh on load
+        const analyticsUrl = '/exam/results?auto_refresh=true#auto-refresh';
+        
+        // Automatically redirect after a delay:
+        const autoRedirect = document.createElement('div');
+        autoRedirect.className = 'text-muted mt-2';
+        autoRedirect.innerHTML = `<small>You will be automatically redirected to analytics in <span id="redirect-countdown">10</span> seconds...</small>`;
+        document.getElementById('resultsContainer').querySelector('.card-body').appendChild(autoRedirect);
+        
+        // Countdown timer for auto-redirect
+        let countdown = 10;
+        const countdownInterval = setInterval(() => {
+            countdown--;
+            document.getElementById('redirect-countdown').textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = analyticsUrl;
+            }
+        }, 1000);
+    } catch (error) {
+        console.error('Error saving test results:', error);
+        // Show error message
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-danger';
+        alertDiv.innerHTML = `<i class="bi bi-exclamation-triangle me-2"></i>${error.message || 'Failed to save test results. Please try again.'}`;
+        
+        // Add retry button
+        const retryButton = document.createElement('button');
+        retryButton.className = 'btn btn-sm btn-outline-danger ms-3';
+        retryButton.innerHTML = '<i class="bi bi-arrow-repeat me-1"></i>Retry';
+        retryButton.onclick = async () => {
+            alertDiv.innerHTML = '<i class="bi bi-hourglass-split me-2"></i>Retrying submission...';
+            try {
+                await submitTest(); // Re-attempt the submission
+                alertDiv.remove(); // Remove the error alert if successful
+            } catch (retryError) {
+                alertDiv.innerHTML = `<i class="bi bi-exclamation-triangle me-2"></i>${retryError.message || 'Failed to save test results again. Please try later.'}`;
+            }
+        };
+        
+        alertDiv.appendChild(retryButton);
+        document.getElementById('resultsContainer').querySelector('.card-body').prepend(alertDiv);
+    }
+    
+    // Show results UI
+    showResults();
+}
+
+// Enhanced results display function
+function showEnhancedResults(result) {
+    // Hide practice interface
+    document.getElementById('practiceContainer').style.display = 'none';
+    
+    // Show enhanced results
+    const resultsHtml = `
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0"><i class="bi bi-trophy me-2"></i>Test Results</h4>
+            </div>
+            <div class="card-body">
+                <!-- Score Overview -->
+                <div class="row mb-4">
+                    <div class="col-md-3 text-center">
+                        <div class="display-6 text-primary">${result.score}</div>
+                        <div class="text-muted">Correct Answers</div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="display-6 text-success">${result.percentage}%</div>
+                        <div class="text-muted">Overall Score</div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="display-6 text-info">${result.attempted}</div>
+                        <div class="text-muted">Attempted</div>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="display-6 text-warning">${result.skipped}</div>
+                        <div class="text-muted">Skipped</div>
+                    </div>
+                </div>
+                
+                <!-- Performance Metrics -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h5>Time Analysis</h5>
+                        <p>Total Time: ${Math.floor(result.total_time / 60)}:${('0' + (result.total_time % 60)).slice(-2)}</p>
+                        <p>Average per Question: ${result.avg_time_per_question} seconds</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h5>Accuracy Analysis</h5>
+                        <p>Attempted Accuracy: ${result.accuracy}%</p>
+                        <p>Total Questions: ${result.total}</p>
+                    </div>
+                </div>
+                
+                <!-- Difficulty Breakdown -->
+                <div class="mb-4">
+                    <h5>Performance by Difficulty</h5>
+                    <div class="row">
+                        ${Object.entries(result.difficulty_breakdown).map(([difficulty, data]) => `
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <h6 class="text-capitalize">${difficulty}</h6>
+                                        <div class="progress mb-2">
+                                            <div class="progress-bar ${difficulty === 'easy' ? 'bg-success' : difficulty === 'moderate' ? 'bg-warning' : 'bg-danger'}" 
+                                                 style="width: ${data.total > 0 ? (data.correct / data.total * 100) : 0}%"></div>
+                                        </div>
+                                        <small>${data.correct}/${data.total} correct</small>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <!-- Comparative Data -->
+                ${result.comparative_data ? `
+                <div class="mb-4">
+                    <h5>Compared to Other Students</h5>
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <div class="h4 text-primary">${result.comparative_data.user_rank}</div>
+                            <div class="text-muted">Your Rank</div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="h4 text-success">${result.comparative_data.user_percentile.toFixed(1)}%</div>
+                            <div class="text-muted">Percentile</div>
+                        </div>
+                        <div class="col-md-4 text-center">
+                            <div class="h4 text-info">${result.comparative_data.total_participants}</div>
+                            <div class="text-muted">Total Students</div>
+                        </div>
+                    </div>
+                </div>
+                ` : ''}
+                
+                <!-- Action Buttons -->
+                <div class="text-center">
+                    <a href="/exam/submit-test?session_id=${result.session_id}" class="btn btn-primary me-2">
+                        <i class="bi bi-eye me-1"></i>View Detailed Analysis
+                    </a>
+                    <button class="btn btn-success me-2" onclick="startNewPractice()">
+                        <i class="bi bi-arrow-repeat me-1"></i>Practice Again
+                    </button>
+                    <a href="/exam/results" class="btn btn-outline-primary">
+                        <i class="bi bi-graph-up me-1"></i>All Results
+                    </a>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('resultsContainer').innerHTML = resultsHtml;
+    document.getElementById('resultsContainer').style.display = 'block';
+}
+
+// Function to start new practice session
+function startNewPractice() {
+    location.reload();
+}
+
+function showResults() {
+    const endTime = new Date();
+    const timeTakenSeconds = Math.round((endTime - startTime) / 1000); // seconds
+    const minutes = Math.floor(timeTakenSeconds / 60);
+    const seconds = timeTakenSeconds % 60;
+    
+    // Calculate score based on practice mode
+    let correct = 0;
+    let total = 0;
+    
+    if (practiceMode === 'test') {
+        // In test mode, we need to count from userAnswers that we just populated in finishPractice
+        correct = userAnswers.filter(a => a.correct).length;
+        total = userAnswers.length;
+    } else {
+        // For instant feedback mode, userAnswers already contains the answers
+        correct = userAnswers.filter(a => a.correct).length;
+        total = userAnswers.length;
+    }
+    
+    console.log(`Score calculation: ${correct}/${total}`);
+    const percentage = Math.round((correct / total) * 100) || 0;
+    
+    // Update results display
+    document.getElementById('correctCount').textContent = correct;
+    document.getElementById('incorrectCount').textContent = total - correct;
+    document.getElementById('scorePercentage').textContent = percentage + '%';
+    document.getElementById('timeTaken').textContent = `${minutes}m ${seconds}s`;
+    
+    // Generate detailed review for each question
+    populateDetailedReview();
+    
+    // Hide practice, show results
+    document.getElementById('practiceContainer').style.display = 'none';
+    document.getElementById('resultsContainer').style.display = 'block';
+}
+
+function populateDetailedReview() {
+    const detailedList = document.getElementById('detailedQuestionList');
+    detailedList.innerHTML = '';
+    
+    userAnswers.forEach((answer, index) => {
+        // Get user answer details from stored answers
+        const userAnswer = answer.answer || 'Not answered';
+        const correctAnswer = answer.correct_answer;
+        const isCorrect = answer.correct;
+        
+        // Create review card for this question
+        const reviewCard = document.createElement('div');
+        reviewCard.className = 'card glass-card border-0 mb-4';
+        reviewCard.innerHTML = `
+            <div class="card-header bg-transparent border-0 py-3">
+                <div class="d-flex justify-content-between align-items-start">
+                    <h5 class="card-title mb-0">
+                        Question ${index + 1}
+                        ${isCorrect 
+                            ? '<span class="badge badge-success ms-2"><i class="bi bi-check-circle me-1"></i>Correct</span>' 
+                            : '<span class="badge badge-danger ms-2"><i class="bi bi-x-circle me-1"></i>Incorrect</span>'}
+                    </h5>
+                    <div class="text-end">
+                        <span class="badge bg-secondary">
+                            ${answer.difficulty_level || 'Moderate'}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <!-- Question Text -->
+                <div class="question-text mb-3 p-3 rounded-3" style="background: var(--gray-50);">
+                    ${answer.question}
+                </div>
+                
+                <!-- Options and Answers -->
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold mb-3">Options:</h6>
+                        <div class="options-list">
+                            ${renderOptions(answer, userAnswer, correctAnswer)}
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <h6 class="fw-semibold mb-3">Answer Summary:</h6>
+                        <div class="answer-summary">
+                            <div class="mb-2">
+                                <strong>Your Answer:</strong>
+                                <span class="badge ${isCorrect ? 'badge-success' : 'badge-danger'} ms-1">
+                                    ${userAnswer}
+                                </span>
+                            </div>
+                            <div class="mb-2">
+                                <strong>Correct Answer:</strong>
+                                <span class="badge badge-success ms-1">${correctAnswer}</span>
+                            </div>
+                            <div class="mb-2">
+                                <strong>Result:</strong>
+                                ${isCorrect 
+                                    ? '<span class="text-success fw-medium"><i class="bi bi-check-circle me-1"></i>Correct</span>'
+                                    : '<span class="text-danger fw-medium"><i class="bi bi-x-circle me-1"></i>Incorrect</span>'}
+                            </div>
+                            <div class="mt-3">
+                                <button class="btn btn-sm btn-warning w-100" type="button" 
+                                        data-bs-toggle="collapse" data-bs-target="#explanation-${index}">
+                                    <i class="bi bi-lightbulb me-1"></i> Show Explanation
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Explanation (Collapsible) -->
+                <div class="collapse mt-4" id="explanation-${index}">
+                    <div class="explanation-section p-3 rounded-3" style="background: #fff3cd; border-left: 4px solid #ffc107;">
+                        <h6 class="fw-semibold mb-2">
+                            <i class="bi bi-lightbulb-fill text-warning me-2"></i>Explanation:
+                        </h6>
+                        <div class="explanation-text">
+                            ${answer.explanation 
+                                ? formatExplanation(answer.explanation) 
+                                : '<p class="text-muted">No detailed explanation available for this question.</p>'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        detailedList.appendChild(reviewCard);
+    });
+    
+    // Add event listeners to explanation buttons
+    document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(button => {
+        button.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-bs-target');
+            const isCollapsed = document.querySelector(targetId).classList.contains('show');
+            
+            if (isCollapsed) {
+                this.innerHTML = '<i class="bi bi-lightbulb me-1"></i> Show Explanation';
+            } else {
+                this.innerHTML = '<i class="bi bi-lightbulb-fill me-1"></i> Hide Explanation';
+            }
+        });
+    });
+    
+    // Re-render math if needed
+    if (window.MathJax) {
+        MathJax.typesetPromise();
+    }
+}
+
+function renderOptions(answer, userAnswer, correctAnswer) {
+    let optionsHTML = '';
+    
+    // Check if options is an array or object
+    if (Array.isArray(answer.options)) {
+        // Handle array format
+        answer.options.forEach((option, index) => {
+            const optionKey = String.fromCharCode(65 + index); // A, B, C, D
+            const isCorrect = optionKey === correctAnswer;
+            const isSelected = optionKey === userAnswer;
+            
+            let className = 'option-item mb-2 p-2 rounded-2 ';
+            if (isCorrect) className += 'correct-option';
+            else if (isSelected && !isCorrect) className += 'incorrect-option';
+            else className += 'border';
+            
+            optionsHTML += `
+                <div class="${className}">
+                    <div class="d-flex align-items-center">
+                        <span class="option-marker me-2 ${isCorrect ? 'correct-marker' : isSelected ? 'incorrect-marker' : ''}">
+                            ${optionKey}
+                        </span>
+                        <span class="option-content">${option}</span>
+                        ${isCorrect ? '<i class="bi bi-check-circle text-success ms-auto"></i>' : ''}
+                        ${isSelected && !isCorrect ? '<i class="bi bi-x-circle text-danger ms-auto"></i>' : ''}
+                    </div>
+                </div>
+            `;
+        });
+    } else {
+        // Handle object format (a, b, c, d keys)
+        for (const [key, value] of Object.entries(answer.options)) {
+            const optionKey = key.toUpperCase();
+            const isCorrect = optionKey === correctAnswer.toUpperCase();
+            const isSelected = optionKey === userAnswer.toUpperCase();
+            
+            let className = 'option-item mb-2 p-2 rounded-2 ';
+            if (isCorrect) className += 'correct-option';
+            else if (isSelected && !isCorrect) className += 'incorrect-option';
+            else className += 'border';
+            
+            optionsHTML += `
+                <div class="${className}">
+                    <div class="d-flex align-items-center">
+                        <span class="option-marker me-2 ${isCorrect ? 'correct-marker' : isSelected ? 'incorrect-marker' : ''}">
+                            ${optionKey}
+                        </span>
+                        <span class="option-content">${value}</span>
+                        ${isCorrect ? '<i class="bi bi-check-circle text-success ms-auto"></i>' : ''}
+                        ${isSelected && !isCorrect ? '<i class="bi bi-x-circle text-danger ms-auto"></i>' : ''}
+                    </div>
+                </div>
+            `;
+        }
+    }
+    
+    return optionsHTML;
+}
+
+function updateProgress() {
+    const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+    document.getElementById('progressBar').style.width = progress + '%';
+    document.getElementById('progressText').textContent = `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+}
+
+function getDifficultyColor(difficulty) {
+    switch(difficulty) {
+        case 'easy': return 'success';
+        case 'difficult': return 'danger';
+        default: return 'warning';
+    }
+}
+
+// Format explanation text for better readability
+function formatExplanation(explanation) {
+    if (!explanation) return '';
+    
+    // Split explanation into paragraphs if it contains line breaks
+    let formatted = explanation
+        .replace(/\n\s*\n/g, '</p><p>')  // Double line breaks become paragraph breaks
+        .replace(/\n/g, '<br>')          // Single line breaks become line breaks
+        .trim();
+    
+    // Wrap in paragraphs if not already wrapped
+    if (!formatted.startsWith('<p>')) {
+        formatted = '<p>' + formatted + '</p>';
+    }
+    
+    // Enhance mathematical expressions
+    formatted = formatted.replace(/\$\$(.*?)\$\$/g, '<span class="math-display">$$1$$</span>');
+    formatted = formatted.replace(/\$(.*?)\$/g, '<span class="math-inline">$1</span>');
+    
+    // Enhance bold text
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    // Enhance italic text
+    formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    
+    // Enhance steps or numbered items
+    formatted = formatted.replace(/^(\d+\.\s)/gm, '<span class="step-number">$1</span>');
+    
+    // Enhance bullet points
+    formatted = formatted.replace(/^[-•]\s/gm, '<span class="bullet-point">• </span>');
+    
+    return formatted;
+}
+
+// Sanitize and format question text to handle HTML content properly
+function sanitizeAndFormatQuestion(questionText) {
+    if (!questionText) return '';
+    
+    // Create a temporary div to parse HTML content
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = questionText;
+    
+    // Get the text content to remove any potentially harmful scripts
+    let cleanText = tempDiv.textContent || tempDiv.innerText || '';
+    
+    // If the original text contains HTML tags for formatting, preserve basic formatting
+    if (questionText.includes('<') && questionText.includes('>')) {
+        // Allow basic formatting tags but sanitize the content
+        cleanText = questionText
+            .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove scripts
+            .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '') // Remove iframes
+            .replace(/javascript:/gi, '') // Remove javascript: URLs
+            .replace(/on\w+\s*=/gi, ''); // Remove event handlers
+    }
+    
+    // Format mathematical expressions if present
+    cleanText = cleanText.replace(/\$\$(.*?)\$\$/g, '<span class="math-display">$$1$$</span>');
+    cleanText = cleanText.replace(/\$(.*?)\$/g, '<span class="math-inline">$1</span>');
+    
+    // Preserve line breaks
+    cleanText = cleanText.replace(/\n/g, '<br>');
+    
+    return cleanText;
+}
+
+// Enhanced navigation variables
+let questionTimers = [];
+let currentQuestionTimer = null;
+let questionStartTime = Date.now();
+
+// Initialize question navigation
+function initializeQuestionNavigation() {
+    const questionButtons = document.getElementById('questionButtons');
+    questionButtons.innerHTML = '';
+    
+    // Create navigation buttons for each question
+    currentQuestions.forEach((question, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'question-nav-btn';
+        btn.textContent = index + 1;
+        btn.dataset.questionIndex = index;
+        btn.onclick = () => navigateToQuestion(index);
+        questionButtons.appendChild(btn);
+        
+        // Initialize question state
+        question.status = 'not-visited';
+        question.timeSpent = 0;
+        question.visitCount = 0;
+    });
+    
+    // Setup navigation button listeners
+    document.getElementById('prevQuestionNav').onclick = () => {
+        if (currentQuestionIndex > 0) {
+            navigateToQuestion(currentQuestionIndex - 1);
+        }
+    };
+    
+    document.getElementById('nextQuestionNav').onclick = () => {
+        if (currentQuestionIndex < currentQuestions.length - 1) {
+            navigateToQuestion(currentQuestionIndex + 1);
+        }
+    };
+    
+    // Start timer for first question
+    startQuestionTimer();
+}
+
+// Navigate to specific question
+function navigateToQuestion(index) {
+    if (index < 0 || index >= currentQuestions.length) return;
+    
+    // Save time spent on current question
+    saveCurrentQuestionTime();
+    
+    // Update question index
+    currentQuestionIndex = index;
+    
+    // Mark question as visited
+    const question = currentQuestions[currentQuestionIndex];
+    if (question.status === 'not-visited') {
+        question.status = 'visited';
+    }
+    question.visitCount = (question.visitCount || 0) + 1;
+    
+    // Load the question
+    loadQuestion();
+    
+    // Update navigation UI
+    updateNavigationUI();
+    
+    // Start timer for new question
+    startQuestionTimer();
+}
+
+// Update navigation UI
+function updateNavigationUI() {
+    const buttons = document.querySelectorAll('.question-nav-btn');
+    
+    buttons.forEach((btn, index) => {
+        const question = currentQuestions[index];
+        btn.className = 'question-nav-btn';
+        
+        // Add status classes
+        if (index === currentQuestionIndex) {
+            btn.classList.add('current');
+        } else {
+            switch (question.status) {
+                case 'not-visited':
+                    // Default styling
+                    break;
+                case 'visited':
+                    btn.classList.add('visited');
+                    break;
+                case 'answered':
+                    btn.classList.add('answered');
+                    break;
+                case 'correct':
+                    btn.classList.add('correct');
+                    break;
+                case 'incorrect':
+                    btn.classList.add('incorrect');
+                    break;
+            }
+        }
+    });
+    
+    // Update prev/next button states
+    document.getElementById('prevQuestionNav').disabled = (currentQuestionIndex === 0);
+    document.getElementById('nextQuestionNav').disabled = (currentQuestionIndex === currentQuestions.length - 1);
+}
+
+// Timer functions
+function startQuestionTimer() {
+    questionStartTime = Date.now();
+    
+    // Clear existing timer
+    if (currentQuestionTimer) {
+        clearInterval(currentQuestionTimer);
+    }
+    
+    // Start new timer
+    currentQuestionTimer = setInterval(updateQuestionTimerDisplay, 1000);
+}
+
+function updateQuestionTimerDisplay() {
+    const elapsed = Math.floor((Date.now() - questionStartTime) / 1000);
+    const minutes = Math.floor(elapsed / 60);
+    const seconds = elapsed % 60;
+    document.getElementById('currentQuestionTimer').textContent = 
+        `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function saveCurrentQuestionTime() {
+    if (currentQuestionIndex < currentQuestions.length) {
+        const timeSpent = (Date.now() - questionStartTime) / 1000;
+        const question = currentQuestions[currentQuestionIndex];
+        question.timeSpent = (question.timeSpent || 0) + timeSpent;
+    }
+}
+
+// Enhanced submit answer function
+function submitAnswerEnhanced() {
+    const question = currentQuestions[currentQuestionIndex];
+    const selectedAnswer = question.selectedAnswer;
+    
+    if (!selectedAnswer) {
+        alert('Please select an answer before submitting.');
+        return;
+    }
+    
+    // Save time spent on this question
+    saveCurrentQuestionTime();
+    
+    const correctAnswer = question.correct_answer;
+    const isCorrect = selectedAnswer === correctAnswer;
+    
+    // Update question status
+    question.status = isCorrect ? 'correct' : 'incorrect';
+    
+    // Update UI for instant feedback mode
+    if (practiceMode === 'instant') {
+        showFeedback(isCorrect, correctAnswer, question.explanation);
+        
+        // Add to userAnswers for instant mode
+        userAnswers.push({
+            question_id: question.id,
+            answer: selectedAnswer,
+            correct: isCorrect,
+            question: question.question,
+            options: question.options,
+            correct_answer: correctAnswer,
+            explanation: question.explanation,
+            difficulty_level: question.difficulty_level,
+            timeSpent: question.timeSpent
+        });
+        
+        // Update button visibility
+        document.getElementById('submitAnswer').style.display = 'none';
+        
+        if (currentQuestionIndex === currentQuestions.length - 1) {
+            document.getElementById('finishPractice').style.display = 'inline-block';
+        } else {
+            document.getElementById('nextQuestion').style.display = 'inline-block';
+        }
+    } else {
+        // For test mode, just mark as answered and move on
+        question.status = 'answered';
+        if (currentQuestionIndex < currentQuestions.length - 1) {
+            nextQuestion();
+        } else {
+            // Last question in test mode
+            document.getElementById('submitAnswer').style.display = 'none';
+            document.getElementById('finishPractice').style.display = 'inline-block';
+        }
+    }
+    
+    // Update navigation UI
+    updateNavigationUI();
+}
+
+// Enhanced loadQuestion function
+const originalLoadQuestion = loadQuestion;
+loadQuestion = function() {
+    // Call original function
+    originalLoadQuestion();
+    
+    // Update navigation UI
+    updateNavigationUI();
+    
+    // Enable/disable navigation buttons based on current question
+    const question = currentQuestions[currentQuestionIndex];
+    
+    // Show appropriate buttons based on mode and question state
+    if (practiceMode === 'test') {
+        document.getElementById('submitAnswer').style.display = 'inline-block';
+        document.getElementById('nextQuestion').style.display = 'none';
+        document.getElementById('finishPractice').style.display = currentQuestionIndex === currentQuestions.length - 1 ? 'inline-block' : 'none';
+    } else {
+        // Instant feedback mode
+        if (question.status === 'correct' || question.status === 'incorrect') {
+            document.getElementById('submitAnswer').style.display = 'none';
+            document.getElementById('nextQuestion').style.display = 'inline-block';
+            document.getElementById('finishPractice').style.display = currentQuestionIndex === currentQuestions.length - 1 ? 'inline-block' : 'none';
+        } else {
+            document.getElementById('submitAnswer').style.display = 'inline-block';
+            document.getElementById('nextQuestion').style.display = 'none';
+            document.getElementById('finishPractice').style.display = 'none';
+        }
+    }
+};
+
+// Event listeners
+document.getElementById('nextQuestion').addEventListener('click', nextQuestion);
+document.getElementById('finishPractice').addEventListener('click', finishPractice);
+document.getElementById('submitAnswer').addEventListener('click', submitAnswerEnhanced);
+</script>
+{% endblock %}
+
+{% block styles %}
+<style>
+/* Option card styles */
+.option-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-card:hover {
+    border-color: #aaa;
+    transform: translateX(5px);
+}
+
+.option-card.selected {
+    border-color: #6366f1;
+    background-color: rgba(99, 102, 241, 0.1);
+}
+
+.option-card.correct, .correct-option {
+    background-color: rgba(6, 214, 160, 0.1);
+    border: 1px solid var(--success-color);
+}
+
+.option-card.incorrect, .incorrect-option {
+    background-color: rgba(247, 37, 133, 0.1);
+    border: 1px solid var(--danger-color);
+}
+
+/* Stats card styles */
+.stats-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+}
+
+.stats-card.success {
+    border-top: 4px solid #06d6a0;
+}
+
+.stats-card.danger {
+    border-top: 4px solid #f72585;
+}
+
+.stats-card.warning {
+    border-top: 4px solid #ffd166;
+}
+
+.stats-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+/* Explanation styles */
+.explanation-content {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Badge styles */
+.badge-success { 
+    background: var(--gradient-success) !important; 
+    color: white;
+}
+.badge-warning { 
+    background: var(--gradient-warning) !important; 
+    color: white;
+}
+.badge-danger { 
+    background: var(--gradient-danger) !important; 
+    color: white;
+}
+
+/* Option marker styles */
+.option-marker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gray-200);
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.correct-marker {
+    background: var(--success-color);
+    color: white;
+}
+
+.incorrect-marker {
+    background: var(--danger-color);
+    color: white;
+}
+
+/* Card styles */
+.glass-card {
+    background: var(--glass-bg, rgba(255,255,255,0.85));
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+/* --- Glassmorphic theme additions --- */
+.glass-section {
+  background: rgba(255,255,255,0.62);
+  border-radius: 24px;
+  box-shadow:
+    8px 8px 15px rgba(0, 0, 0, 0.1),
+    -8px -8px 20px rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Make all .card glassy */
+.card {
+  border-radius: 20px !important;
+  background: rgba(255,255,255,0.6) !important;
+  box-shadow:
+    6px 6px 15px rgba(0,0,0,0.10),
+    -6px -6px 15px rgba(255,255,255,0.70);
+  transition: box-shadow 0.3s;
+}
+
+/* Stats cards */
+.stats-card {
+  background: rgba(255,255,255,0.65);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(6,182,212,0.08);
+  border: none;
+}
+
+/* Enhanced Navigation Styles */
+.question-navigator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.question-nav-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  background: #f8f9fa;
+  color: #6c757d;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin: 2px;
+}
+
+.question-nav-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.question-nav-btn.visited {
+  background: #fff3cd;
+  border-color: #ffc107;
+  color: #856404;
+}
+
+.question-nav-btn.answered {
+  background: #d1ecf1;
+  border-color: #0dcaf0;
+  color: #0c5460;
+}
+
+.question-nav-btn.correct {
+  background: #d1e7dd;
+  border-color: #198754;
+  color: #0f5132;
+}
+
+.question-nav-btn.incorrect {
+  background: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.question-nav-btn.current {
+  background: #6f42c1;
+  border-color: #6f42c1;
+  color: white;
+  transform: scale(1.1);
+}
+
+.question-nav-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#questionButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  max-width: 100%;
+}
+
+.timer-display {
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .question-navigator {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  #questionButtons {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+  
+  .question-nav-btn {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Practice area results */
+#practiceContainer .card,
+#resultsContainer .card {
+  border-radius: 20px;
+  background: rgba(255,255,255,0.68);
+  box-shadow: 8px 8px 32px #2596be12, -8px -8px 20px #fff8;
+  backdrop-filter: blur(16px);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(145deg, #06b6d4, #0891b2);
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 4px 4px 8px #0ff6ff38, -4px -4px 8px #e0ffe5b3;
+  font-weight: 600;
+  padding: 12px 24px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-primary:hover {
+  background: linear-gradient(145deg, #0891b2, #06b6d4);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 12px #0ff6ff48, -6px -6px 12px #e0ffe5c3;
+}
+.btn-primary:disabled {
+  background: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-outline-primary {
+  border: 2px solid #06b6d4;
+  color: #06b6d4;
+  background: transparent;
+  border-radius: 16px;
+  font-weight: 600;
+  padding: 12px 24px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-outline-primary:hover {
+  background: #06b6d4;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 12px rgba(6, 182, 212, 0.3);
+}
+
+.btn-success {
+  background: linear-gradient(145deg, #10b981, #059669);
+  border: none;
+  border-radius: 16px;
+  color: #fff;
+  box-shadow: 4px 4px 8px rgba(16, 185, 129, 0.3);
+  font-weight: 600;
+  padding: 12px 24px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-success:hover {
+  background: linear-gradient(145deg, #059669, #10b981);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Action buttons container */
+.mt-4 {
+  margin-top: 1.5rem !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.option-card {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  
+  border: 2px solid #c8f1ff;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.82);
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.04),
+    -2px -2px 8px rgba(255,255,255,0.5);
+  transition: box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.option-card.selected {
+  border-color: #06b6d4;
+  background: #d6f6ff;
+}
+.option-card.correct {
+  border-color: #22c55e;
+  background: #d1fae5;
+}
+.option-card.incorrect {
+  border-color: #ef4444;
+  background: #fee2e2;
+}
+.option-card:hover {
+  box-shadow: 6px 6px 15px #06b6d430, -6px -6px 15px #9ff5e0a0;
+  transform: translateX(4px);
+}
+
+</style>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}My Tests - KODEMAPA{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>My Custom Tests</h3>
+    <div class="d-flex gap-2">
+      <form method="POST" action="{{ url_for('exam.clear_all_custom_tests') }}" onsubmit="return confirm('Are you sure you want to delete all your custom tests and related sessions?');">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Clear All</button>
+      </form>
+      <a href="{{ url_for('exam.create_test') }}" class="btn btn-warning"><i class="bi bi-plus-circle"></i> Create Test</a>
+    </div>
+  </div>
+  {% if tests and tests|length %}
+  <div class="d-flex justify-content-end align-items-center mb-2 gap-2">
+    <label for="filter-status" class="form-label m-0">Filter:</label>
+    <select id="filter-status" class="form-select form-select-sm" style="width:auto;">
+      <option value="all" selected>All</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+      <option value="scheduled">Scheduled</option>
+    </select>
+    <button id="apply-filter" class="btn btn-sm btn-outline-primary">Search</button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Subject</th>
+          <th>Duration</th>
+          <th>Status</th>
+          <th>Window</th>
+          <th>Submissions</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in tests %}
+        <tr data-status="{{ t.status }}">
+          <td>{{ t.title }}</td>
+          <td>{{ t.subject_name }} ({{ t.class_level }})</td>
+          <td>{{ t.duration_minutes }} mins</td>
+          <td>
+            {% if t.status == 'active' %}
+              <span class="badge bg-success">Active</span>
+            {% elif t.status == 'inactive' %}
+              <span class="badge bg-danger">Inactive</span>
+            {% elif t.status == 'scheduled' %}
+              <span class="badge bg-info text-dark">Scheduled</span>
+            {% else %}
+              <span class="badge bg-secondary">{{ t.status|capitalize }}</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if t.started_at %}<span class="utc-dt" data-utc="{{ t.started_at.strftime('%Y-%m-%dT%H:%M:00') }}Z"></span>{% else %}-{% endif %}
+            &ndash;
+            {% if t.closed_at %}<span class="utc-dt" data-utc="{{ t.closed_at.strftime('%Y-%m-%dT%H:%M:00') }}Z"></span>{% else %}-{% endif %}
+          </td>
+          <td>{{ t.submissions }}</td>
+          <td class="d-flex gap-2">
+            <a class="btn btn-sm btn-outline-primary" href="{{ t.link_url }}">Open Link</a>
+            <a class="btn btn-sm btn-outline-secondary" href="{{ t.submissions_url }}">View Submissions</a>
+            <a class="btn btn-sm btn-outline-info" href="{{ url_for('exam.preview_test', exam_id=t.exam_id) }}">
+              <i class="bi bi-eye"></i> Preview
+            </a>
+            <button class="btn btn-sm btn-outline-danger" onclick="deleteTest({{ t.exam_id }}, '{{ t.title|e }}')">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    // Localize UTC timestamps to user's timezone
+    const dtNodes = document.querySelectorAll('.utc-dt[data-utc]');
+    dtNodes.forEach(function(el){
+      try {
+        const iso = el.getAttribute('data-utc');
+        const d = new Date(iso);
+        if (!isNaN(d.getTime())) {
+          const opts = {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', timeZone:'Asia/Kolkata', hour12:false};
+          el.textContent = new Intl.DateTimeFormat(undefined, opts).format(d);
+        }
+      } catch(_) {}
+    });
+
+    const sel = document.getElementById('filter-status');
+    const btn = document.getElementById('apply-filter');
+    const rows = Array.from(document.querySelectorAll('tbody tr[data-status]'));
+    function apply(){
+      const v = sel.value;
+      rows.forEach(r => {
+        const st = (r.getAttribute('data-status') || '').toLowerCase();
+        r.style.display = (v === 'all' || v === st) ? '' : 'none';
+      });
+    }
+    btn.addEventListener('click', apply);
+
+    // Delete test function
+    window.deleteTest = function(examId, testTitle) {
+      if (confirm('Are you sure you want to delete the test "' + testTitle + '"? This action cannot be undone and will also delete all related submissions.')) {
+        // Create form and submit
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/exam/delete-test/' + examId;
+        
+        const csrfToken = document.createElement('input');
+        csrfToken.type = 'hidden';
+        csrfToken.name = 'csrf_token';
+        csrfToken.value = '{{ csrf_token() }}';
+        
+        form.appendChild(csrfToken);
+        document.body.appendChild(form);
+        form.submit();
+      }
+    };
+  });
+  </script>
+  {% else %}
+  <div class="alert alert-info">You have not created any custom tests yet.</div>
+  {% endif %}
+</div>
+{% endblock %}

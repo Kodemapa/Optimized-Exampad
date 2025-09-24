@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Custom Test Link Status{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <div class="card">
+    <div class="card-body text-center">
+      <h3 class="mb-3">{{ exam.title }}</h3>
+      {% if status == 'scheduled' %}
+        <div class="alert alert-info">
+          This test is scheduled. It will open at <strong>{{ custom_test.started_at.strftime('%Y-%m-%d %H:%M') if custom_test.started_at }}</strong>.
+        </div>
+      {% elif status == 'inactive' %}
+        <div class="alert alert-secondary">
+          This test is inactive. It expired at <strong>{{ custom_test.closed_at.strftime('%Y-%m-%d %H:%M') if custom_test.closed_at }}</strong>.
+        </div>
+      {% else %}
+        <div class="alert alert-success">
+          This test is active.
+        </div>
+      {% endif %}
+      <div class="mt-3">
+        <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+        {% if current_user.is_authenticated and current_user.role == 'teacher' %}
+          <a href="{{ url_for('exam.custom_test_submissions', exam_id=exam.id) }}" class="btn btn-outline-secondary ms-2">View Submissions</a>
+          <a href="{{ url_for('exam.edit_custom_timings', exam_id=exam.id) }}" class="btn btn-outline-primary ms-2">Edit Timings</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,575 @@
+{% extends "base.html" %}
+
+{% block title %}Test Results - AKSHARASHREE{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="py-4 text-white" style="background: linear-gradient(120deg, #667eea 0%, #764ba2 100%);">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1 class="h3 mb-1">
+                    <i class="bi bi-clipboard-check me-2"></i>Test Results
+                </h1>
+                <p class="mb-0 opacity-75">
+                    {{ test_info.test_name or "Practice Test" }} - 
+                    Completed on {{ session.end_time.strftime('%B %d, %Y at %I:%M %p') }}
+                </p>
+            </div>
+            <div class="col-md-4 text-end">
+                <div class="d-flex gap-2 justify-content-end">
+                    <a href="{{ url_for('exam.results') }}" class="btn btn-outline-light">
+                        <i class="bi bi-arrow-left me-1"></i>All Results
+                    </a>
+                    <button class="btn btn-light" onclick="window.print()">
+                        <i class="bi bi-printer me-1"></i>Print
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Results Overview -->
+<div class="container py-4">
+    <!-- Score Cards -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="display-4 mb-2" style="color: #28a745;">{{ session.percentage|round(1) }}%</div>
+                    <h6 class="text-muted mb-1">Percentage</h6>
+                    <small class="text-muted">{{ analytics.question_status.attempted }} attempted</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="display-4 mb-2" style="color: #667eea;">{{ session.score|int }}/{{ session.max_score|int }}</div>
+                    <h6 class="text-muted mb-1">Total Score</h6>
+                    <small class="text-muted">out of {{ session.max_score }}</small>
+                        {% set pos = test_info.marking_scheme.positive if test_info.marking_scheme is defined and test_info.marking_scheme.positive is defined else 1 %}
+                        {% set neg = test_info.marking_scheme.negative if test_info.marking_scheme is defined and test_info.marking_scheme.negative is defined else 0 %}
+                        <div class="display-4 mb-2" style="color: #667eea;"></div>
+                       <!-- <h6 class="text-muted mb-1">Total Score</h6>
+                        <small class="text-muted">Marking: +{{ pos }}, -{{ neg }}</small>
+                    -->
+                    </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="display-4 mb-2" style="color: #ffc107;">{{ (analytics.time_analysis.total_time // 60)|int }}:{{ '%02d'|format((analytics.time_analysis.total_time % 60)|int) }}</div>
+                    <h6 class="text-muted mb-1">Time Taken</h6>
+                    <small class="text-muted">{{ analytics.time_analysis.avg_per_question|round(1) }}s avg/question</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body text-center">
+                    <div class="display-4 mb-2" style="color: #dc3545;">{{ analytics.question_status.skipped }}</div>
+                    <h6 class="text-muted mb-1">Questions Skipped</h6>
+                    <small class="text-muted">{{ ((analytics.question_status.skipped / session.max_score) * 100)|round(1) }}% of total</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comparative Analysis -->
+    <div class="row mb-4">
+        <div class="col-lg-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="mb-0"><i class="bi bi-graph-up me-2"></i>Your Performance vs Others</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-4">
+                            <div class="h4 text-primary">{{ comparative_data.user_rank }}</div>
+                            <small class="text-muted">Your Rank</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h4 text-success">{{ comparative_data.user_percentile|round(1) }}%</div>
+                            <small class="text-muted">Percentile</small>
+                        </div>
+                        <div class="col-4">
+                            <div class="h4 text-info">{{ comparative_data.total_participants }}</div>
+                            <small class="text-muted">Total Students</small>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>Your Score</span>
+                            <strong>{{ session.percentage|round(1) }}%</strong>
+                        </div>
+                        <div class="progress mb-2" style="height: 8px;">
+                            <div class="progress-bar bg-primary" style="width: {{ session.percentage }}%"></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span>Average Score</span>
+                            <span class="text-muted">{{ comparative_data.avg_score_all_users|round(1) }}%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-secondary" style="width: {{ comparative_data.avg_score_all_users }}%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-6 mb-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="mb-0"><i class="bi bi-clock me-2"></i>Time Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center mb-3">
+                        <div class="col-6">
+                            <div class="h6 text-success">{{ comparative_data.time_comparison.faster_than|round(1) }}%</div>
+                            <small class="text-muted">Faster than</small>
+                        </div>
+                        <div class="col-6">
+                            <div class="h6 text-warning">{{ comparative_data.time_comparison.slower_than|round(1) }}%</div>
+                            <small class="text-muted">Slower than</small>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span>Fastest Question</span>
+                            <span>{{ analytics.time_analysis.fastest|round(1) }}s</span>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span>Slowest Question</span>
+                            <span>{{ analytics.time_analysis.slowest|round(1) }}s</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between">
+                            <span>Average per Question</span>
+                            <span>{{ analytics.time_analysis.avg_per_question|round(1) }}s</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Difficulty Analysis -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="mb-0"><i class="bi bi-bar-chart me-2"></i>Performance by Difficulty</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for difficulty, data in analytics.difficulty_analysis.items() %}
+                        <div class="col-lg-4 mb-3">
+                            <div class="text-center">
+                                <h6 class="text-capitalize mb-2">{{ difficulty }}</h6>
+                                <div class="position-relative mb-2">
+                                    <svg width="100" height="100" class="progress-ring">
+                                        <circle cx="50" cy="50" r="40" stroke="#e9ecef" stroke-width="8" fill="none"/>
+                                        <circle cx="50" cy="50" r="40" stroke="{% if difficulty == 'easy' %}#28a745{% elif difficulty == 'moderate' %}#ffc107{% else %}#dc3545{% endif %}" 
+                                                stroke-width="8" fill="none" stroke-linecap="round"
+                                                stroke-dasharray="{{ 2 * 3.14159 * 40 }}" 
+                                                stroke-dashoffset="{{ 2 * 3.14159 * 40 * (1 - (data.accuracy or 0) / 100) }}"
+                                                transform="rotate(-90 50 50)"/>
+                                    </svg>
+                                    <div class="position-absolute top-50 start-50 translate-middle">
+                                        <div class="h6 mb-0">{{ data.accuracy|round(1) }}%</div>
+                                    </div>
+                                </div>
+                                <div class="small text-muted">
+                                    {{ data.correct }}/{{ data.total }} correct<br>
+                                    Avg: {{ data.avg_time|round(1) }}s
+                                </div>
+                                {% if comparative_data.difficulty_comparison[difficulty] %}
+                                <div class="mt-2">
+                                    {% set comp = comparative_data.difficulty_comparison[difficulty] %}
+                                    <span class="badge {% if comp.above_average %}bg-success{% else %}bg-warning{% endif %}">
+                                        {% if comp.above_average %}Above{% else %}Below{% endif %} Average
+                                    </span>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topic Performance -->
+    {% if analytics.topic_analysis %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="mb-0"><i class="bi bi-book me-2"></i>Performance by Topic</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for topic, data in analytics.topic_analysis.items() %}
+                        <div class="col-lg-6 mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="fw-medium">{{ topic }}</span>
+                                <span class="text-muted">{{ data.correct }}/{{ data.total }}</span>
+                            </div>
+                            <div class="progress mb-1" style="height: 8px;">
+                                <div class="progress-bar bg-info" style="width: {{ data.accuracy }}%"></div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <small class="text-muted">{{ data.accuracy|round(1) }}% accuracy</small>
+                                <small class="text-muted">{{ data.avg_time|round(1) }}s avg</small>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Question Navigator -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-transparent border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0"><i class="bi bi-list-ol me-2"></i>Question Navigator</h5>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="filterQuestions('all')">All</button>
+                        <button type="button" class="btn btn-outline-success btn-sm" onclick="filterQuestions('correct')">Correct</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm" onclick="filterQuestions('incorrect')">Incorrect</button>
+                        <button type="button" class="btn btn-outline-warning btn-sm" onclick="filterQuestions('skipped')">Skipped</button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row g-2" id="questionNavigator">
+                        {% for question in questions %}
+                        <div class="col-2 col-sm-1">
+                            <button class="btn w-100 question-nav-btn 
+                                    {% if question.is_correct %}btn-success
+                                    {% elif question.is_attempted %}btn-danger
+                                    {% else %}btn-warning{% endif %}"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#questionModal"
+                                    data-question-index="{{ loop.index0 }}"
+                                    data-status="{% if question.is_correct %}correct{% elif question.is_attempted %}incorrect{% else %}skipped{% endif %}">
+                                {{ loop.index }}
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="mt-3">
+                        <div class="row text-center">
+                            <div class="col-3">
+                                <span class="badge bg-success">{{ analytics.question_status.correct }}</span>
+                                <div class="small text-muted">Correct</div>
+                            </div>
+                            <div class="col-3">
+                                <span class="badge bg-danger">{{ analytics.question_status.incorrect }}</span>
+                                <div class="small text-muted">Incorrect</div>
+                            </div>
+                            <div class="col-3">
+                                <span class="badge bg-warning">{{ analytics.question_status.skipped }}</span>
+                                <div class="small text-muted">Skipped</div>
+                            </div>
+                            <div class="col-3">
+                                <span class="badge bg-secondary">{{ session.max_score }}</span>
+                                <div class="small text-muted">Total</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Question Review -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="mb-0"><i class="bi bi-eye me-2"></i>Detailed Question Review</h5>
+                </div>
+                <div class="card-body">
+                    <div class="accordion" id="questionAccordion">
+                        {% for question in questions %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ loop.index }}">
+                                <button class="accordion-button collapsed" type="button" 
+                                        data-bs-toggle="collapse" 
+                                        data-bs-target="#collapse{{ loop.index }}" 
+                                        aria-expanded="false" 
+                                        aria-controls="collapse{{ loop.index }}">
+                                    <span class="me-2">
+                                        {% if question.is_correct %}
+                                            <i class="bi bi-check-circle text-success"></i>
+                                        {% elif question.is_attempted %}
+                                            <i class="bi bi-x-circle text-danger"></i>
+                                        {% else %}
+                                            <i class="bi bi-dash-circle text-warning"></i>
+                                        {% endif %}
+                                    </span>
+                                    <span class="fw-medium">Question {{ loop.index }}</span>
+                                    <span class="ms-auto me-2">
+                                        <span class="badge bg-secondary">{{ question.difficulty_level|title }}</span>
+                                        {% if question.time_spent %}
+                                        <span class="badge bg-info">{{ question.time_spent|round(1) }}s</span>
+                                        {% endif %}
+                                    </span>
+                                </button>
+                            </h2>
+                            <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" 
+                                 aria-labelledby="heading{{ loop.index }}" 
+                                 data-bs-parent="#questionAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <h6>Question:</h6>
+                                            <p>{{ question.question|safe }}</p>
+                                            
+                                            <h6>Options:</h6>
+                                            <div class="list-group list-group-flush">
+                                                {% set answer_map = {'A': 0, 'B': 1, 'C': 2, 'D': 3} %}
+                                                {% for option in question.options %}
+                                                <div class="list-group-item border-0 px-0 py-1
+                                                    {% if loop.index0 == answer_map.get(question.correct_answer|upper, -1) %}bg-success bg-opacity-10{% endif %}
+                                                    {% if question.user_answer and loop.index0 == answer_map.get(question.user_answer|upper, -1) and not question.is_correct %}bg-danger bg-opacity-10{% endif %}">
+                                                    <strong>{{ 'ABCD'[loop.index0] }}.</strong> {{ option|safe }}
+                                                    {% if loop.index0 == answer_map.get(question.correct_answer|upper, -1) %}
+                                                        <i class="bi bi-check-circle text-success ms-2"></i>
+                                                    {% endif %}
+                                                    {% if question.user_answer and loop.index0 == answer_map.get(question.user_answer|upper, -1) and not question.is_correct %}
+                                                        <i class="bi bi-x-circle text-danger ms-2"></i>
+                                                    {% endif %}
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            
+                                            {% if question.explanation %}
+                                            <h6 class="mt-3">Explanation:</h6>
+                                            <p class="text-muted">{{ question.explanation|safe }}</p>
+                                            {% endif %}
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">Your Answer</h6>
+                                                    <p class="card-text">
+                                                        {% if question.user_answer %}
+                                                            <span class="badge {% if question.is_correct %}bg-success{% else %}bg-danger{% endif %}">
+                                                                Option {{ question.user_answer|upper }}
+                                                            </span>
+                                                        {% else %}
+                                                            <span class="badge bg-warning">Not Attempted</span>
+                                                        {% endif %}
+                                                    </p>
+                                                    
+                                                    <h6 class="card-title">Correct Answer</h6>
+                                                    <p class="card-text">
+                                                        <span class="badge bg-success">Option {{ question.correct_answer|upper }}</span>
+                                                    </p>
+                                                    
+                                                    <h6 class="card-title">Stats</h6>
+                                                    <div class="small">
+                                                        <div>Topic: {{ question.topic_name }}</div>
+                                                        <div>Difficulty: {{ question.difficulty_level|title }}</div>
+                                                        {% if question.time_spent %}
+                                                        <div>Time: {{ question.time_spent|round(1) }} seconds</div>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Question Navigation Modal -->
+<div class="modal fade" id="questionModal" tabindex="-1" aria-labelledby="questionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="questionModalLabel">Question Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="questionModalBody">
+                <!-- Question content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="prevQuestionBtn">
+                    <i class="bi bi-chevron-left"></i> Previous
+                </button>
+                <button type="button" class="btn btn-secondary" id="nextQuestionBtn">
+                    Next <i class="bi bi-chevron-right"></i>
+                </button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+const questions = {{ questions|tojson }};
+let currentQuestionIndex = 0;
+
+// Question filtering
+function filterQuestions(status) {
+    const buttons = document.querySelectorAll('.question-nav-btn');
+    buttons.forEach(btn => {
+        if (status === 'all' || btn.dataset.status === status) {
+            btn.style.display = 'inline-block';
+        } else {
+            btn.style.display = 'none';
+        }
+    });
+    
+    // Update active filter button
+    document.querySelectorAll('.btn-group .btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+// Question modal functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const questionModal = document.getElementById('questionModal');
+    const questionModalBody = document.getElementById('questionModalBody');
+    const prevBtn = document.getElementById('prevQuestionBtn');
+    const nextBtn = document.getElementById('nextQuestionBtn');
+
+    // Handle question navigation buttons
+    document.querySelectorAll('.question-nav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            currentQuestionIndex = parseInt(this.dataset.questionIndex);
+            loadQuestionInModal(currentQuestionIndex);
+        });
+    });
+
+    // Previous/Next navigation
+    prevBtn.addEventListener('click', function() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            loadQuestionInModal(currentQuestionIndex);
+        }
+    });
+
+    nextBtn.addEventListener('click', function() {
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            loadQuestionInModal(currentQuestionIndex);
+        }
+    });
+
+    function loadQuestionInModal(index) {
+        const question = questions[index];
+        const questionNumber = index + 1;
+        
+        // Update modal title
+        document.getElementById('questionModalLabel').textContent = `Question ${questionNumber}`;
+        
+        // Build options HTML
+        let optionsHtml = '';
+        question.options.forEach((option, i) => {
+            const letter = String.fromCharCode(65 + i); // A, B, C, D
+            let optionClass = '';
+            let icon = '';
+            
+            if (letter === question.correct_answer.toUpperCase()) {
+                optionClass = 'bg-success bg-opacity-10';
+                icon = '<i class="bi bi-check-circle text-success ms-2"></i>';
+            }
+            if (question.user_answer && letter === question.user_answer.toUpperCase() && !question.is_correct) {
+                optionClass = 'bg-danger bg-opacity-10';
+                icon = '<i class="bi bi-x-circle text-danger ms-2"></i>';
+            }
+            
+            optionsHtml += `
+                <div class="list-group-item border-0 px-0 py-2 ${optionClass}">
+                    <strong>${letter}.</strong> ${option} ${icon}
+                </div>
+            `;
+        });
+        
+        // Update modal content
+        questionModalBody.innerHTML = `
+            <div class="row">
+                <div class="col-lg-8">
+                    <h6>Question:</h6>
+                    <p>${question.question}</p>
+                    
+                    <h6>Options:</h6>
+                    <div class="list-group list-group-flush">
+                        ${optionsHtml}
+                    </div>
+                    
+                    ${question.explanation ? `
+                        <h6 class="mt-3">Explanation:</h6>
+                        <p class="text-muted">${question.explanation}</p>
+                    ` : ''}
+                </div>
+                <div class="col-lg-4">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title">Your Answer</h6>
+                            <p class="card-text">
+                                ${question.user_answer ? 
+                                    `<span class="badge ${question.is_correct ? 'bg-success' : 'bg-danger'}">Option ${question.user_answer.toUpperCase()}</span>` :
+                                    '<span class="badge bg-warning">Not Attempted</span>'
+                                }
+                            </p>
+                            
+                            <h6 class="card-title">Correct Answer</h6>
+                            <p class="card-text">
+                                <span class="badge bg-success">Option ${question.correct_answer.toUpperCase()}</span>
+                            </p>
+                            
+                            <h6 class="card-title">Stats</h6>
+                            <div class="small">
+                                <div>Topic: ${question.topic_name}</div>
+                                <div>Difficulty: ${question.difficulty_level}</div>
+                                ${question.time_spent ? `<div>Time: ${question.time_spent.toFixed(1)} seconds</div>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        // Update navigation buttons
+        prevBtn.disabled = (index === 0);
+        nextBtn.disabled = (index === questions.length - 1);
+    }
+});
+
+// Print styles
+const printStyles = `
+    <style media="print">
+        .btn, .modal, .card-header .btn-group { display: none !important; }
+        .card { border: 1px solid #ddd !important; box-shadow: none !important; }
+        .progress { border: 1px solid #ddd; }
+        body { font-size: 12px; }
+        .container { max-width: none; padding: 0; }
+    </style>
+`;
+document.head.insertAdjacentHTML('beforeend', printStyles);
+</script>
+{% endblock %}

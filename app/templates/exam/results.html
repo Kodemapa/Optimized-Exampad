@@ -1,0 +1,965 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics & Results - AKSHARASHREE{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="bg-animated text-white py-4 position-relative">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-3 fade-in-up">
+                    📊 Your Performance <span class="text-gradient-cool">Analytics</span>
+                </h1>
+                <p class="lead mb-4 fade-in-up" style="color: rgba(255,255,255,0.9);">
+                    Track your progress, identify strengths, and discover areas for improvement
+                </p>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="bi bi-graph-up float" style="font-size: 6rem; opacity: 0.9; color: rgba(255,255,255,0.8);"></i>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Key Statistics Cards -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card cosmic">
+                    <div class="stats-number" id="total-sessions">{{ total_sessions }}</div>
+                    <h5><i class="bi bi-list-check me-2"></i>Total Tests</h5>
+                    <p class="mb-0">🎯 Completed assessments</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card forest">
+                    <div class="stats-number" id="avg-score">{{ avg_score }}%</div>
+                    <h5><i class="bi bi-trophy me-2"></i>Average Score</h5>
+                    <p class="mb-0">📈 Overall performance</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card fire">
+                    <div class="stats-number" id="best-score">{{ best_session.percentage|round(1) if best_session else 0 }}%</div>
+                    <h5><i class="bi bi-star me-2"></i>Best Score</h5>
+                    <p class="mb-0">🔥 Personal best</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stats-card purple">
+                    <div class="stats-number" id="subject-count">{{ subject_stats|length }}</div>
+                    <h5><i class="bi bi-book me-2"></i>Subjects</h5>
+                    <p class="mb-0">📚 Areas covered</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Performance Charts and Analytics -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Performance Trend Chart -->
+            <div class="col-lg-8 mb-4">
+                <div class="card glass-card border-0 h-100">
+                    <div class="card-header bg-transparent border-0 py-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-graph-up text-primary me-2"></i>Performance Trend
+                        </h5>
+                        <small class="text-muted">Your last 10 test scores</small>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="performanceChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Difficulty Analysis -->
+            <div class="col-lg-4 mb-4">
+                <div class="card glass-card border-0 h-100">
+                    <div class="card-header bg-transparent border-0 py-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-speedometer2 text-warning me-2"></i>Difficulty Analysis
+                        </h5>
+                        <small class="text-muted">Performance by question difficulty</small>
+                    </div>
+                    <div class="card-body" id="difficulty-stats-container">
+                        {% for difficulty, stats in difficulty_stats.items() %}
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="fw-medium text-capitalize">{{ difficulty }}</span>
+                                <span class="badge bg-gradient 
+                                    {% if difficulty == 'easy' %}badge-success
+                                    {% elif difficulty == 'moderate' %}badge-warning
+                                    {% else %}badge-danger{% endif %}">
+                                    {{ stats.percentage|round(1) }}%
+                                </span>
+                            </div>
+                            <div class="progress progress-modern">
+                                <div class="progress-bar 
+                                    {% if difficulty == 'easy' %}bg-gradient-success
+                                    {% elif difficulty == 'moderate' %}bg-gradient-warning
+                                    {% else %}bg-gradient-danger{% endif %}" 
+                                    style="width: {{ stats.percentage }}%"></div>
+                            </div>
+                            <small class="text-muted">{{ stats.correct }}/{{ stats.total }} questions</small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Subject-wise Performance -->
+            <div class="col-lg-6 mb-4">
+                <div class="card glass-card border-0">
+                    <div class="card-header bg-transparent border-0 py-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-book text-info me-2"></i>Subject Performance
+                        </h5>
+                        <small class="text-muted">Your strengths across subjects</small>
+                    </div>
+                    <div class="card-body" id="subject-stats-container">
+                        {% for subject, stats in subject_stats.items() %}
+                        <div class="subject-stat-item mb-3 p-3 rounded-3" style="background: var(--gray-50);">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="mb-0 fw-semibold">{{ subject }}</h6>
+                                <span class="badge 
+                                    {% if stats.percentage >= 80 %}badge-success
+                                    {% elif stats.percentage >= 60 %}badge-warning
+                                    {% else %}badge-danger{% endif %} px-3">
+                                    {{ stats.percentage|round(1) }}%
+                                </span>
+                            </div>
+                            <div class="progress progress-modern mb-2">
+                                <div class="progress-bar 
+                                    {% if stats.percentage >= 80 %}bg-gradient-success
+                                    {% elif stats.percentage >= 60 %}bg-gradient-warning
+                                    {% else %}bg-gradient-danger{% endif %}" 
+                                    style="width: {{ stats.percentage }}%"></div>
+                            </div>
+                            <small class="text-muted">
+                                <i class="bi bi-check-circle me-1"></i>{{ stats.correct }} correct out of {{ stats.total }} questions
+                            </small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recent Test Sessions -->
+            <div class="col-lg-6 mb-4">
+                <div class="card glass-card border-0">
+                    <div class="card-header bg-transparent border-0 py-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-clock-history text-secondary me-2"></i>Recent Sessions
+                        </h5>
+                        <small class="text-muted">Your latest test attempts</small>
+                    </div>
+                    <div class="card-body" id="recent-sessions-container">
+                        {% for session in recent_sessions %}
+                        <div class="session-item mb-3 p-3 rounded-3 border" style="background: var(--gray-50);">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6 class="mb-1 fw-semibold">
+                                        {% if session.exam %}
+                                            {{ session.exam.title }}
+                                        {% else %}
+                                            Practice Test
+                                        {% endif %}
+                                    </h6>
+                                    <small class="text-muted">
+                                        <i class="bi bi-calendar3 me-1"></i>{{ session.start_time.strftime('%B %d, %Y at %I:%M %p') }}
+                                    </small>
+                                </div>
+                                <div class="text-end">
+                                    <span class="badge 
+                                        {% if session.percentage >= 80 %}badge-success
+                                        {% elif session.percentage >= 60 %}badge-warning
+                                        {% else %}badge-danger{% endif %} mb-1">
+                                        {{ session.percentage|round(1) }}%
+                                    </span>
+                                    <br>
+                                    <small class="text-muted">{{ session.score|int }}/{{ session.max_score|int }}</small>
+                                </div>
+                            </div>
+                            {% if session.duration_seconds %}
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <i class="bi bi-stopwatch me-1"></i>
+                                    Duration: 
+                                    {% if session.duration_seconds %}
+                                        {% set minutes = (session.duration_seconds // 60)|int %}
+                                        {% set seconds = (session.duration_seconds % 60)|int %}
+                                        {{ minutes }}m {{ seconds }}s
+                                    {% else %}
+                                        --:--
+                                    {% endif %}
+                                </small>
+                            </div>
+                            {% endif %}
+                            <div class="mt-2">
+                                <a href="{{ url_for('exam.session_details', session_id=session.id) }}" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-eye me-1"></i>View Details & Explanations
+                                </a>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="text-center py-4">
+                            <i class="bi bi-info-circle text-muted" style="font-size: 2rem;"></i>
+                            <p class="text-muted mt-2">No test sessions yet. Start practicing to see your results here!</p>
+                            <a href="{{ url_for('exam.practice') }}" class="btn btn-primary btn-sm">
+                                <i class="bi bi-play-circle me-1"></i>Start Practice
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Topic Analysis (if data available) -->
+        {% if topic_stats %}
+        <div class="row">
+            <div class="col-12">
+                <div class="card glass-card border-0 mb-4">
+                    <div class="card-header bg-transparent border-0 py-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-list-ul text-primary me-2"></i>Topic-wise Analysis
+                        </h5>
+                        <small class="text-muted">Detailed breakdown by topic</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="row" id="topic-stats-container">
+                            {% for topic, stats in topic_stats.items() %}
+                            <div class="col-lg-4 col-md-6 mb-3">
+                                <div class="topic-card p-3 rounded-3 h-100" style="background: var(--gray-50); border-left: 4px solid 
+                                    {% if stats.percentage >= 80 %}var(--success-color)
+                                    {% elif stats.percentage >= 60 %}var(--warning-color)
+                                    {% else %}var(--danger-color){% endif %};">
+                                    <h6 class="fw-semibold mb-1">{{ topic }}</h6>
+                                    <small class="text-muted mb-2 d-block">{{ stats.subject }}</small>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="fw-medium">{{ stats.percentage|round(1) }}%</span>
+                                        <small class="text-muted">{{ stats.correct }}/{{ stats.total }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- All Sessions History -->
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card glass-card border-0">
+                    <div class="card-header bg-transparent border-0 py-3">
+                        <h5 class="card-title mb-0">
+                            <i class="bi bi-journal-check text-primary me-2"></i>All Test Sessions History
+                        </h5>
+                        <small class="text-muted">Complete record of your assessment history</small>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Test Name</th>
+                                        <th>Date</th>
+                                        <th>Score</th>
+                                        <th>Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="all-sessions-container">
+                                    {% for session in sessions %}
+                                    <tr>
+                                        <td>{{ loop.index }}</td>
+                                        <td>
+                                            {% if session.exam %}
+                                                {{ session.exam.title }}
+                                            {% else %}
+                                                Practice Test
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ session.start_time.strftime('%b %d, %Y') }}</td>
+                                        <td>
+                                            <span class="badge 
+                                                {% if session.percentage >= 80 %}badge-success
+                                                {% elif session.percentage >= 60 %}badge-warning
+                                                {% else %}badge-danger{% endif %}">
+                                                {{ session.percentage|round(1) }}% <span class="text-muted">({{ session.score|int }}/{{ session.max_score|int }})</span>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if session.duration_seconds %}
+                                                {% set minutes = (session.duration_seconds // 60)|int %}
+                                                {% set seconds = (session.duration_seconds % 60)|int %}
+                                                {{ minutes }}m {{ seconds }}s
+                                            {% else %}
+                                                --:--
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ url_for('exam.session_details', session_id=session.id) }}" class="btn btn-sm btn-outline-primary">
+                                                <i class="bi bi-eye me-1"></i>View Details
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% else %}
+                                    <tr>
+                                        <td colspan="6" class="text-center py-3">
+                                            <i class="bi bi-info-circle text-muted me-1"></i>
+                                            No test sessions found. Start practicing to build your history!
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="card glass-card border-0 py-4">
+                    <div class="card-body">
+                        <h5 class="mb-3">Ready for more practice?</h5>
+                        <a href="{{ url_for('exam.practice') }}" class="btn btn-primary btn-lg me-3 glow-success">
+                            <i class="bi bi-play-circle me-2"></i>Continue Practice
+                        </a>
+                        <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-primary btn-lg me-3">
+                            <i class="bi bi-house me-2"></i>Back to Dashboard
+                        </a>
+                        <button id="refresh-btn" class="btn btn-outline-secondary btn-lg">
+                            <i class="bi bi-arrow-clockwise me-2"></i>Refresh Analytics
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="d-none position-fixed top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.5); z-index: 9999;">
+            <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading your latest analytics...</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Chart.js for Performance Trend -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Performance Trend Chart
+const ctx = document.getElementById('performanceChart').getContext('2d');
+const performanceData = {{ performance_trend|tojson }};
+let chart;
+
+function initChart() {
+    if (chart) {
+        chart.destroy();
+    }
+    
+    chart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: performanceData.map(item => item.date),
+            datasets: [{
+                label: 'Score %',
+                data: performanceData.map(item => item.percentage),
+                borderColor: 'rgb(99, 102, 241)',
+                backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                tension: 0.4,
+                fill: true,
+                pointBackgroundColor: 'rgb(99, 102, 241)',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2,
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function(value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            elements: {
+                point: {
+                    hoverRadius: 8
+                }
+            }
+        }
+    });
+}
+
+// Initialize chart
+initChart()
+
+
+
+// Auto-refresh functionality with AJAX
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Analytics page loaded, setting up refresh functionality');
+    
+    // Debug toast container creation immediately
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.className = 'position-fixed top-0 end-0 p-3';
+        toastContainer.style.zIndex = '9999';
+        document.body.appendChild(toastContainer);
+    }
+    
+    // Show initial debug message
+    showToast('Analytics page loaded, preparing to fetch data...', 'info');
+    
+    // Function to refresh the page using AJAX
+    async function refreshAnalytics(useAjax = true) {
+        console.log('refreshAnalytics called with useAjax =', useAjax);
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+            loadingOverlay.classList.remove('d-none');
+            console.log('Loading overlay displayed');
+        } else {
+            console.error('Loading overlay element not found');
+        }
+        
+        if (useAjax) {
+            try {
+                console.log('Fetching data from /exam/results/data endpoint');
+                showToast('Fetching data...', 'info');
+                
+                // Fetch fresh data from the server using AJAX
+                const response = await fetch('/exam/results/data', {
+                    method: 'GET',
+                    headers: {
+                        'Cache-Control': 'no-cache',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    credentials: 'same-origin'
+                });
+                
+                console.log('Response received:', response);
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`Server responded with status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Data received from server:', data);
+                
+                // Check if data is empty or has expected properties
+                if (!data || data.error || data.total_sessions === undefined) {
+                    console.error('Invalid data received:', data);
+                    showToast('Error: Invalid data received from server', 'error');
+                    setTimeout(() => window.location.reload(true), 3000); // Reload page after 3 seconds
+                    return;
+                }
+                
+                // Update the UI with fresh data
+                updateAnalyticsUI(data);
+                
+                // Hide the loading overlay
+                if (loadingOverlay) {
+                    loadingOverlay.classList.add('d-none');
+                }
+                
+                // Show success message
+                showToast('Analytics refreshed successfully!', 'success');
+                
+            } catch (error) {
+                console.error('Error refreshing data:', error);
+                showToast(`Error: ${error.message}`, 'error');
+                
+                // Fall back to full page reload if AJAX fails
+                setTimeout(() => {
+                    console.log('AJAX failed, reloading page');
+                    window.location.reload(true);
+                }, 3000);
+            }
+        } else {
+            // Force reload without cache
+            console.log('Full page reload requested');
+            window.location.reload(true);
+        }
+    }
+    
+    // Function to update the UI with fresh data
+    function updateAnalyticsUI(data) {
+        console.log('Updating UI with data:', data);
+        
+        try {
+            // Update summary stats
+            const totalSessions = document.getElementById('total-sessions');
+            if (totalSessions) {
+                totalSessions.textContent = data.total_sessions;
+                console.log('Updated total-sessions to:', data.total_sessions);
+            } else {
+                console.error('Element #total-sessions not found');
+            }
+            
+            const avgScore = document.getElementById('avg-score');
+            if (avgScore) {
+                avgScore.textContent = data.avg_score + '%';
+                console.log('Updated avg-score to:', data.avg_score + '%');
+            } else {
+                console.error('Element #avg-score not found');
+            }
+            
+            const bestScore = document.getElementById('best-score');
+            if (bestScore) {
+                bestScore.textContent = data.best_session ? data.best_session.percentage.toFixed(1) + '%' : '0%';
+                console.log('Updated best-score to:', bestScore.textContent);
+            } else {
+                console.error('Element #best-score not found');
+            }
+            
+            const subjectCount = document.getElementById('subject-count');
+            if (subjectCount) {
+                subjectCount.textContent = Object.keys(data.subject_stats).length;
+                console.log('Updated subject-count to:', Object.keys(data.subject_stats).length);
+            } else {
+                console.error('Element #subject-count not found');
+            }
+            
+            // Update chart data
+            if (data.performance_trend && data.performance_trend.length > 0) {
+                performanceData = data.performance_trend;
+                initChart(); // Re-render chart with new data
+                console.log('Performance chart updated with new data');
+            } else {
+                console.log('No performance trend data available');
+            }
+            
+            // Update difficulty stats
+            if (data.difficulty_stats) {
+                const difficultyContainer = document.getElementById('difficulty-stats-container');
+                if (difficultyContainer) {
+                    let difficultyHTML = '';
+                    for (const [difficulty, stats] of Object.entries(data.difficulty_stats)) {
+                        const badgeClass = difficulty === 'easy' ? 'badge-success' : 
+                                          difficulty === 'moderate' ? 'badge-warning' : 'badge-danger';
+                        const barClass = difficulty === 'easy' ? 'bg-gradient-success' : 
+                                        difficulty === 'moderate' ? 'bg-gradient-warning' : 'bg-gradient-danger';
+                        
+                        difficultyHTML += `
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="fw-medium text-capitalize">${difficulty}</span>
+                                    <span class="badge bg-gradient ${badgeClass}">
+                                        ${stats.percentage.toFixed(1)}%
+                                    </span>
+                                </div>
+                                <div class="progress progress-modern">
+                                    <div class="progress-bar ${barClass}" 
+                                        style="width: ${stats.percentage}%"></div>
+                                </div>
+                                <small class="text-muted">${stats.correct}/${stats.total} questions</small>
+                            </div>
+                        `;
+                    }
+                    difficultyContainer.innerHTML = difficultyHTML;
+                    console.log('Updated difficulty stats');
+                } else {
+                    console.error('Element #difficulty-stats-container not found');
+                }
+            }
+            
+            // Update subject stats
+            if (data.subject_stats) {
+                const subjectContainer = document.getElementById('subject-stats-container');
+                if (subjectContainer) {
+                    let subjectHTML = '';
+                    for (const [subject, stats] of Object.entries(data.subject_stats)) {
+                        const badgeClass = stats.percentage >= 80 ? 'badge-success' : 
+                                          stats.percentage >= 60 ? 'badge-warning' : 'badge-danger';
+                        const barClass = stats.percentage >= 80 ? 'bg-gradient-success' : 
+                                        stats.percentage >= 60 ? 'bg-gradient-warning' : 'bg-gradient-danger';
+                        
+                        subjectHTML += `
+                            <div class="subject-stat-item mb-3 p-3 rounded-3" style="background: var(--gray-50);">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h6 class="mb-0 fw-semibold">${subject}</h6>
+                                    <span class="badge ${badgeClass} px-3">
+                                        ${stats.percentage.toFixed(1)}%
+                                    </span>
+                                </div>
+                                <div class="progress progress-modern mb-2">
+                                    <div class="progress-bar ${barClass}" 
+                                        style="width: ${stats.percentage}%"></div>
+                                </div>
+                                <small class="text-muted">
+                                    <i class="bi bi-check-circle me-1"></i>${stats.correct} correct out of ${stats.total} questions
+                                </small>
+                            </div>
+                        `;
+                    }
+                    subjectContainer.innerHTML = subjectHTML;
+                    console.log('Updated subject stats');
+                } else {
+                    console.error('Element #subject-stats-container not found');
+                }
+            }
+            
+            // Update recent sessions
+            if (data.recent_sessions && data.recent_sessions.length > 0) {
+                const recentSessionsContainer = document.getElementById('recent-sessions-container');
+                if (recentSessionsContainer) {
+                    let sessionsHTML = '';
+                    for (const session of data.recent_sessions) {
+                        const badgeClass = session.percentage >= 80 ? 'badge-success' : 
+                                          session.percentage >= 60 ? 'badge-warning' : 'badge-danger';
+                        
+                        sessionsHTML += `
+                            <div class="session-item mb-3 p-3 rounded-3 border" style="background: var(--gray-50);">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <h6 class="mb-1 fw-semibold">
+                                            ${session.exam_title}
+                                        </h6>
+                                        <small class="text-muted">
+                                            <i class="bi bi-calendar3 me-1"></i>${session.start_time}
+                                        </small>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="badge ${badgeClass} mb-1">
+                                            ${session.percentage.toFixed(1)}%
+                                        </span>
+                                        <br>
+                                        <small class="text-muted">${session.score}/${session.max_score}</small>
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        <i class="bi bi-stopwatch me-1"></i>
+                                        Duration: 
+                                        ${session.minutes}m ${session.seconds}s
+                                    </small>
+                                </div>
+                                <div class="mt-2">
+                                    <a href="/session/${session.id}/details" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-eye me-1"></i>View Details & Explanations
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    if (sessionsHTML) {
+                        recentSessionsContainer.innerHTML = sessionsHTML;
+                    } else {
+                        recentSessionsContainer.innerHTML = `
+                            <div class="text-center py-4">
+                                <i class="bi bi-info-circle text-muted" style="font-size: 2rem;"></i>
+                                <p class="text-muted mt-2">No test sessions yet. Start practicing to see your results here!</p>
+                                <a href="/exam/practice" class="btn btn-primary btn-sm">
+                                    <i class="bi bi-play-circle me-1"></i>Start Practice
+                                </a>
+                            </div>
+                        `;
+                    }
+                } else {
+                    console.error('Element #recent-sessions-container not found');
+                }
+            }
+            
+            console.log('UI updated successfully');
+        } catch (error) {
+            console.error('Error updating UI:', error);
+            showToast(`Error updating UI: ${error.message}`, 'error');
+        }
+    }
+    
+    /*
+    // Function to show toast notifications
+    function showToast(message, type = 'info') {
+        console.log(`Toast (${type}): ${message}`);
+        // Create toast container if it doesn't exist
+        let toastContainer = document.getElementById('toast-container');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toast-container';
+            toastContainer.className = 'position-fixed top-0 end-0 p-3';
+            toastContainer.style.zIndex = '9999';
+            document.body.appendChild(toastContainer);
+        }
+        
+        // Create toast
+        const toastId = 'toast-' + Date.now();
+        const toast = document.createElement('div');
+        toast.className = `toast align-items-center text-white bg-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'primary'}`;
+        toast.id = toastId;
+        toast.setAttribute('role', 'alert');
+        toast.setAttribute('aria-live', 'assertive');
+        toast.setAttribute('aria-atomic', 'true');
+        
+        toast.innerHTML = `
+            <div class="d-flex">
+                <div class="toast-body">
+                    ${message}
+                </div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        `;
+        
+        // Add to container
+        toastContainer.appendChild(toast);
+        
+        // Initialize and show the toast
+        const bsToast = new bootstrap.Toast(toast, { delay: 5000 });
+        bsToast.show();
+        
+        // Remove after hidden
+        toast.addEventListener('hidden.bs.toast', function() {
+            toast.remove();
+        });
+    }
+
+    */
+    
+    // Add event listener to refresh button
+    const refreshBtn = document.getElementById('refresh-btn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', () => {
+            console.log('Refresh button clicked');
+            refreshAnalytics(true);
+
+            // Also trigger /exam/results?format=json for network tab visibility
+            fetch('/exam/results/json', {
+                method: 'GET',
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+            .then(function(response) {
+                if (!response.ok) {
+                    console.error('JSON fetch failed:', response.status);
+                }
+                return response.json();
+            })
+            .then(function(data) {
+                console.log('Fetched /exam/results?format=json:', data);
+            })
+            .catch(function(err) {
+                console.error('Error fetching /exam/results?format=json:', err);
+            });
+        });
+    } else {
+        console.error('Refresh button not found');
+    }
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                credentials: 'same-origin'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.error('JSON fetch failed:', response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Fetched /exam/results?format=json:', data);
+            })
+            .catch(err => {
+                console.error('Error fetching /exam/results?format=json:', err);
+            });
+        });
+    } else {
+        console.error('Refresh button not found');
+    }
+    
+    // Auto-refresh on page load if coming from test completion
+    if (window.location.hash === '#auto-refresh') {
+        console.log('Auto-refresh hash detected');
+        // Remove the hash
+        history.replaceState({}, document.title, window.location.pathname);
+        
+        // Short delay before refresh to let the page load first
+        setTimeout(() => refreshAnalytics(true), 800);
+    } else {
+        // Always auto-refresh on initial load
+        console.log('Initial page load - refreshing data automatically');
+        showToast('Loading your analytics...', 'info');
+        setTimeout(() => refreshAnalytics(true), 1200);
+    }
+    
+    // Add periodic refresh every 45 seconds
+    setInterval(() => {
+        console.log('Periodic refresh triggered');
+        refreshAnalytics(true);
+    }, 45000);
+});
+</script>
+
+<style>
+/* Additional styles for analytics page */
+.stats-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.stats-card.cosmic::before { background: var(--gradient-cosmic); }
+.stats-card.forest::before { background: var(--gradient-forest); }
+.stats-card.fire::before { background: var(--gradient-fire); }
+.stats-card.purple::before { background: var(--gradient-purple); }
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: var(--shadow-md);
+}
+
+.progress-modern {
+    height: 8px;
+    border-radius: 10px;
+    background: var(--gray-200);
+}
+
+.progress-modern .progress-bar {
+    border-radius: 10px;
+}
+
+.badge-success { background: var(--gradient-success) !important; }
+.badge-warning { background: var(--gradient-warning) !important; }
+.badge-danger { background: var(--gradient-danger) !important; }
+
+.bg-gradient-success { background: var(--gradient-success) !important; }
+.bg-gradient-warning { background: var(--gradient-warning) !important; }
+.bg-gradient-danger { background: var(--gradient-danger) !important; }
+
+.session-item, .subject-stat-item, .topic-card {
+    transition: all 0.3s ease;
+}
+
+.session-item:hover, .subject-stat-item:hover, .topic-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+/* Session history table styling */
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    border-top: none;
+    border-bottom-width: 1px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    background: var(--gray-50);
+}
+
+.table td, .table th {
+    padding: 1rem;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: var(--gray-50);
+}
+
+.table .btn-sm {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .stats-number {
+        font-size: 2rem;
+    }
+    
+    .stats-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Loading spinner animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spinner-border {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.25rem;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% macro render_question_card(question_data, index) %}
+<div class="question-card mb-4 glass-card border-0">
+    <div class="card-header bg-transparent border-0">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h5 class="mb-0">Question {{ index }}
+                    {% if question_data.is_correct %}
+                        <span class="badge badge-success ms-2">Correct</span>
+                    {% else %}
+                        <span class="badge badge-danger ms-2">Incorrect</span>
+                    {% endif %}
+                </h5>
+                <small class="text-muted">{{ question_data.question.difficulty_level|title }}</small>
+            </div>
+            <div class="question-controls">
+                <button class="btn btn-sm btn-link toggle-explanation" data-bs-toggle="collapse" data-bs-target="#explanation-{{ index }}">
+                    <i class="bi bi-lightbulb"></i> Explanation
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="question-text mb-3">
+            {{ question_data.question.question_text }}
+        </div>
+        
+        <div class="options-list row">
+            {% set options = question_data.question.get_options() %}
+            {% for option_key, option_value in options.items() %}
+                <div class="col-md-6 mb-2">
+                    <div class="option-item p-2 rounded-3 {% if option_key == question_data.correct_answer %}correct-answer
+                        {% elif option_key == question_data.user_answer and option_key != question_data.correct_answer %}wrong-answer
+                        {% else %}normal-option{% endif %}">
+                        
+                        <div class="d-flex align-items-center">
+                            <div class="option-marker me-2">{{ option_key|upper }}</div>
+                            <div class="option-text">{{ option_value }}</div>
+                            {% if option_key == question_data.correct_answer %}
+                                <div class="ms-auto"><i class="bi bi-check-circle-fill text-success"></i></div>
+                            {% elif option_key == question_data.user_answer and option_key != question_data.correct_answer %}
+                                <div class="ms-auto"><i class="bi bi-x-circle-fill text-danger"></i></div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="explanation collapse" id="explanation-{{ index }}">
+            <div class="mt-3 p-3 rounded-3" style="background-color: rgba(255, 243, 205, 0.5); border-left: 4px solid #ffc107;">
+                <h6 class="mb-2 fw-bold"><i class="bi bi-lightbulb-fill text-warning me-2"></i>Explanation</h6>
+                <div class="explanation-text">
+                    {{ question_data.explanation or "No explanation available for this question." }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endmacro %}

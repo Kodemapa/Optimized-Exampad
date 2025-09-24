@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+
+{% block title %}Class {{ class_level }} Subjects - KODEMAPA{% endblock %}
+
+{% block styles %}
+<style>
+body, html {
+  background: linear-gradient(135deg, #e9f6fb 0%, #d0f0ec 100%);
+  min-height: 100vh;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* Glassmorphic container for grid and stats */
+.glass-section {
+  background: rgba(255,255,255,0.63);
+  border-radius: 34px;
+  box-shadow: 0 12px 45px #2596be15,
+              -8px -8px 30px 0px #fff8 inset,
+              0 2px 22px #cdfbfa14 inset;
+  backdrop-filter: blur(16px);
+  margin-bottom: 2.5rem;
+  padding: 2.9rem 1.2rem 2.3rem 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .glass-section { padding: 1.1rem 0.3rem; }
+}
+
+.subject-card {
+  background: rgba(255,255,255,0.75);
+  border-radius: 28px;
+  border: none;
+  box-shadow: 7px 7px 28px #2596be0f, -7px -7px 19px #e9fffd7d;
+  backdrop-filter: blur(13px);
+  transition: box-shadow 0.32s, transform 0.23s;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: #117597;
+}
+.subject-card:hover {
+  transform: translateY(-7px) scale(1.018);
+  box-shadow: 0 0 54px #2596be1f;
+}
+.subject-card .card-body {
+  padding: 2.3rem 1.2rem 2rem 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.subject-icon {
+  font-size: 3rem;
+  margin-bottom: 0.8rem;
+  color: #2596be;
+}
+.card-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #13586a;
+}
+.bg-light {
+  background: rgba(255,255,255,0.8) !important;
+  border-radius: 10px;
+  box-shadow: inset 4px 4px 15px #cbf8ff87, inset -3px -3px 12px #fbffffaf;
+  padding: 0.6rem;
+}
+.text-primary {
+  color: #2596be !important;
+}
+.text-success {
+  color: #06d6a0 !important;
+}
+.mt-3 {
+  margin-top: 1rem !important;
+}
+.btn-primary, .btn-outline-primary {
+  font-weight: 600;
+  padding: 0.45rem 1rem;
+  border-radius: 16px;
+  box-shadow: 6px 6px 18px #dafafe8a inset, -5px -5px 14px #f5ffffb0 inset;
+  transition: all 0.25s ease;
+}
+.btn-primary {
+  background: linear-gradient(120deg, #35cfc2 0%, #06d6a0 100%);
+  color: white;
+  border: none;
+}
+.btn-primary:hover {
+  background: linear-gradient(120deg, #06d6a0 0%, #35cfc2 100%);
+  box-shadow: 0 0 22px #1f9a89aa;
+}
+.btn-outline-primary {
+  background: #e5fbff;
+  border: 2px solid #2596be;
+  color: #117597;
+}
+.btn-outline-primary:hover {
+  background: #cff9ff;
+  border-color: #06d6a0;
+  color: #06d6a0;
+}
+
+.bg-primary {
+  background: linear-gradient(120deg, #2596be 0%, #35cfc2 100%) !important;
+  color: white !important;
+  border-radius: 28px;
+  box-shadow: 0 6px 24px #2596be22;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.bg-success {
+  background: linear-gradient(120deg, #35cfc2 0%, #06d6a0 100%) !important;
+  color: white !important;
+  border-radius: 28px;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 6px 24px #061d1677;
+}
+.bg-warning {
+  background: linear-gradient(120deg, #ffe066 0%, #fed800 100%) !important;
+  color: #7a7000 !important;
+  border-radius: 28px;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 6px 24px #b5ae0050;
+}
+.bg-info {
+  background: linear-gradient(120deg, #219ebc 0%, #8ecae6 100%) !important;
+  color: white !important;
+  border-radius: 28px;
+  padding: 2rem 1rem;
+  text-align: center;
+  box-shadow: 0 6px 24px #1b6784aa;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .glass-section { padding: 1rem 1rem 1.8rem 1rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<section class="py-5 bg-primary text-white" style="border-radius: 0 0 34px 34px;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <nav aria-label="breadcrumb" style="margin-bottom: 0;"> <!-- remove bottom margin -->
+          <ol class="breadcrumb text-white-50 mb-1 ps-0" style="padding-left: 0;">
+            <li class="breadcrumb-item">
+              <a href="{{ url_for('main.index') }}" class="text-white">Home</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">Class {{ class_level }}</li>
+          </ol>
+        </nav>
+        <h1 class="display-5 fw-bold mb-1 ps-0" style="padding-left: 0;">
+          <i class="bi bi-{{ '11' if class_level == 'XI' else '12' }}-circle me-3"></i>
+          Class {{ class_level }} Subjects
+        </h1>
+        <p class="lead ps-0" style="padding-left: 0;">Choose a subject to explore topics and start practicing</p>
+      </div>
+      <!-- Removed the right icon column as per your snippet -->
+    </div>
+  </div>
+</section>
+
+
+<!-- Subjects Grid -->
+<section class="glass-section">
+  <div class="container">
+    {% if subjects %}
+      <div class="row">
+        {% for subject in subjects %}
+          {% if subject.name|lower != 'english' %}
+            <div class="col-lg-4 col-md-6 mb-4">
+              <a href="{{ url_for('main.topics', subject_id=subject.id) }}" 
+                 class="subject-card card h-100 text-decoration-none">
+                <div class="card-body text-center p-4">
+                  {% if 'Math' in subject.name %}
+                    <i class="bi bi-calculator subject-icon"></i>
+                  {% elif 'Physics' in subject.name %}
+                    <i class="bi bi-lightning subject-icon"></i>
+                  {% elif 'Chemistry' in subject.name %}
+                    <i class="bi bi-droplet subject-icon"></i>
+                  {% elif 'Biology' in subject.name %}
+                    <i class="bi bi-flower1 subject-icon"></i>
+                  {% else %}
+                    <i class="bi bi-journal-text subject-icon"></i>
+                  {% endif %}
+                  <h4 class="card-title mb-3">{{ subject.name }}</h4>
+                  <div class="row text-center">
+                    <div class="col-6">
+                      <div class="bg-light rounded p-2">
+                        <strong class="text-primary">{{ subject.topics.count() }}</strong>
+                        <small class="d-block text-muted">Topics</small>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="bg-light rounded p-2">
+                        <strong class="text-success">
+                          {% set total_questions = 0 %}
+                          {% for topic in subject.topics %}
+                            {% set total_questions = total_questions + topic.questions.count() %}
+                          {% endfor %}
+                          {{ total_questions }}
+                        </strong>
+                        <small class="d-block text-muted">Questions</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-3">
+                    <span class="btn btn-primary btn-sm">
+                      <i class="bi bi-arrow-right me-1"></i>Explore Topics
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center py-5">
+        <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+        <h3 class="text-muted mt-3">No Subjects Found</h3>
+        <p class="text-muted">No subjects are available for Class {{ class_level }} at the moment.</p>
+        <a href="{{ url_for('main.index') }}" class="btn btn-primary">
+          <i class="bi bi-house me-2"></i>Return Home
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Quick Stats -->
+{% if subjects %}
+<section class="py-5 bg-light">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 bg-primary text-white">
+          <div class="card-body">
+            <h3 class="mb-1">{{ subjects|length }}</h3>
+            <small>Subjects</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 bg-success text-white">
+          <div class="card-body">
+            <h3 class="mb-1">
+              {% set total_topics = 0 %}
+              {% for subject in subjects %}
+                {% set total_topics = total_topics + subject.topics.count() %}
+              {% endfor %}
+              {{ total_topics }}
+            </h3>
+            <small>Total Topics</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 bg-warning text-dark">
+          <div class="card-body">
+            <h3 class="mb-1">
+              {% set total_questions = 0 %}
+              {% for subject in subjects %}
+                {% for topic in subject.topics %}
+                  {% set total_questions = total_questions + topic.questions.count() %}
+                {% endfor %}
+              {% endfor %}
+              {{ total_questions }}
+            </h3>
+            <small>Total Questions</small>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="card border-0 bg-info text-white">
+          <div class="card-body">
+            <h3 class="mb-1">100%</h3>
+            <small>CBSE Aligned</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Add staggered animation to subject cards
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.subject-card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'all 0.6s ease';
+      
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, index * 100);
+    });
+  });
+</script>
+{% endblock %}

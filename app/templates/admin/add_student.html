@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}Add Student{% endblock %}
+
+{% block styles %}
+<style>
+.card {
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.form-control {
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.required::after {
+    content: " *";
+    color: #dc3545;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-user-plus"></i> Add New Student</h2>
+                <a href="{{ url_for('admin.students') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Students
+                </a>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0"><i class="fas fa-user"></i> Student Information</h5>
+                </div>
+                <div class="card-body">
+                    <form method="POST" novalidate>
+                        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="username" class="form-label required">Username</label>
+                                    <input type="text" class="form-control" id="username" name="username" 
+                                           placeholder="Enter username" required maxlength="80"
+                                           value="{{ request.form.get('username', '') }}">
+                                    <small class="form-text text-muted">
+                                        Unique identifier for the student (3-80 characters)
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email" class="form-label required">Email Address</label>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           placeholder="Enter email address" required maxlength="120"
+                                           value="{{ request.form.get('email', '') }}">
+                                    <small class="form-text text-muted">
+                                        Valid email address for communication
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password" class="form-label required">Password</label>
+                                    <input type="password" class="form-control" id="password" name="password" 
+                                           placeholder="Enter password" required minlength="6">
+                                    <small class="form-text text-muted">
+                                        Minimum 6 characters
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="confirm_password" class="form-label required">Confirm Password</label>
+                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" 
+                                           placeholder="Confirm password" required minlength="6">
+                                    <small class="form-text text-muted">
+                                        Re-enter the password to confirm
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active" checked>
+                                <label class="form-check-label" for="is_active">
+                                    Active Account
+                                </label>
+                                <small class="form-text text-muted d-block">
+                                    Active students can log in and take exams
+                                </small>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('admin.students') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Add Student
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Password confirmation validation
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirm_password');
+    
+    function validatePassword() {
+        if (password.value !== confirmPassword.value) {
+            confirmPassword.setCustomValidity("Passwords don't match");
+        } else {
+            confirmPassword.setCustomValidity('');
+        }
+    }
+    
+    password.addEventListener('change', validatePassword);
+    confirmPassword.addEventListener('keyup', validatePassword);
+    
+    // Form validation
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const pass = document.getElementById('password').value;
+        const confirmPass = document.getElementById('confirm_password').value;
+        
+        if (!username || !email || !pass || !confirmPass) {
+            e.preventDefault();
+            alert('Please fill in all required fields.');
+            return false;
+        }
+        
+        if (pass !== confirmPass) {
+            e.preventDefault();
+            alert('Passwords do not match.');
+            return false;
+        }
+        
+        if (pass.length < 6) {
+            e.preventDefault();
+            alert('Password must be at least 6 characters long.');
+            return false;
+        }
+    });
+});
+</script>
+{% endblock %}

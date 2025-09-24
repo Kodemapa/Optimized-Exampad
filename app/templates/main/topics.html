@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block title %}{{ subject.name }} Topics - KODEMAPA{% endblock %}
+
+{% block styles %}
+<style>
+body, html {
+  background: linear-gradient(135deg, #e9f6fb 0%, #d0f0ec 100%);
+  min-height: 100vh;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* Glassmorphic container */
+.glass-section {
+  background: rgba(255,255,255,0.63);
+  border-radius: 34px;
+  box-shadow: 0 12px 45px #2596be15,
+              -8px -8px 30px 0px #fff8 inset,
+              0 2px 22px #cdfbfa14 inset;
+  backdrop-filter: blur(16px);
+  margin-bottom: 2.5rem;
+  padding: 2.9rem 1.2rem 2.3rem 1.2rem;
+}
+
+@media (max-width: 900px) {
+  .glass-section { padding: 1.1rem 0.3rem; }
+}
+.header-glass {
+  background: linear-gradient(120deg, #35cfc2 0%, #8ee8f5 100%);
+  border-radius: 0 !important;
+  box-shadow: 0 5px 26px #2596be22, -5px -5px 17px #fff7;
+  padding: 2.7rem 2rem 2.2rem 2rem;
+  color: white;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.header-glass .breadcrumb-item a {
+  color: white;
+  opacity: 0.89;
+}
+
+/* Topic card styling */
+.topic-card {
+  background: rgba(255,255,255,0.72);
+  border-radius: 28px;
+  border: none;
+  box-shadow: 7px 7px 28px #2596be0f, -7px -7px 19px #e9fffd7d;
+  backdrop-filter: blur(13px);
+  transition: box-shadow 0.32s, transform 0.23s;
+  overflow: hidden;
+  margin-bottom: 0.8rem;
+}
+.topic-card:hover {
+  transform: translateY(-7px) scale(1.018);
+  box-shadow: 0 0 54px #2596be1f;
+}
+.topic-card .card-title { font-weight:700; color:#2596be; }
+.badge.bg-primary {
+  background: linear-gradient(120deg,#2596be 0%,#35cfc2 100%)!important;
+  color: #fff !important;
+}
+.topic-card .progress { background: #e2e8f0; border-radius: 9px; }
+.topic-card .progress-bar { background: #2596be; border-radius: 9px; }
+.topic-card .btn {
+  border-radius: 13px;
+  font-weight: 600;
+  box-shadow: 2px 2px 8px #d3f8f9;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.14s;
+}
+.topic-card .btn-primary { background: #2596be; color: white; }
+.topic-card .btn-primary:hover { background: #117597; color: #fff; }
+.topic-card .btn-outline-primary { color: #2596be; border: 2px solid #2596be;}
+.topic-card .btn-outline-primary:hover{ background: #e5fbff; color: #117597;}
+.card-footer.bg-light {
+  background: rgba(245,250,254,0.65)!important;
+  border-top: none!important;
+}
+
+/* Subject Summary */
+.summary-glass {
+  background: rgba(255,255,255,0.75);
+  border-radius: 28px;
+  box-shadow: 0 8px 28px #2596be11, -7px -7px 19px #fff5;
+  backdrop-filter: blur(13px);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 2.2rem 1.2rem;
+}
+
+.summary-glass .card { background:transparent; box-shadow:none;}
+.summary-glass .bg-primary { background: linear-gradient(120deg, #2596be 0%, #35cfc2 100%)!important; color:white!important;}
+.summary-glass .bg-success { background: linear-gradient(120deg, #35cfc2 0%, #06d6a0 100%)!important; color:white!important;}
+.summary-glass .bg-warning { background: linear-gradient(120deg, #ffe066 0%, #fed800 100%)!important; color:#fff7a3!important;}
+.summary-glass .bg-info { background: linear-gradient(120deg, #219ebc 0%, #8ecae6 100%)!important; color:white!important;}
+/* Empty topics */
+.empty-glass {
+  background: rgba(255,255,255,0.8);
+  border-radius: 30px;
+  box-shadow: 0 8px 22px #b2f0ffe5;
+  padding: 4rem 2rem;
+}
+</style>
+{% endblock %}
+
+
+{% block content %}
+<!-- Header Section -->
+<section class="header-glass mb-4">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb text-white-50 mb-2">
+            <li class="breadcrumb-item">
+              <a href="{{ url_for('main.index') }}" class="text-white">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="{{ url_for('main.subjects', class_level=subject.class_level) }}" class="text-white">
+                Class {{ subject.class_level }}
+              </a>
+            </li>
+            <li class="breadcrumb-item active text-white">{{ subject.name }}</li>
+          </ol>
+        </nav>
+        <h1 class="display-5 fw-bold mb-3">
+          {% if 'Math' in subject.name %}
+            <!--<i class="bi bi-calculator me-3"></i>-->
+          {% elif 'Physics' in subject.name %}
+            <!--<i class="bi bi-lightning me-3"></i>-->
+          {% elif 'Chemistry' in subject.name %}
+            <!--<i class="bi bi-droplet me-3"></i>-->
+          {% elif 'Biology' in subject.name %}
+            <!--<i class="bi bi-flower1 me-3"></i>-->
+          {% else %}
+           <!-- <i class="bi bi-journal-text me-3"></i>-->
+          {% endif %}
+          {{ subject.name }} Topics
+        </h1>
+        <p class="lead text-white-75 mb-0">Class {{ subject.class_level }} • {{ topics|length }} Topics Available</p>
+      </div>
+      <!--
+      <div class="col-md-4 text-center">
+        <i class="bi bi-list-nested" style="font-size: 5rem; opacity: 0.7;"></i>
+      </div>
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- Topics Grid -->
+<section class="glass-section mb-5">
+  <div class="container">
+    {% if topics %}
+    <div class="row">
+      {% for topic in topics %}
+      <div class="col-lg-6 col-xl-4 mb-4">
+        <div class="topic-card card h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <h5 class="card-title mb-0">{{ topic.name }}</h5>
+              <span class="badge bg-primary rounded-pill">{{ topic.question_count }}</span>
+            </div>
+            <p class="card-text text-muted small mb-3">
+              {{ topic.description or "Practice questions from " + topic.name }}
+            </p>
+            <!-- Progress bar (placeholder) -->
+            <div class="mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <small class="text-muted">Progress</small>
+                <small class="text-muted">0%</small>
+              </div>
+              <div class="progress" style="height: 4px;">
+                <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+              </div>
+            </div>
+            <!-- Action buttons -->
+            <div class="d-grid gap-2">
+              <a href="{{ url_for('exam.practice_topic', topic_id=topic.id) }}" 
+                class="btn btn-primary btn-sm">
+                <i class="bi bi-play-circle me-2"></i>Start Practice
+              </a>
+              <a href="{{ url_for('exam.topic_test', topic_id=topic.id) }}" 
+                class="btn btn-outline-primary btn-sm">
+                <i class="bi bi-stopwatch me-2"></i>Take Test
+              </a>
+            </div>
+          </div>
+          <!-- Card footer with stats -->
+          <div class="card-footer bg-light border-0">
+            <div class="row text-center">
+              <div class="col-4">
+                <small class="text-muted d-block">Questions</small>
+                <strong class="text-primary">{{ topic.question_count }}</strong>
+              </div>
+              <div class="col-4">
+                <small class="text-muted d-block">Difficulty</small>
+                <strong class="text-warning">Mixed</strong>
+              </div>
+              <div class="col-4">
+                <small class="text-muted d-block">Time</small>
+                <strong class="text-info">{{ (topic.question_count * 1.5) | int }}m</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <!-- Subject Actions -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="card glass-section border-primary">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ subject.name }} Full Test</h5>
+            <p class="card-text">Take a comprehensive test covering all topics in {{ subject.name }}</p>
+            <a href="{{ url_for('exam.subject_test', subject_id=subject.id) }}" 
+              class="btn btn-primary btn-lg me-3">
+              <i class="bi bi-clipboard-check me-2"></i>Full Subject Test
+            </a>
+            <a href="{{ url_for('exam.custom_test', subject_id=subject.id) }}" 
+              class="btn btn-outline-primary btn-lg">
+              <i class="bi bi-gear me-2"></i>Custom Test
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="empty-glass text-center">
+      <i class="bi bi-inbox text-muted" style="font-size: 4rem;"></i>
+      <h3 class="text-muted mt-3">No Topics Found</h3>
+      <p class="text-muted">No topics are available for {{ subject.name }} at the moment.</p>
+      <a href="{{ url_for('main.subjects', class_level=subject.class_level) }}" class="btn btn-primary">
+        <i class="bi bi-arrow-left me-2"></i>Back to Subjects
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Subject Summary -->
+{% if topics %}
+<section class="summary-glass">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <div class="card border-0 shadow-none">
+          <div class="card-body text-center p-4">
+            <h4 class="mb-3">{{ subject.name }} Summary</h4>
+            <div class="row">
+              <div class="col-md-3 col-6 mb-3">
+                <div class="p-3 bg-primary bg-opacity-10 rounded">
+                  <h5 class="text-primary mb-1">{{ topics|length }}</h5>
+                  <small class="text-muted">Topics</small>
+                </div>
+              </div>
+              <div class="col-md-3 col-6 mb-3">
+                <div class="p-3 bg-success bg-opacity-10 rounded">
+                  <h5 class="text-success mb-1">
+                    {% set total_questions = 0 %}
+                    {% for topic in topics %}
+                      {% set total_questions = total_questions + topic.question_count %}
+                    {% endfor %}
+                    {{ total_questions }}
+                  </h5>
+                  <small class="text-muted">Questions</small>
+                </div>
+              </div>
+              <div class="col-md-3 col-6 mb-3">
+                <div class="p-3 bg-warning bg-opacity-10 rounded">
+                  <h5 class="text-warning mb-1">{{ (total_questions * 1.5 / 60) | round(1) }}h</h5>
+                  <small class="text-muted">Est. Time</small>
+                </div>
+              </div>
+              <div class="col-md-3 col-6 mb-3">
+                <div class="p-3 bg-info bg-opacity-10 rounded">
+                  <h5 class="text-info mb-1">0%</h5>
+                  <small class="text-muted">Completed</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Add staggered animation to topic cards
+  document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.topic-card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'all 0.6s cubic-bezier(0.4,0,0.2,1)';
+      setTimeout(() => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      }, index * 100);
+    });
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px)';
+      });
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}Login - AKSHARASHREE{% endblock %}
+
+{% block styles %}
+<style>
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e9f6fb 0%, #d0f0ec 100%);
+    min-height: 100vh;
+  }
+  .login-container {
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(120deg, #e9f6fb 0%, #f9f9f9 100%);
+  }
+  .glass-card-neu {
+    display: flex;
+    min-width: 700px;
+    max-width: 900px;
+    background: rgba(255,255,255,0.6);
+    box-shadow: 0 12px 30px rgba(37,150,190,0.12),
+                3px 4px 20px 0px rgba(37,150,190,0.04) inset,
+                -8px -8px 24px 0px #fff inset;
+    border-radius: 40px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(53,207,194,0.11);
+  }
+  .login-left {
+    flex: 1.2;
+    background: rgba(38, 168, 208, 0.16);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 3.5rem;
+    box-shadow: 11px 0 40px -15px #bafffd21 inset;
+    border-right: 1px solid #eafffa52;
+  }
+  .login-left h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    color: #2596be;
+    margin-bottom: 1.5rem;
+    text-shadow:
+      0 1px 3px #fff,
+      0 4px 18px #c8f0ee99;
+  }
+  .login-left p {
+    font-size: 1.12rem;
+    font-weight: 500;
+    color: #2596be;
+    opacity: 0.90;
+    max-width: 350px;
+    line-height: 1.5;
+  }
+  .login-right {
+    flex: 1;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 2rem;
+    box-shadow: -8px 0 35px -25px #eafffa inset;
+  }
+  .login-form {
+    width: 100%;
+    max-width: 330px;
+    background: rgba(255,255,255,0.34);
+    border-radius: 25px;
+    padding: 2.2rem 1.4rem 1.5rem 1.4rem;
+    box-shadow:  7px 7px 32px rgba(0,140,140,0.04) inset,
+                -7px -7px 18px #fff8 inset;
+    backdrop-filter: blur(10px);
+    border: 1.1px solid #e0f8fd99;
+  }
+
+  .login-form h2 {
+    color: #2596be;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 0 1px 0 #fff;
+  }
+  .form-label {
+    color: #2596be;
+    font-weight: 600;
+    font-size: 0.93rem;
+    letter-spacing: 0.03em;
+  }
+  .form-control,
+  .form-select {
+    width: 100%;
+    border-radius: 16px;
+    border: none;
+    background: linear-gradient(120deg, #e4ffff88 0%, #f7feff 80%);
+    color: #2596be;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    box-shadow: 6px 6px 17px #f0fbff inset, -3px -3px 14px #cbf8ff2b inset;
+    outline: none;
+    transition: box-shadow 0.28s, background 0.28s;
+  }
+  .form-control:focus, .form-select:focus {
+    box-shadow:
+      0 1px 12px #52e5ff42,
+      4px 4px 12px #dafafa inset;
+    background: #f4ffffde;
+  }
+  .form-control::placeholder {
+    color: #94bbe1;
+    opacity: 0.6;
+  }
+  .form-check-label {
+    color: #2596be;
+    font-weight: 500;
+  }
+  .btn-login {
+    width: 100%;
+    padding: 0.9rem 0;
+    border: none;
+    border-radius: 15px;
+    color: #2596be;
+    background: linear-gradient(120deg, #deffff 0%, #cff2ea 100%);
+    font-size: 1.07rem;
+    font-weight: 700;
+    box-shadow:  6px 6px 14px #dea  inset, 0 8px 24px rgba(37,150,190,0.08);
+    cursor: pointer;
+    transition: background 0.2s, box-shadow 0.2s;
+  }
+  .btn-login:hover {
+    background: linear-gradient(120deg, #c5faff 0%, #e1f6ff 100%);
+    color: #117597;
+    box-shadow: 0 6px 20px #baf5e621, 0 1px 1px #fff8 inset;
+    transform: translateY(-1.5px) scale(1.02);
+  }
+  .login-footer {
+    text-align: center;
+    margin-top: 1.8rem;
+    font-weight: 500;
+    color: #2596be;
+  }
+  .login-footer a {
+    color: #2596be;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .login-footer a:hover {
+    color: #117597;
+    text-decoration: underline;
+  }
+  .form-check .form-check-input[type="checkbox"] {
+    accent-color: #2596be;
+    box-shadow:  1px 1px 8px #87eaea60 inset, -1.5px -1.5px 6px #ffffffe3 inset;
+    border-radius: 6px;
+    margin-right: 6px;
+    border: none;
+    width: 17px;
+    height: 17px;
+  }
+  @media (max-width: 1000px) {
+    .glass-card-neu {
+      min-width: unset;
+      max-width: 98vw;
+      flex-direction: column;
+    }
+    .login-left, .login-right {
+      padding: 2.5rem 1.2rem;
+      min-width: unset;
+    }
+    .login-left {
+      border-right: none;
+      border-bottom: 1px solid #eafffa52;
+      box-shadow: 11px 0 40px -12px #bafffd21 inset;
+      text-align: center;
+    }
+  }
+  @media (max-width: 480px) {
+    .glass-card-neu {
+      border-radius: 15px;
+      margin: 6vw;
+    }
+    .login-form {
+      padding: 1.1rem 0.6rem;
+      border-radius: 10px;
+    }
+    .login-left h1 {
+      font-size: 2.1rem;
+    }
+    .login-left {
+      padding: 1.2rem 0.7rem;
+    }
+    .login-right {
+      padding: 1.2rem 0.7rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="login-container">
+  <div class="glass-card-neu">
+    <div class="login-left">
+      <h1>Welcome Back!</h1>
+      <p>Sign in to ExamPad and continue your learning journey with exciting courses and features tailored just for you.</p>
+    </div>
+    <div class="login-right">
+      <form method="POST" action="{{ url_for('auth.login') }}" class="login-form" novalidate>
+        <h2>Login</h2>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="mb-4">
+          <label for="username" class="form-label">Username</label>
+          <input type="text" id="username" name="username" placeholder="Enter your username" class="form-control" required />
+        </div>
+        <div class="mb-4">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" name="password" placeholder="Enter your password" class="form-control" required />
+        </div>
+        <div class="mb-4">
+          <label for="role" class="form-label">Select Role</label>
+          <select id="role" name="role" class="form-select" required>
+            <option value="student" selected>Student</option>
+            <option value="teacher">Teacher</option>
+          </select>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="remember" name="remember" />
+          <label for="remember" class="form-check-label">Remember me</label>
+        </div>
+        <button type="submit" class="btn btn-login mb-3">Sign In</button>
+        <div class="login-footer">
+          <p>Don't have an account? <a href="{{ url_for('auth.register') }}">Sign up here</a></p>
+          <p><a href="{{ url_for('auth.forgot_password') }}">Forgot Password?</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

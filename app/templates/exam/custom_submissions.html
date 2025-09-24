@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+
+{% block title %}Submissions - {{ exam.title }}{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>Submissions for: {{ exam.title }}</h3>
+        <div class="d-flex align-items-center gap-2">
+            <small id="lastRefresh" class="text-muted">Last updated: Just now</small>
+            <button id="refreshBtn" class="btn btn-outline-primary">
+                <i class="fas fa-sync-alt"></i> Refresh Rankings
+            </button>
+        </div>
+    </div>
+    
+    {% if sessions and sessions|length %}
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0"><i class="fas fa-trophy"></i> Student Rankings</h5>
+                <span class="badge bg-light text-dark fs-6">{{ sessions|length if sessions else 0 }} Submissions</span>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-center" style="width: 80px;">Rank</th>
+                            <th>Student</th>
+                            <th class="text-center">Score</th>
+                            <th class="text-center">Percentage</th>
+                            <th class="text-center">Time Taken</th>
+                            <th class="text-center">Submitted At</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in sessions %}
+                        <tr class="{% if s.rank == 1 %}table-warning{% elif s.rank == 2 %}table-secondary{% elif s.rank == 3 %}table-info{% endif %}">
+                            <td class="text-center">
+                                {% if s.rank == 1 %}
+                                    <span class="badge bg-warning text-dark fs-6"><i class="fas fa-crown"></i> #{{ s.rank }}</span>
+                                {% elif s.rank == 2 %}
+                                    <span class="badge bg-secondary fs-6"><i class="fas fa-medal"></i> #{{ s.rank }}</span>
+                                {% elif s.rank == 3 %}
+                                    <span class="badge bg-info fs-6"><i class="fas fa-award"></i> #{{ s.rank }}</span>
+                                {% else %}
+                                    <span class="badge bg-light text-dark">#{{ s.rank }}</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <strong>{{ s.username }}</strong>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge bg-success">{{ s.score }}/{{ s.max_score }}</span>
+                            </td>
+                            <td class="text-center">
+                                <span class="badge {% if s.percentage >= 90 %}bg-success{% elif s.percentage >= 75 %}bg-primary{% elif s.percentage >= 60 %}bg-warning{% else %}bg-danger{% endif %} fs-6">
+                                    {{ '%.1f'|format(s.percentage or 0) }}%
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                {{ (s.duration_seconds or 0) // 60 }}m {{ (s.duration_seconds or 0) % 60 }}s
+                            </td>
+                            <td class="text-center">
+                                {% if s.end_time_str %}
+                                <small class="text-muted utc-dt" data-utc="{{ s.end_time_str }}"></small>
+                                {% else %}-{% endif %}
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('exam.session_details_teacher', session_id=s.id) }}">
+                                    <i class="fas fa-eye"></i> View Details
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <small><i class="fas fa-info-circle"></i> Rankings update automatically. Top 3 performers are highlighted.</small>
+        </div>
+    </div>
+    {% else %}
+    <div class="alert alert-info mt-3">
+        <i class="fas fa-info-circle"></i> No submissions yet. Rankings will appear here once students complete the test.
+    </div>
+    {% endif %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    // Format UTC timestamps to local time
+    const nodes = document.querySelectorAll('.utc-dt[data-utc]');
+    nodes.forEach(function(el){
+        try {
+            const iso = el.getAttribute('data-utc');
+            const d = new Date(iso);
+            if (!isNaN(d.getTime())) {
+                const opts = {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', timeZone:'Asia/Kolkata', hour12:false};
+                el.textContent = new Intl.DateTimeFormat(undefined, opts).format(d);
+            }
+        } catch(_) {}
+    });
+
+    // Auto-refresh functionality
+    const refreshBtn = document.getElementById('refreshBtn');
+    let isRefreshing = false;
+    
+    function refreshRankings() {
+        if (isRefreshing) return;
+        
+        isRefreshing = true;
+        const originalHtml = refreshBtn.innerHTML;
+        
+        // Add loading state
+        refreshBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+        refreshBtn.disabled = true;
+        
+        // Fetch updated data
+        fetch('{{ url_for("exam.custom_test_submissions_json", exam_id=exam.id) }}')
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                // Update the table with new data
+                updateRankingsTable(data.sessions);
+                
+                // Update submission count
+                const countBadge = document.querySelector('.card-header .badge');
+                if (countBadge) {
+                    countBadge.textContent = data.total_submissions + ' Submissions';
+                }
+                
+                // Update last refresh time
+                const now = new Date();
+                document.getElementById('lastRefresh').textContent = 
+                    'Last updated: ' + now.toLocaleTimeString();
+                
+                // Show success message briefly
+                showRefreshMessage('Rankings updated successfully!', 'success');
+            })
+            .catch(error => {
+                console.error('Error refreshing rankings:', error);
+                showRefreshMessage('Failed to refresh rankings. Please try again.', 'error');
+            })
+            .finally(() => {
+                // Reset button state
+                refreshBtn.innerHTML = originalHtml;
+                refreshBtn.disabled = false;
+                isRefreshing = false;
+            });
+    }
+    
+    function (sessions) {
+        const tbody = document.querySelector('tbody');
+        if (!tbody || !sessions.length) return;
+        
+        tbody.innerHTML = '';
+        
+        sessions.forEach(session => {
+            const rowClass = session.rank === 1 ? 'table-warning' : 
+                           session.rank === 2 ? 'table-secondary' : 
+                           session.rank === 3 ? 'table-info' : '';
+            
+            const rankBadge = session.rank === 1 ? 
+                '<span class="badge bg-warning text-dark fs-6"><i class="fas fa-crown"></i> #' + session.rank + '</span>' :
+                session.rank === 2 ? 
+                '<span class="badge bg-secondary fs-6"><i class="fas fa-medal"></i> #' + session.rank + '</span>' :
+                session.rank === 3 ? 
+                '<span class="badge bg-info fs-6"><i class="fas fa-award"></i> #' + session.rank + '</span>' :
+                '<span class="badge bg-light text-dark">#' + session.rank + '</span>';
+            
+            const scoreBadge = '<span class="badge bg-success">' + session.score + '/' + session.max_score + '</span>';
+            
+            const percentageBadge = '<span class="badge ' + 
+                (session.percentage >= 90 ? 'bg-success' : 
+                 session.percentage >= 75 ? 'bg-primary' : 
+                 session.percentage >= 60 ? 'bg-warning' : 'bg-danger') + 
+                ' fs-6">' + session.percentage.toFixed(1) + '%</span>';
+            
+            const timeDisplay = Math.floor(session.duration_seconds / 60) + 'm ' + (session.duration_seconds % 60) + 's';
+            
+            const submittedTime = session.end_time_str ? 
+                '<small class="text-muted utc-dt" data-utc="' + session.end_time_str + '"></small>' : '-';
+            
+            const viewButton = '<a class="btn btn-sm btn-outline-primary" href="' + 
+                '{{ url_for("exam.session_details_teacher", session_id=0) }}'.replace('0', session.id) + 
+                '"><i class="fas fa-eye"></i> View Details</a>';
+            
+            const row = '<tr class="' + rowClass + '">' +
+                '<td class="text-center">' + rankBadge + '</td>' +
+                '<td><strong>' + session.username + '</strong></td>' +
+                '<td class="text-center">' + scoreBadge + '</td>' +
+                '<td class="text-center">' + percentageBadge + '</td>' +
+                '<td class="text-center">' + timeDisplay + '</td>' +
+                '<td class="text-center">' + submittedTime + '</td>' +
+                '<td class="text-center">' + viewButton + '</td>' +
+                '</tr>';
+            
+            tbody.innerHTML += row;
+        });
+        
+        // Re-apply time formatting
+        const nodes = document.querySelectorAll('.utc-dt[data-utc]');
+        nodes.forEach(function(el){
+            try {
+                const iso = el.getAttribute('data-utc');
+                const d = new Date(iso);
+                if (!isNaN(d.getTime())) {
+                    const opts = {year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', timeZone:'Asia/Kolkata', hour12:false};
+                    el.textContent = new Intl.DateTimeFormat(undefined, opts).format(d);
+                }
+            } catch(_) {}
+        });
+    }
+    
+    function showRefreshMessage(message, type) {
+        // Remove existing message
+        const existingMsg = document.getElementById('refreshMessage');
+        if (existingMsg) {
+            existingMsg.remove();
+        }
+        
+        // Create new message
+        const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+        const messageDiv = document.createElement('div');
+        messageDiv.id = 'refreshMessage';
+        messageDiv.className = 'alert ' + alertClass + ' alert-dismissible fade show position-fixed';
+        messageDiv.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        messageDiv.innerHTML = 
+            '<i class="fas fa-' + (type === 'success' ? 'check-circle' : 'exclamation-triangle') + '"></i> ' + message +
+            '<button type="button" class="btn-close" data-bs-dismiss="alert"></button>';
+        
+        document.body.appendChild(messageDiv);
+        
+        // Auto-remove after 3 seconds
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.remove();
+            }
+        }, 3000);
+    }
+    
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', refreshRankings);
+    }
+    
+    // Auto-refresh every 60 seconds
+    setInterval(refreshRankings, 60000);
+});
+</script>
+{% endblock %}
+
+

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Teacher's Custom Tests{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h3><i class="fas fa-user-tie"></i> Custom Tests by {{ teacher.username }}</h3>
+    <div class="card mt-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0"><i class="fas fa-list"></i> Tests Created by {{ teacher.username }}</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Test Title</th>
+                            <th>Subject</th>
+                            <th>Created At</th>
+                            <th>Status</th>
+                            <th>Submissions</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for test in tests %}
+                        <tr>
+                            <td>{{ test.title }}</td>
+                            <td>{{ test.subject_name }}</td>
+                            <td>{{ test.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                            <td>{{ test.status }}</td>
+                            <td class="text-center">
+                                <span class="badge bg-primary">{{ test.submissions }}</span>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('exam.custom_test_submissions', exam_id=test.exam_id) }}">
+                                    <i class="fas fa-eye"></i> View Submissions
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

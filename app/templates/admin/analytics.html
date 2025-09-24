@@ -1,0 +1,406 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics{% endblock %}
+
+{% block styles %}
+<style>
+/* Enhanced Admin Button Styles */
+.btn-group .btn {
+    min-width: 40px;
+    height: 38px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-group .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-sm {
+    min-width: 38px !important;
+    height: 36px !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+    border-color: #117a8b;
+}
+
+/* Make action buttons more visible */
+.btn-group {
+    white-space: nowrap;
+}
+
+/* Enhanced table styling */
+.table td {
+    vertical-align: middle;
+}
+
+/* Badge enhancements */
+.badge {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-chart-bar"></i> Advanced Analytics</h2>
+                <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Platform Overview -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-globe"></i> Platform Overview</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-primary">{{ total_users }}</h3>
+                            <p class="text-muted">Total Students</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-success">{{ total_sessions }}</h3>
+                            <p class="text-muted">Total Test Sessions</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-info">{{ "%.1f"|format(total_sessions / total_users if total_users > 0 else 0) }}</h3>
+                            <p class="text-muted">Average Tests per Student</p>
+                        </div>
+                        <div class="col-md-3 text-center">
+                            <h3 class="text-warning">
+                                {% if score_ranges %}
+                                    {{ "%.1f"|format((score_ranges['90-100'] + score_ranges['80-89']) / total_sessions * 100 if total_sessions > 0 else 0) }}%
+                                {% else %}
+                                    0%
+                                {% endif %}
+                            </h3>
+                            <p class="text-muted">High Performers (≥80%)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Score Distribution -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-pie"></i> Score Distribution</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="scoreDistributionChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-percentage"></i> Performance Breakdown</h5>
+                </div>
+                <div class="card-body">
+                    {% if score_ranges %}
+                        {% for range, count in score_ranges.items() %}
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span>{{ range }}%</span>
+                            <div class="d-flex align-items-center">
+                                <span class="badge badge-{% if range == '90-100' %}success{% elif range == '80-89' %}info{% elif range == '70-79' %}warning{% else %}danger{% endif %} mr-2">
+                                    {{ count }}
+                                </span>
+                                <span class="text-muted">
+                                    ({{ "%.1f"|format(count / total_sessions * 100 if total_sessions > 0 else 0) }}%)
+                                </span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">No data available</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subject Difficulty Analysis -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-layer-group"></i> Subject Difficulty Analysis</h5>
+                </div>
+                <div class="card-body">
+                    {% if subject_difficulty %}
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Average Score</th>
+                                        <th>Total Attempts</th>
+                                        <th>Difficulty Level</th>
+                                        <th>Performance Distribution</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for subject, data in subject_difficulty.items() | sort(attribute='1.avg_score', reverse=true) %}
+                                    <tr>
+                                        <td><strong>{{ subject }}</strong></td>
+                                        <td>
+                                            <span class="badge badge-{% if data.avg_score >= 80 %}success{% elif data.avg_score >= 60 %}warning{% else %}danger{% endif %}">
+                                                {{ data.avg_score }}%
+                                            </span>
+                                        </td>
+                                        <td>{{ data.total_attempts }}</td>
+                                        <td>
+                                            <span class="badge badge-{% if data.difficulty_level == 'Easy' %}success{% elif data.difficulty_level == 'Moderate' %}warning{% else %}danger{% endif %}">
+                                                {{ data.difficulty_level }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-{% if data.avg_score >= 80 %}success{% elif data.avg_score >= 60 %}warning{% else %}danger{% endif %}" 
+                                                     style="width: {{ data.avg_score }}%">
+                                                    {{ data.avg_score }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-chart-bar fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No subject data available</h5>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Topic Performance Analysis -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-list"></i> Top Performing Topics</h5>
+                </div>
+                <div class="card-body">
+                    {% if topic_performance %}
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="topicsTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Topic</th>
+                                        <th>Subject</th>
+                                        <th>Accuracy</th>
+                                        <th>Total Attempts</th>
+                                        <th>Performance Level</th>
+                                        <th>Visual Progress</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for topic, data in topic_performance.items() %}
+                                    <tr>
+                                        <td>
+                                            {% if loop.index <= 5 %}
+                                                <span class="badge badge-warning">#{{ loop.index }}</span>
+                                            {% else %}
+                                                <span class="badge badge-secondary">#{{ loop.index }}</span>
+                                            {% endif %}
+                                        </td>
+                                        <td><strong>{{ topic }}</strong></td>
+                                        <td>
+                                            <span class="badge badge-info">{{ data.subject }}</span>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-{% if data.accuracy >= 80 %}success{% elif data.accuracy >= 60 %}warning{% else %}danger{% endif %}">
+                                                {{ data.accuracy }}%
+                                            </span>
+                                        </td>
+                                        <td>{{ data.total_attempts }}</td>
+                                        <td>
+                                            {% if data.accuracy >= 90 %}
+                                                <span class="badge badge-success">Excellent</span>
+                                            {% elif data.accuracy >= 80 %}
+                                                <span class="badge badge-info">Very Good</span>
+                                            {% elif data.accuracy >= 70 %}
+                                                <span class="badge badge-warning">Good</span>
+                                            {% elif data.accuracy >= 60 %}
+                                                <span class="badge badge-warning">Average</span>
+                                            {% else %}
+                                                <span class="badge badge-danger">Challenging</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-{% if data.accuracy >= 80 %}success{% elif data.accuracy >= 60 %}warning{% else %}danger{% endif %}" 
+                                                     style="width: {{ data.accuracy }}%">
+                                                    {{ "%.0f"|format(data.accuracy) }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-4">
+                            <i class="fas fa-list fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No topic data available</h5>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Insights -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-lightbulb"></i> Performance Insights</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Strengths</h6>
+                            <div class="alert alert-success">
+                                <ul class="mb-0">
+                                    {% if topic_performance %}
+                                        {% set top_topics = topic_performance.items() | list | sort(attribute='1.accuracy', reverse=true) %}
+                                        {% for topic, data in top_topics[:3] %}
+                                            <li>{{ topic }} ({{ data.accuracy }}% accuracy)</li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>No performance data available yet</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Areas for Improvement</h6>
+                            <div class="alert alert-warning">
+                                <ul class="mb-0">
+                                    {% if topic_performance %}
+                                        {% set bottom_topics = topic_performance.items() | list | sort(attribute='1.accuracy') %}
+                                        {% for topic, data in bottom_topics[:3] %}
+                                            <li>{{ topic }} ({{ data.accuracy }}% accuracy)</li>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li>No performance data available yet</li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+<script>
+// Score Distribution Chart
+const ctx = document.getElementById('scoreDistributionChart').getContext('2d');
+const scoreData = {{ score_ranges | tojson }};
+
+const labels = Object.keys(scoreData);
+const data = Object.values(scoreData);
+const backgroundColors = [
+    '#28a745', // 90-100 - Green
+    '#17a2b8', // 80-89 - Blue
+    '#ffc107', // 70-79 - Yellow
+    '#fd7e14', // 60-69 - Orange
+    '#6f42c1', // 50-59 - Purple
+    '#dc3545'  // Below 50 - Red
+];
+
+const chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: labels,
+        datasets: [{
+            data: data,
+            backgroundColor: backgroundColors,
+            borderColor: '#fff',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Score Distribution Across All Tests'
+            },
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+// Initialize DataTable for topics
+$(document).ready(function() {
+    $('#topicsTable').DataTable({
+        "pageLength": 15,
+        "order": [[ 3, "desc" ]], // Sort by accuracy by default
+        "columnDefs": [
+            { "orderable": false, "targets": 6 } // Disable sorting for progress bar column
+        ],
+        "language": {
+            "search": "Search topics:",
+            "lengthMenu": "Show _MENU_ topics per page",
+            "info": "Showing _START_ to _END_ of _TOTAL_ topics"
+        }
+    });
+});
+</script>
+{% endblock %}

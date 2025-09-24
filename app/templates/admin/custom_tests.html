@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Custom Tests - Admin{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <h3><i class="fas fa-chalkboard-teacher"></i> Custom Tests by Teachers</h3>
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="fas fa-users"></i> Teachers & Active Custom Tests</h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped align-middle mb-0">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Teacher Name</th>
+                            <th class="text-center">Active Tests</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for t in teachers %}
+                        <tr>
+                            <td><strong>{{ t.username }}</strong></td>
+                            <td class="text-center">
+                                <span class="badge bg-success">{{ t.active_tests }}</span>
+                            </td>
+                            <td class="text-center">
+                                <a class="btn btn-sm btn-outline-primary" href="{{ url_for('admin.view_teacher_tests', teacher_id=t.id) }}">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

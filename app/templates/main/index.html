@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}KODEMAPA - Online Exam Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="bg-animated text-white py-5 position-relative">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3 fade-in-up">
+                    Master Your <span class="text-gradient-cool">CBSE Exams</span>
+                </h1>
+                <p class="lead mb-4 fade-in-up" style="color: rgba(255,255,255,0.9);">
+                    🚀 Comprehensive online examination platform with thousands of questions, 
+                    detailed explanations, and real-time performance tracking.
+                </p>
+                <div class="fade-in-up">
+                    <a href="{{ url_for('exam.practice') }}" class="btn btn-light btn-lg me-3 glow-success">
+                        <i class="bi bi-play-circle me-2"></i>Start Practice
+                    </a>
+                    <a href="{{ url_for('main.about') }}" class="btn btn-outline-light btn-lg">
+                        <i class="bi bi-info-circle me-2"></i>Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="bi bi-mortarboard-fill float" style="font-size: 8rem; opacity: 0.9; color: rgba(255,255,255,0.8);"></i>
+            </div>
+        </div>
+    </div>
+    <!-- Decorative Elements -->
+    <div class="position-absolute" style="top: 10%; right: 10%; opacity: 0.1;">
+        <i class="bi bi-star-fill" style="font-size: 3rem;"></i>
+    </div>
+    <div class="position-absolute" style="bottom: 15%; left: 5%; opacity: 0.1;">
+        <i class="bi bi-lightbulb-fill" style="font-size: 2.5rem;"></i>
+    </div>
+</section>
+
+<!-- Statistics Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-4 mb-4">
+                <div class="stats-card cosmic">
+                    <div class="stats-number">{{ total_subjects }}</div>
+                    <h5><i class="bi bi-book me-2"></i>Subjects</h5>
+                    <p class="mb-0">📚 Comprehensive coverage of CBSE curriculum</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stats-card forest">
+                    <div class="stats-number">{{ total_topics }}</div>
+                    <h5><i class="bi bi-list-ul me-2"></i>Topics</h5>
+                    <p class="mb-0">🎯 Detailed topic-wise practice sessions</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="stats-card vibrant">
+                    <div class="stats-number">{{ (total_questions / 1000) | round(1) }}K+</div>
+                    <h5><i class="bi bi-question-circle me-2"></i>Questions</h5>
+                    <p class="mb-0">💡 Extensive question bank with solutions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Class Selection Section -->
+<section class="py-5 position-relative">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="text-gradient-fire">🎓 Choose Your Class</h2>
+                <p class="lead text-muted">Select your class to explore subjects and start practicing</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Class XI -->
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 shadow-glow-primary">
+                    <div class="card-header text-center bg-glass">
+                        <h3><i class="bi bi-11-circle me-2"></i>Class XI</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for subject in class_xi_subjects %}
+                            <div class="col-md-6 mb-3">
+                                <a href="{{ url_for('main.topics', subject_id=subject.id) }}" 
+                                   class="text-decoration-none">
+                                    <div class="d-flex align-items-center p-3 bg-glass rounded-custom shadow-custom">
+                                        <i class="bi bi-journal-text me-3 text-gradient" style="font-size: 1.5rem;"></i>
+                                        <div>
+                                            <h6 class="mb-1">{{ subject.name }}</h6>
+                                            <small class="text-muted">{{ subject.topics.count() }} topics</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="{{ url_for('main.subjects', class_level='XI') }}" 
+                               class="btn btn-primary">
+                                <i class="bi bi-arrow-right me-2"></i>View All Subjects
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Class XII -->
+            <div class="col-lg-6 mb-4">
+                <div class="card h-100 shadow-custom">
+                    <div class="card-header text-center">
+                        <h3><i class="bi bi-12-circle me-2"></i>Class XII</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            {% for subject in class_xii_subjects %}
+                            <div class="col-md-6 mb-3">
+                                <a href="{{ url_for('main.topics', subject_id=subject.id) }}" 
+                                   class="text-decoration-none">
+                                    <div class="d-flex align-items-center p-3 bg-light rounded">
+                                        <i class="bi bi-journal-text me-3 text-primary" style="font-size: 1.5rem;"></i>
+                                        <div>
+                                            <h6 class="mb-1">{{ subject.name }}</h6>
+                                            <small class="text-muted">{{ subject.topics.count() }} topics</small>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center mt-3">
+                            <a href="{{ url_for('main.subjects', class_level='XII') }}" 
+                               class="btn btn-primary">
+                                <i class="bi bi-arrow-right me-2"></i>View All Subjects
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="text-gradient">Platform Features</h2>
+                <p class="lead text-muted">Everything you need for exam preparation</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <i class="bi bi-speedometer2 text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5>Real-time Assessment</h5>
+                        <p class="text-muted">Instant feedback and scoring with detailed performance analytics</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <i class="bi bi-lightbulb text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5>Detailed Explanations</h5>
+                        <p class="text-muted">Step-by-step solutions for every question to enhance understanding</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100 text-center border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <i class="bi bi-graph-up text-primary mb-3" style="font-size: 3rem;"></i>
+                        <h5>Progress Tracking</h5>
+                        <p class="text-muted">Monitor your improvement with comprehensive progress reports</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-3">Ready to Excel in Your Exams?</h2>
+        <p class="lead mb-4">Join thousands of students who are already improving their scores</p>
+        <a href="{{ url_for('exam.practice') }}" class="btn btn-light btn-lg">
+            <i class="bi bi-rocket-takeoff me-2"></i>Start Your Journey
+        </a>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Add smooth scrolling and animation effects
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animate cards on scroll
+        const cards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+        
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    });
+</script>
+{% endblock %}

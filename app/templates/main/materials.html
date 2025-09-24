@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  /* --- Page Background --- */
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #e9f6fb 0%, #d0f0ec 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 2rem 0;
+  }
+
+  h2 {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #2979ff;
+  }
+
+  /* --- Glassmorphic Accordion --- */
+  .accordion {
+    width: 95%;
+    margin: 10px auto;
+    border-radius: 24px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow:
+      8px 8px 32px rgba(37, 150, 190, 0.12),
+      -8px -8px 24px rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(24px);
+    transition: all 0.3s ease;
+  }
+
+  .accordion-header {
+    padding: 14px 24px;
+    color: #2596be;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow:
+      inset 3px 3px 8px #d1e9f6,
+      inset -3px -3px 8px #ffffff;
+    transition: background 0.3s ease;
+    user-select: none;
+    border-bottom: 1px solid rgba(37, 150, 190, 0.12);
+  }
+
+  .accordion-header:hover {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .accordion-header span {
+    background: #2596be;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 13px;
+    font-weight: bold;
+    font-size: 20px;
+    transition: transform 0.2s;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    box-shadow:
+      2px 2px 6px rgba(0, 0, 0, 0.1),
+      -2px -2px 6px #8ad1f2;
+  }
+
+  .accordion-header:hover span {
+    transform: rotate(90deg);
+  }
+
+  /* --- Accordion Content --- */
+  .accordion-content {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 24px 30px;
+    animation: fadeIn 0.4s ease-in-out;
+    border-radius: 0 0 24px 24px;
+    box-shadow:
+      inset 6px 6px 16px #c5efff8a,
+      inset -6px -6px 16px #ffffff;
+  }
+
+  /* --- Video Grid --- */
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+
+  .video-container {
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .fullscreen-video {
+    width: 100%;
+    height: 160px;
+    border-radius: 18px;
+    box-shadow:
+      7px 7px 20px rgba(37, 150, 190, 0.12),
+      -7px -7px 20px #ffffff;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .fullscreen-video:hover {
+    transform: scale(1.04);
+  }
+
+  .video-title {
+    margin-top: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #13586a;
+  }
+
+  /* --- Notes Grid --- */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 15px;
+  }
+
+  .note-card {
+    background: rgba(255, 255, 255, 0.7);
+    color: #2596be;
+    padding: 12px 16px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    box-shadow:
+      6px 6px 21px rgba(37, 150, 190, 0.12),
+      -6px -6px 20px #ffffff;
+    transition: background 0.3s, transform 0.25s;
+    user-select: none;
+  }
+
+  .note-card:hover {
+    background-color: #c2f0ff;
+    transform: scale(1.05);
+    text-decoration: underline;
+    color: #117597;
+    box-shadow:
+      8px 8px 28px rgba(44, 180, 212, 0.32),
+      -8px -8px 28px #a5f1ff;
+  }
+
+  /* --- Animations --- */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+
+<h2>📘 Study Materials</h2>
+
+{% for class_name, subjects in materials.items() %}
+  <h3>{{ class_name.split('class')[-1] }}</h3>
+
+  {% for subject, data in subjects.items() %}
+    <div class="accordion">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        {{ subject }} {{ class_name.split('class')[-1] }}
+        <span>+</span>
+      </div>
+      <div class="accordion-content">
+        <div class="video-grid">
+          {% for file in data.videos %}
+            <div class="video-container" onclick="openFullscreen(this)">
+              <video class="fullscreen-video" controls
+                poster="{{ url_for('static', filename='thumbnails/' + file.replace('materials/', '').replace('.mp4', '.jpg')) }}">
+                <source src="{{ url_for('static', filename=file) }}" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
+              <p class="video-title">{{ file.split('/')[-1].rsplit('.', 1)[0].replace('_', ' ') }}</p>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if data.notes %}
+          <div style="margin-top: 30px;">
+            <h4 style="color: #2596be; margin-bottom: 15px;">📄 Notes</h4>
+            <div class="notes-grid">
+              {% for note in data.notes %}
+                <a href="{{ url_for('static', filename=note) }}" target="_blank" class="note-card">
+                  {{ note.split('/')[-1].rsplit('.', 1)[0].replace('_', ' ') }}
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+{% endfor %}
+
+<script>
+  function openFullscreen(container) {
+    const video = container.querySelector('video');
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
+    }
+    video.play();
+  }
+
+  function toggleAccordion(header) {
+    const content = header.nextElementSibling;
+    const isOpen = content.style.display === 'block';
+    const icon = header.querySelector('span');
+
+    // Close all others
+    document.querySelectorAll('.accordion-content').forEach((el) => {
+      el.style.display = 'none';
+    });
+    document.querySelectorAll('.accordion-header span').forEach((el) => {
+      el.innerText = '+';
+    });
+
+    // Toggle current
+    if (!isOpen) {
+      content.style.display = 'block';
+      icon.innerText = '−';
+    } else {
+      content.style.display = 'none';
+      icon.innerText = '+';
+    }
+  }
+</script>
+{% endblock %}

@@ -1,0 +1,369 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block styles %}
+<style>
+/* Enhanced Admin Button Styles */
+.btn-group .btn {
+    min-width: 40px;
+    height: 38px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-group .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-sm {
+    min-width: 38px !important;
+    height: 36px !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+}
+
+/* Admin dashboard specific styles */
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card footer links */
+.card-footer a {
+    transition: all 0.3s ease;
+}
+
+.card-footer a:hover {
+    text-decoration: underline !important;
+}
+
+/* Badge enhancements */
+.badge {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.badge-danger {
+    background-color: #dc3545;
+    color: white;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4">
+                <i class="bi bi-speedometer2"></i> Admin Dashboard
+            </h2>
+        </div>
+    </div>
+
+    <!-- Overview Cards -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ total_students }}</h4>
+                            <p class="mb-0">Total Students</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('admin.students') }}" class="text-white text-decoration-none">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ total_sessions }}</h4>
+                            <p class="mb-0">Total Sessions</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-chart-line fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('admin.sessions') }}" class="text-white text-decoration-none">
+                        View Sessions <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ avg_performance }}%</h4>
+                            <p class="mb-0">Average Score</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-percentage fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url_for('admin.analytics') }}" class="text-white text-decoration-none">
+                        View Analytics <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h4>{{ recent_sessions }}</h4>
+                            <p class="mb-0">This Week</p>
+                        </div>
+                        <div class="align-self-center">
+                            <i class="fas fa-calendar-week fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <span class="text-white">Recent Activity</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Top Students -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-trophy"></i> Top Performing Students (Last 30 Days)</h5>
+                </div>
+                <div class="card-body">
+                    {% if top_students %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Rank</th>
+                                        <th>Student</th>
+                                        <th>Avg Score</th>
+                                        <th>Tests</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for student in top_students %}
+                                    <tr>
+                                        <td>
+                                            {% if loop.index <= 3 %}
+                                                <span class="badge badge-warning">#{{ loop.index }}</span>
+                                            {% else %}
+                                                {{ loop.index }}
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{{ url_for('admin.student_detail', student_id=student.id) }}" 
+                                               class="text-decoration-none">
+                                                {{ student.username }}
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-{% if student.avg_score >= 90 %}success{% elif student.avg_score >= 70 %}warning{% else %}danger{% endif %}">
+                                                {{ "%.1f"|format(student.avg_score) }}%
+                                            </span>
+                                        </td>
+                                        <td>{{ student.total_tests }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted">No data available</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Subject Performance -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-book"></i> Subject Performance</h5>
+                </div>
+                <div class="card-body">
+                    {% if subject_performance %}
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Subject</th>
+                                        <th>Avg Score</th>
+                                        <th>Attempts</th>
+                                        <th>Performance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for subject in subject_performance %}
+                                    <tr>
+                                        <td>{{ subject.name }}</td>
+                                        <td>{{ "%.1f"|format(subject.avg_score) }}%</td>
+                                        <td>{{ subject.total_attempts }}</td>
+                                        <td>
+                                            <div class="progress" style="height: 20px;">
+                                                <div class="progress-bar bg-{% if subject.avg_score >= 80 %}success{% elif subject.avg_score >= 60 %}warning{% else %}danger{% endif %}" 
+                                                     role="progressbar" 
+                                                     style="width: {{ subject.avg_score }}%"
+                                                     aria-valuenow="{{ subject.avg_score }}" 
+                                                     aria-valuemin="0" 
+                                                     aria-valuemax="100">
+                                                    {{ "%.0f"|format(subject.avg_score) }}%
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <p class="text-muted">No data available</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Daily Activity Chart -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-area"></i> Daily Activity (Last 30 Days)</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="activityChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-bolt"></i> Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ url_for('admin.students') }}" class="btn btn-primary btn-block w-100">
+                                <i class="fas fa-users"></i> Manage Students
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ url_for('admin.sessions') }}" class="btn btn-success btn-block w-100">
+                                <i class="fas fa-list"></i> View All Sessions
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ url_for('admin.analytics') }}" class="btn btn-info btn-block w-100">
+                                <i class="fas fa-chart-bar"></i> Advanced Analytics
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ url_for('admin.custom_tests') }}" class="btn btn-warning btn-block w-100">
+                                <i class="fas fa-chalkboard-teacher"></i> Custom Tests
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ url_for('admin.all_submissions') }}" class="btn btn-dark btn-block w-100">
+                                <i class="fas fa-file-alt"></i> All Test Submissions
+                            </a>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <a href="{{ url_for('main.index') }}" class="btn btn-secondary btn-block w-100">
+                                <i class="fas fa-home"></i> Back to Home
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Daily Activity Chart
+const ctx = document.getElementById('activityChart').getContext('2d');
+const activityData = {{ daily_activity | tojson }};
+
+const chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: activityData.map(d => d.date),
+        datasets: [{
+            label: 'Sessions',
+            data: activityData.map(d => d.sessions),
+            borderColor: 'rgb(75, 192, 192)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            tension: 0.1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Daily Test Sessions'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+</script>
+{% endblock %}

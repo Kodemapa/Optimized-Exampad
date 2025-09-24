@@ -1,0 +1,679 @@
+{% extends "base.html" %}
+
+{% block title %}Session Details{% endblock %}
+
+{% block styles %}
+<style>
+/* Enhanced Admin Button Styles */
+.btn-group .btn {
+    min-width: 40px;
+    height: 38px;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-group .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-sm {
+    min-width: 38px !important;
+    height: 36px !important;
+    padding: 6px 10px !important;
+    font-size: 13px !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+    border-color: #117a8b;
+}
+
+/* Make action buttons more visible */
+.btn-group {
+    white-space: nowrap;
+}
+
+/* Enhanced table styling */
+.table td {
+    vertical-align: middle;
+}
+
+/* Badge enhancements */
+.badge {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h2><i class="bi bi-clipboard-list"></i> Session Details</h2>
+                    <p class="text-muted">
+                        <strong>{{ session.user.username }}</strong> - 
+                        {% if session.exam %}{{ session.exam.title }}{% else %}Practice Test{% endif %}
+                        ({{ session.start_time.strftime('%Y-%m-%d %H:%M') }})
+                    </p>
+                </div>
+                <div>
+                    <a href="{{ url_for('admin.sessions') }}" class="btn btn-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Sessions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Performance Summary -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body text-center">
+                    <h3>{{ session.percentage }}%</h3>
+                    <p class="mb-0">Final Score</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body text-center">
+                    <h3>{{ analytics.correct }}/{{ analytics.total_questions }}</h3>
+                    <p class="mb-0">Correct Answers</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body text-center">
+                    <h3>
+                        {% if session.duration_seconds %}
+                            {% set minutes = (session.duration_seconds // 60) %}
+                            {% set seconds = (session.duration_seconds % 60) %}
+                            {{ minutes }}:{{ "%02d"|format(seconds) }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </h3>
+                    <p class="mb-0">Time Taken</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body text-center">
+                    <h3>
+                        {% if comparative_data.rank %}
+                            #{{ comparative_data.rank }}
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </h3>
+                    <p class="mb-0">Rank</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Analytics Overview -->
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-pie-chart"></i> Performance Analytics</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Answer Distribution</h6>
+                            <div class="mb-2">
+                                <span class="text-success">Correct: {{ analytics.correct }}</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-danger">Incorrect: {{ analytics.incorrect }}</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="text-warning">Skipped: {{ analytics.skipped }}</span>
+                            </div>
+                            <div class="progress" style="height: 25px;">
+                                {% set correct_percent = (analytics.correct / analytics.total_questions * 100) if analytics.total_questions > 0 else 0 %}
+                                {% set incorrect_percent = (analytics.incorrect / analytics.total_questions * 100) if analytics.total_questions > 0 else 0 %}
+                                {% set skipped_percent = (analytics.skipped / analytics.total_questions * 100) if analytics.total_questions > 0 else 0 %}
+                                
+                                <div class="progress-bar bg-success" style="width: {{ correct_percent }}%">
+                                    {{ "%.0f"|format(correct_percent) }}%
+                                </div>
+                                <div class="progress-bar bg-danger" style="width: {{ incorrect_percent }}%">
+                                    {{ "%.0f"|format(incorrect_percent) }}%
+                                </div>
+                                <div class="progress-bar bg-warning" style="width: {{ skipped_percent }}%">
+                                    {{ "%.0f"|format(skipped_percent) }}%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Time Analysis</h6>
+                            <div class="mb-2">
+                                <span>Average per question: {{ "%.1f"|format(analytics.time_analysis.avg_per_question) }}s</span>
+                            </div>
+                            <div class="mb-2">
+                                <span>Fastest question: {{ analytics.time_analysis.fastest }}s</span>
+                            </div>
+                            <div class="mb-2">
+                                <span>Slowest question: {{ analytics.time_analysis.slowest }}s</span>
+                            </div>
+                            <div class="mb-2">
+                                <span>Total time: {{ "%.0f"|format(analytics.time_analysis.total_time / 60) }} minutes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparative Performance -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-people"></i> Comparative Performance</h5>
+                </div>
+                <div class="card-body">
+                    {% if comparative_data.total_participants > 1 %}
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Rank:</span>
+                                <strong>
+                                    {% if comparative_data.rank %}
+                                        #{{ comparative_data.rank }} / {{ comparative_data.total_participants }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </strong>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Percentile:</span>
+                                <strong>{{ comparative_data.percentile }}th</strong>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Average Score:</span>
+                                <strong>{{ comparative_data.avg_score }}%</strong>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span>Faster than:</span>
+                                <strong>{{ comparative_data.faster_than_percent }}% of students</strong>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="text-center">
+                            <i class="bi bi-person fs-2 text-muted mb-2"></i>
+                            <p class="text-muted">Only student to take this exam</p>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Difficulty Breakdown -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-layers"></i> Difficulty Level Performance</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for difficulty, stats in analytics.difficulty_breakdown.items() %}
+                        <div class="col-md-4">
+                            <div class="card border">
+                                <div class="card-body text-center">
+                                    <h5 class="text-capitalize">{{ difficulty }}</h5>
+                                    <div class="progress mb-2" style="height: 25px;">
+                                        <div class="progress-bar bg-{% if stats.accuracy >= 80 %}success{% elif stats.accuracy >= 60 %}warning{% else %}danger{% endif %}" 
+                                             style="width: {{ stats.accuracy }}%">
+                                            {{ "%.1f"|format(stats.accuracy) }}%
+                                        </div>
+                                    </div>
+                                    <small class="text-muted">{{ stats.correct }}/{{ stats.total }} questions</small>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Question-by-Question Analysis -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-transparent border-0">
+                <h5 class="mb-0"><i class="bi bi-list-ol me-2"></i>Question-by-Question Analysis</h5>
+            </div>
+            <div class="card-body">
+                <div class="accordion" id="questionsAccordion">
+                    {% for qdata in questions %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{ loop.index }}">
+                            <button class="accordion-button collapsed" type="button"
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ loop.index }}"
+                                    aria-expanded="false"
+                                    aria-controls="collapse{{ loop.index }}">
+                                <span class="me-2">
+                                    {% if qdata.is_correct %}
+                                        <i class="bi bi-check-circle text-success"></i>
+                                    {% elif qdata.is_attempted %}
+                                        <i class="bi bi-x-circle text-danger"></i>
+                                    {% else %}
+                                        <i class="bi bi-dash-circle text-warning"></i>
+                                    {% endif %}
+                                </span>
+                                <span class="fw-medium">Question {{ loop.index }}</span>
+                                <span class="ms-auto me-2">
+                                    <span class="badge bg-secondary">{{ qdata.question.difficulty_level|title }}</span>
+                                    {% if qdata.time_spent %}
+                                    <span class="badge bg-info">{{ qdata.time_spent|round(1) }}s</span>
+                                    {% endif %}
+                                </span>
+                            </button>
+                        </h2>
+                        <div id="collapse{{ loop.index }}" class="accordion-collapse collapse"
+                             aria-labelledby="heading{{ loop.index }}"
+                             data-bs-parent="#questionsAccordion">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <h6>Question:</h6>
+                                        <p>{{ qdata.question.question_text|safe }}</p>
+
+                                        <h6>Options:</h6>
+                                        <div class="list-group list-group-flush">
+                                            {% set answer_map = {'A': 0, 'B': 1, 'C': 2, 'D': 3} %}
+                                            {% for option in qdata.question.get_options() %}
+                                            <div class="list-group-item border-0 px-0 py-1
+                                                {% if loop.index0 == answer_map.get(qdata.correct_answer|upper, -1) %}bg-success bg-opacity-10{% endif %}
+                                                {% if qdata.user_answer and loop.index0 == answer_map.get(qdata.user_answer|upper, -1) and not qdata.is_correct %}bg-danger bg-opacity-10{% endif %}">
+                                                <strong>{{ 'ABCD'[loop.index0] }}.</strong> {{ option|safe }}
+                                                {% if loop.index0 == answer_map.get(qdata.correct_answer|upper, -1) %}
+                                                    <i class="bi bi-check-circle text-success ms-2"></i>
+                                                {% endif %}
+                                                {% if qdata.user_answer and loop.index0 == answer_map.get(qdata.user_answer|upper, -1) and not qdata.is_correct %}
+                                                    <i class="bi bi-x-circle text-danger ms-2"></i>
+                                                {% endif %}
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+
+                                        {% if qdata.explanation %}
+                                        <h6 class="mt-3">Explanation:</h6>
+                                        <p class="text-muted">{{ qdata.explanation|safe }}</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <h6 class="card-title">Your Answer</h6>
+                                                <p class="card-text">
+                                                    {% if qdata.user_answer %}
+                                                        <span class="badge {% if qdata.is_correct %}bg-success{% else %}bg-danger{% endif %}">
+                                                            Option {{ qdata.user_answer|upper }}
+                                                        </span>
+                                                    {% else %}
+                                                        <span class="badge bg-warning">Not Attempted</span>
+                                                    {% endif %}
+                                                </p>
+
+                                                <h6 class="card-title">Correct Answer</h6>
+                                                <p class="card-text">
+                                                    <span class="badge bg-success">Option {{ qdata.correct_answer|upper }}</span>
+                                                </p>
+
+                                                <h6 class="card-title">Stats</h6>
+                                                <div class="small">
+                                                    <div>Topic: {{ qdata.question.topic.name }}</div>
+                                                    <div>Difficulty: {{ qdata.question.difficulty_level|title }}</div>
+                                                    {% if qdata.time_spent %}
+                                                    <div>Time: {{ qdata.time_spent|round(1) }} seconds</div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> <!-- row -->
+                            </div> <!-- accordion-body -->
+                        </div> <!-- collapse -->
+                    </div> <!-- accordion-item -->
+                    {% endfor %}
+                </div> <!-- accordion -->
+            </div> <!-- card-body -->
+        </div> <!-- card -->
+    </div> <!-- col -->
+</div> <!-- row -->
+
+
+<style>
+.neo-container {
+  background: #e0e0e0;
+  border-radius: 20px;
+  box-shadow:
+    8px 8px 16px #bebebe,
+    -8px -8px 16px #ffffff;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.neo-title {
+  font-weight: 700;
+  color: #222;
+}
+
+.neo-accordion-item {
+  background: #e0e0e0;
+  border-radius: 16px;
+  box-shadow:
+    4px 4px 8px #bebebe,
+    -4px -4px 8px #ffffff;
+  transition: box-shadow 0.3s ease;
+}
+
+.neo-accordion-header {
+  background: transparent;
+  border: none;
+  padding: 16px 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #222;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: none !important;
+}
+
+.neo-accordion-header:focus,
+.neo-accordion-header:hover {
+  outline: none;
+  color: #007bff;
+}
+
+.neo-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 14px;
+  user-select: none;
+  box-shadow:
+    2px 2px 4px #bebebe,
+    -2px -2px 4px #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.qnum {
+  width: 40px;
+  text-align: center;
+  background-color: #e0e0e0;
+  color: #555;
+}
+
+.neo-success {
+  background-color: #d1e7dd !important;
+  color: #0f5132 !important;
+  box-shadow:
+    inset 2px 2px 4px #a2b39e,
+    inset -2px -2px 4px #f0fff1 !important;
+}
+
+.neo-danger {
+  background-color: #f8d7da !important;
+  color: #842029 !important;
+  box-shadow:
+    inset 2px 2px 4px #c4959e,
+    inset -2px -2px 4px #fff0f1 !important;
+}
+
+.neo-warning {
+  background-color: #fff3cd !important;
+  color: #664d03 !important;
+  box-shadow:
+    inset 2px 2px 4px #c6b68b,
+    inset -2px -2px 4px #fffbea !important;
+}
+
+.neo-neutral {
+  background-color: #e0e0e0;
+  color: #666;
+  box-shadow:
+    2px 2px 5px #bebebe,
+    -2px -2px 5px #ffffff;
+}
+
+.neo-success-icon {
+  color: #198754;
+  font-size: 1.3rem;
+}
+
+.neo-danger-icon {
+  color: #dc3545;
+  font-size: 1.3rem;
+}
+
+.neo-chevron {
+  font-size: 1.25rem;
+  color: #888;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate chevron on collapse show */
+.collapse.show + .neo-accordion-header .neo-chevron,
+.neo-accordion-header[aria-expanded="true"] .neo-chevron {
+  transform: rotate(180deg);
+}
+
+/* Accordion body */
+.neo-accordion-body {
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  background: #e0e0e0;
+  border-radius: 0 0 16px 16px;
+  box-shadow:
+    inset 4px 4px 8px #bebebe,
+    inset -4px -4px 8px #ffffff;
+  color: #444;
+}
+
+/* Options List */
+.neo-options-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.75rem;
+}
+
+.neo-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 16px;
+  font-size: 1rem;
+  user-select: none;
+  gap: 12px;
+  box-shadow:
+    5px 5px 10px #bebebe,
+    -5px -5px 10px #ffffff;
+  background: #e0e0e0;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.neo-option:hover {
+  box-shadow:
+    3px 3px 7px #a3a3a3,
+    -3px -3px 7px #ffffff;
+  background: #f0f0f0;
+}
+
+.neo-option-badge {
+  min-width: 38px;
+  text-align: center;
+  padding: 8px 0;
+  border-radius: 50%;
+  font-weight: 700;
+  box-shadow:
+    2px 2px 5px #bebebe,
+    -2px -2px 5px #ffffff;
+  user-select: none;
+  font-size: 1rem;
+}
+
+.neo-option-text {
+  flex-grow: 1;
+  color: #222;
+}
+
+.neo-correct {
+  background-color: #d1e7dd;
+  box-shadow:
+    inset 3px 3px 7px #a2b39e,
+    inset -3px -3px 7px #f0fff1;
+}
+
+.neo-wrong {
+  background-color: #f8d7da;
+  box-shadow:
+    inset 3px 3px 7px #c4959e,
+    inset -3px -3px 7px #fff0f1;
+}
+
+.neo-correct-icon {
+  color: #198754;
+  font-size: 1.3rem;
+}
+
+.neo-wrong-icon {
+  color: #dc3545;
+  font-size: 1.3rem;
+}
+
+.neo-explanation {
+  background: #d1ecf1;
+  color: #0c5460;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow:
+    inset 3px 3px 8px #a3c1c9,
+    inset -3px -3px 8px #e1f0f5;
+  font-size: 0.95rem;
+  margin-top: 1.5rem;
+}
+
+.neo-stats {
+  background: #e0e0e0;
+  box-shadow:
+    8px 8px 16px #bebebe,
+    -8px -8px 16px #ffffff;
+  border-radius: 20px;
+  color: #444;
+}
+
+.neo-stats h6 {
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.neo-stats p {
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+}
+
+.neo-muted {
+  color: #999;
+}
+
+</style>
+
+
+    <!-- Student and Exam Info -->
+    <div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5><i class="bi bi-person"></i> Student Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h5>{{ session.user.username }}</h5>
+                        <p class="text-muted">{{ session.user.email }}</p>
+                        <a href="{{ url_for('admin.student_detail', student_id=session.user.id) }}" 
+                           class="btn btn-primary btn-sm">
+                            <i class="bi bi-box-arrow-up-right"></i> View Full Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="bi bi-book"></i> Exam Information</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <strong>Title:</strong> {{ session.exam.title }}
+                    </div>
+                    <div class="mb-2">
+                        <strong>Subject:</strong> {{ session.exam.subject.name }}
+                    </div>
+                    <div class="mb-2">
+                        <strong>Total Questions:</strong> {{ analytics.total_questions }}
+                    </div>
+                    <div class="mb-2">
+                        <strong>Session Started:</strong> {{ session.start_time.strftime('%Y-%m-%d %H:%M:%S') }}
+                    </div>
+                    {% if session.end_time %}
+                    <div class="mb-2">
+                        <strong>Session Ended:</strong> {{ session.end_time.strftime('%Y-%m-%d %H:%M:%S') }}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

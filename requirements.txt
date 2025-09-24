@@ -1,0 +1,26 @@
+# Core Flask API dependencies
+Flask==3.0.3
+gunicorn==22.0.0
+
+# Flask Extensions
+Flask-SQLAlchemy==3.1.1
+Flask-Login==0.6.3
+Flask-WTF==1.2.2
+Flask-CORS==5.0.0
+
+# Database dependencies
+SQLAlchemy==2.0.41
+
+# Form handling
+WTForms==3.2.1
+
+# Document generation dependencies
+pypandoc==1.13
+
+# Flask dependencies (auto-installed with Flask but listed for clarity)
+Werkzeug==3.0.3
+Jinja2==3.1.4
+MarkupSafe==2.1.5
+itsdangerous==2.2.0
+click==8.1.7
+blinker==1.8.2

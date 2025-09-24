@@ -1,0 +1,493 @@
+    {% extends "base.html" %}
+
+    {% block title %}Create Test - KODEMAPA{% endblock %}
+
+    {% block content %}
+    <div class="container py-4">
+        <h2>Create Test</h2>
+        <form id="create-test-form" method="POST" action="{{ url_for('exam.create_test') }}">
+            <style>
+            #selected-list { background: #fdfdfd; }
+            .selected-item { border-left: 4px solid #0d6efd; }
+            .selected-item .drag-handle { cursor: grab; color: #0d6efd; user-select: none; }
+            .selected-item.dragging { opacity: 0.8; border-color: #6c757d; }
+            #preview-questions .question-card { border: 1px solid #e6e6e6; border-radius: 8px; padding: 12px; margin-bottom: 12px; background: #ffffff; }
+            #preview-questions .question-title { font-weight: 600; margin-bottom: 8px; }
+            #preview-questions ol.options { margin: 0; padding-left: 1.25rem; }
+            </style>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="mb-3">
+                <label for="class_level" class="form-label">Select Class</label>
+                <select class="form-select" id="class_level" name="class_level" required>
+                    <option value="XI">Class XI</option>
+                    <option value="XII">Class XII</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="subject_id" class="form-label">Select Subject</label>
+                <select class="form-select" id="subject_id" name="subject_id" required>
+                    {% for subject in class_xi_subjects + class_xii_subjects %}
+                        {% if subject.name|lower != 'english' %}
+                            <option value="{{ subject.id }}">{{ subject.name }} ({{ subject.class_level }})</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="duration_minutes" class="form-label">Duration (minutes)</label>
+                <input type="number" class="form-control" id="duration_minutes" name="duration_minutes" min="1" step="1" value="30" required>
+                <small class="form-text text-muted">Set how long students have to complete the test.</small>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Select Topic</label>
+                <div id="topic-list" style="border:1px solid #ccc; border-radius:8px; max-height:120px; min-height:50px; overflow-y:auto; padding:8px; background:#f3f3f3; margin-bottom:12px;">
+                    <!-- Topics will be loaded here -->
+                </div>
+                <div class="row g-3">
+                    <div class="col-lg-8">
+                        <label class="form-label d-flex align-items-center justify-content-between">
+                            <span>Select Questions</span>
+                            <span class="d-flex gap-2">
+                                <button id="select-all-btn" type="button" class="btn btn-sm btn-outline-secondary">Select All Shown</button>
+                                <button id="clear-selected-btn" type="button" class="btn btn-sm btn-outline-secondary">Clear Selected</button>
+                            </span>
+                        </label>
+                        <div id="question-list" style="border:1px solid #ccc; border-radius:8px; max-height:500px; min-height:300px; overflow-y:auto; padding:12px; background:#f9f9f9;">
+                            <!-- Questions for selected topic will be loaded here -->
+                        </div>
+                        <small class="form-text text-muted">Click the checkbox to add a question. Options are shown under each question.</small>
+                    </div>
+                    <div class="col-lg-4">
+                        <label class="form-label">Selected Questions</label>
+                        <div id="selected-list" style="border:1px solid #ccc; border-radius:8px; max-height:500px; min-height:300px; overflow-y:auto; padding:12px; background:#fff;">
+                            <div class="text-muted small">No questions selected yet.</div>
+                        </div>
+                        <div id="selected-hidden" style="display:none;"></div>
+                    </div>
+                </div>
+                <div class="row g-3 mt-2">
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label for="positive_mark" class="form-label">Marks for correct answer (positive)</label>
+                            <input type="number" class="form-control" id="positive_mark" name="positive_mark" min="0" step="1" value="1" required>
+                            <small class="form-text text-muted">Applies to all questions.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="negative_mark" class="form-label">Penalty for wrong answer (negative)</label>
+                            <input type="number" class="form-control" id="negative_mark" name="negative_mark" min="0" step="1" value="0" required>
+                            <small class="form-text text-muted">Applies to all questions. Use 0 to disable negative marking.</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="mb-3">
+                            <label for="start_datetime" class="form-label">Start date & time (optional)</label>
+                            <input type="datetime-local" class="form-control" id="start_datetime" name="start_datetime">
+                            <small class="form-text text-muted">Students can start only after this time. Leave blank to allow immediately.</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="end_datetime" class="form-label">Expiry/Close date & time</label>
+                            <input type="datetime-local" class="form-control" id="end_datetime" name="end_datetime" required>
+                            <small class="form-text text-muted">The test link will expire at this time (will become inactive).</small>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- Preview Modal -->
+            <div class="modal fade" id="previewModal" tabindex="-1" aria-labelledby="previewModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="previewModalLabel">Test Preview</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <strong>Class:</strong> <span id="preview-class"></span>
+                                &nbsp; | &nbsp; <strong>Subject:</strong> <span id="preview-subject"></span>
+                                &nbsp; | &nbsp; <strong>Duration:</strong> <span id="preview-duration"></span> minutes
+                                &nbsp; | &nbsp; <strong>Marks:</strong> +<span id="preview-pos"></span> / -<span id="preview-neg"></span>
+                            </div>
+                            <div id="preview-questions"></div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Back</button>
+                            <button id="final-submit-btn" type="button" class="btn btn-primary">Submit & Create Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    {% block scripts %}
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function byId(id){ return document.getElementById(id); }
+        function createHiddenInputsOrdered() {
+            const container = byId('selected-hidden');
+            container.innerHTML = '';
+            const items = byId('selected-list').querySelectorAll('.selected-item');
+            items.forEach((el, idx) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'selected_question_ids';
+                input.value = el.dataset.qid;
+                container.appendChild(input);
+            });
+        }
+        function renumberSelectedItems() {
+            const items = byId('selected-list').querySelectorAll('.selected-item');
+            items.forEach((el, idx) => {
+                const num = el.querySelector('.q-number');
+                if (num) { num.textContent = (idx + 1) + '.'; }
+            });
+        }
+        function enableDragAndDrop() {
+            const container = byId('selected-list');
+            let dragSrcEl = null;
+            container.addEventListener('dragstart', function(e){
+                const target = e.target.closest('.selected-item');
+                if (!target) return;
+                dragSrcEl = target;
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/plain', target.dataset.qid);
+                target.classList.add('dragging');
+            });
+            container.addEventListener('dragend', function(e){
+                const target = e.target.closest('.selected-item');
+                if (target) target.classList.remove('dragging');
+                renumberSelectedItems();
+                createHiddenInputsOrdered();
+            });
+            container.addEventListener('dragover', function(e){
+                e.preventDefault();
+                const afterElement = getDragAfterElement(container, e.clientY);
+                const draggable = container.querySelector('.dragging');
+                if (!draggable) return;
+                if (afterElement == null) {
+                    container.appendChild(draggable);
+                } else {
+                    container.insertBefore(draggable, afterElement);
+                }
+            });
+            function getDragAfterElement(container, y) {
+                const elements = [...container.querySelectorAll('.selected-item:not(.dragging)')];
+                return elements.reduce((closest, child) => {
+                    const box = child.getBoundingClientRect();
+                    const offset = y - box.top - box.height / 2;
+                    if (offset < 0 && offset > closest.offset) {
+                        return { offset: offset, element: child };
+                    } else {
+                        return closest;
+                    }
+                }, { offset: Number.NEGATIVE_INFINITY }).element;
+            }
+            container.addEventListener('drop', function(){
+                renumberSelectedItems();
+                createHiddenInputsOrdered();
+            });
+        }
+        enableDragAndDrop();
+
+        function loadTopics(subjectId) {
+            fetch(`/exam/get_topics/${subjectId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const topicDiv = document.getElementById('topic-list');
+                    topicDiv.innerHTML = '';
+                    data.topics.forEach(topic => {
+                        const btn = document.createElement('button');
+                        btn.type = 'button';
+                        btn.className = 'btn btn-outline-primary btn-sm m-1';
+                        btn.textContent = topic.name;
+                        btn.onclick = function() {
+                            loadQuestionsByTopic(topic.id);
+                            Array.from(topicDiv.children).forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
+                        };
+                        topicDiv.appendChild(btn);
+                    });
+                });
+        }
+
+        function loadQuestionsByTopic(topicId) {
+            fetch(`/exam/get_questions_by_topic/${topicId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const listDiv = document.getElementById('question-list');
+                    listDiv.innerHTML = '';
+                    if (data.questions.length === 0) {
+                        listDiv.innerHTML = '<div class="text-muted">No questions available for this topic.</div>';
+                        return;
+                    }
+                    data.questions.forEach(q => {
+                        const card = document.createElement('div');
+                        card.className = 'card mb-2';
+                        card.style.border = '1px solid #e0e0e0';
+                        card.style.boxShadow = 'none';
+                        card.style.background = '#fff';
+                        const cardBody = document.createElement('div');
+                        cardBody.className = 'card-body py-2 px-3';
+                        const row = document.createElement('div');
+                        row.className = 'd-flex align-items-start';
+                        const checkbox = document.createElement('input');
+                        checkbox.type = 'checkbox';
+                        checkbox.className = 'form-check-input me-2 mt-1';
+                        checkbox.name = 'question_ids';
+                        checkbox.value = q.id;
+                        checkbox.id = 'question_' + q.id;
+                        const label = document.createElement('label');
+                        label.className = 'form-check-label mb-0';
+                        label.htmlFor = checkbox.id;
+                        label.innerHTML = q.text;
+                        row.appendChild(checkbox);
+                        row.appendChild(label);
+                        cardBody.appendChild(row);
+                        if (q.options && Array.isArray(q.options) && q.options.length) {
+                            const opts = document.createElement('ol');
+                            opts.className = 'mt-2 mb-0';
+                            opts.style.paddingLeft = '1.25rem';
+                            q.options.forEach(opt => {
+                                const li = document.createElement('li');
+                                li.className = 'small';
+                                li.innerHTML = opt;
+                                opts.appendChild(li);
+                            });
+                            cardBody.appendChild(opts);
+                        }
+                        checkbox.addEventListener('change', function() {
+                            const selectedList = document.getElementById('selected-list');
+                            if (!selectedList) return;
+                            const emptyMsg = selectedList.querySelector('.text-muted');
+                            if (this.checked) {
+                                if (emptyMsg) emptyMsg.remove();
+                                const item = document.createElement('div');
+                                item.className = 'border rounded p-2 mb-2 bg-white selected-item';
+                                item.dataset.qid = q.id;
+                                item.dataset.fulltext = q.text;
+                                try { item.dataset.options = JSON.stringify(q.options || []); } catch(_) {}
+                                item.draggable = true;
+                                const row = document.createElement('div');
+                                row.className = 'd-flex align-items-start justify-content-between gap-2';
+                                const left = document.createElement('div');
+                                left.className = 'd-flex align-items-start gap-2';
+                                const num = document.createElement('span');
+                                num.className = 'q-number fw-bold';
+                                num.style.minWidth = '2ch';
+                                num.textContent = (selectedList.querySelectorAll('.selected-item').length + 1) + '.';
+                                const t = document.createElement('div');
+                                t.className = 'small fw-semibold';
+                                t.innerHTML = q.text;
+                                if (q.options && Array.isArray(q.options) && q.options.length) {
+                                    const opts = document.createElement('ol');
+                                    opts.className = 'mt-2 mb-0';
+                                    opts.style.paddingLeft = '1.25rem';
+                                    q.options.forEach(opt => {
+                                        const li = document.createElement('li');
+                                        li.className = 'small';
+                                        li.innerHTML = opt;
+                                        opts.appendChild(li);
+                                    });
+                                    t.appendChild(opts);
+                                }
+                                const drag = document.createElement('span');
+                                drag.className = 'drag-handle ms-2';
+                                drag.title = 'Drag to reorder';
+                                drag.textContent = '⋮⋮';
+                                const rm = document.createElement('button');
+                                rm.type = 'button';
+                                rm.className = 'btn btn-sm btn-outline-danger';
+                                rm.textContent = 'Remove';
+                                rm.addEventListener('click', function() {
+                                    const src = document.getElementById('question_' + q.id);
+                                    if (src) src.checked = false;
+                                    item.remove();
+                                    if (!selectedList.querySelector('.selected-item')) {
+                                        const msg = document.createElement('div');
+                                        msg.className = 'text-muted small selected-item';
+                                        msg.textContent = 'No questions selected yet.';
+                                        selectedList.appendChild(msg);
+                                    }
+                                    renumberSelectedItems();
+                                    createHiddenInputsOrdered();
+                                });
+                                left.appendChild(num);
+                                left.appendChild(t);
+                                left.appendChild(drag);
+                                row.appendChild(left);
+                                row.appendChild(rm);
+                                item.appendChild(row);
+                                selectedList.appendChild(item);
+                                createHiddenInputsOrdered();
+                                if (window.MathJax && window.MathJax.typeset) {
+                                    window.MathJax.typesetPromise([item]);
+                                }
+                            } else {
+                                const toRemove = selectedList.querySelector('.selected-item[data-qid="' + q.id + '"]');
+                                if (toRemove) toRemove.remove();
+                                if (!selectedList.querySelector('.selected-item')) {
+                                    const msg = document.createElement('div');
+                                    msg.className = 'text-muted small selected-item';
+                                    msg.textContent = 'No questions selected yet.';
+                                    selectedList.appendChild(msg);
+                                }
+                                renumberSelectedItems();
+                                createHiddenInputsOrdered();
+                            }
+                        });
+                        card.appendChild(cardBody);
+                        listDiv.appendChild(card);
+                    });
+                    if (window.MathJax && window.MathJax.typeset) {
+                        window.MathJax.typeset();
+                    }
+                });
+        }
+
+        const subjectSelect = document.getElementById('subject_id');
+        if (subjectSelect) {
+            loadTopics(subjectSelect.value);
+            subjectSelect.addEventListener('change', function() {
+                loadTopics(this.value);
+                document.getElementById('question-list').innerHTML = '';
+            });
+        }
+
+        const form = byId('create-test-form');
+        let primaryBtn = form.querySelector('#open-preview-btn');
+        if (!primaryBtn) {
+            primaryBtn = document.createElement('button');
+            primaryBtn.id = 'open-preview-btn';
+            primaryBtn.type = 'button';
+            primaryBtn.className = 'btn btn-warning me-2';
+            primaryBtn.textContent = 'Create Test (Preview)';
+            form.appendChild(primaryBtn);
+        }
+
+        let previewModal, previewModalEl;
+        function setupPreviewModal() {
+            previewModalEl = document.getElementById('previewModal');
+            previewModal = new bootstrap.Modal(previewModalEl, { backdrop: 'static', keyboard: false });
+            previewModalEl.removeEventListener('hidden.bs.modal', onPreviewModalHide);
+            previewModalEl.addEventListener('hidden.bs.modal', onPreviewModalHide);
+        }
+        function onPreviewModalHide() {
+            // Remove any lingering modal backdrops and restore body state
+            document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+            document.body.classList.remove('modal-open');
+            document.body.style.overflow = '';
+            form.querySelectorAll('button, input, select').forEach(el => el.disabled = false);
+        }
+        setupPreviewModal();
+
+        primaryBtn.addEventListener('click', function(){
+            createHiddenInputsOrdered();
+            const items = byId('selected-list').querySelectorAll('.selected-item');
+            if (!items.length) {
+                alert('Please select at least one question.');
+                return;
+            }
+            byId('preview-class').textContent = byId('class_level').value;
+            const subjectName = subjectSelect.options[subjectSelect.selectedIndex]?.text || '';
+            byId('preview-subject').textContent = subjectName;
+            byId('preview-duration').textContent = byId('duration_minutes').value || '30';
+            const list = byId('preview-questions');
+            // Display marking scheme in preview
+            const pos = byId('positive_mark')?.value || '1';
+            const neg = byId('negative_mark')?.value || '0';
+            byId('preview-pos').textContent = pos;
+            byId('preview-neg').textContent = neg;
+            list.innerHTML = '';
+            items.forEach((el, idx) => {
+                const card = document.createElement('div');
+                card.className = 'question-card';
+                const title = document.createElement('div');
+                title.className = 'question-title d-flex align-items-center';
+                title.innerHTML = `<span class='me-2 fw-bold'>${idx + 1}.</span> <span>${el.dataset.fulltext || el.querySelector('.fw-semibold')?.innerHTML || ('Question ' + (idx+1))}</span>`;
+                card.appendChild(title);
+                try {
+                    const opts = JSON.parse(el.dataset.options || '[]');
+                    if (Array.isArray(opts) && opts.length) {
+                        const ol = document.createElement('ol');
+                        ol.className = 'options';
+                        opts.forEach(o => {
+                            const li = document.createElement('li');
+                            li.innerHTML = o;
+                            ol.appendChild(li);
+                        });
+                        card.appendChild(ol);
+                    }
+                } catch(_) {}
+                list.appendChild(card);
+            });
+            if (window.MathJax && window.MathJax.typeset) {
+                window.MathJax.typeset();
+            }
+            setupPreviewModal();
+            previewModal.show();
+        });
+
+        const finalSubmitBtn = byId('final-submit-btn');
+        if (finalSubmitBtn) {
+            finalSubmitBtn.addEventListener('click', function(){
+                createHiddenInputsOrdered();
+                form.submit();
+            });
+        }
+
+        const selectAllBtn = byId('select-all-btn');
+        if (selectAllBtn) {
+            selectAllBtn.addEventListener('click', function(e){
+                e.stopPropagation();
+                const listDiv = byId('question-list');
+                const checkboxes = listDiv.querySelectorAll('input[type="checkbox"][name="question_ids"]');
+                checkboxes.forEach(cb => { if (!cb.checked) cb.click(); });
+                renumberSelectedItems();
+                createHiddenInputsOrdered();
+            });
+        }
+        const selectQuestionsLabel = document.querySelector('label.form-label.d-flex');
+        if (selectQuestionsLabel) {
+            selectQuestionsLabel.addEventListener('click', function(e) {
+                if (e.target === selectAllBtn) return;
+                if (e.target === byId('clear-selected-btn')) return;
+                e.stopPropagation();
+            });
+        }
+
+        const clearSelectedBtn = byId('clear-selected-btn');
+        if (clearSelectedBtn) {
+            clearSelectedBtn.addEventListener('click', function(e){
+                e.stopPropagation();
+                const selectedList = byId('selected-list');
+                selectedList.querySelectorAll('.selected-item').forEach(item => {
+                    const qid = item.dataset.qid;
+                    const source = byId('question_' + qid);
+                    if (source && source.checked) source.checked = false;
+                    item.remove();
+                });
+                if (!selectedList.querySelector('.selected-item')) {
+                    const msg = document.createElement('div');
+                    msg.className = 'text-muted small selected-item';
+                    msg.textContent = 'No questions selected yet.';
+                    selectedList.appendChild(msg);
+                }
+                renumberSelectedItems();
+                createHiddenInputsOrdered();
+            });
+        }
+
+        // Fix: Remove modal backdrop and restore scroll after closing preview
+        if (previewModalEl) {
+            previewModalEl.addEventListener('hidden.bs.modal', function() {
+                document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                form.querySelectorAll('button, input, select').forEach(el => el.disabled = false);
+            });
+        }
+    });
+    </script>
+    {% endblock %}
+            <!-- The submit button is dynamically added as 'Preview & Create' above -->
+        </form>
+    </div>
+    {% endblock %}

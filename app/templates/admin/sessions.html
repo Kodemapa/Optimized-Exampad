@@ -1,0 +1,452 @@
+{% extends "base.html" %}
+
+{% block title %}Session Management{% endblock %}
+
+{% block styles %}
+<style>
+/* Enhanced Admin Button Styles */
+.btn-group .btn {
+    min-width: 75px;
+    height: 38px;
+    padding: 8px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+    margin: 0 2px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-group .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-sm {
+    min-width: 70px !important;
+    height: 36px !important;
+    padding: 6px 10px !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: white;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+}
+
+.btn-info:hover {
+    background-color: #117a8b;
+    border-color: #117a8b;
+    color: white;
+}
+
+/* Make action buttons more visible and descriptive */
+.btn-group {
+    white-space: nowrap;
+    gap: 4px;
+}
+
+.btn i {
+    font-size: 12px;
+}
+
+/* Enhanced table styling */
+.table td {
+    vertical-align: middle;
+}
+
+/* Badge enhancements */
+.badge {
+    font-size: 12px;
+    padding: 4px 8px;
+}
+
+/* Better contrast for action buttons */
+.btn-sm:focus, .btn-sm:active {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Ensure Subject and Performance badges text are black */
+.table td:nth-child(4) .badge {
+    color: black !important;
+}
+.table td:nth-child(9) .badge {
+    color: black !important;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-list"></i> Test Sessions Management</h2>
+                <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-filter"></i> Filter Sessions</h5>
+                </div>
+                <div class="card-body">
+                    <form method="GET" action="{{ url_for('admin.sessions') }}">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="student_id">Student</label>
+                                    <select class="form-control" id="student_id" name="student_id">
+                                        <option value="">All Students</option>
+                                        {% for student in students %}
+                                            <option value="{{ student.id }}" 
+                                                    {% if filters.student_id == student.id %}selected{% endif %}>
+                                                {{ student.username }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="subject_id">Subject</label>
+                                    <select class="form-control" id="subject_id" name="subject_id">
+                                        <option value="">All Subjects</option>
+                                        {% for subject in subjects %}
+                                            <option value="{{ subject.id }}" 
+                                                    {% if filters.subject_id == subject.id %}selected{% endif %}>
+                                                {{ subject.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="date_from">From Date</label>
+                                    <input type="date" class="form-control" id="date_from" name="date_from" 
+                                           value="{{ filters.date_from or '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="date_to">To Date</label>
+                                    <input type="date" class="form-control" id="date_to" name="date_to" 
+                                           value="{{ filters.date_to or '' }}">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>&nbsp;</label>
+                                    <div>
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            <i class="fas fa-search"></i> Filter
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sessions Summary -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-bar"></i> Sessions Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-primary">{{ session_analytics|length }}</h4>
+                                <p class="text-muted mb-0">Total Sessions</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-success">
+                                    {{ session_analytics | selectattr('session.percentage', 'ge', 80) | list | length }}
+                                </h4>
+                                <p class="text-muted mb-0">High Scores (≥80%)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-warning">
+                                    {{ session_analytics | selectattr('session.percentage', 'ge', 60) | selectattr('session.percentage', 'lt', 80) | list | length }}
+                                </h4>
+                                <p class="text-muted mb-0">Average (60-79%)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-danger">
+                                    {{ session_analytics | selectattr('session.percentage', 'lt', 60) | list | length }}
+                                </h4>
+                                <p class="text-muted mb-0">Low Scores (<60%)</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-info">
+                                    {% if session_analytics %}
+                                        {{ "%.1f"|format(session_analytics | map(attribute='session.percentage') | list | sum / session_analytics|length) }}%
+                                    {% else %}
+                                        0%
+                                    {% endif %}
+                                </h4>
+                                <p class="text-muted mb-0">Average Score</p>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="text-center">
+                                <h4 class="text-secondary">
+                                    {{ (session_analytics | map(attribute='session.user.username') | unique | list) | length }}
+                                </h4>
+                                <p class="text-muted mb-0">Unique Students</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sessions Table -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-table"></i> Session Details</h5>
+                </div>
+                <div class="card-body">
+                    {% if session_analytics %}
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="sessionsTable">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Date & Time</th>
+                                        <th>Student</th>
+                                        <th>Exam</th>
+                                        <th>Subject</th>
+                                        <th>Score</th>
+                                        <th>Rank</th>
+                                        <th>Percentile</th>
+                                        <th>Duration</th>
+                                        <th>Performance</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for analytics in session_analytics %}
+                                    {% set session = analytics.session %}
+                                    <tr>
+                                        <td>
+                                            <div>
+                                                <strong>{{ session.start_time.strftime('%Y-%m-%d') }}</strong>
+                                                <br>
+                                                <small class="text-muted">{{ session.start_time.strftime('%H:%M') }}</small>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-sm mr-2">
+                                                    <div class="avatar-title rounded-circle bg-primary">
+                                                        {{ session.user.username[0].upper() }}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <a href="{{ url_for('admin.student_detail', student_id=session.user.id) }}" 
+                                                       class="text-decoration-none">
+                                                        {{ session.user.username }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <strong>{{ session.exam.title }}</strong>
+                                            <br>
+                                            <small class="text-muted">
+                                                {% set questions_data = session.get_questions_data() %}
+                                                {{ questions_data.questions | length }} questions
+                                            </small>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-info" style="color:black;">
+                                                {{ session.exam.subject.name }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="badge badge-{% if session.percentage >= 80 %}success{% elif session.percentage >= 60 %}warning{% else %}danger{% endif %} mr-2">
+                                                    {{ session.percentage }}%
+                                                </span>
+                                                <div class="progress flex-grow-1" style="height: 8px; width: 60px;">
+                                                    <div class="progress-bar bg-{% if session.percentage >= 80 %}success{% elif session.percentage >= 60 %}warning{% else %}danger{% endif %}" 
+                                                         style="width: {{ session.percentage }}%"></div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {% if analytics.rank %}
+                                                <span class="badge badge-{% if analytics.rank <= 3 %}warning{% elif analytics.rank <= 10 %}primary{% else %}secondary{% endif %}"
+                                                    style="color: black; font-weight: 600;">
+                                                    #{{ analytics.rank }}
+                                                </span>
+                                            {% else %}
+                                                <span class="text-muted">N/A</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if analytics.percentile > 0 %}
+                                                <span class="badge badge-success">{{ analytics.percentile }}th</span>
+                                            {% else %}
+                                                <span class="text-muted">N/A</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if session.duration_seconds %}
+                                                {% set minutes = (session.duration_seconds // 60) %}
+                                                {% set seconds = (session.duration_seconds % 60) %}
+                                                <span class="text-monospace">{{ minutes }}:{{ "%02d"|format(seconds) }}</span>
+                                            {% else %}
+                                                <span class="text-muted">N/A</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            {% if session.percentage >= 90 %}
+                                                <span class="badge badge-success" style="color:black;">Excellent</span>
+                                            {% elif session.percentage >= 80 %}
+                                                <span class="badge badge-info" style="color:black;">Very Good</span>
+                                            {% elif session.percentage >= 70 %}
+                                                <span class="badge badge-warning" style="color:black;">Good</span>
+                                            {% elif session.percentage >= 60 %}
+                                                <span class="badge badge-warning" style="color:black;">Average</span>
+                                            {% else %}
+                                                <span class="badge badge-danger" style="color:black;">Poor</span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{{ url_for('admin.session_detail', session_id=session.id) }}" 
+                                                   class="btn btn-sm btn-primary" title="View Session Details">
+                                                    <i class="bi bi-eye me-1"></i>Details
+                                                </a>
+                                                <a href="{{ url_for('admin.student_detail', student_id=session.user.id) }}" 
+                                                   class="btn btn-sm btn-info" title="View Student Profile">
+                                                    <i class="bi bi-person me-1"></i>Profile
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="text-center py-5">
+                            <i class="fas fa-clipboard-list fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">No sessions found</h5>
+                            <p class="text-muted">No test sessions match your current filters.</p>
+                            <a href="{{ url_for('admin.sessions') }}" class="btn btn-primary">
+                                <i class="fas fa-refresh"></i> Reset Filters
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.avatar-sm {
+    width: 30px;
+    height: 30px;
+}
+
+.avatar-title {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    font-size: 12px;
+}
+
+.progress {
+    height: 8px;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.table td {
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+.badge {
+    font-size: 0.75rem;
+}
+</style>
+
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+
+<script>
+$(document).ready(function() {
+    // Initialize DataTable
+    $('#sessionsTable').DataTable({
+        "pageLength": 25,
+        "order": [[ 0, "desc" ]], // Sort by date by default (newest first)
+        "columnDefs": [
+            { "orderable": false, "targets": 9 }, // Disable sorting for Actions column
+            { "type": "date", "targets": 0 } // Date column sorting
+        ],
+        "language": {
+            "search": "Search sessions:",
+            "lengthMenu": "Show _MENU_ sessions per page",
+            "info": "Showing _START_ to _END_ of _TOTAL_ sessions",
+            "paginate": {
+                "first": "First",
+                "last": "Last",
+                "next": "Next",
+                "previous": "Previous"
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

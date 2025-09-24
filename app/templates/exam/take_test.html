@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% block title %}Take Test - KODEMAPA{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <h3 class="mb-1">{{ exam.title }}</h3>
+    <div class="text-muted mb-3 d-flex justify-content-between align-items-center">
+        <span>{{ subject.name }} ({{ subject.class_level }}) • Duration: {{ exam.duration_minutes }} mins</span>
+        <span class="badge bg-dark" id="timer-badge">--:--</span>
+    </div>
+
+    <div id="test-container">
+        <ol id="question-list" style="padding-left: 1.25rem;">
+            {% for q in questions %}
+            <li class="mb-3" data-qid="{{ q.id }}">
+                <div class="fw-semibold mb-2">{{ q.question_text|safe }}</div>
+                <div>
+                    <div class="form-check">
+                        {% for opt in q.get_options() %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q_{{ q.id }}" id="q_{{ q.id }}_{{ loop.index0 }}" value="{{ ['A','B','C','D'][loop.index0] if loop.length<=4 else loop.index0 }}">
+                            <label class="form-check-label" for="q_{{ q.id }}_{{ loop.index0 }}">{{ opt|safe }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <div class="text-muted">Questions: {{ questions|length }}</div>
+        <button id="submit-test-btn" class="btn btn-primary">Submit Test</button>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+    // Persistent test state per user+exam
+    const userId = {{ current_user.id }};
+    const examId = {{ exam.id }};
+    const storageKey = `exampad_test_${userId}_${examId}`;
+
+    // Countdown timer (reverse) with persistence across reloads/navigation
+    const totalSeconds = ({{ exam.duration_minutes or 30 }} * 60);
+    const timerEl = document.getElementById('timer-badge');
+    const submitBtn = document.getElementById('submit-test-btn');
+    const questionContainer = document.getElementById('question-list');
+    let state = null;
+    // Initialize or restore state
+    try {
+        const raw = localStorage.getItem(storageKey);
+        if (raw) {
+            state = JSON.parse(raw);
+        }
+    } catch(_) { state = null; }
+
+    if (!state || !state.startedAtMs || !state.endsAtMs) {
+        const startedAtMs = Date.now();
+        state = {
+            startedAtMs: startedAtMs,
+            endsAtMs: startedAtMs + (totalSeconds * 1000),
+            answers: {}
+        };
+        try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch(_) {}
+    }
+
+    // Restore previously selected answers (if any)
+    try {
+        if (state.answers) {
+            Object.entries(state.answers).forEach(([qid, ans]) => {
+                const input = document.querySelector(`input[name="q_${qid}"][value="${ans}"]`);
+                if (input) input.checked = true;
+            });
+        }
+    } catch(_) {}
+
+    let submitted = false;
+
+    function formatTime(sec){
+        const m = Math.floor(sec/60).toString().padStart(2,'0');
+        const s = Math.floor(sec%60).toString().padStart(2,'0');
+        return m + ':' + s;
+    }
+    function tick(){
+        const now = Date.now();
+        const remainingSec = Math.max(0, Math.floor((state.endsAtMs - now) / 1000));
+        timerEl.textContent = formatTime(remainingSec);
+        if (remainingSec <= 0){
+            if (!submitted) {
+                questionContainer.querySelectorAll('input[type="radio"]').forEach(i => i.disabled = true);
+                submitBtn.disabled = true;
+                submitted = true;
+                submitTest(true);
+            }
+            return;
+        }
+        window.__examTimer = setTimeout(tick, 1000);
+    }
+    tick();
+
+    function submitTest(isAuto=false){
+        const answers = [];
+        document.querySelectorAll('#question-list > li').forEach((li, idx) => {
+            const qid = li.getAttribute('data-qid');
+            const checked = li.querySelector('input[type="radio"]:checked');
+            const ans = checked ? checked.value : '';
+            answers.push({ question_id: parseInt(qid), answer: ans, is_attempted: !!checked });
+        });
+        const secondsSpent = Math.min(totalSeconds, Math.max(0, Math.floor((Date.now() - state.startedAtMs) / 1000)));
+        const payload = {
+            answers: answers,
+            test_info: { exam_id: {{ exam.id }}, subject_id: {{ subject.id }}, duration_seconds: secondsSpent },
+            duration_seconds: secondsSpent,
+            // No per-question timings available in this template; send empty map to avoid cumulative errors
+            question_timings: {},
+            navigation_data: { autoSubmitted: !!isAuto }
+        };
+        fetch('{{ url_for('exam.api_submit_test') }}', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(r => r.json()).then(data => {
+            if (data && data.redirect_url) {
+                try { localStorage.removeItem(storageKey); } catch(_) {}
+                window.location.href = data.redirect_url;
+            } else if (data.error) {
+                alert(data.error);
+            } else {
+                alert('Submitted. Redirecting to results...');
+            }
+        }).catch(() => alert('Failed to submit test.'));
+    }
+    submitBtn.addEventListener('click', function(){
+        // Manual submit
+        if (window.__examTimer) clearTimeout(window.__examTimer);
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Submitting...';
+        submitted = true;
+        submitTest(false);
+    });
+
+    // Persist answer selections on change
+    questionContainer.addEventListener('change', function(e){
+        const target = e.target;
+        if (target && target.matches('input[type="radio"]')) {
+            const name = target.getAttribute('name');
+            const m = name && name.match(/^q_(\d+)$/);
+            if (m) {
+                const qid = m[1];
+                const val = target.value;
+                try {
+                    state.answers[qid] = val;
+                    localStorage.setItem(storageKey, JSON.stringify(state));
+                } catch(_) {}
+            }
+        }
+    });
+
+    // Save progress periodically and on unload (without submitting)
+    function saveProgress(){
+        try { localStorage.setItem(storageKey, JSON.stringify(state)); } catch(_) {}
+    }
+    setInterval(saveProgress, 5000);
+    window.addEventListener('beforeunload', function(){
+        // Update answers snapshot before leaving
+        document.querySelectorAll('#question-list > li').forEach((li) => {
+            const qid = li.getAttribute('data-qid');
+            const checked = li.querySelector('input[type="radio"]:checked');
+            if (qid && checked) {
+                state.answers[qid] = checked.value;
+            }
+        });
+        saveProgress();
+    });
+});
+</script>
+{% endblock %}
