@@ -44,3 +44,4 @@ Thumbs.db
 # Temporary files
 temp/
 tmp/
+instance/exampad.db
