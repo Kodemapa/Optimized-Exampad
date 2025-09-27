@@ -1,0 +1,903 @@
+================================================================================
+KODEMAPA-EXAMPAD Video Paths Extraction
+Generated on: 2025-09-26 22:50:03
+Total Videos Found: 168
+================================================================================
+
+📚 CLASS-XI
+----------------------------------------
+
+  📖 Biology
+     Total Videos: 24
+
+     1. Biodiversity and Conservation.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Biodiversity%20and%20Conservation.mp4
+        Size: 81.1 MB
+
+     2. Biology in Human Welfare.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Biology%20in%20Human%20Welfare.mp4
+        Size: 74.0 MB
+
+     3. Biotechnolgy Principles and Processes.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Biotechnolgy%20Principles%20and%20Processes.mp4
+        Size: 96.9 MB
+
+     4. Biotechnology and its Applications.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Biotechnology%20and%20its%20Applications.mp4
+        Size: 64.7 MB
+
+     5. Ecosystem.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Ecosystem.mp4
+        Size: 129.0 MB
+
+     6. Enhancement in Food Production.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Enhancement%20in%20Food%20Production.mp4
+        Size: 76.2 MB
+
+     7. Environmental Issues-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Environmental%20Issues-I.mp4
+        Size: 63.9 MB
+
+     8. Environmental Issues-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Environmental%20Issues-II.mp4
+        Size: 76.5 MB
+
+     9. Evoloution-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Evoloution-I.mp4
+        Size: 40.3 MB
+
+    10. Evoloution-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Evoloution-II.mp4
+        Size: 49.2 MB
+
+    11. Human Health and Disease-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Health%20and%20Disease-I.mp4
+        Size: 45.7 MB
+
+    12. Human Health and Disease-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Health%20and%20Disease-II.mp4
+        Size: 57.9 MB
+
+    13. Human Reproduction-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Reproduction-I.mp4
+        Size: 38.5 MB
+
+    14. Human Reproduction-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Reproduction-II.mp4
+        Size: 34.7 MB
+
+    15. Inheritance and variation-III.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Inheritance%20and%20variation-III.mp4
+        Size: 39.9 MB
+
+    16. Microbes in Human Welfare.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Microbes%20in%20Human%20Welfare.mp4
+        Size: 74.0 MB
+
+    17. Molecular Basis of Inheritance-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Molecular%20Basis%20of%20Inheritance-I.mp4
+        Size: 42.5 MB
+
+    18. Molecular Basis of Inheritance-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Molecular%20Basis%20of%20Inheritance-II.mp4
+        Size: 41.2 MB
+
+    19. Molecular Basis of Inheritance-III.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Molecular%20Basis%20of%20Inheritance-III.mp4
+        Size: 43.3 MB
+
+    20. Organisms and Population.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Organisms%20and%20Population.mp4
+        Size: 97.9 MB
+
+    21. Princilpes of Inheritance and variation-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-I.mp4
+        Size: 40.8 MB
+
+    22. Princilpes of Inheritance and variation-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-II.mp4
+        Size: 27.9 MB
+
+    23. Reproduction in flowering plants.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Reproduction%20in%20flowering%20plants.mp4
+        Size: 86.1 MB
+
+    24. Reproduction in Organisms.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/biology/videos/Reproduction%20in%20Organisms.mp4
+        Size: 33.3 MB
+
+
+  📖 Chemistry
+     Total Videos: 21
+
+     1. Baisic Concepts of Chemistry-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Baisic%20Concepts%20of%20Chemistry-I.mp4
+        Size: 48.5 MB
+
+     2. Baisic Concepts of Chemistry-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Baisic%20Concepts%20of%20Chemistry-II.mp4
+        Size: 55.8 MB
+
+     3. Chemical Bonding & Molecular Structure-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Chemical%20Bonding%20%26%20Molecular%20Structure-I.mp4
+        Size: 48.3 MB
+
+     4. Chemical Bonding & Molecular Structure-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Chemical%20Bonding%20%26%20Molecular%20Structure-II.mp4
+        Size: 69.9 MB
+
+     5. Equilibrium-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Equilibrium-I.mp4
+        Size: 82.7 MB
+
+     6. Equilibrium-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Equilibrium-II.mp4
+        Size: 84.1 MB
+
+     7. Hydrocarbons-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrocarbons-I.mp4
+        Size: 66.4 MB
+
+     8. Hydrocarbons-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrocarbons-II.mp4
+        Size: 71.6 MB
+
+     9. Hydrocarbons-III.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrocarbons-III.mp4
+        Size: 76.8 MB
+
+    10. Hydrogen-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrogen-I.mp4
+        Size: 59.2 MB
+
+    11. Hydrogen-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrogen-II.mp4
+        Size: 57.4 MB
+
+    12. Organic Chemistry-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Organic%20Chemistry-I.mp4
+        Size: 61.6 MB
+
+    13. Organic Chemistry-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Organic%20Chemistry-II.mp4
+        Size: 49.3 MB
+
+    14. Organic Chemistry-III.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Organic%20Chemistry-III.mp4
+        Size: 87.5 MB
+
+    15. Redox Reaction.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Redox%20Reaction.mp4
+        Size: 66.1 MB
+
+    16. States of Matter.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/States%20of%20Matter.mp4
+        Size: 94.9 MB
+
+    17. Structure of Atom-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Structure%20of%20Atom-I.mp4
+        Size: 119.6 MB
+
+    18. Structure of Atom-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Structure%20of%20Atom-II.mp4
+        Size: 94.3 MB
+
+    19. The p-Block Elements.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/The%20p-Block%20Elements.mp4
+        Size: 211.6 KB
+
+    20. The s-block Elements.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/The%20s-block%20Elements.mp4
+        Size: 97.3 MB
+
+    21. Thermodynamics & Chemicals Energetic.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Thermodynamics%20%26%20Chemicals%20Energetic.mp4
+        Size: 79.3 MB
+
+
+  📖 Mathematics
+     Total Videos: 23
+
+     1. 3D Geometry.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/3D%20Geometry.mp4
+        Size: 54.7 MB
+
+     2. Circle.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Circle.mp4
+        Size: 80.3 MB
+
+     3. Complex Numbers.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Complex%20Numbers.mp4
+        Size: 40.3 MB
+
+     4. Conic Section.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Conic%20Section.mp4
+        Size: 47.5 MB
+
+     5. Limits and Derivatives.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Limits%20and%20Derivatives.mp4
+        Size: 64.9 MB
+
+     6. Linear Equations in One Variable (2).mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Linear%20Equations%20in%20One%20Variable%20%282%29.mp4
+        Size: 43.6 MB
+
+     7. Mathematical Introduction.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Mathematical%20Introduction.mp4
+        Size: 71.9 MB
+
+     8. Mathematical Reasoning.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Mathematical%20Reasoning.mp4
+        Size: 71.9 MB
+
+     9. Principle of Mathematical Induction.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Principle%20of%20Mathematical%20Induction.mp4
+        Size: 33.7 MB
+
+    10. Probability.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Probability.mp4
+        Size: 90.1 MB
+
+    11. Relations and Functions.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Relations%20and%20Functions.mp4
+        Size: 76.3 MB
+
+    12. Sequence and Series-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sequence%20and%20Series-I.mp4
+        Size: 39.7 MB
+
+    13. Sequence and Series-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sequence%20and%20Series-II.mp4
+        Size: 45.0 MB
+
+    14. Sets-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sets-I.mp4
+        Size: 33.6 MB
+
+    15. Sets-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sets-II.mp4
+        Size: 32.7 MB
+
+    16. Sets-III.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sets-III.mp4
+        Size: 31.1 MB
+
+    17. Statistics.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Statistics.mp4
+        Size: 85.1 MB
+
+    18. Straight line _ Family of Straight  line.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Straight%20line%20_%20Family%20of%20Straight%20%20line.mp4
+        Size: 62.1 MB
+
+    19. Straight Line-I.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Straight%20Line-I.mp4
+        Size: 62.1 MB
+
+    20. Straight Line-II.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Straight%20Line-II.mp4
+        Size: 52.6 MB
+
+    21. Three Dimensional Geometry.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Three%20Dimensional%20Geometry.mp4
+        Size: 104.5 MB
+
+    22. Trignometric Functions.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Trignometric%20Functions.mp4
+        Size: 63.6 MB
+
+    23. Vector Algebra.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Vector%20Algebra.mp4
+        Size: 91.3 MB
+
+
+  📖 Physics
+     Total Videos: 14
+
+     1. Gravitation.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Gravitation.mp4
+        Size: 77.7 MB
+
+     2. Kinetic Theory of Gases.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Kinetic%20Theory%20of%20Gases.mp4
+        Size: 60.2 MB
+
+     3. Laws of Motion.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Laws%20of%20Motion.mp4
+        Size: 78.2 MB
+
+     4. Mechanical Properties of Fluids.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Mechanical%20Properties%20of%20Fluids.mp4
+        Size: 53.6 MB
+
+     5. Mechanical Properties of solids.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Mechanical%20Properties%20of%20solids.mp4
+        Size: 51.2 MB
+
+     6. Motion in a plane.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Motion%20in%20a%20plane.mp4
+        Size: 36.1 MB
+
+     7. Motion in a Straight Line (1).mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Motion%20in%20a%20Straight%20Line%20%281%29.mp4
+        Size: 50.8 MB
+
+     8. Oscillations.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Oscillations.mp4
+        Size: 67.8 MB
+
+     9. Physical world.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Physical%20world.mp4
+        Size: 45.6 MB
+
+    10. System of particles and rotational motion.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/System%20of%20particles%20and%20rotational%20motion.mp4
+        Size: 76.8 MB
+
+    11. Thermal Properties of Matter.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Thermal%20Properties%20of%20Matter.mp4
+        Size: 66.5 MB
+
+    12. Thermodynamics.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Thermodynamics.mp4
+        Size: 66.7 MB
+
+    13. Waves.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Waves.mp4
+        Size: 82.0 MB
+
+    14. Work, Power and Energy.mp4
+        URL: https://kampusly.in/static/materials/CLass-XI/physics/videos/Work%2C%20Power%20and%20Energy.mp4
+        Size: 68.0 MB
+
+
+📚 CLASS-XII
+----------------------------------------
+
+  📖 Biology
+     Total Videos: 24
+
+     1. Biodiversity and Conservation.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Biodiversity%20and%20Conservation.mp4
+        Size: 81.1 MB
+
+     2. Biology inHuman Welfare.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Biology%20inHuman%20Welfare.mp4
+        Size: 74.0 MB
+
+     3. Biotechnolgy Principles and Processes.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Biotechnolgy%20Principles%20and%20Processes.mp4
+        Size: 96.9 MB
+
+     4. Biotechnology and its Applications.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Biotechnology%20and%20its%20Applications.mp4
+        Size: 64.7 MB
+
+     5. Ecosystem.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Ecosystem.mp4
+        Size: 129.0 MB
+
+     6. Environmental Issues-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Environmental%20Issues-I.mp4
+        Size: 63.9 MB
+
+     7. Environmental Issues-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Environmental%20Issues-II.mp4
+        Size: 76.5 MB
+
+     8. Evoloution-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Evoloution-I.mp4
+        Size: 40.3 MB
+
+     9. Evoloution-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Evoloution-II.mp4
+        Size: 49.2 MB
+
+    10. Human Health and Disease-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Health%20and%20Disease-I.mp4
+        Size: 45.7 MB
+
+    11. Human Health and Disease-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Health%20and%20Disease-II.mp4
+        Size: 57.9 MB
+
+    12. Human Reproduction-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Reproduction-I.mp4
+        Size: 38.5 MB
+
+    13. Human Reproduction-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Reproduction-II.mp4
+        Size: 34.7 MB
+
+    14. Microbes in Human Welfare.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Microbes%20in%20Human%20Welfare.mp4
+        Size: 74.0 MB
+
+    15. Molecular Basis of Inheritance-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Molecular%20Basis%20of%20Inheritance-I.mp4
+        Size: 42.5 MB
+
+    16. Molecular Basis of Inheritance-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Molecular%20Basis%20of%20Inheritance-II.mp4
+        Size: 41.2 MB
+
+    17. Molecular Basis of Inheritance-III.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Molecular%20Basis%20of%20Inheritance-III.mp4
+        Size: 43.3 MB
+
+    18. Organisms and Population.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Organisms%20and%20Population.mp4
+        Size: 97.9 MB
+
+    19. Princilpes of Inheritance and variation-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-I.mp4
+        Size: 40.8 MB
+
+    20. Princilpes of Inheritance and variation-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-II.mp4
+        Size: 27.9 MB
+
+    21. Princilpes of Inheritance and variation-III.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-III.mp4
+        Size: 39.9 MB
+
+    22. Reproduction in Organisms.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Reproduction%20in%20Organisms.mp4
+        Size: 33.3 MB
+
+    23. Sexual Reproduction in flowering plants.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Sexual%20Reproduction%20in%20flowering%20plants.mp4
+        Size: 86.1 MB
+
+    24. Strategies for Enhancement in Food Production.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/biology/videos/Strategies%20for%20Enhancement%20in%20Food%20Production.mp4
+        Size: 76.2 MB
+
+
+  📖 Chemistry
+     Total Videos: 25
+
+     1. Alcohols, Phenols, and Ethers I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Alcohols%2C%20Phenols%2C%20and%20Ethers%20I.mp4
+        Size: 160.3 MB
+
+     2. Alcohols, Phenols, and Ethers II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Alcohols%2C%20Phenols%2C%20and%20Ethers%20II.mp4
+        Size: 545.3 MB
+
+     3. Aldehydes, Ketones, and Carboxylic acids- II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Aldehydes%2C%20Ketones%2C%20and%20Carboxylic%20acids-%20II.mp4
+        Size: 245.0 MB
+
+     4. Aldehydes, Ketones, and Carboxylic acids-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Aldehydes%2C%20Ketones%2C%20and%20Carboxylic%20acids-I.mp4
+        Size: 149.8 MB
+
+     5. Amines.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Amines.mp4
+        Size: 243.8 MB
+
+     6. Biomolecules.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Biomolecules.mp4
+        Size: 412.1 MB
+
+     7. Chemical Kinetics.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Chemical%20Kinetics.mp4
+        Size: 319.4 MB
+
+     8. Chemistry in everyday life.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Chemistry%20in%20everyday%20life.mp4
+        Size: 248.1 MB
+
+     9. Coordination Compounds.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Coordination%20Compounds.mp4
+        Size: 334.6 MB
+
+    10. Electrochemistry - II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Electrochemistry%20-%20II.mp4
+        Size: 178.4 MB
+
+    11. Electrochemistry-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Electrochemistry-I.mp4
+        Size: 314.3 MB
+
+    12. Haloalkanes and Haloarenes- I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Haloalkanes%20and%20Haloarenes-%20I.mp4
+        Size: 153.4 MB
+
+    13. Haloalkanes and Haloarenes- II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Haloalkanes%20and%20Haloarenes-%20II.mp4
+        Size: 241.8 MB
+
+    14. Polymers.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Polymers.mp4
+        Size: 263.0 MB
+
+    15. Processes of isolation of elements.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Processes%20of%20isolation%20of%20elements.mp4
+        Size: 277.4 MB
+
+    16. Solid State-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solid%20State-I.mp4
+        Size: 103.5 MB
+
+    17. Solid State-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solid%20State-II.mp4
+        Size: 154.1 MB
+
+    18. Solid State-III.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solid%20State-III.mp4
+        Size: 159.1 MB
+
+    19. Solutions-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solutions-I.mp4
+        Size: 73.1 MB
+
+    20. Solutions-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solutions-II.mp4
+        Size: 86.2 MB
+
+    21. Surface Chemistry.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/Surface%20Chemistry.mp4
+        Size: 154.9 MB
+
+    22. The d and f-block elements-1.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20d%20and%20f-block%20elements-1.mp4
+        Size: 119.9 MB
+
+    23. The P-block elements-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20P-block%20elements-I.mp4
+        Size: 117.6 MB
+
+    24. The P-block elements-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20P-block%20elements-II.mp4
+        Size: 93.4 MB
+
+    25. The P-block elements-III.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20P-block%20elements-III.mp4
+        Size: 85.2 MB
+
+
+  📖 Mathematics
+     Total Videos: 16
+
+     1. Algebra of Matrices-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Algebra%20of%20Matrices-I.mp4
+        Size: 29.6 MB
+
+     2. Algebra of Matrices-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Algebra%20of%20Matrices-II.mp4
+        Size: 42.0 MB
+
+     3. Algebra of Matrices-III.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Algebra%20of%20Matrices-III.mp4
+        Size: 40.0 MB
+
+     4. Application of Derivatives.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Application%20of%20Derivatives.mp4
+        Size: 81.3 MB
+
+     5. Application of Integrals.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Application%20of%20Integrals.mp4
+        Size: 43.8 MB
+
+     6. Continuity and Differentiability.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Continuity%20and%20Differentiability.mp4
+        Size: 106.1 MB
+
+     7. Determinants.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Determinants.mp4
+        Size: 63.5 MB
+
+     8. Differential Equations.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Differential%20Equations.mp4
+        Size: 66.5 MB
+
+     9. Integrals.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Integrals.mp4
+        Size: 135.1 MB
+
+    10. Inverse Trigonometric functions.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Inverse%20Trigonometric%20functions.mp4
+        Size: 51.3 MB
+
+    11. Linear Programming.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Linear%20Programming.mp4
+        Size: 96.1 MB
+
+    12. Probability.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Probability.mp4
+        Size: 122.2 MB
+
+    13. Relations and Functions.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Relations%20and%20Functions.mp4
+        Size: 52.6 MB
+
+    14. Tangent and Normal.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Tangent%20and%20Normal.mp4
+        Size: 70.5 MB
+
+    15. Three Dimensional Geometry.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Three%20Dimensional%20Geometry.mp4
+        Size: 104.5 MB
+
+    16. Vector Algebra.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/mathematics/videos/Vector%20Algebra.mp4
+        Size: 91.3 MB
+
+
+  📖 Physics
+     Total Videos: 21
+
+     1. Alternating current-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Alternating%20current-I.mp4
+        Size: 66.2 MB
+
+     2. Alternating current-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Alternating%20current-II.mp4
+        Size: 88.0 MB
+
+     3. Atoms.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Atoms.mp4
+        Size: 62.7 MB
+
+     4. Communication Systems.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Communication%20Systems.mp4
+        Size: 78.5 MB
+
+     5. Current Electricity.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Current%20Electricity.mp4
+        Size: 115.3 MB
+
+     6. Dual Nature of Radiation and Matter.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Dual%20Nature%20of%20Radiation%20and%20Matter.mp4
+        Size: 82.3 MB
+
+     7. Electric Charges and Fields.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Electric%20Charges%20and%20Fields.mp4
+        Size: 65.6 MB
+
+     8. Electromagnetic Induction.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Electromagnetic%20Induction.mp4
+        Size: 66.4 MB
+
+     9. Electromagnetic Waves.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Electromagnetic%20Waves.mp4
+        Size: 75.0 MB
+
+    10. Electrostatic potential and capacitance-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Electrostatic%20potential%20and%20capacitance-I.mp4
+        Size: 67.5 MB
+
+    11. Electrostatic potential and capacitance-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Electrostatic%20potential%20and%20capacitance-II.mp4
+        Size: 85.3 MB
+
+    12. Magnetism and Matter.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Magnetism%20and%20Matter.mp4
+        Size: 70.4 MB
+
+    13. Moving charges and magnetism-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Moving%20charges%20and%20magnetism-I.mp4
+        Size: 71.2 MB
+
+    14. Moving charges and magnetism-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Moving%20charges%20and%20magnetism-II.mp4
+        Size: 69.9 MB
+
+    15. Nuclei.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Nuclei.mp4
+        Size: 86.9 MB
+
+    16. Optics and Optical Instrument-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Optics%20and%20Optical%20Instrument-II.mp4
+        Size: 93.3 MB
+
+    17. Ray Optics and Optical Instrument-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Ray%20Optics%20and%20Optical%20Instrument-I.mp4
+        Size: 47.7 MB
+
+    18. Semiconductor Electronics-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Semiconductor%20Electronics-I.mp4
+        Size: 88.2 MB
+
+    19. Semiconductor Electronics-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Semiconductor%20Electronics-II.mp4
+        Size: 93.3 MB
+
+    20. Wave Optics-I.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Wave%20Optics-I.mp4
+        Size: 103.0 MB
+
+    21. Wave Optics-II.mp4
+        URL: https://kampusly.in/static/materials/Class-XII/physics/videos/Wave%20Optics-II.mp4
+        Size: 68.2 MB
+
+
+
+================================================================================
+ALL VIDEO URLS (Simple List)
+================================================================================
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Biodiversity%20and%20Conservation.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Biology%20in%20Human%20Welfare.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Biotechnolgy%20Principles%20and%20Processes.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Biotechnology%20and%20its%20Applications.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Ecosystem.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Enhancement%20in%20Food%20Production.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Environmental%20Issues-I.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Environmental%20Issues-II.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Evoloution-I.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Evoloution-II.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Health%20and%20Disease-I.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Health%20and%20Disease-II.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Reproduction-I.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Human%20Reproduction-II.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Inheritance%20and%20variation-III.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Microbes%20in%20Human%20Welfare.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Molecular%20Basis%20of%20Inheritance-I.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Molecular%20Basis%20of%20Inheritance-II.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Molecular%20Basis%20of%20Inheritance-III.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Organisms%20and%20Population.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-I.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-II.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Reproduction%20in%20Organisms.mp4
+https://kampusly.in/static/materials/CLass-XI/biology/videos/Reproduction%20in%20flowering%20plants.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Baisic%20Concepts%20of%20Chemistry-I.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Baisic%20Concepts%20of%20Chemistry-II.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Chemical%20Bonding%20%26%20Molecular%20Structure-I.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Chemical%20Bonding%20%26%20Molecular%20Structure-II.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Equilibrium-I.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Equilibrium-II.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrocarbons-I.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrocarbons-II.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrocarbons-III.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrogen-I.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Hydrogen-II.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Organic%20Chemistry-I.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Organic%20Chemistry-II.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Organic%20Chemistry-III.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Redox%20Reaction.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/States%20of%20Matter.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Structure%20of%20Atom-I.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Structure%20of%20Atom-II.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/The%20p-Block%20Elements.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/The%20s-block%20Elements.mp4
+https://kampusly.in/static/materials/CLass-XI/chemistry/videos/Thermodynamics%20%26%20Chemicals%20Energetic.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/3D%20Geometry.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Circle.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Complex%20Numbers.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Conic%20Section.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Limits%20and%20Derivatives.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Linear%20Equations%20in%20One%20Variable%20%282%29.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Mathematical%20Introduction.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Mathematical%20Reasoning.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Principle%20of%20Mathematical%20Induction.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Probability.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Relations%20and%20Functions.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sequence%20and%20Series-I.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sequence%20and%20Series-II.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sets-I.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sets-II.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Sets-III.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Statistics.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Straight%20Line-I.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Straight%20Line-II.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Straight%20line%20_%20Family%20of%20Straight%20%20line.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Three%20Dimensional%20Geometry.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Trignometric%20Functions.mp4
+https://kampusly.in/static/materials/CLass-XI/mathematics/videos/Vector%20Algebra.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Gravitation.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Kinetic%20Theory%20of%20Gases.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Laws%20of%20Motion.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Mechanical%20Properties%20of%20Fluids.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Mechanical%20Properties%20of%20solids.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Motion%20in%20a%20Straight%20Line%20%281%29.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Motion%20in%20a%20plane.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Oscillations.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Physical%20world.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/System%20of%20particles%20and%20rotational%20motion.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Thermal%20Properties%20of%20Matter.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Thermodynamics.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Waves.mp4
+https://kampusly.in/static/materials/CLass-XI/physics/videos/Work%2C%20Power%20and%20Energy.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Biodiversity%20and%20Conservation.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Biology%20inHuman%20Welfare.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Biotechnolgy%20Principles%20and%20Processes.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Biotechnology%20and%20its%20Applications.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Ecosystem.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Environmental%20Issues-I.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Environmental%20Issues-II.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Evoloution-I.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Evoloution-II.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Health%20and%20Disease-I.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Health%20and%20Disease-II.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Reproduction-I.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Human%20Reproduction-II.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Microbes%20in%20Human%20Welfare.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Molecular%20Basis%20of%20Inheritance-I.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Molecular%20Basis%20of%20Inheritance-II.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Molecular%20Basis%20of%20Inheritance-III.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Organisms%20and%20Population.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-I.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-II.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Princilpes%20of%20Inheritance%20and%20variation-III.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Reproduction%20in%20Organisms.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Sexual%20Reproduction%20in%20flowering%20plants.mp4
+https://kampusly.in/static/materials/Class-XII/biology/videos/Strategies%20for%20Enhancement%20in%20Food%20Production.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Alcohols%2C%20Phenols%2C%20and%20Ethers%20I.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Alcohols%2C%20Phenols%2C%20and%20Ethers%20II.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Aldehydes%2C%20Ketones%2C%20and%20Carboxylic%20acids-%20II.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Aldehydes%2C%20Ketones%2C%20and%20Carboxylic%20acids-I.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Amines.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Biomolecules.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Chemical%20Kinetics.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Chemistry%20in%20everyday%20life.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Coordination%20Compounds.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Electrochemistry%20-%20II.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Electrochemistry-I.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Haloalkanes%20and%20Haloarenes-%20I.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Haloalkanes%20and%20Haloarenes-%20II.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Polymers.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Processes%20of%20isolation%20of%20elements.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solid%20State-I.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solid%20State-II.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solid%20State-III.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solutions-I.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Solutions-II.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/Surface%20Chemistry.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20P-block%20elements-I.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20P-block%20elements-II.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20P-block%20elements-III.mp4
+https://kampusly.in/static/materials/Class-XII/chemistry/videos/The%20d%20and%20f-block%20elements-1.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Algebra%20of%20Matrices-I.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Algebra%20of%20Matrices-II.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Algebra%20of%20Matrices-III.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Application%20of%20Derivatives.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Application%20of%20Integrals.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Continuity%20and%20Differentiability.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Determinants.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Differential%20Equations.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Integrals.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Inverse%20Trigonometric%20functions.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Linear%20Programming.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Probability.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Relations%20and%20Functions.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Tangent%20and%20Normal.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Three%20Dimensional%20Geometry.mp4
+https://kampusly.in/static/materials/Class-XII/mathematics/videos/Vector%20Algebra.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Alternating%20current-I.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Alternating%20current-II.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Atoms.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Communication%20Systems.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Current%20Electricity.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Dual%20Nature%20of%20Radiation%20and%20Matter.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Electric%20Charges%20and%20Fields.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Electromagnetic%20Induction.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Electromagnetic%20Waves.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Electrostatic%20potential%20and%20capacitance-I.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Electrostatic%20potential%20and%20capacitance-II.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Magnetism%20and%20Matter.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Moving%20charges%20and%20magnetism-I.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Moving%20charges%20and%20magnetism-II.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Nuclei.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Optics%20and%20Optical%20Instrument-II.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Ray%20Optics%20and%20Optical%20Instrument-I.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Semiconductor%20Electronics-I.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Semiconductor%20Electronics-II.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Wave%20Optics-I.mp4
+https://kampusly.in/static/materials/Class-XII/physics/videos/Wave%20Optics-II.mp4
+
+================================================================================
+STATISTICS
+================================================================================
+Total Videos: 168
+
+Videos by Class:
+  CLass-XI: 82 videos
+  Class-XII: 86 videos
+
+Videos by Subject:
+  biology: 48 videos
+  chemistry: 46 videos
+  mathematics: 39 videos
+  physics: 35 videos

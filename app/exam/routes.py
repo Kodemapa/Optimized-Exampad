@@ -492,36 +492,57 @@ from flask import current_app
 
 @bp.route('/materials')
 def study_materials():
-    base_dir = os.path.join(current_app.static_folder, 'materials')  # FIXED ✅
-
+    # Read video paths from the extracted_video_paths.txt file
+    video_paths_file = os.path.join(current_app.static_folder, 'extracted_video_paths.txt')
+    
     materials = {}
-    for class_dir in os.listdir(base_dir):
-        class_path = os.path.join(base_dir, class_dir)
-        if os.path.isdir(class_path):
-            materials[class_dir] = {}
-            for subject in os.listdir(class_path):
-                subject_path = os.path.join(class_path, subject)
-                if os.path.isdir(subject_path):
-                    videos = []
-                    notes = []
-
-                    videos_path = os.path.join(subject_path, 'videos')
-                    notes_path = os.path.join(subject_path, 'notes')
-
-                    if os.path.isdir(videos_path):
-                        for v in os.listdir(videos_path):
-                            if v.endswith('.mp4'):
-                                videos.append(f'materials/{class_dir}/{subject}/videos/{v}')
-
-                    if os.path.isdir(notes_path):
-                        for n in os.listdir(notes_path):
-                            if n.endswith('.pdf'):
-                                notes.append(f'materials/{class_dir}/{subject}/notes/{n}')
-
-                    materials[class_dir][subject.capitalize()] = {
-                        'videos': videos,
-                        'notes': notes
+    
+    try:
+        with open(video_paths_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+            
+        # Parse the content to extract video information
+        current_class = None
+        current_subject = None
+        
+        for line in content.split('\n'):
+            original_line = line
+            line = line.strip()
+            
+            # Detect class (e.g., "📚 CLASS-XI")
+            if line.startswith('📚 CLASS-'):
+                current_class = line.replace('📚 ', '').strip()
+                if current_class not in materials:
+                    materials[current_class] = {}
+            
+            # Detect subject (e.g., "  📖 Biology") - check original line indentation
+            elif original_line.startswith('  📖 '):
+                current_subject = line.replace('📖 ', '').strip()
+                if current_class and current_subject:
+                    materials[current_class][current_subject] = {
+                        'videos': [],
+                        'notes': []
                     }
+            
+            # Detect video URL lines
+            elif original_line.startswith('        URL: https://'):
+                if current_class and current_subject:
+                    video_url = line.replace('URL: ', '').strip()
+                    # Extract video name from URL
+                    video_name = video_url.split('/')[-1].replace('%20', ' ')
+                    materials[current_class][current_subject]['videos'].append({
+                        'name': video_name,
+                        'url': video_url
+                    })
+        
+
+    
+    except FileNotFoundError:
+        current_app.logger.error(f"Video paths file not found: {video_paths_file}")
+        materials = {}
+    except Exception as e:
+        current_app.logger.error(f"Error reading video paths: {str(e)}")
+        materials = {}
 
     return render_template('main/materials.html', materials=materials)
 

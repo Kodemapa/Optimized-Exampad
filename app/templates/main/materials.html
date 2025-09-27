@@ -177,14 +177,13 @@
       </div>
       <div class="accordion-content">
         <div class="video-grid">
-          {% for file in data.videos %}
+          {% for video in data.videos %}
             <div class="video-container" onclick="openFullscreen(this)">
-              <video class="fullscreen-video" controls
-                poster="{{ url_for('static', filename='thumbnails/' + file.replace('materials/', '').replace('.mp4', '.jpg')) }}">
-                <source src="{{ url_for('static', filename=file) }}" type="video/mp4">
+              <video class="fullscreen-video" controls preload="metadata">
+                <source src="{{ video.url }}" type="video/mp4">
                 Your browser does not support the video tag.
               </video>
-              <p class="video-title">{{ file.split('/')[-1].rsplit('.', 1)[0].replace('_', ' ') }}</p>
+              <p class="video-title">{{ video.name.replace('.mp4', '').replace('%20', ' ') }}</p>
             </div>
           {% endfor %}
         </div>
