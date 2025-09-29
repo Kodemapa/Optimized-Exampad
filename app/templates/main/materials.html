@@ -110,10 +110,56 @@
       7px 7px 20px rgba(37, 150, 190, 0.12),
       -7px -7px 20px #ffffff;
     transition: transform 0.2s ease-in-out;
+    background-color: #f0f8ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .fullscreen-video:hover {
     transform: scale(1.04);
+  }
+
+  .video-placeholder {
+    width: 100%;
+    height: 160px;
+    border-radius: 18px;
+    box-shadow:
+      7px 7px 20px rgba(37, 150, 190, 0.12),
+      -7px -7px 20px #ffffff;
+    transition: transform 0.2s ease-in-out;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .video-placeholder:hover {
+    transform: scale(1.04);
+  }
+
+  .play-button {
+    width: 60px;
+    height: 60px;
+    background: rgba(37, 150, 190, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-bottom: 8px;
+  }
+
+  .placeholder-text {
+    color: #2596be;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
   }
 
   .video-title {
@@ -178,11 +224,11 @@
       <div class="accordion-content">
         <div class="video-grid">
           {% for video in data.videos %}
-            <div class="video-container" onclick="openFullscreen(this)">
-              <video class="fullscreen-video" controls preload="metadata">
-                <source src="{{ video.url }}" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
+            <div class="video-container" onclick="loadAndPlayVideo(this)">
+              <div class="video-placeholder" data-video-url="{{ video.url }}">
+                <div class="play-button">▶</div>
+                <div class="placeholder-text">Click to load video</div>
+              </div>
               <p class="video-title">{{ video.name.replace('.mp4', '').replace('%20', ' ') }}</p>
             </div>
           {% endfor %}
@@ -206,8 +252,30 @@
 {% endfor %}
 
 <script>
-  function openFullscreen(container) {
-    const video = container.querySelector('video');
+  function loadAndPlayVideo(container) {
+    const placeholder = container.querySelector('.video-placeholder');
+    const videoUrl = placeholder.dataset.videoUrl;
+    
+    // Create video element
+    const video = document.createElement('video');
+    video.className = 'fullscreen-video';
+    video.controls = true;
+    video.preload = 'metadata';
+    
+    // Create source element
+    const source = document.createElement('source');
+    source.src = videoUrl;
+    source.type = 'video/mp4';
+    
+    video.appendChild(source);
+    
+    // Add fallback text
+    video.innerHTML += 'Your browser does not support the video tag.';
+    
+    // Replace placeholder with video
+    placeholder.parentNode.replaceChild(video, placeholder);
+    
+    // Open fullscreen and play
     if (video.requestFullscreen) {
       video.requestFullscreen();
     } else if (video.webkitRequestFullscreen) {
@@ -215,7 +283,32 @@
     } else if (video.msRequestFullscreen) {
       video.msRequestFullscreen();
     }
-    video.play();
+    
+    // Play the video
+    video.play().catch(e => {
+      console.log('Video play failed:', e);
+    });
+    
+    // Update click handler for future clicks (for fullscreen toggle)
+    container.onclick = function() {
+      openFullscreen(container);
+    };
+  }
+
+  function openFullscreen(container) {
+    const video = container.querySelector('video');
+    if (video) {
+      if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) {
+        video.msRequestFullscreen();
+      }
+      video.play().catch(e => {
+        console.log('Video play failed:', e);
+      });
+    }
   }
 
   function toggleAccordion(header) {
