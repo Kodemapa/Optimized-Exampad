@@ -614,7 +614,7 @@ def submit_practice_test():
 
 @bp.route('/students', methods=['GET'])
 def get_students():
-    """Return list of all students for superadmin access."""
+    """Return list of all students for superadmin access with pagination."""
     from flask_login import current_user
     from app.models import User, StudentClass
     
@@ -623,10 +623,20 @@ def get_students():
         return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
     
     try:
-        # Get all students with their class information
-        students = db.session.query(User, StudentClass).outerjoin(
+        # Get pagination parameters
+        page = request.args.get('page', 1, type=int)
+        per_page = 20  # Fixed to 20 users per page
+        
+        # Get paginated students with their class information
+        students_query = db.session.query(User, StudentClass).outerjoin(
             StudentClass, User.id == StudentClass.user_id
-        ).filter(User.role == 'student').all()
+        ).filter(User.role == 'student')
+        
+        # Get total count
+        total_students = students_query.count()
+        
+        # Apply pagination
+        students = students_query.offset((page - 1) * per_page).limit(per_page).all()
         
         students_data = []
         for user, student_class in students:
@@ -640,9 +650,21 @@ def get_students():
             }
             students_data.append(student_info)
         
+        # Calculate pagination info
+        total_pages = (total_students + per_page - 1) // per_page
+        has_next = page < total_pages
+        has_prev = page > 1
+        
         return jsonify({
             'students': students_data,
-            'total': len(students_data)
+            'pagination': {
+                'page': page,
+                'per_page': per_page,
+                'total': total_students,
+                'total_pages': total_pages,
+                'has_next': has_next,
+                'has_prev': has_prev
+            }
         })
         
     except Exception as e:
@@ -737,7 +759,7 @@ def update_student_access_settings(student_id):
 # Teacher Management API Endpoints
 @bp.route('/teachers', methods=['GET'])
 def get_teachers():
-    """Get all teachers with basic stats."""
+    """Get all teachers with basic stats and pagination."""
     from flask_login import current_user
     from app.models import User, CustomTest
     
@@ -746,8 +768,18 @@ def get_teachers():
         return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
     
     try:
-        # Get all teachers
-        teachers = User.query.filter_by(role='teacher').all()
+        # Get pagination parameters
+        page = request.args.get('page', 1, type=int)
+        per_page = 20  # Fixed to 20 users per page
+        
+        # Get paginated teachers
+        teachers_query = User.query.filter_by(role='teacher')
+        
+        # Get total count
+        total_teachers = teachers_query.count()
+        
+        # Apply pagination
+        teachers = teachers_query.offset((page - 1) * per_page).limit(per_page).all()
         
         teacher_data = []
         for teacher in teachers:
@@ -765,7 +797,22 @@ def get_teachers():
                 'active_tests': active_tests
             })
         
-        return jsonify({'teachers': teacher_data})
+        # Calculate pagination info
+        total_pages = (total_teachers + per_page - 1) // per_page
+        has_next = page < total_pages
+        has_prev = page > 1
+        
+        return jsonify({
+            'teachers': teacher_data,
+            'pagination': {
+                'page': page,
+                'per_page': per_page,
+                'total': total_teachers,
+                'total_pages': total_pages,
+                'has_next': has_next,
+                'has_prev': has_prev
+            }
+        })
         
     except Exception as e:
         return jsonify({'error': f'An error occurred: {str(e)}'}), 500
@@ -854,4 +901,174 @@ def update_teacher_access_settings(teacher_id):
         
     except Exception as e:
         db.session.rollback()
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+
+@bp.route('/student/<int:student_id>', methods=['DELETE'])
+def delete_student(student_id):
+    """Delete a student and all associated data."""
+    from flask_login import current_user
+    from app.models import User, StudentClass, StudentAccessSettings
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Verify student exists
+        student = User.query.filter_by(id=student_id, role='student').first()
+        if not student:
+            return jsonify({'error': 'Student not found'}), 404
+        
+        # Delete associated student class record
+        student_class = StudentClass.query.filter_by(user_id=student_id).first()
+        if student_class:
+            db.session.delete(student_class)
+        
+        # Delete associated access settings
+        access_settings = StudentAccessSettings.query.filter_by(user_id=student_id).first()
+        if access_settings:
+            db.session.delete(access_settings)
+        
+        # Store username for response
+        username = student.username
+        
+        # Delete the student user account
+        db.session.delete(student)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': f'Student "{username}" has been successfully deleted'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': f'An error occurred while deleting student: {str(e)}'}), 500
+
+
+@bp.route('/teacher/<int:teacher_id>', methods=['DELETE'])
+def delete_teacher(teacher_id):
+    """Delete a teacher and all associated data."""
+    from flask_login import current_user
+    from app.models import User, TeacherAccessSettings, CustomTest, Exam
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Verify teacher exists
+        teacher = User.query.filter_by(id=teacher_id, role='teacher').first()
+        if not teacher:
+            return jsonify({'error': 'Teacher not found'}), 404
+        
+        # Delete associated access settings
+        access_settings = TeacherAccessSettings.query.filter_by(user_id=teacher_id).first()
+        if access_settings:
+            db.session.delete(access_settings)
+        
+        # Delete associated custom tests created by this teacher
+        custom_tests = CustomTest.query.filter_by(created_by_user_id=teacher_id).all()
+        for custom_test in custom_tests:
+            # Also delete the associated exam if it exists
+            if custom_test.exam_id:
+                exam = Exam.query.get(custom_test.exam_id)
+                if exam:
+                    db.session.delete(exam)
+            db.session.delete(custom_test)
+        
+        # Store username for response
+        username = teacher.username
+        
+        # Delete the teacher user account
+        db.session.delete(teacher)
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': f'Teacher "{username}" and all associated data have been successfully deleted'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': f'An error occurred while deleting teacher: {str(e)}'}), 500
+
+
+@bp.route('/students/statistics', methods=['GET'])
+def get_students_statistics():
+    """Get detailed statistics for students."""
+    from flask_login import current_user
+    from app.models import User, StudentClass
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Get all students
+        all_students = User.query.filter_by(role='student').all()
+        
+        # Calculate statistics
+        total_students = len(all_students)
+        active_students = len([s for s in all_students if s.is_active])
+        
+        # Get class information
+        class_xi_students = db.session.query(User).join(
+            StudentClass, User.id == StudentClass.user_id
+        ).filter(
+            User.role == 'student',
+            StudentClass.class_level == 'XI'
+        ).count()
+        
+        class_xii_students = db.session.query(User).join(
+            StudentClass, User.id == StudentClass.user_id
+        ).filter(
+            User.role == 'student',
+            StudentClass.class_level == 'XII'
+        ).count()
+        
+        return jsonify({
+            'success': True,
+            'total_students': total_students,
+            'active_students': active_students,
+            'class_xi_students': class_xi_students,
+            'class_xii_students': class_xii_students
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+
+@bp.route('/teachers/statistics', methods=['GET'])
+def get_teachers_statistics():
+    """Get detailed statistics for teachers."""
+    from flask_login import current_user
+    from app.models import User, CustomTest
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Get all teachers
+        all_teachers = User.query.filter_by(role='teacher').all()
+        
+        # Calculate statistics
+        total_teachers = len(all_teachers)
+        active_teachers = len([t for t in all_teachers if t.is_active])
+        
+        # Get test statistics
+        tests_created = CustomTest.query.count()
+        active_tests = CustomTest.query.filter_by(status='active').count()
+        
+        return jsonify({
+            'success': True,
+            'total_teachers': total_teachers,
+            'active_teachers': active_teachers,
+            'tests_created': tests_created,
+            'active_tests': active_tests
+        })
+        
+    except Exception as e:
         return jsonify({'error': f'An error occurred: {str(e)}'}), 500

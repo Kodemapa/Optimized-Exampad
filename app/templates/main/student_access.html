@@ -43,6 +43,26 @@
     margin: 0 2px;
 }
 
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.delete-btn {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.delete-btn:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 .loading-container {
     min-height: 200px;
     display: flex;
@@ -225,7 +245,6 @@
                             <th><i class="bi bi-book me-1"></i>Class</th>
                             <th><i class="bi bi-shield-check me-1"></i>Status</th>
                             <th><i class="bi bi-calendar-plus me-1"></i>Joined</th>
-                            <th><i class="bi bi-clock me-1"></i>Last Active</th>
                             <th><i class="bi bi-key me-1"></i>Access</th>
                             <th><i class="bi bi-gear me-1"></i>Actions</th>
                         </tr>
@@ -236,19 +255,22 @@
                 </table>
             </div>
             
-            <!-- Table Footer with Pagination Info -->
-            <div class="p-3 border-top bg-light">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <small class="text-muted">
-                            Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> students
-                        </small>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <small class="text-muted">
-                            Last updated: <span id="lastUpdated">-</span>
-                        </small>
-                    </div>
+            <!-- Table Footer with Pagination -->
+            <div class="pagination-container">
+                <div>
+                    <small class="text-muted">
+                        Showing <span id="showingStart">0</span>-<span id="showingEnd">0</span> of <span id="totalCount">0</span> students
+                    </small>
+                </div>
+                <nav aria-label="Student pagination">
+                    <ul class="pagination pagination-sm mb-0" id="paginationControls">
+                        <!-- Pagination will be populated by JavaScript -->
+                    </ul>
+                </nav>
+                <div>
+                    <small class="text-muted">
+                        Last updated: <span id="lastUpdated">-</span>
+                    </small>
                 </div>
             </div>
         </div>
@@ -258,7 +280,7 @@
             <i class="bi bi-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
             <h5 class="mt-3">Error Loading Students</h5>
             <p class="text-muted">There was an error loading the student data. Please try again.</p>
-            <button class="btn btn-primary" onclick="loadStudentData()">
+            <button class="btn btn-primary" onclick="loadStudentData(1)">
                 <i class="bi bi-arrow-clockwise me-1"></i>Try Again
             </button>
         </div>
@@ -381,12 +403,15 @@
 
 {% block scripts %}
 <script>
+let currentPage = 1;
+let totalPages = 1;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Load student data when page loads
-    loadStudentData();
+    loadStudentData(1);
 });
 
-function loadStudentData() {
+function loadStudentData(page = 1) {
     const loadingIndicator = document.getElementById('studentLoadingIndicator');
     const tableContainer = document.getElementById('studentTableContainer');
     const errorContainer = document.getElementById('errorContainer');
@@ -396,9 +421,11 @@ function loadStudentData() {
     loadingIndicator.style.display = 'flex';
     tableContainer.style.display = 'none';
     errorContainer.style.display = 'none';
+    
+    currentPage = page;
 
-    // Fetch student data from backend
-    fetch('/api/students', {
+    // Fetch student data from backend with pagination
+    fetch(`/api/students?page=${page}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -415,11 +442,13 @@ function loadStudentData() {
         loadingIndicator.style.display = 'none';
         
         if (data.students && data.students.length > 0) {
-            displayStudents(data.students);
-            updateStatistics(data.students);
+            displayStudents(data.students, data.pagination);
+            updateStatistics(data.pagination.total);
+            updatePagination(data.pagination);
             tableContainer.style.display = 'block';
         } else {
-            tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-5 text-muted"><i class="bi bi-inbox me-2"></i>No students found</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="7" class="text-center py-5 text-muted"><i class="bi bi-inbox me-2"></i>No students found</td></tr>';
+            document.getElementById('paginationControls').innerHTML = '';
             tableContainer.style.display = 'block';
         }
         
@@ -433,7 +462,7 @@ function loadStudentData() {
     });
 }
 
-function displayStudents(students) {
+function displayStudents(students, pagination) {
     const tableBody = document.getElementById('studentTableBody');
     let html = '';
 
@@ -444,7 +473,7 @@ function displayStudents(students) {
             '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Inactive</span>';
         
         html += `
-            <tr>
+            <tr id="student-row-${student.id}">
                 <td><strong><i class="bi bi-person-circle me-2"></i>${student.username}</strong></td>
                 <td><i class="bi bi-envelope me-2"></i>${student.email}</td>
                 <td>
@@ -455,7 +484,6 @@ function displayStudents(students) {
                 </td>
                 <td>${statusBadge}</td>
                 <td><i class="bi bi-calendar me-2"></i>${joinedDate}</td>
-                <td><i class="bi bi-clock me-2"></i>-</td>
                 <td>
                     <button class="btn btn-outline-success btn-sm" onclick="viewStudentAccess(${student.id})" title="View Access Details">
                         <i class="bi bi-key me-1"></i>View Access
@@ -472,28 +500,99 @@ function displayStudents(students) {
                         <button class="btn btn-outline-info btn-sm" onclick="viewStudentSessions(${student.id})" title="View Sessions">
                             <i class="bi bi-graph-up"></i>
                         </button>
+                        <button class="btn btn-outline-danger btn-sm delete-btn" onclick="confirmDeleteStudent(${student.id}, '${student.username}')" title="Delete Student">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>
                 </td>
             </tr>`;
     });
 
     tableBody.innerHTML = html;
-    
-    // Update showing count
-    document.getElementById('showingCount').textContent = students.length;
-    document.getElementById('totalCount').textContent = students.length;
 }
 
-function updateStatistics(students) {
-    const totalStudents = students.length;
-    const activeStudents = students.filter(s => s.is_active).length;
-    const classXIStudents = students.filter(s => s.class_level === 'XI').length;
-    const classXIIStudents = students.filter(s => s.class_level === 'XII').length;
+function updatePagination(pagination) {
+    const paginationControls = document.getElementById('paginationControls');
+    const { page, total_pages, has_prev, has_next, per_page, total } = pagination;
     
-    document.getElementById('totalStudents').textContent = totalStudents;
-    document.getElementById('activeStudents').textContent = activeStudents;
-    document.getElementById('classXIStudents').textContent = classXIStudents;
-    document.getElementById('classXIIStudents').textContent = classXIIStudents;
+    totalPages = total_pages;
+    
+    // Update showing counts
+    const start = ((page - 1) * per_page) + 1;
+    const end = Math.min(page * per_page, total);
+    
+    document.getElementById('showingStart').textContent = start;
+    document.getElementById('showingEnd').textContent = end;
+    document.getElementById('totalCount').textContent = total;
+    
+    let paginationHtml = '';
+    
+    // Previous button
+    if (has_prev) {
+        paginationHtml += `
+            <li class="page-item">
+                <a class="page-link" href="#" onclick="loadStudentData(${page - 1}); return false;">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>`;
+    } else {
+        paginationHtml += `<li class="page-item disabled"><span class="page-link"><i class="bi bi-chevron-left"></i></span></li>`;
+    }
+    
+    // Page numbers
+    const startPage = Math.max(1, page - 2);
+    const endPage = Math.min(total_pages, page + 2);
+    
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === page) {
+            paginationHtml += `<li class="page-item active"><span class="page-link">${i}</span></li>`;
+        } else {
+            paginationHtml += `<li class="page-item"><a class="page-link" href="#" onclick="loadStudentData(${i}); return false;">${i}</a></li>`;
+        }
+    }
+    
+    // Next button
+    if (has_next) {
+        paginationHtml += `
+            <li class="page-item">
+                <a class="page-link" href="#" onclick="loadStudentData(${page + 1}); return false;">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>`;
+    } else {
+        paginationHtml += `<li class="page-item disabled"><span class="page-link"><i class="bi bi-chevron-right"></i></span></li>`;
+    }
+    
+    paginationControls.innerHTML = paginationHtml;
+}
+
+function updateStatistics(totalCount) {
+    // Update total count from pagination
+    document.getElementById('totalStudents').textContent = totalCount || 0;
+    
+    // Fetch detailed statistics from API
+    fetch('/api/students/statistics', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('activeStudents').textContent = data.active_students || 0;
+            document.getElementById('classXIStudents').textContent = data.class_xi_students || 0;
+            document.getElementById('classXIIStudents').textContent = data.class_xii_students || 0;
+        }
+    })
+    .catch(error => {
+        console.error('Error loading statistics:', error);
+        // Set fallback values
+        document.getElementById('activeStudents').textContent = 0;
+        document.getElementById('classXIStudents').textContent = 0;
+        document.getElementById('classXIIStudents').textContent = 0;
+    });
 }
 
 function filterStudents() {
@@ -673,5 +772,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function confirmDeleteStudent(studentId, username) {
+    if (confirm(`Are you sure you want to delete student "${username}"?\n\nThis action will permanently delete:\n- The student account\n- All access settings\n- Class assignments\n\nThis action cannot be undone.`)) {
+        deleteStudent(studentId, username);
+    }
+}
+
+function deleteStudent(studentId, username) {
+    // Show loading indicator
+    const row = document.getElementById(`student-row-${studentId}`);
+    if (row) {
+        row.style.opacity = '0.5';
+        row.style.pointerEvents = 'none';
+    }
+    
+    fetch(`/api/student/${studentId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            alert(data.message);
+            
+            // Reload the current page to refresh the student list
+            loadStudentData(currentPage);
+        } else {
+            // Show error message
+            alert(`Error: ${data.error}`);
+            
+            // Restore row appearance
+            if (row) {
+                row.style.opacity = '1';
+                row.style.pointerEvents = 'auto';
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting student:', error);
+        alert('An error occurred while deleting the student. Please try again.');
+        
+        // Restore row appearance
+        if (row) {
+            row.style.opacity = '1';
+            row.style.pointerEvents = 'auto';
+        }
+    });
+}
 </script>
 {% endblock %}

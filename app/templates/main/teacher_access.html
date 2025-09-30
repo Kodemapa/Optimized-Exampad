@@ -43,6 +43,26 @@
     margin: 0 2px;
 }
 
+.pagination-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+.delete-btn {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.delete-btn:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
 .loading-container {
     min-height: 200px;
     display: flex;
@@ -224,19 +244,22 @@
                 </table>
             </div>
             
-            <!-- Table Footer with Pagination Info -->
-            <div class="p-3 border-top bg-light">
-                <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <small class="text-muted">
-                            Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> teachers
-                        </small>
-                    </div>
-                    <div class="col-md-6 text-end">
-                        <small class="text-muted">
-                            Last updated: <span id="lastUpdated">-</span>
-                        </small>
-                    </div>
+            <!-- Table Footer with Pagination -->
+            <div class="pagination-container">
+                <div>
+                    <small class="text-muted">
+                        Showing <span id="showingStart">0</span>-<span id="showingEnd">0</span> of <span id="totalCount">0</span> teachers
+                    </small>
+                </div>
+                <nav aria-label="Teacher pagination">
+                    <ul class="pagination pagination-sm mb-0" id="paginationControls">
+                        <!-- Pagination will be populated by JavaScript -->
+                    </ul>
+                </nav>
+                <div>
+                    <small class="text-muted">
+                        Last updated: <span id="lastUpdated">-</span>
+                    </small>
                 </div>
             </div>
         </div>
@@ -246,7 +269,7 @@
             <i class="bi bi-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
             <h5 class="mt-3">Error Loading Teachers</h5>
             <p class="text-muted">There was an error loading the teacher data. Please try again.</p>
-            <button class="btn btn-primary" onclick="loadTeacherData()">
+            <button class="btn btn-primary" onclick="loadTeacherData(1)">
                 <i class="bi bi-arrow-clockwise me-1"></i>Try Again
             </button>
         </div>
@@ -369,12 +392,15 @@
 
 {% block scripts %}
 <script>
+let currentPage = 1;
+let totalPages = 1;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Load teacher data when page loads
-    loadTeacherData();
+    loadTeacherData(1);
 });
 
-function loadTeacherData() {
+function loadTeacherData(page = 1) {
     const loadingIndicator = document.getElementById('teacherLoadingIndicator');
     const tableContainer = document.getElementById('teacherTableContainer');
     const errorContainer = document.getElementById('errorContainer');
@@ -384,9 +410,11 @@ function loadTeacherData() {
     loadingIndicator.style.display = 'flex';
     tableContainer.style.display = 'none';
     errorContainer.style.display = 'none';
+    
+    currentPage = page;
 
-    // Fetch teacher data from backend
-    fetch('/api/teachers', {
+    // Fetch teacher data from backend with pagination
+    fetch(`/api/teachers?page=${page}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -403,11 +431,13 @@ function loadTeacherData() {
         loadingIndicator.style.display = 'none';
         
         if (data.teachers && data.teachers.length > 0) {
-            displayTeachers(data.teachers);
-            updateStatistics(data.teachers);
+            displayTeachers(data.teachers, data.pagination);
+            updateStatistics(data.pagination.total);
+            updatePagination(data.pagination);
             tableContainer.style.display = 'block';
         } else {
-            tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-5 text-muted"><i class="bi bi-inbox me-2"></i>No teachers found</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="7" class="text-center py-5 text-muted"><i class="bi bi-inbox me-2"></i>No teachers found</td></tr>';
+            document.getElementById('paginationControls').innerHTML = '';
             tableContainer.style.display = 'block';
         }
         
@@ -421,7 +451,7 @@ function loadTeacherData() {
     });
 }
 
-function displayTeachers(teachers) {
+function displayTeachers(teachers, pagination) {
     const tableBody = document.getElementById('teacherTableBody');
     let html = '';
 
@@ -434,13 +464,12 @@ function displayTeachers(teachers) {
         const testsCount = teacher.tests_created || 0;
         
         html += `
-            <tr>
+            <tr id="teacher-row-${teacher.id}">
                 <td><strong><i class="bi bi-person-circle me-2"></i>${teacher.username}</strong></td>
                 <td><i class="bi bi-envelope me-2"></i>${teacher.email}</td>
                 <td><span class="badge bg-info">${testsCount} tests</span></td>
                 <td>${statusBadge}</td>
                 <td><i class="bi bi-calendar me-2"></i>${joinedDate}</td>
-                <td><i class="bi bi-clock me-2"></i>-</td>
                 <td>
                     <button class="btn btn-outline-success btn-sm" onclick="viewTeacherAccess(${teacher.id})" title="View Access Details">
                         <i class="bi bi-key me-1"></i>View Access
@@ -454,28 +483,99 @@ function displayTeachers(teachers) {
                         <button class="btn btn-outline-info btn-sm" onclick="viewTeacherTests(${teacher.id})" title="View Tests">
                             <i class="bi bi-clipboard-data"></i>
                         </button>
+                        <button class="btn btn-outline-danger btn-sm delete-btn" onclick="confirmDeleteTeacher(${teacher.id}, '${teacher.username}')" title="Delete Teacher">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>
                 </td>
             </tr>`;
     });
 
     tableBody.innerHTML = html;
-    
-    // Update showing count
-    document.getElementById('showingCount').textContent = teachers.length;
-    document.getElementById('totalCount').textContent = teachers.length;
 }
 
-function updateStatistics(teachers) {
-    const totalTeachers = teachers.length;
-    const activeTeachers = teachers.filter(t => t.is_active).length;
-    const testsCreated = teachers.reduce((sum, t) => sum + (t.tests_created || 0), 0);
-    const activeTests = teachers.reduce((sum, t) => sum + (t.active_tests || 0), 0);
+function updatePagination(pagination) {
+    const paginationControls = document.getElementById('paginationControls');
+    const { page, total_pages, has_prev, has_next, per_page, total } = pagination;
     
-    document.getElementById('totalTeachers').textContent = totalTeachers;
-    document.getElementById('activeTeachers').textContent = activeTeachers;
-    document.getElementById('testsCreated').textContent = testsCreated;
-    document.getElementById('activeTests').textContent = activeTests;
+    totalPages = total_pages;
+    
+    // Update showing counts
+    const start = ((page - 1) * per_page) + 1;
+    const end = Math.min(page * per_page, total);
+    
+    document.getElementById('showingStart').textContent = start;
+    document.getElementById('showingEnd').textContent = end;
+    document.getElementById('totalCount').textContent = total;
+    
+    let paginationHtml = '';
+    
+    // Previous button
+    if (has_prev) {
+        paginationHtml += `
+            <li class="page-item">
+                <a class="page-link" href="#" onclick="loadTeacherData(${page - 1}); return false;">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+            </li>`;
+    } else {
+        paginationHtml += `<li class="page-item disabled"><span class="page-link"><i class="bi bi-chevron-left"></i></span></li>`;
+    }
+    
+    // Page numbers
+    const startPage = Math.max(1, page - 2);
+    const endPage = Math.min(total_pages, page + 2);
+    
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === page) {
+            paginationHtml += `<li class="page-item active"><span class="page-link">${i}</span></li>`;
+        } else {
+            paginationHtml += `<li class="page-item"><a class="page-link" href="#" onclick="loadTeacherData(${i}); return false;">${i}</a></li>`;
+        }
+    }
+    
+    // Next button
+    if (has_next) {
+        paginationHtml += `
+            <li class="page-item">
+                <a class="page-link" href="#" onclick="loadTeacherData(${page + 1}); return false;">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
+            </li>`;
+    } else {
+        paginationHtml += `<li class="page-item disabled"><span class="page-link"><i class="bi bi-chevron-right"></i></span></li>`;
+    }
+    
+    paginationControls.innerHTML = paginationHtml;
+}
+
+function updateStatistics(totalCount) {
+    // Update total count from pagination
+    document.getElementById('totalTeachers').textContent = totalCount || 0;
+    
+    // Fetch detailed statistics from API
+    fetch('/api/teachers/statistics', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            document.getElementById('activeTeachers').textContent = data.active_teachers || 0;
+            document.getElementById('testsCreated').textContent = data.tests_created || 0;
+            document.getElementById('activeTests').textContent = data.active_tests || 0;
+        }
+    })
+    .catch(error => {
+        console.error('Error loading statistics:', error);
+        // Set fallback values
+        document.getElementById('activeTeachers').textContent = 0;
+        document.getElementById('testsCreated').textContent = 0;
+        document.getElementById('activeTests').textContent = 0;
+    });
 }
 
 function filterTeachers() {
@@ -652,5 +752,57 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+function confirmDeleteTeacher(teacherId, username) {
+    if (confirm(`Are you sure you want to delete teacher "${username}"?\n\nThis action will permanently delete:\n- The teacher account\n- All access settings\n- All custom tests created by this teacher\n- Associated exam data\n\nThis action cannot be undone.`)) {
+        deleteTeacher(teacherId, username);
+    }
+}
+
+function deleteTeacher(teacherId, username) {
+    // Show loading indicator
+    const row = document.getElementById(`teacher-row-${teacherId}`);
+    if (row) {
+        row.style.opacity = '0.5';
+        row.style.pointerEvents = 'none';
+    }
+    
+    fetch(`/api/teacher/${teacherId}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            alert(data.message);
+            
+            // Reload the current page to refresh the teacher list
+            loadTeacherData(currentPage);
+        } else {
+            // Show error message
+            alert(`Error: ${data.error}`);
+            
+            // Restore row appearance
+            if (row) {
+                row.style.opacity = '1';
+                row.style.pointerEvents = 'auto';
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Error deleting teacher:', error);
+        alert('An error occurred while deleting the teacher. Please try again.');
+        
+        // Restore row appearance
+        if (row) {
+            row.style.opacity = '1';
+            row.style.pointerEvents = 'auto';
+        }
+    });
+}
 </script>
 {% endblock %}
