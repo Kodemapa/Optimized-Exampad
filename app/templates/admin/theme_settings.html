@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Theme Settings - Admin{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Theme Settings</h3>
+      <p>Choose a site-wide theme. Only superadmin may update the theme.</p>
+
+      <form method="POST" action="{{ url_for('admin.theme_update') }}">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="mb-3">
+          <label for="site_title" class="form-label">Platform Name</label>
+          <input type="text" id="site_title" name="site_title" class="form-control" value="{{ site_title or 'AKSHARASHREE' }}">
+          <div class="form-text">This name will appear in the header and footer for all users.</div>
+        </div>
+        <div class="list-group mb-3">
+          {% for theme in themes %}
+          <label class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <input type="radio" name="theme" value="{{ theme.id }}" {% if theme.id == current_theme %}checked{% endif %}>
+              <strong class="ms-2">{{ theme.name }}</strong>
+            </div>
+            <div class="theme-swatch" data-color="{{ theme.primary }}"></div>
+          </label>
+          {% endfor %}
+        </div>
+
+        <button class="btn btn-primary" type="submit">Save Theme</button>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary ms-2">Cancel</a>
+      </form>
+
+    </div>
+    <div class="col-md-4">
+      <h5>Preview</h5>
+      <div class="p-3 border rounded">
+        <p>Header, buttons and cards will use theme primary color.</p>
+        <div class="mt-2">
+          <button class="btn btn-primary me-2">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Render color swatches from data attributes
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.theme-swatch').forEach(function(el) {
+      var c = el.dataset.color;
+      if (c) el.style.backgroundColor = c;
+    });
+  });
+</script>
+{% endblock %}

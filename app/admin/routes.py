@@ -6,14 +6,14 @@ Admin Routes - Administrative dashboard and analytics
 from flask import render_template, request, jsonify, redirect, url_for, flash, current_app
 from flask_login import login_required, current_user
 from app.admin import bp
-from app.models import db, User, Subject, Topic, Question, Exam, ExamSession, CustomTest
+from app.models import db, User, Subject, Topic, Question, Exam, ExamSession, CustomTest, SiteSetting
 from sqlalchemy import func, desc, and_
 from datetime import datetime, timedelta
 import json
 def admin_required(f):
-    """Decorator to require admin role"""
+    """Decorator to require admin or superadmin role"""
     def decorated_function(*args, **kwargs):
-        if not current_user.is_authenticated or current_user.role != 'admin':
+        if not current_user.is_authenticated or (current_user.role not in ('admin', 'superadmin')):
             flash('Admin access required', 'error')
             return redirect(url_for('main.index'))
         return f(*args, **kwargs)
@@ -41,17 +41,7 @@ def all_submissions():
         })
     return render_template('admin/all_submissions.html', exams=exam_list)
 
-def admin_required(f):
-    """Decorator to require admin role"""
-    def decorated_function(*args, **kwargs):
-        if not current_user.is_authenticated or current_user.role != 'admin':
-            flash('Admin access required', 'error')
-            return redirect(url_for('main.index'))
-        return f(*args, **kwargs)
-
-
-    decorated_function.__name__ = f.__name__
-    return decorated_function
+# Note: admin_required defined above; duplicate removed to avoid redefinition.
 
 
 # Admin: Custom Tests Overview (list all teachers and their active tests)
@@ -176,6 +166,52 @@ def dashboard():
         current_app.logger.error(f"Error in admin dashboard: {str(e)}")
         flash('Error loading dashboard', 'error')
         return redirect(url_for('main.index'))
+
+
+@bp.route('/theme', methods=['GET'])
+@login_required
+@admin_required
+def theme_settings():
+    # Only allow superadmin to change site theme
+    if getattr(current_user, 'role', None) != 'superadmin':
+        flash('Superadmin access required to change theme', 'error')
+        return redirect(url_for('admin.dashboard'))
+
+    current_theme = SiteSetting.get('ui_theme', default='default')
+    themes = [
+        {'id': 'default', 'name': 'Default (purple)', 'primary': '#667eea'},
+        {'id': 'blue', 'name': 'Blue', 'primary': '#0d6efd'},
+        {'id': 'green', 'name': 'Green', 'primary': '#198754'},
+        {'id': 'dark', 'name': 'Dark', 'primary': '#343a40'},
+        {'id': 'sunset', 'name': 'Sunset', 'primary': '#ff7e5f'}
+    ]
+    site_title = SiteSetting.get('site_title', default='AKSHARASHREE')
+    return render_template('admin/theme_settings.html', current_theme=current_theme, themes=themes, site_title=site_title)
+
+
+@bp.route('/theme', methods=['POST'])
+@login_required
+@admin_required
+def theme_update():
+    if getattr(current_user, 'role', None) != 'superadmin':
+        return jsonify({'success': False, 'message': 'Superadmin access required'}), 403
+
+    selected = request.form.get('theme')
+    site_title = request.form.get('site_title')
+    # site_title can be updated even if theme is not changed
+    try:
+        if site_title is not None:
+            SiteSetting.set('site_title', site_title.strip())
+        if selected:
+            SiteSetting.set('ui_theme', selected)
+            flash('Theme and site title updated successfully', 'success')
+        else:
+            flash('Site title updated successfully', 'success')
+        return redirect(url_for('admin.theme_settings'))
+    except Exception as e:
+        current_app.logger.error(f"Failed to update theme/site title: {e}")
+        flash('Failed to update theme or site title', 'error')
+        return redirect(url_for('admin.theme_settings'))
 
 @bp.route('/students')
 @login_required

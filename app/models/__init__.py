@@ -215,3 +215,42 @@ class CustomTest(db.Model):
     def __repr__(self):
         return f"<CustomTest {self.id} status={self.status}>"
 
+
+class SuperAdmin(db.Model):
+    """Optional table to store additional metadata for super admin users."""
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
+    privileges = db.Column(db.Text)  # JSON or comma-separated privileges (optional)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    # Relationship
+    user = db.relationship('User', backref=db.backref('superadmin_profile', uselist=False))
+
+    def __repr__(self):
+        return f"<SuperAdmin user_id={self.user_id}>"
+
+
+class SiteSetting(db.Model):
+    """Simple key/value store for site-wide settings (e.g., ui_theme)."""
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    value = db.Column(db.Text)
+
+    @classmethod
+    def get(cls, name, default=None):
+        s = cls.query.filter_by(name=name).first()
+        return s.value if s else default
+
+    @classmethod
+    def set(cls, name, value):
+        s = cls.query.filter_by(name=name).first()
+        if s:
+            s.value = value
+        else:
+            s = cls(name=name, value=value)
+            db.session.add(s)
+        db.session.commit()
+
+    def __repr__(self):
+        return f"<SiteSetting {self.name}={self.value}>"
+
