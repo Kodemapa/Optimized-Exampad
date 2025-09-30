@@ -64,27 +64,29 @@ def create_app(config_name='default'):
     def inject_site_settings():
         try:
             from app.models import SiteSetting
-            current_theme = SiteSetting.get('ui_theme', default='default')
+            current_theme = SiteSetting.get('ui_theme', default='original')
         except Exception:
-            current_theme = 'default'
+            current_theme = 'original'
 
         theme_map = {
+            'original': '#2596be',
             'default': '#667eea',
             'blue': '#0d6efd',
             'green': '#198754',
             'dark': '#343a40',
             'sunset': '#ff7e5f'
         }
-        primary = theme_map.get(current_theme, theme_map['default'])
+        primary = theme_map.get(current_theme, theme_map['original'])
         # Define a simple secondary mapping (a darker or complementary shade)
         secondary_map = {
+            'original': '#207381',
             'default': '#5a67d8',
             'blue': '#0b5ed7',
             'green': '#157347',
             'dark': '#212529',
-            'sunset': '#ff6f4d'
+            'sunset': '#e85a3f'
         }
-        secondary = secondary_map.get(current_theme, secondary_map['default'])
+        secondary = secondary_map.get(current_theme, secondary_map['original'])
         # Read site title (default fallback)
         try:
             site_title = SiteSetting.get('site_title', default='AKSHARASHREE')

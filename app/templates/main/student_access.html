@@ -1,0 +1,677 @@
+{% extends "base.html" %}
+
+{% block title %}Student Access - {{ site_title }}{% endblock %}
+
+{% block styles %}
+<style>
+/* Student Access Page Styles */
+.student-access-header {
+    background: linear-gradient(135deg, var(--site-primary) 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.filter-card {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.student-table {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--site-primary);
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 1rem 0.75rem;
+}
+
+.student-actions .btn {
+    margin: 0 2px;
+}
+
+.loading-container {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-box {
+    max-width: 300px;
+}
+
+.filter-select {
+    max-width: 200px;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--site-primary);
+}
+
+.btn-back {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #545b62;
+    border-color: #4e555b;
+    color: white;
+}
+
+/* Access Control Modal Styles */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.form-check-input {
+    transform: scale(1.2);
+}
+
+.form-check-input:checked {
+    background-color: var(--site-primary);
+    border-color: var(--site-primary);
+}
+
+.access-feature-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.access-feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="student-access-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1><i class="bi bi-people-fill me-3"></i>Student Access Management</h1>
+                <p class="lead mb-0">Comprehensive student account management and analytics</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-back btn-lg">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Statistics Row -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="totalStudents">-</div>
+                <h5><i class="bi bi-people me-2"></i>Total Students</h5>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="activeStudents">-</div>
+                <h5><i class="bi bi-person-check me-2"></i>Active Students</h5>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="classXIStudents">-</div>
+                <h5><i class="bi bi-11-circle me-2"></i>Class XI</h5>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="classXIIStudents">-</div>
+                <h5><i class="bi bi-12-circle me-2"></i>Class XII</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters and Search -->
+    <div class="filter-card">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Search Students</label>
+                <input type="text" class="form-control search-box" id="studentFilter" 
+                       placeholder="Search by username or email..." onkeyup="filterStudents()">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Class Filter</label>
+                <select class="form-select filter-select" id="classFilter" onchange="filterStudents()">
+                    <option value="">All Classes</option>
+                    <option value="XI">Class XI</option>
+                    <option value="XII">Class XII</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Status Filter</label>
+                <select class="form-select filter-select" id="statusFilter" onchange="filterStudents()">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="col-md-4 text-end">
+                <label class="form-label fw-bold d-block">&nbsp;</label>
+                <button class="btn btn-primary me-2" onclick="loadStudentData()">
+                    <i class="bi bi-arrow-clockwise me-1"></i>Refresh Data
+                </button>
+                <!--
+                <a href="{{ url_for('admin.students') }}" class="btn btn-success">
+                    <i class="bi bi-gear me-1"></i>Manage Students
+                </a>-->
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Data Table -->
+    <div class="student-table">
+        <!-- Loading Indicator -->
+        <div id="studentLoadingIndicator" class="loading-container">
+            <div class="text-center">
+                <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h5>Loading student data...</h5>
+                <p class="text-muted">Please wait while we fetch the latest information</p>
+            </div>
+        </div>
+
+        <!-- Student Table -->
+        <div id="studentTableContainer" style="display: none;">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="studentTable">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-person me-1"></i>Username</th>
+                            <th><i class="bi bi-envelope me-1"></i>Email</th>
+                            <th><i class="bi bi-book me-1"></i>Class</th>
+                            <th><i class="bi bi-shield-check me-1"></i>Status</th>
+                            <th><i class="bi bi-calendar-plus me-1"></i>Joined</th>
+                            <th><i class="bi bi-clock me-1"></i>Last Active</th>
+                            <th><i class="bi bi-key me-1"></i>Access</th>
+                            <th><i class="bi bi-gear me-1"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="studentTableBody">
+                        <!-- Student data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Table Footer with Pagination Info -->
+            <div class="p-3 border-top bg-light">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <small class="text-muted">
+                            Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> students
+                        </small>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <small class="text-muted">
+                            Last updated: <span id="lastUpdated">-</span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorContainer" class="text-center py-5" style="display: none;">
+            <i class="bi bi-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            <h5 class="mt-3">Error Loading Students</h5>
+            <p class="text-muted">There was an error loading the student data. Please try again.</p>
+            <button class="btn btn-primary" onclick="loadStudentData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>Try Again
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Student Access Control Modal -->
+<div class="modal fade" id="studentAccessModal" tabindex="-1" aria-labelledby="accessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background: var(--site-primary); color: white;">
+                <h5 class="modal-title" id="accessModalLabel">
+                    <i class="bi bi-key me-2"></i>
+                    <span id="accessModalTitle">Student Access Control</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="accessModalStudentId" value="">
+                
+                <!-- Loading State -->
+                <div id="accessSettingsLoading" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Loading current access settings...</p>
+                </div>
+                
+                <!-- Access Settings Form -->
+                <div id="accessSettingsForm" style="display: none;">
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Access Control:</strong> Enable or disable specific features for this student. 
+                        Disabled features will not be accessible to the student when they log in.
+                    </div>
+                    
+                    <div class="row g-4">
+                        <!-- Materials/Exam Prep -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-journal-bookmark text-primary" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">Materials / Exam Prep</h6>
+                                    <p class="text-muted small">Access to study materials and exam preparation content</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleMaterials" checked>
+                                        <label class="form-check-label ms-2" for="toggleMaterials">
+                                            <span class="badge bg-success" id="statusMaterials">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Start Exam -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-play-circle text-success" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">Start Exam Page</h6>
+                                    <p class="text-muted small">Access to take exams and practice tests</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleStartExam" checked>
+                                        <label class="form-check-label ms-2" for="toggleStartExam">
+                                            <span class="badge bg-success" id="statusStartExam">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- View Results -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-graph-up text-info" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">View Results Page</h6>
+                                    <p class="text-muted small">Access to exam results and performance analytics</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleViewResults" checked>
+                                        <label class="form-check-label ms-2" for="toggleViewResults">
+                                            <span class="badge bg-success" id="statusViewResults">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Browse by Class -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-book text-warning" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">Browse by Class</h6>
+                                    <p class="text-muted small">Topic-wise preparation and subject browsing</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleBrowseClass" checked>
+                                        <label class="form-check-label ms-2" for="toggleBrowseClass">
+                                            <span class="badge bg-success" id="statusBrowseClass">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-lg me-1"></i>Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="saveAccessBtn" onclick="saveStudentAccessSettings()">
+                    <i class="bi bi-check-lg me-1"></i>Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load student data when page loads
+    loadStudentData();
+});
+
+function loadStudentData() {
+    const loadingIndicator = document.getElementById('studentLoadingIndicator');
+    const tableContainer = document.getElementById('studentTableContainer');
+    const errorContainer = document.getElementById('errorContainer');
+    const tableBody = document.getElementById('studentTableBody');
+    
+    // Show loading, hide others
+    loadingIndicator.style.display = 'flex';
+    tableContainer.style.display = 'none';
+    errorContainer.style.display = 'none';
+
+    // Fetch student data from backend
+    fetch('/api/students', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        loadingIndicator.style.display = 'none';
+        
+        if (data.students && data.students.length > 0) {
+            displayStudents(data.students);
+            updateStatistics(data.students);
+            tableContainer.style.display = 'block';
+        } else {
+            tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-5 text-muted"><i class="bi bi-inbox me-2"></i>No students found</td></tr>';
+            tableContainer.style.display = 'block';
+        }
+        
+        // Update last updated time
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+    })
+    .catch(error => {
+        console.error('Error loading students:', error);
+        loadingIndicator.style.display = 'none';
+        errorContainer.style.display = 'block';
+    });
+}
+
+function displayStudents(students) {
+    const tableBody = document.getElementById('studentTableBody');
+    let html = '';
+
+    students.forEach(student => {
+        const joinedDate = student.created_at ? new Date(student.created_at).toLocaleDateString() : 'Unknown';
+        const statusBadge = student.is_active ? 
+            '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Active</span>' : 
+            '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Inactive</span>';
+        
+        html += `
+            <tr>
+                <td><strong><i class="bi bi-person-circle me-2"></i>${student.username}</strong></td>
+                <td><i class="bi bi-envelope me-2"></i>${student.email}</td>
+                <td>
+                    ${student.class_level ? 
+                        `<span class="badge bg-primary">Class ${student.class_level}</span>` : 
+                        '<span class="badge bg-secondary">Not Set</span>'
+                    }
+                </td>
+                <td>${statusBadge}</td>
+                <td><i class="bi bi-calendar me-2"></i>${joinedDate}</td>
+                <td><i class="bi bi-clock me-2"></i>-</td>
+                <td>
+                    <button class="btn btn-outline-success btn-sm" onclick="viewStudentAccess(${student.id})" title="View Access Details">
+                        <i class="bi bi-key me-1"></i>View Access
+                    </button>
+                </td>
+                <td>
+                    <div class="student-actions">
+                        <a href="/admin/student/${student.id}" class="btn btn-outline-primary btn-sm" title="View Details">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a href="/admin/students/edit/${student.id}?redirect_to=student_access" class="btn btn-outline-warning btn-sm" title="Edit Student">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <button class="btn btn-outline-info btn-sm" onclick="viewStudentSessions(${student.id})" title="View Sessions">
+                            <i class="bi bi-graph-up"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>`;
+    });
+
+    tableBody.innerHTML = html;
+    
+    // Update showing count
+    document.getElementById('showingCount').textContent = students.length;
+    document.getElementById('totalCount').textContent = students.length;
+}
+
+function updateStatistics(students) {
+    const totalStudents = students.length;
+    const activeStudents = students.filter(s => s.is_active).length;
+    const classXIStudents = students.filter(s => s.class_level === 'XI').length;
+    const classXIIStudents = students.filter(s => s.class_level === 'XII').length;
+    
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('activeStudents').textContent = activeStudents;
+    document.getElementById('classXIStudents').textContent = classXIStudents;
+    document.getElementById('classXIIStudents').textContent = classXIIStudents;
+}
+
+function filterStudents() {
+    const searchFilter = document.getElementById('studentFilter').value.toLowerCase();
+    const classFilter = document.getElementById('classFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    
+    const rows = document.querySelectorAll('#studentTable tbody tr');
+    let visibleCount = 0;
+    
+    rows.forEach(row => {
+        const username = row.cells[0]?.textContent.toLowerCase() || '';
+        const email = row.cells[1]?.textContent.toLowerCase() || '';
+        const studentClass = row.cells[2]?.textContent || '';
+        const status = row.cells[3]?.textContent.toLowerCase() || '';
+        
+        const matchesSearch = username.includes(searchFilter) || email.includes(searchFilter);
+        const matchesClass = !classFilter || studentClass.includes(classFilter);
+        const matchesStatus = !statusFilter || status.includes(statusFilter);
+        
+        if (matchesSearch && matchesClass && matchesStatus) {
+            row.style.display = '';
+            visibleCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    // Update showing count
+    document.getElementById('showingCount').textContent = visibleCount;
+}
+
+function viewStudentSessions(studentId) {
+    // Redirect to admin student detail page
+    window.location.href = `/admin/student/${studentId}`;
+}
+
+function viewStudentAccess(studentId) {
+    // Open student access control modal
+    showStudentAccessModal(studentId);
+}
+
+function showStudentAccessModal(studentId) {
+    // Set the student ID in the modal
+    document.getElementById('accessModalStudentId').value = studentId;
+    
+    // Find student info for modal title
+    const studentRow = document.querySelector(`button[onclick="viewStudentAccess(${studentId})"]`).closest('tr');
+    const studentUsername = studentRow.cells[0].textContent.trim().replace('👤', '').trim();
+    document.getElementById('accessModalTitle').textContent = `Access Control - ${studentUsername}`;
+    
+    // Load current access settings
+    loadStudentAccessSettings(studentId);
+    
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('studentAccessModal'));
+    modal.show();
+}
+
+function loadStudentAccessSettings(studentId) {
+    // Show loading in modal
+    const loadingDiv = document.getElementById('accessSettingsLoading');
+    const settingsDiv = document.getElementById('accessSettingsForm');
+    
+    loadingDiv.style.display = 'block';
+    settingsDiv.style.display = 'none';
+    
+    // Fetch current access settings for the student
+    fetch(`/api/student/${studentId}/access-settings`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        loadingDiv.style.display = 'none';
+        settingsDiv.style.display = 'block';
+        
+        // Update toggle switches and badges based on current settings
+        updateToggleAndBadge('toggleMaterials', 'statusMaterials', data.materials_access !== false);
+        updateToggleAndBadge('toggleStartExam', 'statusStartExam', data.start_exam_access !== false);
+        updateToggleAndBadge('toggleViewResults', 'statusViewResults', data.view_results_access !== false);
+        updateToggleAndBadge('toggleBrowseClass', 'statusBrowseClass', data.browse_class_access !== false);
+    })
+    .catch(error => {
+        console.error('Error loading access settings:', error);
+        loadingDiv.style.display = 'none';
+        settingsDiv.style.display = 'block';
+        
+        // Default to all enabled if error
+        updateToggleAndBadge('toggleMaterials', 'statusMaterials', true);
+        updateToggleAndBadge('toggleStartExam', 'statusStartExam', true);
+        updateToggleAndBadge('toggleViewResults', 'statusViewResults', true);
+        updateToggleAndBadge('toggleBrowseClass', 'statusBrowseClass', true);
+    });
+}
+
+function saveStudentAccessSettings() {
+    const studentId = document.getElementById('accessModalStudentId').value;
+    const saveBtn = document.getElementById('saveAccessBtn');
+    
+    // Show saving state
+    saveBtn.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>Saving...';
+    saveBtn.disabled = true;
+    
+    // Collect form data
+    const accessSettings = {
+        materials_access: document.getElementById('toggleMaterials').checked,
+        start_exam_access: document.getElementById('toggleStartExam').checked,
+        view_results_access: document.getElementById('toggleViewResults').checked,
+        browse_class_access: document.getElementById('toggleBrowseClass').checked
+    };
+    
+    // Send update request
+    fetch(`/api/student/${studentId}/access-settings`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        },
+        body: JSON.stringify(accessSettings)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            alert('Access settings updated successfully!');
+            
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('studentAccessModal'));
+            modal.hide();
+        } else {
+            alert('Error updating access settings: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error saving access settings:', error);
+        alert('Error saving access settings. Please try again.');
+    })
+    .finally(() => {
+        // Reset button
+        saveBtn.innerHTML = '<i class="bi bi-check-lg me-1"></i>Save Changes';
+        saveBtn.disabled = false;
+    });
+}
+
+// Helper function to update toggle and badge
+function updateToggleAndBadge(toggleId, statusId, isEnabled) {
+    const toggle = document.getElementById(toggleId);
+    const statusBadge = document.getElementById(statusId);
+    
+    toggle.checked = isEnabled;
+    
+    if (isEnabled) {
+        statusBadge.textContent = 'Enabled';
+        statusBadge.className = 'badge bg-success';
+    } else {
+        statusBadge.textContent = 'Disabled';
+        statusBadge.className = 'badge bg-danger';
+    }
+}
+
+// Add event listeners for toggle switches to update status badges
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('change', function(e) {
+        const toggleMappings = {
+            'toggleMaterials': 'statusMaterials',
+            'toggleStartExam': 'statusStartExam', 
+            'toggleViewResults': 'statusViewResults',
+            'toggleBrowseClass': 'statusBrowseClass'
+        };
+        
+        if (toggleMappings[e.target.id]) {
+            updateToggleAndBadge(e.target.id, toggleMappings[e.target.id], e.target.checked);
+        }
+    });
+});
+</script>
+{% endblock %}

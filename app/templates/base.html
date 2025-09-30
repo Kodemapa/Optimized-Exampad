@@ -12,24 +12,47 @@
     <!-- Custom CSS -->
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <style>
-      :root { --site-primary: {{ site_primary or '#667eea' }}; --site-secondary: {{ site_secondary or '#5a67d8' }}; }
-      /* Primary buttons and outline variants */
-      .btn-primary, .btn-primary:focus, .btn-primary:hover {
+      :root { 
+        --site-primary: {{ site_primary or '#2596be' }}; 
+        --site-secondary: {{ site_secondary or '#207381' }}; 
+        /* Override ALL CSS variables with dynamic theme colors */
+        --primary-color: var(--site-primary) !important;
+        --secondary-color: var(--site-secondary) !important;
+        --accent-color: var(--site-primary) !important;
+        --accent-purple: var(--site-primary) !important;
+        --accent-coral: var(--site-secondary) !important;
+        --gradient-primary: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-electric: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-ocean: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-sunset: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-aurora: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-purple: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-cosmic: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-vibrant: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-cool: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+        --gradient-animated: linear-gradient(-45deg, var(--site-primary), var(--site-secondary), var(--site-primary), var(--site-secondary)) !important;
+      }
+      
+      /* Primary buttons and outline variants - with higher specificity */
+      .btn.btn-primary, .btn-primary, .btn-primary:focus, .btn-primary:hover, .btn-primary:active, .btn-primary:not(:disabled):not(.disabled):active {
         background-color: var(--site-primary) !important;
         border-color: var(--site-primary) !important;
         color: #fff !important;
+        box-shadow: none !important;
       }
-      .btn-outline-primary {
+      .btn.btn-outline-primary, .btn-outline-primary {
         color: var(--site-primary) !important;
         border-color: var(--site-primary) !important;
+        background-color: transparent !important;
       }
-      .btn-outline-primary:hover {
+      .btn.btn-outline-primary:hover, .btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:not(:disabled):not(.disabled):active {
         background-color: var(--site-primary) !important;
+        border-color: var(--site-primary) !important;
         color: #fff !important;
       }
 
       /* Secondary buttons and outline variants */
-      .btn-secondary, .btn-secondary:focus, .btn-secondary:hover {
+      .btn-secondary, .btn-secondary:focus, .btn-secondary:hover, .btn-secondary:active {
         background-color: var(--site-secondary) !important;
         border-color: var(--site-secondary) !important;
         color: #fff !important;
@@ -38,19 +61,70 @@
         color: var(--site-secondary) !important;
         border-color: var(--site-secondary) !important;
       }
-      .btn-outline-secondary:hover {
+      .btn-outline-secondary:hover, .btn-outline-secondary:active {
         background-color: var(--site-secondary) !important;
+        border-color: var(--site-secondary) !important;
         color: #fff !important;
       }
 
+      /* Success, Warning, Info button overrides for theme consistency */
+      .btn-success, .btn-success:focus, .btn-success:hover, .btn-success:active {
+        background-color: var(--site-primary) !important;
+        border-color: var(--site-primary) !important;
+      }
+      .btn-warning, .btn-warning:focus, .btn-warning:hover, .btn-warning:active {
+        background-color: var(--site-secondary) !important;
+        border-color: var(--site-secondary) !important;
+        color: #fff !important;
+      }
+      .btn-info, .btn-info:focus, .btn-info:hover, .btn-info:active {
+        background-color: var(--site-primary) !important;
+        border-color: var(--site-primary) !important;
+      }
+
+      /* Header and background elements - with higher specificity */
       .simple-header h4 { color: white !important; }
-  /* Header and background utility overrides */
-  .simple-header { background: linear-gradient(135deg, var(--site-primary) 0%, #764ba2 100%) !important; border-bottom: 1px solid rgba(255,255,255,0.2); }
-  .auth-header { background: linear-gradient(135deg, var(--site-primary) 0%, #764ba2 100%) !important; }
-  .offcanvas-header { background: linear-gradient(135deg, var(--site-primary) 0%, #764ba2 100%) !important; color: white !important; }
-  .bg-primary { background-color: var(--site-primary) !important; color: #fff !important; }
-  .card.bg-primary { background-color: color-mix(in srgb, var(--site-primary) 80%, white) !important; }
-  .card { transition: box-shadow 0.3s ease, transform 0.3s ease; }
+      header.simple-header, .simple-header { 
+        background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important; 
+        border-bottom: 1px solid rgba(255,255,255,0.2) !important; 
+      }
+      .auth-header { background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important; }
+      .offcanvas-header { background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important; color: white !important; }
+      
+      /* Override any existing header styles */
+      body .simple-header, body header.simple-header {
+        background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
+      }
+      
+      /* Card and background overrides */
+      .bg-primary { background-color: var(--site-primary) !important; color: #fff !important; }
+      .card.bg-primary { background-color: var(--site-primary) !important; color: #fff !important; }
+      .card-header { background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important; }
+      
+      /* Link colors */
+      .text-primary { color: var(--site-primary) !important; }
+      a.text-primary:hover { color: var(--site-secondary) !important; }
+      
+      /* Form controls focus */
+      .form-control:focus { border-color: var(--site-primary) !important; }
+      
+      /* Additional theme elements */
+      .navbar-brand { color: white !important; }
+      .stats-card, .quick-actions-card, .class-card { transition: all 0.3s ease; }
+      .access-card { transition: all 0.3s ease; }
+      
+      /* Override any hardcoded colors in utility classes */
+      .text-gradient-primary, .text-gradient-cool, .text-gradient-electric { 
+        background: linear-gradient(135deg, var(--site-primary), var(--site-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      
+      /* Transition for smooth color changes */
+      .card, .btn, .simple-header, .auth-header, .offcanvas-header, .card-header { 
+        transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important; 
+      }
     </style>
     
     <meta name="csrf-token" content="{{ csrf_token() }}">

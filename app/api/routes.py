@@ -611,3 +611,247 @@ def submit_practice_test():
         
     except Exception as e:
         return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+@bp.route('/students', methods=['GET'])
+def get_students():
+    """Return list of all students for superadmin access."""
+    from flask_login import current_user
+    from app.models import User, StudentClass
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Get all students with their class information
+        students = db.session.query(User, StudentClass).outerjoin(
+            StudentClass, User.id == StudentClass.user_id
+        ).filter(User.role == 'student').all()
+        
+        students_data = []
+        for user, student_class in students:
+            student_info = {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'is_active': user.is_active,
+                'created_at': user.created_at.isoformat() if user.created_at else None,
+                'class_level': student_class.class_level if student_class else None
+            }
+            students_data.append(student_info)
+        
+        return jsonify({
+            'students': students_data,
+            'total': len(students_data)
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+@bp.route('/student/<int:student_id>/access-settings', methods=['GET'])
+def get_student_access_settings(student_id):
+    """Get access settings for a specific student."""
+    from flask_login import current_user
+    from app.models import User, StudentAccessSettings
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Verify student exists
+        student = User.query.filter_by(id=student_id, role='student').first()
+        if not student:
+            return jsonify({'error': 'Student not found'}), 404
+        
+        # Get or create access settings for the student
+        access_settings = StudentAccessSettings.query.filter_by(user_id=student_id).first()
+        
+        if not access_settings:
+            # Create default settings (all enabled)
+            access_settings = StudentAccessSettings(
+                user_id=student_id,
+                materials_access=True,
+                start_exam_access=True,
+                view_results_access=True,
+                browse_class_access=True
+            )
+            db.session.add(access_settings)
+            db.session.commit()
+        
+        return jsonify({
+            'materials_access': access_settings.materials_access,
+            'start_exam_access': access_settings.start_exam_access,
+            'view_results_access': access_settings.view_results_access,
+            'browse_class_access': access_settings.browse_class_access
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+@bp.route('/student/<int:student_id>/access-settings', methods=['PUT'])
+def update_student_access_settings(student_id):
+    """Update access settings for a specific student."""
+    from flask_login import current_user
+    from app.models import User, StudentAccessSettings
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Verify student exists
+        student = User.query.filter_by(id=student_id, role='student').first()
+        if not student:
+            return jsonify({'error': 'Student not found'}), 404
+        
+        # Get request data
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+        
+        # Get or create access settings
+        access_settings = StudentAccessSettings.query.filter_by(user_id=student_id).first()
+        
+        if not access_settings:
+            access_settings = StudentAccessSettings(user_id=student_id)
+            db.session.add(access_settings)
+        
+        # Update settings
+        access_settings.materials_access = data.get('materials_access', True)
+        access_settings.start_exam_access = data.get('start_exam_access', True)
+        access_settings.view_results_access = data.get('view_results_access', True)
+        access_settings.browse_class_access = data.get('browse_class_access', True)
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Access settings updated successfully'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+# Teacher Management API Endpoints
+@bp.route('/teachers', methods=['GET'])
+def get_teachers():
+    """Get all teachers with basic stats."""
+    from flask_login import current_user
+    from app.models import User, CustomTest
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Get all teachers
+        teachers = User.query.filter_by(role='teacher').all()
+        
+        teacher_data = []
+        for teacher in teachers:
+            # Count tests created by this teacher
+            tests_created = CustomTest.query.filter_by(created_by_user_id=teacher.id).count()
+            active_tests = CustomTest.query.filter_by(created_by_user_id=teacher.id, status='active').count()
+            
+            teacher_data.append({
+                'id': teacher.id,
+                'username': teacher.username,
+                'email': teacher.email,
+                'is_active': teacher.is_active,
+                'created_at': teacher.created_at.isoformat() if teacher.created_at else None,
+                'tests_created': tests_created,
+                'active_tests': active_tests
+            })
+        
+        return jsonify({'teachers': teacher_data})
+        
+    except Exception as e:
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+@bp.route('/teacher/<int:teacher_id>/access-settings', methods=['GET'])
+def get_teacher_access_settings(teacher_id):
+    """Get access settings for a specific teacher."""
+    from flask_login import current_user
+    from app.models import User, TeacherAccessSettings
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Verify teacher exists
+        teacher = User.query.filter_by(id=teacher_id, role='teacher').first()
+        if not teacher:
+            return jsonify({'error': 'Teacher not found'}), 404
+        
+        # Get or create access settings for the teacher
+        access_settings = TeacherAccessSettings.query.filter_by(user_id=teacher_id).first()
+        
+        if not access_settings:
+            # Create default settings (all enabled)
+            access_settings = TeacherAccessSettings(
+                user_id=teacher_id,
+                create_test_access=True,
+                manage_tests_access=True,
+                view_submissions_access=True,
+                analytics_access=True
+            )
+            db.session.add(access_settings)
+            db.session.commit()
+        
+        return jsonify({
+            'create_test_access': access_settings.create_test_access,
+            'manage_tests_access': access_settings.manage_tests_access,
+            'view_submissions_access': access_settings.view_submissions_access,
+            'analytics_access': access_settings.analytics_access
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+@bp.route('/teacher/<int:teacher_id>/access-settings', methods=['PUT'])
+def update_teacher_access_settings(teacher_id):
+    """Update access settings for a specific teacher."""
+    from flask_login import current_user
+    from app.models import User, TeacherAccessSettings
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        # Verify teacher exists
+        teacher = User.query.filter_by(id=teacher_id, role='teacher').first()
+        if not teacher:
+            return jsonify({'error': 'Teacher not found'}), 404
+        
+        # Get request data
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+        
+        # Get or create access settings
+        access_settings = TeacherAccessSettings.query.filter_by(user_id=teacher_id).first()
+        
+        if not access_settings:
+            access_settings = TeacherAccessSettings(user_id=teacher_id)
+            db.session.add(access_settings)
+        
+        # Update settings
+        access_settings.create_test_access = data.get('create_test_access', True)
+        access_settings.manage_tests_access = data.get('manage_tests_access', True)
+        access_settings.view_submissions_access = data.get('view_submissions_access', True)
+        access_settings.analytics_access = data.get('analytics_access', True)
+        
+        db.session.commit()
+        
+        return jsonify({
+            'success': True,
+            'message': 'Access settings updated successfully'
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500

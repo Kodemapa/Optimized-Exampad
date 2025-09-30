@@ -177,8 +177,9 @@ def theme_settings():
         flash('Superadmin access required to change theme', 'error')
         return redirect(url_for('admin.dashboard'))
 
-    current_theme = SiteSetting.get('ui_theme', default='default')
+    current_theme = SiteSetting.get('ui_theme', default='original')
     themes = [
+        {'id': 'original', 'name': 'Original (cyan)', 'primary': '#2596be'},
         {'id': 'default', 'name': 'Default (purple)', 'primary': '#667eea'},
         {'id': 'blue', 'name': 'Blue', 'primary': '#0d6efd'},
         {'id': 'green', 'name': 'Green', 'primary': '#198754'},
@@ -197,21 +198,54 @@ def theme_update():
         return jsonify({'success': False, 'message': 'Superadmin access required'}), 403
 
     selected = request.form.get('theme')
-    site_title = request.form.get('site_title')
-    # site_title can be updated even if theme is not changed
+    
+    if not selected:
+        flash('Please select a theme', 'error')
+        return redirect(url_for('admin.theme_settings'))
+    
     try:
-        if site_title is not None:
-            SiteSetting.set('site_title', site_title.strip())
-        if selected:
-            SiteSetting.set('ui_theme', selected)
-            flash('Theme and site title updated successfully', 'success')
-        else:
-            flash('Site title updated successfully', 'success')
+        SiteSetting.set('ui_theme', selected)
+        flash(f'Theme updated successfully! The new {selected} theme is now applied across the website.', 'success')
         return redirect(url_for('admin.theme_settings'))
     except Exception as e:
-        current_app.logger.error(f"Failed to update theme/site title: {e}")
-        flash('Failed to update theme or site title', 'error')
+        current_app.logger.error(f"Failed to update theme: {e}")
+        flash('Failed to update theme', 'error')
         return redirect(url_for('admin.theme_settings'))
+
+@bp.route('/site-settings', methods=['GET'])
+@login_required
+@admin_required
+def site_settings():
+    """Site settings page for superadmin"""
+    if getattr(current_user, 'role', None) != 'superadmin':
+        flash('Superadmin access required to change site settings', 'error')
+        return redirect(url_for('admin.dashboard'))
+
+    site_title = SiteSetting.get('site_title', default='AKSHARASHREE')
+    return render_template('admin/site_settings.html', site_title=site_title)
+
+@bp.route('/site-settings', methods=['POST'])
+@login_required
+@admin_required
+def site_settings_update():
+    """Update site settings"""
+    if getattr(current_user, 'role', None) != 'superadmin':
+        return jsonify({'success': False, 'message': 'Superadmin access required'}), 403
+
+    site_title = request.form.get('site_title', '').strip()
+    
+    if not site_title:
+        flash('Site title cannot be empty', 'error')
+        return redirect(url_for('admin.site_settings'))
+    
+    try:
+        SiteSetting.set('site_title', site_title)
+        flash('Site title updated successfully! Changes will appear across the website.', 'success')
+        return redirect(url_for('admin.site_settings'))
+    except Exception as e:
+        current_app.logger.error(f"Failed to update site title: {e}")
+        flash('Failed to update site title', 'error')
+        return redirect(url_for('admin.site_settings'))
 
 @bp.route('/students')
 @login_required
@@ -909,7 +943,13 @@ def edit_student(student_id):
             db.session.commit()
             
             flash(f'Student {username} updated successfully', 'success')
-            return redirect(url_for('admin.students'))
+            
+            # Check for redirect parameter (from both URL args and form data)
+            redirect_to = request.args.get('redirect_to') or request.form.get('redirect_to')
+            if redirect_to == 'student_access':
+                return redirect(url_for('main.student_access'))
+            else:
+                return redirect(url_for('admin.students'))
             
         except Exception as e:
             db.session.rollback()

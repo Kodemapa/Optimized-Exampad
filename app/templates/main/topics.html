@@ -55,23 +55,23 @@ body, html {
   transform: translateY(-7px) scale(1.018);
   box-shadow: 0 0 54px #2596be1f;
 }
-.topic-card .card-title { font-weight:700; color:#2596be; }
+.topic-card .card-title { font-weight:700; color:var(--site-primary); }
 .badge.bg-primary {
-  background: linear-gradient(120deg,#2596be 0%,#35cfc2 100%)!important;
+  background: linear-gradient(120deg,var(--site-primary) 0%,var(--site-secondary) 100%)!important;
   color: #fff !important;
 }
 .topic-card .progress { background: #e2e8f0; border-radius: 9px; }
-.topic-card .progress-bar { background: #2596be; border-radius: 9px; }
+.topic-card .progress-bar { background: var(--site-primary); border-radius: 9px; }
 .topic-card .btn {
   border-radius: 13px;
   font-weight: 600;
   box-shadow: 2px 2px 8px #d3f8f9;
   transition: background 0.18s, box-shadow 0.18s, transform 0.14s;
 }
-.topic-card .btn-primary { background: #2596be; color: white; }
-.topic-card .btn-primary:hover { background: #117597; color: #fff; }
-.topic-card .btn-outline-primary { color: #2596be; border: 2px solid #2596be;}
-.topic-card .btn-outline-primary:hover{ background: #e5fbff; color: #117597;}
+.topic-card .btn-primary { background: var(--site-primary); color: white; }
+.topic-card .btn-primary:hover { background: var(--site-primary-dark, #117597); color: #fff; }
+.topic-card .btn-outline-primary { color: var(--site-primary); border: 2px solid var(--site-primary);}
+.topic-card .btn-outline-primary:hover{ background: var(--site-primary-light, #e5fbff); color: var(--site-primary-dark, #117597);}
 .card-footer.bg-light {
   background: rgba(245,250,254,0.65)!important;
   border-top: none!important;
@@ -89,8 +89,8 @@ body, html {
 }
 
 .summary-glass .card { background:transparent; box-shadow:none;}
-.summary-glass .bg-primary { background: linear-gradient(120deg, #2596be 0%, #35cfc2 100%)!important; color:white!important;}
-.summary-glass .bg-success { background: linear-gradient(120deg, #35cfc2 0%, #06d6a0 100%)!important; color:white!important;}
+.summary-glass .bg-primary { background: linear-gradient(120deg, var(--site-primary) 0%, var(--site-secondary) 100%)!important; color:white!important;}
+.summary-glass .bg-success { background: linear-gradient(120deg, var(--site-secondary) 0%, #06d6a0 100%)!important; color:white!important;}
 .summary-glass .bg-warning { background: linear-gradient(120deg, #ffe066 0%, #fed800 100%)!important; color:#fff7a3!important;}
 .summary-glass .bg-info { background: linear-gradient(120deg, #219ebc 0%, #8ecae6 100%)!important; color:white!important;}
 /* Empty topics */

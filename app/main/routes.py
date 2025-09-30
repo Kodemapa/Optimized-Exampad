@@ -5,7 +5,7 @@ Main Blueprint Routes - Dashboard and home pages
 from flask import render_template, request, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from app.main import bp
-from app.models import Subject, Topic, Question
+from app.models import Subject, Topic, Question, require_student_access
 from app.main.student_class_utils import get_student_class
 
 @bp.route('/')
@@ -71,6 +71,7 @@ def dashboard():
 
 
 @bp.route('/subjects/<class_level>')
+@require_student_access('browse_class')
 def subjects(class_level):
     """Show subjects for a specific class"""
     if class_level not in ['XI', 'XII']:
@@ -82,6 +83,7 @@ def subjects(class_level):
                          class_level=class_level)
 
 @bp.route('/topics/<int:subject_id>')
+@require_student_access('browse_class')
 def topics(subject_id):
     """Show topics for a specific subject"""
     subject = Subject.query.get_or_404(subject_id)
@@ -132,6 +134,34 @@ def update_class():
         db.session.add(new_sc)
     db.session.commit()
     return jsonify({'success': True}), 200
+@bp.route('/student-access')
+@login_required
+def student_access():
+    """Student Access page for superadmin"""
+    from app.models import User
+    from flask import flash
+    
+    # Check if current user is superadmin
+    if current_user.role != 'superadmin':
+        flash('Access denied. Superadmin role required.', 'error')
+        return redirect(url_for('main.dashboard'))
+    
+    return render_template('main/student_access.html')
+
+@bp.route('/teacher_access')
+@login_required
+def teacher_access():
+    """Teacher Access page for superadmin"""
+    from app.models import User
+    from flask import flash
+    
+    # Check if current user is superadmin
+    if current_user.role != 'superadmin':
+        flash('Access denied. Superadmin role required.', 'error')
+        return redirect(url_for('main.dashboard'))
+    
+    return render_template('main/teacher_access.html')
+
 @bp.app_context_processor
 def inject_student_class():
     student_class = None

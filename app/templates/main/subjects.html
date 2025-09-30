@@ -14,7 +14,7 @@ body, html {
 .glass-section {
   background: rgba(255,255,255,0.63);
   border-radius: 34px;
-  box-shadow: 0 12px 45px #2596be15,
+  box-shadow: 0 12px 45px rgba(37, 150, 190, 0.08),
               -8px -8px 30px 0px #fff8 inset,
               0 2px 22px #cdfbfa14 inset;
   backdrop-filter: blur(16px);
@@ -30,7 +30,7 @@ body, html {
   background: rgba(255,255,255,0.75);
   border-radius: 28px;
   border: none;
-  box-shadow: 7px 7px 28px #2596be0f, -7px -7px 19px #e9fffd7d;
+  box-shadow: 7px 7px 28px rgba(37, 150, 190, 0.06), -7px -7px 19px #e9fffd7d;
   backdrop-filter: blur(13px);
   transition: box-shadow 0.32s, transform 0.23s;
   overflow: hidden;
@@ -38,11 +38,11 @@ body, html {
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  color: #117597;
+  color: var(--site-primary);
 }
 .subject-card:hover {
   transform: translateY(-7px) scale(1.018);
-  box-shadow: 0 0 54px #2596be1f;
+  box-shadow: 0 0 54px rgba(37, 150, 190, 0.12);
 }
 .subject-card .card-body {
   padding: 2.3rem 1.2rem 2rem 1.2rem;
@@ -54,7 +54,7 @@ body, html {
 .subject-icon {
   font-size: 3rem;
   margin-bottom: 0.8rem;
-  color: #2596be;
+  color: var(--site-primary);
 }
 .card-title {
   font-weight: 700;
@@ -68,7 +68,7 @@ body, html {
   padding: 0.6rem;
 }
 .text-primary {
-  color: #2596be !important;
+  color: var(--site-primary) !important;
 }
 .text-success {
   color: #06d6a0 !important;
@@ -84,18 +84,18 @@ body, html {
   transition: all 0.25s ease;
 }
 .btn-primary {
-  background: linear-gradient(120deg, #35cfc2 0%, #06d6a0 100%);
+  background: linear-gradient(120deg, var(--site-secondary) 0%, #06d6a0 100%);
   color: white;
   border: none;
 }
 .btn-primary:hover {
-  background: linear-gradient(120deg, #06d6a0 0%, #35cfc2 100%);
-  box-shadow: 0 0 22px #1f9a89aa;
+  background: linear-gradient(120deg, #06d6a0 0%, var(--site-secondary) 100%);
+  box-shadow: 0 0 22px rgba(31, 154, 137, 0.67);
 }
 .btn-outline-primary {
   background: #e5fbff;
-  border: 2px solid #2596be;
-  color: #117597;
+  border: 2px solid var(--site-primary);
+  color: var(--site-primary);
 }
 .btn-outline-primary:hover {
   background: #cff9ff;
@@ -104,15 +104,15 @@ body, html {
 }
 
 .bg-primary {
-  background: linear-gradient(120deg, #2596be 0%, #35cfc2 100%) !important;
+  background: linear-gradient(120deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important;
   color: white !important;
   border-radius: 28px;
-  box-shadow: 0 6px 24px #2596be22;
+  box-shadow: 0 6px 24px rgba(37, 150, 190, 0.13);
   padding: 2rem 1rem;
   text-align: center;
 }
 .bg-success {
-  background: linear-gradient(120deg, #35cfc2 0%, #06d6a0 100%) !important;
+  background: linear-gradient(120deg, var(--site-secondary) 0%, #06d6a0 100%) !important;
   color: white !important;
   border-radius: 28px;
   padding: 2rem 1rem;

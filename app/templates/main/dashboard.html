@@ -35,6 +35,7 @@
     <!-- Right main content panel -->
     <main class="dashboard-main">
 
+        {% if current_user.role != 'superadmin' %}
         <!-- Statistics Section -->
         <section class="stats-section">
             <div class="stats-card cosmic">
@@ -74,17 +75,29 @@
           <i class="bi bi-clipboard-plus text-warning"></i>
           <h5>Create Test</h5>
           <p>Create a test for your students</p>
+          {% if current_user.teacher_access_settings and current_user.teacher_access_settings.create_test_access != False %}
           <a href="{{ url_for('exam.create_test') }}" class="btn btn-warning">
             <i class="bi bi-plus-circle"></i> Create Test
           </a>
+          {% else %}
+          <button class="btn btn-warning" onclick="showAccessDenied('Create Test')">
+            <i class="bi bi-plus-circle"></i> Create Test
+          </button>
+          {% endif %}
         </div>
         <div class="quick-actions-card">
           <i class="bi bi-card-list text-primary"></i>
           <h5>My Tests</h5>
           <p>Manage your custom tests</p>
+          {% if current_user.teacher_access_settings and current_user.teacher_access_settings.manage_tests_access != False %}
           <a href="{{ url_for('exam.my_tests') }}" class="btn btn-primary">
             <i class="bi bi-folder2-open"></i> View All
           </a>
+          {% else %}
+          <button class="btn btn-primary" onclick="showAccessDenied('My Tests')">
+            <i class="bi bi-folder2-open"></i> View All
+          </button>
+          {% endif %}
         </div>
         <!--
         {% if teacher_custom_tests %}
@@ -109,9 +122,15 @@
           <i class="bi bi-clipboard-data text-success"></i>
           <h5>Take Exam</h5>
           <p>Take a full-length practice exam</p>
+          {% if current_user.role != 'student' or (current_user.access_settings and current_user.access_settings.start_exam_access != False) %}
           <a href="{{ url_for('exam.active_tests') }}" class="btn btn-success">
             <i class="bi bi-clock"></i> Start Exam
           </a>
+          {% else %}
+          <button class="btn btn-success" onclick="showAccessDenied('Start Exam')">
+            <i class="bi bi-clock"></i> Start Exam
+          </button>
+          {% endif %}
         </div>
         {% endif %}
         {% if current_user.role != 'teacher' %}
@@ -119,13 +138,20 @@
           <i class="bi bi-graph-up text-info"></i>
           <h5>View Results</h5>
           <p>Check your performance and progress</p>
+          {% if current_user.role != 'student' or (current_user.access_settings and current_user.access_settings.view_results_access != False) %}
           <a href="{{ url_for('exam.results') }}" class="btn btn-info">
             <i class="bi bi-bar-chart"></i> View Results
           </a>
+          {% else %}
+          <button class="btn btn-info" onclick="showAccessDenied('View Results')">
+            <i class="bi bi-bar-chart"></i> View Results
+          </button>
+          {% endif %}
         </div>
         {% endif %}
       </div>
     </section>
+        {% endif %}
 <!-- Create Test Modal for Teachers -->
 {% if current_user.role == 'teacher' %}
 <div class="modal fade" id="createTestModal" tabindex="-1" aria-labelledby="createTestModalLabel" aria-hidden="true">
@@ -176,11 +202,69 @@
 </div>
 {% endif %}
 
+        {% if current_user.role == 'superadmin' %}
+        <!-- Access Management Section for SuperAdmin -->
+        <section class="access-management-section mb-4">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="access-card border rounded p-4 text-center h-100">
+                        <i class="bi bi-people text-primary" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3 mb-2">Student Management</h4>
+                        <p class="text-muted mb-3">Access and manage all student accounts and permissions</p>
+                        <a href="{{ url_for('main.student_access') }}" class="btn btn-primary">
+                            <i class="bi bi-person-lines-fill me-2"></i>Student Access
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="access-card border rounded p-4 text-center h-100">
+                        <i class="bi bi-person-workspace text-warning" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3 mb-2">Teacher Management</h4>
+                        <p class="text-muted mb-3">Access and manage all teacher accounts and permissions</p>
+                        <a href="{{ url_for('main.teacher_access') }}" class="btn btn-warning">
+                            <i class="bi bi-person-workspace me-2"></i>Teacher Access
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Theme and Site Management Section -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="access-card border rounded p-4 text-center h-100">
+                        <i class="bi bi-palette text-success" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3 mb-2">Theme Management</h4>
+                        <p class="text-muted mb-3">Customize website colors and appearance for all users</p>
+                        <a href="{{ url_for('admin.theme_settings') }}" class="btn btn-success">
+                            <i class="bi bi-brush me-2"></i>Change Theme
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="access-card border rounded p-4 text-center h-100">
+                        <i class="bi bi-gear text-info" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3 mb-2">Site Settings</h4>
+                        <p class="text-muted mb-3">Change website name and branding displayed in header and footer</p>
+                        <a href="{{ url_for('admin.site_settings') }}" class="btn btn-info">
+                            <i class="bi bi-pencil-square me-2"></i>Edit Name
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+
         <!-- Class Selection Section -->
         <section class="class-section">
             <div>
                 <h2> Browse by Class</h2>
                 <p class="lead">Select your class to explore subjects and topics</p>
+                {% if current_user.role == 'student' and current_user.access_settings and current_user.access_settings.browse_class_access == False %}
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <strong>Access Restricted:</strong> Browse by Class feature is currently disabled for your account.
+                </div>
+                {% endif %}
             </div>
             <div class="class-cards">
                 <!-- Class XI -->
@@ -193,6 +277,7 @@
                         {% for subject in class_xi_subjects %}
                           {% if subject.name|lower != 'english' %}
                             <div class="col-md-6 mb-3">
+                              {% if current_user.role != 'student' or (current_user.access_settings and current_user.access_settings.browse_class_access != False) %}
                               <a href="{{ url_for('main.topics', subject_id=subject.id) }}" class="subject-link">
                                 <i class="bi bi-journal-text"></i>
                                 <div>
@@ -200,15 +285,30 @@
                                   <small>{{ subject.topics.count() }} topics</small>
                                 </div>
                               </a>
+                              {% else %}
+                              <div class="subject-link" onclick="showAccessDenied('Browse by Class')" style="cursor: pointer;">
+                                <i class="bi bi-journal-text"></i>
+                                <div>
+                                  <h6 class="mb-1">{{ subject.name }}</h6>
+                                  <small>{{ subject.topics.count() }} topics</small>
+                                </div>
+                              </div>
+                              {% endif %}
                             </div>
                           {% endif %}
                           {% endfor %}
 
                         </div>
                         <div class="text-center mt-3">
+                            {% if current_user.role != 'student' or (current_user.access_settings and current_user.access_settings.browse_class_access != False) %}
                             <a href="{{ url_for('main.subjects', class_level='XI') }}" class="view-all-btn">
                                 <i class="bi bi-arrow-right me-2"></i>View All Subjects
                             </a>
+                            {% else %}
+                            <button class="view-all-btn" onclick="showAccessDenied('Browse by Class')" style="background: none; border: none; color: inherit; cursor: pointer;">
+                                <i class="bi bi-arrow-right me-2"></i>View All Subjects
+                            </button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -222,6 +322,7 @@
                         <div class="row">
                             {% for subject in class_xii_subjects %}
                             <div class="col-md-6 mb-3">
+                                {% if current_user.role != 'student' or (current_user.access_settings and current_user.access_settings.browse_class_access != False) %}
                                 <a href="{{ url_for('main.topics', subject_id=subject.id) }}" class="subject-link">
                                     <i class="bi bi-journal-text"></i>
                                     <div>
@@ -229,13 +330,28 @@
                                         <small>{{ subject.topics.count() }} topics</small>
                                     </div>
                                 </a>
+                                {% else %}
+                                <div class="subject-link" onclick="showAccessDenied('Browse by Class')" style="cursor: pointer;">
+                                    <i class="bi bi-journal-text"></i>
+                                    <div>
+                                        <h6 class="mb-1">{{ subject.name }}</h6>
+                                        <small>{{ subject.topics.count() }} topics</small>
+                                    </div>
+                                </div>
+                                {% endif %}
                             </div>
                             {% endfor %}
                         </div>
                         <div class="text-center mt-3">
+                            {% if current_user.role != 'student' or (current_user.access_settings and current_user.access_settings.browse_class_access != False) %}
                             <a href="{{ url_for('main.subjects', class_level='XII') }}" class="view-all-btn">
                                 <i class="bi bi-arrow-right me-2"></i>View All Subjects
                             </a>
+                            {% else %}
+                            <button class="view-all-btn" onclick="showAccessDenied('Browse by Class')" style="background: none; border: none; color: inherit; cursor: pointer;">
+                                <i class="bi bi-arrow-right me-2"></i>View All Subjects
+                            </button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -303,6 +419,13 @@
       };
     }
   });
+
+  // Function to show access denied alerts
+  function showAccessDenied(featureName) {
+    alert('Access Denied: ' + featureName + ' feature is currently disabled for your account. Please contact your administrator for assistance.');
+  }
+
+
 </script>
 
 

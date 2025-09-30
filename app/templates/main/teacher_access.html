@@ -1,0 +1,656 @@
+{% extends "base.html" %}
+
+{% block title %}Teacher Access - {{ site_title }}{% endblock %}
+
+{% block styles %}
+<style>
+/* Teacher Access Page Styles */
+.teacher-access-header {
+    background: linear-gradient(135deg, var(--site-primary) 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.filter-card {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.teacher-table {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.table th {
+    background-color: var(--site-primary);
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 1rem 0.75rem;
+}
+
+.teacher-actions .btn {
+    margin: 0 2px;
+}
+
+.loading-container {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-box {
+    max-width: 300px;
+}
+
+.filter-select {
+    max-width: 200px;
+}
+
+.stats-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.stats-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--site-primary);
+}
+
+.btn-back {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #545b62;
+    border-color: #4e555b;
+    color: white;
+}
+
+/* Access Control Modal Styles */
+.modal-content {
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.form-check-input {
+    transform: scale(1.2);
+}
+
+.form-check-input:checked {
+    background-color: var(--site-primary);
+    border-color: var(--site-primary);
+}
+
+.access-feature-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.access-feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="teacher-access-header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h1><i class="bi bi-person-workspace me-3"></i>Teacher Access Management</h1>
+                <p class="lead mb-0">Comprehensive teacher account management and permissions</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a href="{{ url_for('main.dashboard') }}" class="btn btn-back btn-lg">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Statistics Row -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="totalTeachers">-</div>
+                <h5><i class="bi bi-person-workspace me-2"></i>Total Teachers</h5>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="activeTeachers">-</div>
+                <h5><i class="bi bi-person-check me-2"></i>Active Teachers</h5>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="testsCreated">-</div>
+                <h5><i class="bi bi-clipboard-check me-2"></i>Tests Created</h5>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div class="stats-number" id="activeTests">-</div>
+                <h5><i class="bi bi-calendar-check me-2"></i>Active Tests</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters and Search -->
+    <div class="filter-card">
+        <div class="row align-items-center">
+            <div class="col-md-4">
+                <label class="form-label fw-bold">Search Teachers</label>
+                <input type="text" class="form-control search-box" id="teacherFilter" 
+                       placeholder="Search by username or email..." onkeyup="filterTeachers()">
+            </div>
+            <div class="col-md-2">
+                <label class="form-label fw-bold">Status Filter</label>
+                <select class="form-select filter-select" id="statusFilter" onchange="filterTeachers()">
+                    <option value="">All Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="col-md-6 text-end">
+                <label class="form-label fw-bold d-block">&nbsp;</label>
+                <button class="btn btn-primary me-2" onclick="loadTeacherData()">
+                    <i class="bi bi-arrow-clockwise me-1"></i>Refresh Data
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teacher Data Table -->
+    <div class="teacher-table">
+        <!-- Loading Indicator -->
+        <div id="teacherLoadingIndicator" class="loading-container">
+            <div class="text-center">
+                <div class="spinner-border text-primary mb-3" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <h5>Loading teacher data...</h5>
+                <p class="text-muted">Please wait while we fetch the latest information</p>
+            </div>
+        </div>
+
+        <!-- Teacher Table -->
+        <div id="teacherTableContainer" style="display: none;">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="teacherTable">
+                    <thead>
+                        <tr>
+                            <th><i class="bi bi-person me-1"></i>Username</th>
+                            <th><i class="bi bi-envelope me-1"></i>Email</th>
+                            <th><i class="bi bi-clipboard-check me-1"></i>Tests Created</th>
+                            <th><i class="bi bi-shield-check me-1"></i>Status</th>
+                            <th><i class="bi bi-calendar-plus me-1"></i>Joined</th>
+                            <th><i class="bi bi-clock me-1"></i>Last Active</th>
+                            <th><i class="bi bi-key me-1"></i>Access</th>
+                            <th><i class="bi bi-gear me-1"></i>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="teacherTableBody">
+                        <!-- Teacher data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Table Footer with Pagination Info -->
+            <div class="p-3 border-top bg-light">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <small class="text-muted">
+                            Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> teachers
+                        </small>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <small class="text-muted">
+                            Last updated: <span id="lastUpdated">-</span>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorContainer" class="text-center py-5" style="display: none;">
+            <i class="bi bi-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
+            <h5 class="mt-3">Error Loading Teachers</h5>
+            <p class="text-muted">There was an error loading the teacher data. Please try again.</p>
+            <button class="btn btn-primary" onclick="loadTeacherData()">
+                <i class="bi bi-arrow-clockwise me-1"></i>Try Again
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Teacher Access Control Modal -->
+<div class="modal fade" id="teacherAccessModal" tabindex="-1" aria-labelledby="accessModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" style="background: var(--site-primary); color: white;">
+                <h5 class="modal-title" id="accessModalLabel">
+                    <i class="bi bi-key me-2"></i>
+                    <span id="accessModalTitle">Teacher Access Control</span>
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="accessModalTeacherId" value="">
+                
+                <!-- Loading State -->
+                <div id="accessSettingsLoading" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <p class="mt-2 text-muted">Loading current access settings...</p>
+                </div>
+                
+                <!-- Access Settings Form -->
+                <div id="accessSettingsForm" style="display: none;">
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <strong>Access Control:</strong> Enable or disable specific features for this teacher. 
+                        Disabled features will not be accessible to the teacher when they log in.
+                    </div>
+                    
+                    <div class="row g-4">
+                        <!-- Create Test -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-plus-circle text-success" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">Create Test</h6>
+                                    <p class="text-muted small">Create new custom tests and exams</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleCreateTest" checked>
+                                        <label class="form-check-label ms-2" for="toggleCreateTest">
+                                            <span class="badge bg-success" id="statusCreateTest">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Manage Tests -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-clipboard-data text-primary" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">Manage Tests</h6>
+                                    <p class="text-muted small">Edit, delete and manage existing tests</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleManageTests" checked>
+                                        <label class="form-check-label ms-2" for="toggleManageTests">
+                                            <span class="badge bg-success" id="statusManageTests">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- View Submissions -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-graph-up-arrow text-info" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">View Submissions</h6>
+                                    <p class="text-muted small">View and review student test submissions</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleViewSubmissions" checked>
+                                        <label class="form-check-label ms-2" for="toggleViewSubmissions">
+                                            <span class="badge bg-success" id="statusViewSubmissions">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Analytics -->
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <i class="bi bi-bar-chart-line text-warning" style="font-size: 2.5rem;"></i>
+                                    <h6 class="mt-2 mb-3">Analytics</h6>
+                                    <p class="text-muted small">View test analytics and performance reports</p>
+                                    <div class="form-check form-switch d-flex justify-content-center">
+                                        <input class="form-check-input" type="checkbox" id="toggleAnalytics" checked>
+                                        <label class="form-check-label ms-2" for="toggleAnalytics">
+                                            <span class="badge bg-success" id="statusAnalytics">Enabled</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="bi bi-x-lg me-1"></i>Cancel
+                </button>
+                <button type="button" class="btn btn-primary" id="saveAccessBtn" onclick="saveTeacherAccessSettings()">
+                    <i class="bi bi-check-lg me-1"></i>Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load teacher data when page loads
+    loadTeacherData();
+});
+
+function loadTeacherData() {
+    const loadingIndicator = document.getElementById('teacherLoadingIndicator');
+    const tableContainer = document.getElementById('teacherTableContainer');
+    const errorContainer = document.getElementById('errorContainer');
+    const tableBody = document.getElementById('teacherTableBody');
+    
+    // Show loading, hide others
+    loadingIndicator.style.display = 'flex';
+    tableContainer.style.display = 'none';
+    errorContainer.style.display = 'none';
+
+    // Fetch teacher data from backend
+    fetch('/api/teachers', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        loadingIndicator.style.display = 'none';
+        
+        if (data.teachers && data.teachers.length > 0) {
+            displayTeachers(data.teachers);
+            updateStatistics(data.teachers);
+            tableContainer.style.display = 'block';
+        } else {
+            tableBody.innerHTML = '<tr><td colspan="8" class="text-center py-5 text-muted"><i class="bi bi-inbox me-2"></i>No teachers found</td></tr>';
+            tableContainer.style.display = 'block';
+        }
+        
+        // Update last updated time
+        document.getElementById('lastUpdated').textContent = new Date().toLocaleString();
+    })
+    .catch(error => {
+        console.error('Error loading teachers:', error);
+        loadingIndicator.style.display = 'none';
+        errorContainer.style.display = 'block';
+    });
+}
+
+function displayTeachers(teachers) {
+    const tableBody = document.getElementById('teacherTableBody');
+    let html = '';
+
+    teachers.forEach(teacher => {
+        const joinedDate = teacher.created_at ? new Date(teacher.created_at).toLocaleDateString() : 'Unknown';
+        const statusBadge = teacher.is_active ? 
+            '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Active</span>' : 
+            '<span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Inactive</span>';
+        
+        const testsCount = teacher.tests_created || 0;
+        
+        html += `
+            <tr>
+                <td><strong><i class="bi bi-person-circle me-2"></i>${teacher.username}</strong></td>
+                <td><i class="bi bi-envelope me-2"></i>${teacher.email}</td>
+                <td><span class="badge bg-info">${testsCount} tests</span></td>
+                <td>${statusBadge}</td>
+                <td><i class="bi bi-calendar me-2"></i>${joinedDate}</td>
+                <td><i class="bi bi-clock me-2"></i>-</td>
+                <td>
+                    <button class="btn btn-outline-success btn-sm" onclick="viewTeacherAccess(${teacher.id})" title="View Access Details">
+                        <i class="bi bi-key me-1"></i>View Access
+                    </button>
+                </td>
+                <td>
+                    <div class="teacher-actions">
+                        <a href="/admin/teacher/${teacher.id}" class="btn btn-outline-primary btn-sm" title="View Details">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <button class="btn btn-outline-info btn-sm" onclick="viewTeacherTests(${teacher.id})" title="View Tests">
+                            <i class="bi bi-clipboard-data"></i>
+                        </button>
+                    </div>
+                </td>
+            </tr>`;
+    });
+
+    tableBody.innerHTML = html;
+    
+    // Update showing count
+    document.getElementById('showingCount').textContent = teachers.length;
+    document.getElementById('totalCount').textContent = teachers.length;
+}
+
+function updateStatistics(teachers) {
+    const totalTeachers = teachers.length;
+    const activeTeachers = teachers.filter(t => t.is_active).length;
+    const testsCreated = teachers.reduce((sum, t) => sum + (t.tests_created || 0), 0);
+    const activeTests = teachers.reduce((sum, t) => sum + (t.active_tests || 0), 0);
+    
+    document.getElementById('totalTeachers').textContent = totalTeachers;
+    document.getElementById('activeTeachers').textContent = activeTeachers;
+    document.getElementById('testsCreated').textContent = testsCreated;
+    document.getElementById('activeTests').textContent = activeTests;
+}
+
+function filterTeachers() {
+    const searchFilter = document.getElementById('teacherFilter').value.toLowerCase();
+    const statusFilter = document.getElementById('statusFilter').value;
+    
+    const rows = document.querySelectorAll('#teacherTable tbody tr');
+    let visibleCount = 0;
+    
+    rows.forEach(row => {
+        const username = row.cells[0]?.textContent.toLowerCase() || '';
+        const email = row.cells[1]?.textContent.toLowerCase() || '';
+        const status = row.cells[3]?.textContent.toLowerCase() || '';
+        
+        const matchesSearch = username.includes(searchFilter) || email.includes(searchFilter);
+        const matchesStatus = !statusFilter || status.includes(statusFilter);
+        
+        if (matchesSearch && matchesStatus) {
+            row.style.display = '';
+            visibleCount++;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    // Update showing count
+    document.getElementById('showingCount').textContent = visibleCount;
+}
+
+function viewTeacherTests(teacherId) {
+    // Redirect to admin teacher tests page
+    window.location.href = `/admin/custom-tests/${teacherId}`;
+}
+
+function viewTeacherAccess(teacherId) {
+    // Open teacher access control modal
+    showTeacherAccessModal(teacherId);
+}
+
+function showTeacherAccessModal(teacherId) {
+    // Set the teacher ID in the modal
+    document.getElementById('accessModalTeacherId').value = teacherId;
+    
+    // Find teacher info for modal title
+    const teacherRow = document.querySelector(`button[onclick="viewTeacherAccess(${teacherId})"]`).closest('tr');
+    const teacherUsername = teacherRow.cells[0].textContent.trim().replace('👤', '').trim();
+    document.getElementById('accessModalTitle').textContent = `Access Control - ${teacherUsername}`;
+    
+    // Load current access settings
+    loadTeacherAccessSettings(teacherId);
+    
+    // Show the modal
+    const modal = new bootstrap.Modal(document.getElementById('teacherAccessModal'));
+    modal.show();
+}
+
+function loadTeacherAccessSettings(teacherId) {
+    // Show loading in modal
+    const loadingDiv = document.getElementById('accessSettingsLoading');
+    const settingsDiv = document.getElementById('accessSettingsForm');
+    
+    loadingDiv.style.display = 'block';
+    settingsDiv.style.display = 'none';
+    
+    // Fetch current access settings for the teacher
+    fetch(`/api/teacher/${teacherId}/access-settings`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        loadingDiv.style.display = 'none';
+        settingsDiv.style.display = 'block';
+        
+        // Update toggle switches and badges based on current settings
+        updateToggleAndBadge('toggleCreateTest', 'statusCreateTest', data.create_test_access !== false);
+        updateToggleAndBadge('toggleManageTests', 'statusManageTests', data.manage_tests_access !== false);
+        updateToggleAndBadge('toggleViewSubmissions', 'statusViewSubmissions', data.view_submissions_access !== false);
+        updateToggleAndBadge('toggleAnalytics', 'statusAnalytics', data.analytics_access !== false);
+    })
+    .catch(error => {
+        console.error('Error loading access settings:', error);
+        loadingDiv.style.display = 'none';
+        settingsDiv.style.display = 'block';
+        
+        // Default to all enabled if error
+        updateToggleAndBadge('toggleCreateTest', 'statusCreateTest', true);
+        updateToggleAndBadge('toggleManageTests', 'statusManageTests', true);
+        updateToggleAndBadge('toggleViewSubmissions', 'statusViewSubmissions', true);
+        updateToggleAndBadge('toggleAnalytics', 'statusAnalytics', true);
+    });
+}
+
+function saveTeacherAccessSettings() {
+    const teacherId = document.getElementById('accessModalTeacherId').value;
+    const saveBtn = document.getElementById('saveAccessBtn');
+    
+    // Show saving state
+    saveBtn.innerHTML = '<i class="bi bi-hourglass-split me-1"></i>Saving...';
+    saveBtn.disabled = true;
+    
+    // Collect form data
+    const accessSettings = {
+        create_test_access: document.getElementById('toggleCreateTest').checked,
+        manage_tests_access: document.getElementById('toggleManageTests').checked,
+        view_submissions_access: document.getElementById('toggleViewSubmissions').checked,
+        analytics_access: document.getElementById('toggleAnalytics').checked
+    };
+    
+    // Send update request
+    fetch(`/api/teacher/${teacherId}/access-settings`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': "{{ csrf_token() }}"
+        },
+        body: JSON.stringify(accessSettings)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Show success message
+            alert('Access settings updated successfully!');
+            
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('teacherAccessModal'));
+            modal.hide();
+        } else {
+            alert('Error updating access settings: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error saving access settings:', error);
+        alert('Error saving access settings. Please try again.');
+    })
+    .finally(() => {
+        // Reset button
+        saveBtn.innerHTML = '<i class="bi bi-check-lg me-1"></i>Save Changes';
+        saveBtn.disabled = false;
+    });
+}
+
+// Helper function to update toggle and badge
+function updateToggleAndBadge(toggleId, statusId, isEnabled) {
+    const toggle = document.getElementById(toggleId);
+    const statusBadge = document.getElementById(statusId);
+    
+    toggle.checked = isEnabled;
+    
+    if (isEnabled) {
+        statusBadge.textContent = 'Enabled';
+        statusBadge.className = 'badge bg-success';
+    } else {
+        statusBadge.textContent = 'Disabled';
+        statusBadge.className = 'badge bg-danger';
+    }
+}
+
+// Add event listeners for toggle switches to update status badges
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('change', function(e) {
+        const toggleMappings = {
+            'toggleCreateTest': 'statusCreateTest',
+            'toggleManageTests': 'statusManageTests', 
+            'toggleViewSubmissions': 'statusViewSubmissions',
+            'toggleAnalytics': 'statusAnalytics'
+        };
+        
+        if (toggleMappings[e.target.id]) {
+            updateToggleAndBadge(e.target.id, toggleMappings[e.target.id], e.target.checked);
+        }
+    });
+});
+</script>
+{% endblock %}

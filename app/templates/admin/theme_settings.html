@@ -6,40 +6,226 @@
 <div class="container mt-4">
   <div class="row">
     <div class="col-md-8">
-      <h3>Theme Settings</h3>
-      <p>Choose a site-wide theme. Only superadmin may update the theme.</p>
+      <div class="d-flex align-items-center mb-4">
+        <i class="bi bi-palette text-success me-3" style="font-size: 2rem;"></i>
+        <div>
+          <h3 class="mb-1">Theme Settings</h3>
+          <p class="text-muted mb-0">Choose colors and appearance for the entire website</p>
+        </div>
+      </div>
 
       <form method="POST" action="{{ url_for('admin.theme_update') }}">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <div class="mb-3">
-          <label for="site_title" class="form-label">Platform Name</label>
-          <input type="text" id="site_title" name="site_title" class="form-control" value="{{ site_title or 'AKSHARASHREE' }}">
-          <div class="form-text">This name will appear in the header and footer for all users.</div>
-        </div>
-        <div class="list-group mb-3">
-          {% for theme in themes %}
-          <label class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <input type="radio" name="theme" value="{{ theme.id }}" {% if theme.id == current_theme %}checked{% endif %}>
-              <strong class="ms-2">{{ theme.name }}</strong>
+        
+        <div class="card">
+          <div class="card-header bg-light">
+            <h5 class="card-title mb-0">
+              <i class="bi bi-palette me-2"></i>Theme Colors
+            </h5>
+          </div>
+          <div class="card-body">
+            <!-- Hidden radio inputs for form submission -->
+            <div style="display: none;">
+              {% for theme in themes %}
+              <input type="radio" 
+                     name="theme" 
+                     value="{{ theme.id }}" 
+                     id="theme_{{ theme.id }}"
+                     {% if theme.id == current_theme %}checked{% endif %}>
+              {% endfor %}
             </div>
-            <div class="theme-swatch" data-color="{{ theme.primary }}"></div>
-          </label>
-          {% endfor %}
+
+            <!-- Reset to Original Section -->
+            <div class="reset-section mb-4">
+              <div class="d-flex align-items-center justify-content-between p-3 border rounded bg-light">
+                <div class="d-flex align-items-center">
+                  <div class="original-color-preview me-3"></div>
+                  <div>
+                    <h6 class="mb-1">Original Theme</h6>
+                    <small class="text-muted">Reset to the default cyan theme</small>
+                  </div>
+                </div>
+                <button type="button" class="btn btn-outline-info btn-sm reset-original-btn" data-theme="original">
+                  <i class="bi bi-arrow-clockwise me-1"></i>Reset to Original
+                </button>
+              </div>
+            </div>
+
+            <!-- Color Picker Grid -->
+            <div class="color-picker-container">
+              <div class="color-section">
+                <h6 class="color-section-title">Primary Themes</h6>
+                <div class="color-grid">
+                  <div class="color-swatch {% if current_theme == 'original' %}selected{% endif %}" 
+                       data-theme="original" 
+                       data-color="#2596be" 
+                       data-name="Original Cyan"
+                       style="background: linear-gradient(135deg, #2596be 0%, #35cfc2 100%);"
+                       title="Original Cyan Theme">
+                  </div>
+                  <div class="color-swatch {% if current_theme == 'default' %}selected{% endif %}" 
+                       data-theme="default" 
+                       data-color="#667eea" 
+                       data-name="Default Purple"
+                       style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"
+                       title="Default Purple Theme">
+                  </div>
+                  <div class="color-swatch {% if current_theme == 'blue' %}selected{% endif %}" 
+                       data-theme="blue" 
+                       data-color="#0d6efd" 
+                       data-name="Corporate Blue"
+                       style="background: linear-gradient(135deg, #0d6efd 0%, #0056b3 100%);"
+                       title="Corporate Blue Theme">
+                  </div>
+                  <div class="color-swatch {% if current_theme == 'green' %}selected{% endif %}" 
+                       data-theme="green" 
+                       data-color="#198754" 
+                       data-name="Nature Green"
+                       style="background: linear-gradient(135deg, #198754 0%, #146c43 100%);"
+                       title="Nature Green Theme">
+                  </div>
+                  <div class="color-swatch {% if current_theme == 'sunset' %}selected{% endif %}" 
+                       data-theme="sunset" 
+                       data-color="#ff7e5f" 
+                       data-name="Sunset Orange"
+                       style="background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);"
+                       title="Sunset Orange Theme">
+                  </div>
+                  <div class="color-swatch {% if current_theme == 'dark' %}selected{% endif %}" 
+                       data-theme="dark" 
+                       data-color="#343a40" 
+                       data-name="Professional Dark"
+                       style="background: linear-gradient(135deg, #343a40 0%, #212529 100%);"
+                       title="Professional Dark Theme">
+                  </div>
+                </div>
+              </div>
+
+              <div class="color-section mt-4">
+                <h6 class="color-section-title">Color Variations</h6>
+                <div class="color-variations">
+                  <!-- Cyan variations (Original) -->
+                  <div class="variation-row">
+                    <div class="color-swatch-small" style="background: #e0f7fa;" data-theme="original" title="Light Cyan"></div>
+                    <div class="color-swatch-small" style="background: #4dd0e1;" data-theme="original" title="Medium Cyan"></div>
+                    <div class="color-swatch-small" style="background: #2596be;" data-theme="original" title="Original Cyan"></div>
+                    <div class="color-swatch-small" style="background: #006064;" data-theme="original" title="Dark Cyan"></div>
+                    <div class="color-swatch-small" style="background: #003737;" data-theme="original" title="Deep Cyan"></div>
+                  </div>
+                  
+                  <!-- Purple variations -->
+                  <div class="variation-row">
+                    <div class="color-swatch-small" style="background: #e6e6fa;" data-theme="default" title="Light Purple"></div>
+                    <div class="color-swatch-small" style="background: #9370db;" data-theme="default" title="Medium Purple"></div>
+                    <div class="color-swatch-small" style="background: #667eea;" data-theme="default" title="Default Purple"></div>
+                    <div class="color-swatch-small" style="background: #4b0082;" data-theme="default" title="Dark Purple"></div>
+                    <div class="color-swatch-small" style="background: #301934;" data-theme="default" title="Deep Purple"></div>
+                  </div>
+                  
+                  <!-- Blue variations -->
+                  <div class="variation-row">
+                    <div class="color-swatch-small" style="background: #e7f3ff;" data-theme="blue" title="Light Blue"></div>
+                    <div class="color-swatch-small" style="background: #6cb4ee;" data-theme="blue" title="Sky Blue"></div>
+                    <div class="color-swatch-small" style="background: #0d6efd;" data-theme="blue" title="Primary Blue"></div>
+                    <div class="color-swatch-small" style="background: #0056b3;" data-theme="blue" title="Deep Blue"></div>
+                    <div class="color-swatch-small" style="background: #003366;" data-theme="blue" title="Navy Blue"></div>
+                  </div>
+                  
+                  <!-- Green variations -->
+                  <div class="variation-row">
+                    <div class="color-swatch-small" style="background: #e8f5e8;" data-theme="green" title="Light Green"></div>
+                    <div class="color-swatch-small" style="background: #90ee90;" data-theme="green" title="Mint Green"></div>
+                    <div class="color-swatch-small" style="background: #198754;" data-theme="green" title="Forest Green"></div>
+                    <div class="color-swatch-small" style="background: #146c43;" data-theme="green" title="Dark Green"></div>
+                    <div class="color-swatch-small" style="background: #0d4f37;" data-theme="green" title="Deep Green"></div>
+                  </div>
+                  
+                  <!-- Orange variations -->
+                  <div class="variation-row">
+                    <div class="color-swatch-small" style="background: #fff5ee;" data-theme="sunset" title="Light Orange"></div>
+                    <div class="color-swatch-small" style="background: #ffa500;" data-theme="sunset" title="Bright Orange"></div>
+                    <div class="color-swatch-small" style="background: #ff7e5f;" data-theme="sunset" title="Sunset Orange"></div>
+                    <div class="color-swatch-small" style="background: #cc5a42;" data-theme="sunset" title="Dark Orange"></div>
+                    <div class="color-swatch-small" style="background: #8b3a1f;" data-theme="sunset" title="Deep Orange"></div>
+                  </div>
+                  
+                  <!-- Dark variations -->
+                  <div class="variation-row">
+                    <div class="color-swatch-small" style="background: #f8f9fa;" data-theme="dark" title="Light Gray"></div>
+                    <div class="color-swatch-small" style="background: #6c757d;" data-theme="dark" title="Medium Gray"></div>
+                    <div class="color-swatch-small" style="background: #343a40;" data-theme="dark" title="Dark Gray"></div>
+                    <div class="color-swatch-small" style="background: #212529;" data-theme="dark" title="Charcoal"></div>
+                    <div class="color-swatch-small" style="background: #000000;" data-theme="dark" title="Black"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="selected-theme-info mt-4 p-3 border rounded bg-light">
+              <div class="d-flex align-items-center">
+                <div class="selected-color-preview me-3"></div>
+                <div>
+                  <strong class="selected-theme-name">{{ themes|selectattr('id', 'equalto', current_theme)|first|attr('name') if current_theme else 'Default Purple' }}</strong>
+                  <div class="text-muted small selected-theme-description">
+                    Click any color above to preview the theme
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="alert alert-info mt-3">
+              <i class="bi bi-info-circle me-2"></i>
+              <strong>Note:</strong> Theme changes will apply immediately to all users across the platform including headers, buttons, cards, and navigation elements.
+            </div>
+          </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Save Theme</button>
-        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-secondary ms-2">Cancel</a>
+        <div class="mt-4">
+          <button class="btn btn-success btn-lg" type="submit">
+            <i class="bi bi-check-circle me-2"></i>Apply Theme
+          </button>
+          <a href="{{ url_for('main.dashboard') }}" class="btn btn-outline-secondary btn-lg ms-2">
+            <i class="bi bi-arrow-left me-2"></i>Back to Dashboard
+          </a>
+        </div>
       </form>
 
     </div>
     <div class="col-md-4">
-      <h5>Preview</h5>
-      <div class="p-3 border rounded">
-        <p>Header, buttons and cards will use theme primary color.</p>
-        <div class="mt-2">
-          <button class="btn btn-primary me-2">Primary</button>
-          <button class="btn btn-secondary">Secondary</button>
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h5 class="card-title mb-0">
+            <i class="bi bi-eye me-2"></i>Live Preview
+          </h5>
+        </div>
+        <div class="card-body">
+          <p class="mb-3">See how elements will look with the selected theme:</p>
+          <div id="preview-container" class="p-3 border rounded">
+            <div class="mb-3">
+              <button class="btn btn-primary me-2" id="preview-btn-primary">Primary Button</button>
+              <button class="btn btn-outline-primary" id="preview-btn-outline">Outline Button</button>
+            </div>
+            <div class="card">
+              <div class="card-header" id="preview-card-header" style="background-color: var(--primary-color); color: white;">
+                Sample Card Header
+              </div>
+              <div class="card-body">
+                <p class="card-text">This shows how cards will appear with the selected theme.</p>
+              </div>
+            </div>
+          </div>
+          
+          <hr>
+          
+          <h6>Quick Actions:</h6>
+          <div class="d-grid gap-2">
+            <a href="{{ url_for('admin.site_settings') }}" class="btn btn-outline-info btn-sm">
+              <i class="bi bi-gear me-1"></i> Site Settings
+            </a>
+            <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-primary btn-sm">
+              <i class="bi bi-speedometer2 me-1"></i> Admin Dashboard
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -47,14 +233,287 @@
 </div>
 {% endblock %}
 
+{% block styles %}
+<style>
+.color-picker-container {
+  padding: 1rem 0;
+}
+
+.color-section-title {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.color-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.color-swatch {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.color-swatch:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.color-swatch.selected {
+  border-color: #ffffff;
+  box-shadow: 0 0 0 2px #007bff, 0 6px 20px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+
+.color-swatch.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.color-variations {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.variation-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.color-swatch-small {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.color-swatch-small:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.color-swatch-small.selected {
+  border-color: #007bff;
+  transform: scale(1.1);
+}
+
+.selected-theme-info {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+}
+
+.selected-color-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background: #667eea;
+}
+
+.selected-theme-name {
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.selected-theme-description {
+  margin-top: 2px;
+}
+
+.reset-section {
+  border-left: 4px solid #2596be !important;
+}
+
+.original-color-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #2596be 0%, #35cfc2 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 150, 190, 0.3);
+}
+
+.reset-original-btn {
+  border-color: #2596be !important;
+  color: #2596be !important;
+  transition: all 0.3s ease;
+}
+
+.reset-original-btn:hover {
+  background-color: #2596be !important;
+  color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 150, 190, 0.4);
+}
+
+@media (max-width: 768px) {
+  .color-grid {
+    justify-content: center;
+  }
+  
+  .variation-row {
+    justify-content: center;
+  }
+  
+  .reset-section .d-flex {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}
+</style>
+{% endblock %}
+
 {% block scripts %}
 <script>
-  // Render color swatches from data attributes
-  document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.theme-swatch').forEach(function(el) {
-      var c = el.dataset.color;
-      if (c) el.style.backgroundColor = c;
+document.addEventListener('DOMContentLoaded', function() {
+  const themeRadios = document.querySelectorAll('input[name="theme"]');
+  const colorSwatches = document.querySelectorAll('.color-swatch');
+  const colorSwatchesSmall = document.querySelectorAll('.color-swatch-small');
+  const previewBtnPrimary = document.getElementById('preview-btn-primary');
+  const previewBtnOutline = document.getElementById('preview-btn-outline');
+  const previewCardHeader = document.getElementById('preview-card-header');
+  const selectedColorPreview = document.querySelector('.selected-color-preview');
+  const selectedThemeName = document.querySelector('.selected-theme-name');
+  const selectedThemeDescription = document.querySelector('.selected-theme-description');
+  
+  // Theme information
+  const themeInfo = {
+    'original': {
+      name: 'Original Cyan',
+      description: 'The original cyan theme as shown in the platform',
+      color: '#2596be'
+    },
+    'default': {
+      name: 'Default Purple',
+      description: 'Modern purple gradient with professional look',
+      color: '#667eea'
+    },
+    'blue': {
+      name: 'Corporate Blue',
+      description: 'Clean blue theme for corporate environments',
+      color: '#0d6efd'
+    },
+    'green': {
+      name: 'Nature Green',
+      description: 'Fresh green theme for educational institutions',
+      color: '#198754'
+    },
+    'dark': {
+      name: 'Professional Dark',
+      description: 'Dark theme for reduced eye strain',
+      color: '#343a40'
+    },
+    'sunset': {
+      name: 'Sunset Orange',
+      description: 'Warm orange theme for creative spaces',
+      color: '#ff7e5f'
+    }
+  };
+  
+  // Update preview and info
+  function updateThemeSelection(selectedTheme) {
+    const theme = themeInfo[selectedTheme];
+    if (!theme) return;
+    
+    // Update radio button
+    const radio = document.getElementById('theme_' + selectedTheme);
+    if (radio) radio.checked = true;
+    
+    // Update color swatch selection
+    colorSwatches.forEach(swatch => swatch.classList.remove('selected'));
+    colorSwatchesSmall.forEach(swatch => swatch.classList.remove('selected'));
+    
+    document.querySelectorAll(`[data-theme="${selectedTheme}"]`).forEach(swatch => {
+      swatch.classList.add('selected');
+    });
+    
+    // Update preview elements
+    const color = theme.color;
+    previewBtnPrimary.style.backgroundColor = color;
+    previewBtnPrimary.style.borderColor = color;
+    previewBtnOutline.style.color = color;
+    previewBtnOutline.style.borderColor = color;
+    previewCardHeader.style.backgroundColor = color;
+    
+    // Update selected theme info
+    selectedColorPreview.style.background = `linear-gradient(135deg, ${color} 0%, ${color}dd 100%)`;
+    selectedThemeName.textContent = theme.name;
+    selectedThemeDescription.textContent = theme.description;
+    
+    // Update preview container border
+    const previewContainer = document.getElementById('preview-container');
+    if (previewContainer) {
+      previewContainer.style.borderColor = color + '40';
+    }
+  }
+  
+  // Add click handlers to color swatches
+  colorSwatches.forEach(function(swatch) {
+    swatch.addEventListener('click', function() {
+      const theme = this.dataset.theme;
+      updateThemeSelection(theme);
     });
   });
+  
+  // Add click handlers to small color swatches
+  colorSwatchesSmall.forEach(function(swatch) {
+    swatch.addEventListener('click', function() {
+      const theme = this.dataset.theme;
+      updateThemeSelection(theme);
+    });
+  });
+  
+  // Add click handler to reset button
+  const resetBtn = document.querySelector('.reset-original-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function() {
+      updateThemeSelection('original');
+      
+      // Add visual feedback
+      this.innerHTML = '<i class="bi bi-check-circle me-1"></i>Reset to Original';
+      this.classList.remove('btn-outline-info');
+      this.classList.add('btn-info', 'text-white');
+      
+      // Reset button appearance after 2 seconds
+      setTimeout(() => {
+        this.innerHTML = '<i class="bi bi-arrow-clockwise me-1"></i>Reset to Original';
+        this.classList.remove('btn-info', 'text-white');
+        this.classList.add('btn-outline-info');
+      }, 2000);
+    });
+  }
+  
+  // Initialize with current theme
+  const currentTheme = document.querySelector('input[name="theme"]:checked');
+  if (currentTheme) {
+    updateThemeSelection(currentTheme.value);
+  } else {
+    updateThemeSelection('original');
+  }
+});
 </script>
 {% endblock %}

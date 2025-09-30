@@ -8,7 +8,7 @@
 from flask import render_template, request, jsonify, redirect, url_for, flash, current_app
 from flask_login import login_required, current_user
 from app.exam import bp
-from app.models import db, Subject, Topic, Question, Exam, ExamSession
+from app.models import db, Subject, Topic, Question, Exam, ExamSession, require_student_access, require_teacher_access
 from app import csrf
 import random
 from datetime import datetime, timedelta
@@ -19,6 +19,7 @@ import json
 
 @bp.route('/results/json', methods=['GET'])
 @login_required
+@require_student_access('view_results')
 def results_json():
     """Return analytics JSON for the current user."""
     from sqlalchemy import func
@@ -295,6 +296,7 @@ from flask import current_app
 
 @bp.route('/create_test', methods=['GET', 'POST'])
 @login_required
+@require_teacher_access('create_test')
 def create_test():
     """Allow teachers to create a test for students"""
     if getattr(current_user, 'role', None) != 'teacher':
@@ -491,6 +493,8 @@ import json
 from flask import current_app
 
 @bp.route('/materials')
+@login_required
+@require_student_access('materials')
 def study_materials():
     # Read video paths from the extracted_video_paths.txt file
     video_paths_file = os.path.join(current_app.static_folder, 'extracted_video_paths.txt')
@@ -549,6 +553,7 @@ def study_materials():
 
 @bp.route('/dashboard')
 @login_required
+@require_student_access('start_exam')
 def dashboard():
     """Exam dashboard showing user's progress and available exams"""
     recent_sessions = ExamSession.query.filter_by(user_id=current_user.id)\
@@ -757,6 +762,7 @@ def custom_test():
 
 @bp.route('/results')
 @login_required
+@require_student_access('view_results')
 def results():
     """Show user's exam results and analytics"""
     from sqlalchemy import func
@@ -998,6 +1004,7 @@ def results():
 
 @bp.route('/results/data', methods=['GET'])
 @login_required
+@require_student_access('view_results')
 def results_data():
     """API endpoint to get user's analytics data for AJAX refresh"""
     from sqlalchemy import func
@@ -1776,6 +1783,7 @@ def session_details_teacher(session_id):
 
 @bp.route('/custom/<int:exam_id>/submissions')
 @login_required
+@require_teacher_access('view_submissions')
 def custom_test_submissions(exam_id):
     """Teacher view: list all student submissions for a specific custom test"""
     if getattr(current_user, 'role', None) not in ('teacher', 'admin'):
@@ -1834,6 +1842,7 @@ def custom_test_submissions(exam_id):
 
 @bp.route('/custom/<int:exam_id>/submissions/json')
 @login_required
+@require_teacher_access('analytics')
 def custom_test_submissions_json(exam_id):
     """AJAX endpoint to get submissions data in JSON format for real-time updates"""
     if getattr(current_user, 'role', None) not in ('teacher', 'admin'):
@@ -1879,6 +1888,7 @@ def custom_test_submissions_json(exam_id):
 
 @bp.route('/my-tests')
 @login_required
+@require_teacher_access('manage_tests')
 def my_tests():
     """Teacher page: list all custom tests created by the current teacher"""
     if getattr(current_user, 'role', None) not in ('teacher', 'admin'):

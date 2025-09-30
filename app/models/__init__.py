@@ -4,8 +4,14 @@ Database Models for KODEMAPA-EXAMPAD
 
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import redirect, url_for, flash
+from functools import wraps
+import json
+
+
+# Access Control Decoratorsort wraps
 import json
 
 # Initialize db here to avoid circular imports
@@ -253,4 +259,137 @@ class SiteSetting(db.Model):
 
     def __repr__(self):
         return f"<SiteSetting {self.name}={self.value}>"
+
+
+class StudentAccessSettings(db.Model):
+    """Access control settings for individual students."""
+    __tablename__ = 'student_access_settings'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False, unique=True)
+    
+    # Feature access controls
+    materials_access = db.Column(db.Boolean, default=True, nullable=False)
+    start_exam_access = db.Column(db.Boolean, default=True, nullable=False)
+    view_results_access = db.Column(db.Boolean, default=True, nullable=False)
+    browse_class_access = db.Column(db.Boolean, default=True, nullable=False)
+    
+    # Metadata
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationship
+    user = db.relationship('User', backref=db.backref('access_settings', uselist=False))
+
+    def __repr__(self):
+        return f"<StudentAccessSettings user_id={self.user_id}>"
+
+
+class TeacherAccessSettings(db.Model):
+    """Access control settings for individual teachers"""
+    __tablename__ = 'teacherAccessSettings'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True, nullable=False)
+    
+    # Access control flags for teacher features
+    create_test_access = db.Column(db.Boolean, default=True, nullable=False)
+    manage_tests_access = db.Column(db.Boolean, default=True, nullable=False)  # My Tests
+    view_submissions_access = db.Column(db.Boolean, default=True, nullable=False)
+    analytics_access = db.Column(db.Boolean, default=True, nullable=False)
+    
+    # Metadata
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationship
+    user = db.relationship('User', backref=db.backref('teacher_access_settings', uselist=False))
+
+    def __repr__(self):
+        return f"<TeacherAccessSettings user_id={self.user_id}>"
+
+
+# Access Control Decorators
+def require_student_access(access_type):
+    """
+    Decorator to check if student has access to specific features.
+    access_type should be one of: 'materials', 'start_exam', 'view_results', 'browse_class'
+    """
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            # Only check for students
+            if current_user.is_authenticated and current_user.role == 'student':
+                # Get student's access settings
+                access_settings = StudentAccessSettings.query.filter_by(user_id=current_user.id).first()
+                
+                # If no settings exist, create default (all enabled)
+                if not access_settings:
+                    access_settings = StudentAccessSettings(
+                        user_id=current_user.id,
+                        materials_access=True,
+                        start_exam_access=True,
+                        view_results_access=True,
+                        browse_class_access=True
+                    )
+                    db.session.add(access_settings)
+                    db.session.commit()
+                
+                # Check specific access
+                access_mapping = {
+                    'materials': access_settings.materials_access,
+                    'start_exam': access_settings.start_exam_access,
+                    'view_results': access_settings.view_results_access,
+                    'browse_class': access_settings.browse_class_access
+                }
+                
+                if not access_mapping.get(access_type, True):
+                    flash(f'Access denied: {access_type.replace("_", " ").title()} feature is currently disabled for your account. Please contact your administrator for assistance.', 'warning')
+                    return redirect(url_for('main.dashboard'))
+            
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
+
+
+def require_teacher_access(access_type):
+    """
+    Decorator to check if teacher has access to specific features.
+    access_type should be one of: 'create_test', 'manage_tests', 'view_submissions', 'analytics'
+    """
+    def decorator(f):
+        @wraps(f)
+        def decorated_function(*args, **kwargs):
+            # Only check for teachers
+            if current_user.is_authenticated and current_user.role == 'teacher':
+                # Get teacher's access settings
+                access_settings = TeacherAccessSettings.query.filter_by(user_id=current_user.id).first()
+                
+                # If no settings exist, create default (all enabled)
+                if not access_settings:
+                    access_settings = TeacherAccessSettings(
+                        user_id=current_user.id,
+                        create_test_access=True,
+                        manage_tests_access=True,
+                        view_submissions_access=True,
+                        analytics_access=True
+                    )
+                    db.session.add(access_settings)
+                    db.session.commit()
+                
+                # Check specific access
+                access_mapping = {
+                    'create_test': access_settings.create_test_access,
+                    'manage_tests': access_settings.manage_tests_access,
+                    'view_submissions': access_settings.view_submissions_access,
+                    'analytics': access_settings.analytics_access
+                }
+                
+                if not access_mapping.get(access_type, True):
+                    flash(f'Access denied: {access_type.replace("_", " ").title()} feature is currently disabled for your account. Please contact your administrator for assistance.', 'warning')
+                    return redirect(url_for('main.dashboard'))
+            
+            return f(*args, **kwargs)
+        return decorated_function
+    return decorator
 
