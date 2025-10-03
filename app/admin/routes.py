@@ -1,4 +1,3 @@
-
 """
 Admin Routes - Administrative dashboard and analytics
 """
@@ -10,6 +9,9 @@ from app.models import db, User, Subject, Topic, Question, Exam, ExamSession, Cu
 from sqlalchemy import func, desc, and_
 from datetime import datetime, timedelta
 import json
+import os
+from werkzeug.utils import secure_filename
+
 def admin_required(f):
     """Decorator to require admin or superadmin role"""
     def decorated_function(*args, **kwargs):
@@ -1045,3 +1047,40 @@ def toggle_student_status(student_id):
         flash('Error updating student status', 'error')
     
     return redirect(url_for('admin.students'))
+
+@bp.route('/logo-settings', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def logo_settings():
+    """Logo settings for the admin panel"""
+    if request.method == 'POST':
+        # Debugging logs
+        current_app.logger.debug(f"Request form data: {request.form}")
+        current_app.logger.debug(f"Request files: {request.files}")
+
+        # Handle logo upload
+        logo = request.files.get('logo')
+        if logo:
+            try:
+                # Secure the filename and save the file
+                filename = secure_filename(logo.filename)
+                logo_path = os.path.join(current_app.root_path, 'static/uploads', 'logo.png')
+                # Delete existing logo if it exists
+                if os.path.exists(logo_path):
+                    os.remove(logo_path)
+                # Save new logo
+                logo.save(logo_path)
+                
+                # Update the logo path in the database or settings
+                SiteSetting.set('site_logo', filename)
+                
+                flash('Logo uploaded successfully!', 'success')
+            except Exception as e:
+                current_app.logger.error(f"Error uploading logo: {str(e)}")
+                flash('Error uploading logo', 'error')
+        else:
+            flash('No file selected!', 'danger')
+    
+    # Get the current logo filename from settings
+    current_logo = SiteSetting.get('site_logo', default='default_logo.png')
+    return render_template('admin/logo_settings.html', current_logo=current_logo)

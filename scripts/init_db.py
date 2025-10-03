@@ -13,7 +13,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app import create_app
 from app.models import db, User, Subject, Topic, Question
-from app.models import StudentClass
+from app.models import StudentClass, SiteSetting
 
 from enhanced_solutions_loader import load_comprehensive_solutions
 
@@ -49,6 +49,13 @@ def init_database():
         db.session.add(student)
         print("✅ Sample student created (username: student, password: student123)")
     
+    # Create SiteSetting table and initialize default values
+    if not SiteSetting.query.filter_by(key='site_title').first():
+        db.session.add(SiteSetting(key='site_title', value='LERNOCHAMP'))
+        print("✅ Default site title initialized")
+    if not SiteSetting.query.filter_by(key='site_logo').first():
+        db.session.add(SiteSetting(key='site_logo', value=None))
+        print("✅ Default site logo initialized")
     db.session.commit()
     
     # Load subjects and topics from JSON files

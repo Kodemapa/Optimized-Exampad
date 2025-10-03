@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Logo Settings{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Logo Management</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="mb-3">
+            <label for="logo" class="form-label">Upload Logo</label>
+            <input type="file" class="form-control" id="logo" name="logo" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="mt-4">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+</div>
+{% endblock %}
