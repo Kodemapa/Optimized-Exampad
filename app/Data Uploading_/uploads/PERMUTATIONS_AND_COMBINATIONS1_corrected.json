@@ -1,0 +1,645 @@
+{
+  "status": "success",
+  "msg": "",
+  "code": 200,
+  "result": {
+    "data": {
+      "passages": null,
+      "shuffling": true,
+      "sol_passage": null,
+      "sec_questions": [
+        [
+          "<p>In a group of 15 students, there are exactly 6 girls and 9 boys. Each day one student leaves the group. What is the probability that after four days there are exactly 8 boys in that group?<br></p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>In a group of 15 students, there are exactly 6 girls and 9 boys. Each day one student leaves the group. What is the probability that after four days there are exactly 8 boys in that group?<br></p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>Find \\(n\\) if \\((n+2) !=60 \\times(n-1) ! ?\\)</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>Find \\(n\\) if \\((n+2) !=60 \\times(n-1) ! ?\\)</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<div>How many numbers between \\(100\\) and \\(1000\\) can be formed with the digits \\(5,6,7,8,9,\\) if the repetition of digits is not allowed?</div>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<div>How many numbers between \\(100\\) and \\(1000\\) can be formed with the digits \\(5,6,7,8,9,\\) if the repetition of digits is not allowed?</div>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>In how many ways can we select 6 people out of 10, of which a particular person is not included?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>In how many ways can we select 6 people out of 10, of which a particular person is not included?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>In how many different ways can the letters of the word ALLAHABAD be arranged?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>In how many different ways can the letters of the word ALLAHABAD be arranged?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>In how many different ways can the letters of the word 'RUMOUR' be arranged?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>In how many different ways can the letters of the word 'RUMOUR' be arranged?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>How many permutations of the letters of the word APPLE are there?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>How many permutations of the letters of the word APPLE are there?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<div>In the expansion of \\((1+x)^{43}\\) coefficients of \\((2 r+1)^{\\text {th }}\\) and \\((r+2)^{\\text {th }}\\) terms are equal, then what is the value of \\(r(r \\neq 1)\\)?</div>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<div>In the expansion of \\((1+x)^{43}\\) coefficients of \\((2 r+1)^{\\text {th }}\\) and \\((r+2)^{\\text {th }}\\) terms are equal, then what is the value of \\(r(r \\neq 1)\\)?</div>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>In how many ways can a team of \\(3\\) boys and \\(3\\) girls be selected from \\(5\\) boys and \\(4\\) girls?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>In how many ways can a team of \\(3\\) boys and \\(3\\) girls be selected from \\(5\\) boys and \\(4\\) girls?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>How many 4-digit numbers can be formed using digits 1, 2, 3, 4, 7, 9 lying between 3000 and 5000, if repetition of digits is allowed?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>How many 4-digit numbers can be formed using digits 1, 2, 3, 4, 7, 9 lying between 3000 and 5000, if repetition of digits is allowed?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>If \\(5 \\times^{ n } P _{3}=4 \\times^{( n +1)} P _{3}\\), find \\(n\\)?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>If \\(5 \\times^{ n } P _{3}=4 \\times^{( n +1)} P _{3}\\), find \\(n\\)?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>What is \\(C(n, r)+2 C(n, r+1)+C(n, r+2)\\) equal to?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>What is \\(C(n, r)+2 C(n, r+1)+C(n, r+2)\\) equal to?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>In how many ways can the letters of the word ‘PARAGLIDING’ be arranged such that all the vowels occur together?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>In how many ways can the letters of the word ‘PARAGLIDING’ be arranged such that all the vowels occur together?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>How many different words can be formed by using all the letters of the word, ALLAHABAD if both L's do not come together? </p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>How many different words can be formed by using all the letters of the word, ALLAHABAD if both L's do not come together? </p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>What is the number of different messages that can be represented by three a’s and two b’s?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>What is the number of different messages that can be represented by three a’s and two b’s?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>There are 20 cricket players, out of which 5 players can bowl. In how many ways can a team of 11 players be selected so, to include 4 bowlers?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>There are 20 cricket players, out of which 5 players can bowl. In how many ways can a team of 11 players be selected so, to include 4 bowlers?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "What will be the sum of all the numbers greater than 1000 formed by using the digits 1, 3, 5 and 7, such that no digit is being repeated in any number?",
+          [],
+          [
+            0
+          ],
+          null,
+          "What will be the sum of all the numbers greater than 1000 formed by using the digits 1, 3, 5 and 7, such that no digit is being repeated in any number?",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>How many combinations are possible while selecting four letters from the word ‘\\(SMOKEJACK\\)’ with the condition that ‘\\(J\\)’ must appear in it?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>How many combinations are possible while selecting four letters from the word ‘\\(SMOKEJACK\\)’ with the condition that ‘\\(J\\)’ must appear in it?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>In how many ways can the word 'CORONAVIRUS' be arranged such that all the vowels come together?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>In how many ways can the word 'CORONAVIRUS' be arranged such that all the vowels come together?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>What is the number of diagonals of a heptagon?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>What is the number of diagonals of a heptagon?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>How many different salads can be made from onion, cucumber, tomato, and carrot?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>How many different salads can be made from onion, cucumber, tomato, and carrot?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>A jar contains 10 red marbles and 30 green ones. How many red marbles must be added to the jar so that 60% of the marbles will be red?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>A jar contains 10 red marbles and 30 green ones. How many red marbles must be added to the jar so that 60% of the marbles will be red?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>Find how many four letter word can be formed out of the word “PINEAPPLES”?</p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>Find how many four letter word can be formed out of the word “PINEAPPLES”?</p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "<p>Find the number of arrangements of letters in the word ASHUTOSH?<br></p>",
+          [],
+          [
+            0
+          ],
+          null,
+          "<p>Find the number of arrangements of letters in the word ASHUTOSH?<br></p>",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ],
+        [
+          "In how many ways can 3 girls and 9 boys be seated in two vans, each having numbered seats with 3 in the front and 4 in the back, if 3 girls sit together in the back row on adjacent seats?",
+          [],
+          [
+            0
+          ],
+          null,
+          "In how many ways can 3 girls and 9 boys be seated in two vans, each having numbered seats with 3 in the front and 4 in the back, if 3 girls sit together in the back row on adjacent seats?",
+          null,
+          null,
+          [
+            0,
+            0
+          ],
+          1,
+          0,
+          "auto_id",
+          "1",
+          null,
+          null,
+          false,
+          "0",
+          null,
+          null
+        ]
+      ],
+      "qc_ids": {},
+      "qp_ids": {}
+    },
+    "user": {
+      "level": 4,
+      "name": "Soladi Prashitha"
+    }
+  }
+}

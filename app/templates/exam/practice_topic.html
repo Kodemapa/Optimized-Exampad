@@ -411,7 +411,8 @@ function selectOption(answer, element) {
 function submitAnswer() {
     const question = currentQuestions[currentQuestionIndex];
     const selectedAnswer = question.selectedAnswer;
-    const correctAnswer = question.correct_answer;
+    const correctAnswerIndex = question.correct_answer;
+    const correctAnswer = String.fromCharCode(65 + correctAnswerIndex); // Convert 0,1,2,3 to A,B,C,D
     const isCorrect = selectedAnswer === correctAnswer;
     
     // Store answer with full details for detailed review later
@@ -502,7 +503,8 @@ function finishPractice() {
         const correctAnswers = [];
         currentQuestions.forEach((question, index) => {
             const selectedAnswer = question.selectedAnswer || '';
-            const correctAnswer = question.correct_answer;
+            const correctAnswerIndex = question.correct_answer;
+            const correctAnswer = String.fromCharCode(65 + correctAnswerIndex); // Convert 0,1,2,3 to A,B,C,D
             const isCorrect = selectedAnswer === correctAnswer;
             
             // Build up the userAnswers array for test mode
@@ -1221,7 +1223,8 @@ function submitAnswerEnhanced() {
     // Save time spent on this question
     saveCurrentQuestionTime();
     
-    const correctAnswer = question.correct_answer;
+    const correctAnswerIndex = question.correct_answer;
+    const correctAnswer = String.fromCharCode(65 + correctAnswerIndex); // Convert 0,1,2,3 to A,B,C,D
     const isCorrect = selectedAnswer === correctAnswer;
     
     // Update question status

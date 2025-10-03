@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "question": "A tea party is arranged for 16 people...",
+    "options": [
+      "6!8!10!/4!6!",
+      "8!8!10!/4!6!",
+      "8!8!6!/6!4!",
+      "None of these"
+    ],
+    "answer": "8!8!10!/4!6!",
+    "solution": "Solution text here..."
+  },
+  {
+    "id": 2,
+    "question": "If 9P5 + 5*9P4 = 10Pr then r is:",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "7"
+    ],
+    "answer": "5",
+    "solution": "Solution text here..."
+  },
+  {
+    "id": 3,
+    "question": "In a group of 15 students...probability...",
+    "options": [
+      "12/91",
+      "13/91",
+      "15/91",
+      "18/91"
+    ],
+    "answer": "12/91",
+    "solution": "Solution text here..."
+  }
+]

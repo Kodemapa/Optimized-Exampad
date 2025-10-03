@@ -1,0 +1,887 @@
+[
+  {
+    "id": 1,
+    "question": "It is given that n arithmetic means are inserted between two sets of numbers a, 2b and 2a, b where a, b&nbsp;&nbsp;R. If the mth mean between these two sets of numbers is the same, then a : b equals",
+    "options": [
+      "n - m + 1 : m",
+      "n + m + 1 : m",
+      "m : n - m + 1",
+      "n : n - m + 1"
+    ],
+    "answer": 2,
+    "solution": "since n A.M.'s are inserted between a and \\(2 b,\\) we have \\(a, A_{1}, A_{2}, \\ldots \\ldots . . A_{n}, 2 b,\\) then we have\\(2 b=a+n+2)-1) d \\Rightarrow d=\frac{2 b-a}{n+1}\\)So, mth mean \\(=a+((m+1)-1) d=a+\frac{m(2 b-a)}{n+1}\\)Similarly, mth mean between \\(2 a\\) and \\(b=2 a+\frac{m(b-2 a)}{n+1}\\)From the given condition: \\(a+\frac{m(2 b-a)}{n+1}=2 a+\frac{m(b-2 a}{n+1}\\)\\( \\Rightarrow a =\frac{m}{n+1}(2 b-a-b+2 a) \\) \\(=\frac{m}{n+1}(a+b) \\)\\( \\Rightarrow a\\left(1-\frac{m}{n+1}\right)=\frac{m b}{n+1} \\)\\( \\Rightarrow \frac{a(n+1-m)}{n+1}=\frac{m b}{n+1} \\Rightarrow \frac{a}{b}=\frac{m}{n-m+1}\\)Hence, \\(a: b=m: n-m+1\\)"
+  },
+  {
+    "id": 2,
+    "question": "If pth, qth and rth terms of an AP, respectively are a, b and c, then a(q - r) + b(r - p) + c(p - q) is equal to",
+    "options": [
+      "1",
+      "0",
+      "a + b + c",
+      "- 1"
+    ],
+    "answer": 1,
+    "solution": "Given: pth term = a  t1 + (p - 1)d = a … (1)qth term = b  t1 + (q - 1)d = b ... (2)rth term = b  t1 + (r - 1)d = c … (3)The given expression is: a(q - r) + b(r - p) + c(p - q) This is equivalent to: q(a - c) + r(b - a) + p(c - b)Putting the values of a, b and c in terms of t1 and d in the given expression, we getq[(p - 1)d - (r - 1)d] + r[(q - 1)d - (p - 1)d] + p[(r - 1)d - (q - 1)d]= q[pd - d - rd + d] + r[qd - d - pd + d] + p[rd - d - qd + d]= qpd - qrd + rqd - prd + prd - qpd = 0a(q - r) + b(r - p) + c(p - q) = 0Thus, answer option (2) is correct."
+  },
+  {
+    "id": 3,
+    "question": "If \\(p, q, r\\) are three positive integers such that, \\(27 p q r \\geq(p+q+r)^{3}\\) and \\(2 p+q+r=4\\) then:",
+    "options": [
+      "\\(p=q=r=0\\)",
+      "\\(p=q=r=1\\)",
+      "\\(p=0, q=r=1\\)",
+      "None of these"
+    ],
+    "answer": 1,
+    "solution": "We know that:If \\(A\\) is the arithmetic mean,\\(\\Rightarrow A=\frac{a+b}{2}\\)If \\( {G}\\) is the geometric mean,\\(\\Rightarrow {G}=\\sqrt{ {ab}}\\)Relation between \\(AM\\), and \\(GM\\),\\( {AM} \\geq {GM}\\)Given:\\(2 p+q+r=4\\quad\\dots(1)\\)So,\\(\\Rightarrow\frac{p+q+r}{3} \\geq(pqr)^{\frac{1}{3}}\\)\\(\\Rightarrow \frac{(p+q+r)^{3}}{3^{3}} \\geq(pqr)\\)\\(\\Rightarrow 27 p q r \\geq(p+q+r)^{3}\\)This will be possible only if,\\(p=q=r\\)Therefore,&nbsp;from equation \\((1)\\),\\(2 p+p+p=4\\)\\(\\Rightarrow 4 p=4\\) or \\(p=1\\)\\(\\Rightarrow p=q=r=1\\)"
+  },
+  {
+    "id": 4,
+    "question": "Let S1, S2, … be squares such that for each n &nbsp;1, the length of a side of Sn equals the length of a diagonal of Sn + 1. If the length of a side of S1 is 10 cm, then the smallest value of n for which Area (Sn) &lt; 1 is",
+    "options": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "answer": 1,
+    "solution": "Let \\(a_{n}\\) denote the length of a side of \\(S_{n} .\\) We are givenLength of a side of \\(S_{n}=\\) Length of a diagonal of \\(S_{n+1}\\)\\(\\Rightarrow a_{n}=\\sqrt{2} a_{n+1} \\Rightarrow \frac{a_{n+1}}{a_{n}}=\frac{1}{\\sqrt{2}}\\)Thus, \\(a_{1}, a_{2}, a_{3}, \\ldots\\) is a G.P. with first term 10 and common ratio \\(1 / \\sqrt{2} .\\) Therefore,\\(a_{n}=10(1 / \\sqrt{2})^{n-1}\\)Also, Area \\(\\left(S_{n}\right)=a_{n}^{2}&lt;1\\)\\(\\Rightarrow \\left[10(1 / \\sqrt{2})^{n-1}\right]^{2}&lt;1 \\Rightarrow 100&lt;2^{n-1}\\)\\(\\Rightarrow\\) smallest possible value of n is \\(8\\)."
+  },
+  {
+    "id": 5,
+    "question": "Suppose \\(a, b, c,\\) are in A.P. and \\(-1&lt;a, b, c&lt;1\\). Let \\(x=\\sum_{n=0}^{\\infty} a^{n}, y=\\sum_{n=0}^{\\infty} b^{n}, z=\\sum_{n=0}^{\\infty} c^{n},\\) then \\(x, y, z\\) are in",
+    "options": [
+      "A.P.",
+      "G.P.",
+      "H.P.",
+      "None of these"
+    ],
+    "answer": 2,
+    "solution": "Here, x, y, z are infinite GPs. Thus,&nbsp;We have \\(x=\frac{1}{1-a}, y=\frac{1}{1-b}, z=\frac{1}{1-c}\\)As \\(a, b, c\\) are in A.P. \\(-a,-b,-c\\) are in A.P. \\(\\Rightarrow 1-a, 1-b\\), \\(1-c\\) are in A.P.\\(\\Rightarrow \frac{1}{1-a}, \frac{1}{1-b}, \frac{1}{1-c}\\) are in H.P."
+  },
+  {
+    "id": 6,
+    "question": "If \\( x&gt;1, y&gt;1, z&gt;1\\) are in G.P., then \\( \frac{1}{1+\\ln x} \\cdot \frac{1}{1+\\ln y} \\cdot \frac{1}{1+\\ln z}\\) are in",
+    "options": [
+      "A.P.",
+      "G.P.",
+      "H.P.",
+      "None of these"
+    ],
+    "answer": 2,
+    "solution": "As \\( x, y, z\\) are in G . P .\\( \\Rightarrow y^{2}=x z\\) \\( \\Rightarrow \\ln \\left(y^{2}\right)=\\ln (x z) \\Rightarrow 2 \\ln (y)=\\ln (x)+\\ln (z)\\) \\( \\Rightarrow 2(1+\\ln (y))=(1+\\ln (x))+(1+\\ln (z))\\) \\( \\Rightarrow 1+\\ln (x), 1+\\ln (y), 1+\\ln (z)\\) are in A.P.\\(\\Rightarrow \frac{1}{1+\\ln (x)}, \frac{1}{1+\\ln (y)}, \frac{1}{1+\\ln (z)}\\) are in H.P."
+  },
+  {
+    "id": 7,
+    "question": "Find the value of S.\\(S=2012+\frac{1}{3}\\left(2011+\frac{1}{3}\\left(2010+\frac{1}{3}\\left(2009+\\ldots+\frac{1}{3}\\left(2+\frac{1}{3}(1)\right) \\ldots\right)\right.\right.\\)",
+    "options": [
+      "3018",
+      "3017.5",
+      "",
+      "\\(3018-\frac{1}{4}\\left(\frac{1}{3}\right)^{2011}\\)"
+    ],
+    "answer": 2,
+    "solution": "Given,&nbsp;This is AGP.Here,&nbsp;&nbsp;and&nbsp;"
+  },
+  {
+    "id": 8,
+    "question": "The positive integer n, for which 2 &nbsp;22&nbsp; + 3 &nbsp;23 + 4 &nbsp;24 + … + n &nbsp;2n = 2n +10, is",
+    "options": [
+      "510",
+      "511",
+      "512",
+      "513"
+    ],
+    "answer": 3,
+    "solution": "We have\\(2^{n+10} =2 \times 2^{2}+3 \times 2^{3}+4 \times 2^{4}+\\ldots+n \times 2^{n} \\)\\(\\Rightarrow 2\\left(2^{n+10}\right) =2 \times 2^{3}+3 \times 2^{4}+\\ldots+(n-1) \times 2^{n}+ n \times 2^{n+1}\\)Subtracting, we get\\(-2^{n+10}= 2 \\cdot 2^{2}+2^{3}+2^{4}+\\ldots+2^{n}-n \\cdot 2^{n+1} \\)\\(= 8+\frac{8\\left(2^{n-2}-1\right)}{2-1}-n \times 2^{n+1} \\)\\(=2^{n+1}-(n) 2^{n+1}\\)\\(\\Rightarrow 2^{10}=2 n-2 \\Rightarrow n=513\\)"
+  },
+  {
+    "id": 9,
+    "question": "Statement - 1: The sum of the series \\(1+(1+2+4)+(4+6+9)+(9+12+16)+\\ldots+(361+380+400)\\) is 8000 . Statement -2: \\(\\sum_{k=1}^{n}\\left(k^{3}-(k-1)^{3}\right)=n^{3}\\) for each natural number \\(n\\)",
+    "options": [
+      "Statement – 1 is True, Statement – 2 is True and statement – 2 is the correct explanation for Statement – 1.",
+      "Statement – 1 is True, Statement – 2 is True and statement – 2 is not the correct explanation for Statement – 1.",
+      "Statement – 1 is True, Statement – 2 is False.",
+      "Statement – 1 is False, Statement – 2 is True."
+    ],
+    "answer": 0,
+    "solution": "Statement- 2: is True since\\(\\sum_{k=1}^{n}\\left(k^{3}-(k-1)^{3}\right)=\\left(1^{3}-0^{3}\right)+\\left(2^{3}-1^{3}\right)+\\ldots +\\left(n^{3}-(n-1)^{3}\right)=n^{3} \\)\\(\\Rightarrow \\sum_{k=1}^{n}(k-(k-1))\\left(\\left(k^{2}+k(k-1)+(k-1)^{2}\right)=n^{3}\right. \\)\\(\\Rightarrow \\sum_{k=1}^{n}\\left(k^{2}+k(k-1)+(k-1)^{2}\right)=n^{3}\\)Putting \\(n=20,\\) we get \\(\\sum_{k=1}^{20}\\left((k-1)^{2}+k(k-1)+k^{2}\right)=20^{3}\\)\\(\\Rightarrow 1+(1+2+4)+(4+6+9)+\\ldots+ (361+380+400)=8000\\)Thus, statement- 1 is also True and statement- 2 is a correct reason for it."
+  },
+  {
+    "id": 10,
+    "question": "Let \\(x=\\sqrt{2012+\\sqrt{2012+\\sqrt{2012+\\ldots+\\sqrt{2012}}}},\\) where the number 2012 appears 2012 times. Then \\([x],\\) the greatest integer less than or equal to \\(x\\), equals",
+    "options": [
+      "42",
+      "43",
+      "44",
+      "45"
+    ],
+    "answer": 3,
+    "solution": "Let \\(a_{1}=\\sqrt{2012}\\) and for \\(n \\in N\\) \\(a_{n+1}=\\sqrt{2012+a_{n}}\\) As \\(44^{2}=1936&lt;2012&lt;2025=45^{2},\\) we get \\(44&lt;a_{1}&lt;45\\) Next, \\(2012+44&lt;2012+a_{1}&lt;2012+45\\) \\(\\Rightarrow 2056&lt;2012+a_{1}&lt;2057\\) \\(\\Rightarrow 45&lt;\\sqrt{2012+a_{1}}&lt;46\\) \\(\\Rightarrow 45&lt;a_{2}&lt;46\\) A similar argument shows that  \\(45&lt;a_{n}&lt;46\\) for \\(2 \\leq n \\leq 2012\\) Thus \\(\\left[a_{2012}\right]=45\\)"
+  },
+  {
+    "id": 11,
+    "question": "Suppose a, b and c are positive real numbers satisfying the system of equations(a2 + ab + b2) (b2 + bc + c2) (c2 + ca + a2) = abc &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(a4 + a2b2 + b4) (b4 + b2c2 + c4) (c4 + c2a2 + a4) = a3b3c3. &nbsp; &nbsp;Then,",
+    "options": [
+      "a = b = c",
+      "abc = 1",
+      "\\(\frac{1}{3}(a+b+c)=(a b c)^{1 / 2}\\)",
+      "None of these"
+    ],
+    "answer": 0,
+    "solution": "(a2 + ab + b2) (b2 + bc + c2) (c2 + ca + a2) = abc &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ......... &nbsp;(1)(a4 + a2b2 + b4) (b4 + b2c2 + c4) (c4 + c2a2 + a4) = a3b3c3 ...........(2)We have \\(a^{4}+a^{2} b^{2}+b^{4}=\\left(a^{2}+b^{2}\right)^{2}-a^{2} b^{2}\\)\\(=\\left(a^{2}+a b+b^{2}\right)\\left(a^{2}-a b+b^{2}\right)\\) etc.Thus dividing ( 2 ) by ( 1 ), we get\\(\\left(a^{2}-a b+b^{2}\right)\\left(b^{2}-b c+c^{2}\right)\\left(c^{2}-c a+a^{2}\right)=a^{2} b^{2} c^{2}\\)..(3)since \\(A.M. \\geq G.M\\)\\(\\Rightarrow \frac{1}{2}\\left(x^{2}+y^{2}\right) \\geq x y\\)\\(\\Rightarrow x^{2}-x y+y^{2} \\geq x y \forall x, y&gt;0\\)and the equality holds if and only \\(x=y\\) Thus, equality in (3) can hold if and only if \\(a=b=c\\). Putting this in \\((1),\\) we obtain\\(\\left(3 a^{2}\right)^{3}=a^{3} \\Rightarrow a^{3}=(1 / 3)^{3} \text { or } a=1 / 3\\)\\(a=b=c=1 / 3\\)"
+  },
+  {
+    "id": 12,
+    "question": "If \\(S=\frac{1}{1.2}-\frac{1}{2.3}+\frac{1}{3.4}-\frac{1}{4.5}+\\ldots \\ldots . .+\\infty, e^{S}\\) is equal to",
+    "options": [
+      "loge (4/e)",
+      "4/e",
+      "loge (e/4)",
+      "e/4"
+    ],
+    "answer": 1,
+    "solution": "Let \\(T_{n}=\frac{1}{n(n+1)}\\). Then \\(T_{n}=\\left(1 / n-\frac{1}{n+1}\right)\\)\\(\\Rightarrow S=\frac{1}{1.2}-\frac{1}{2.3}+\frac{1}{3.4}-\frac{1}{4.5}+\\ldots \\ldots \\infty\\)\\(=T_{1}-T_{2}+T_{3}-T_{4}+\\ldots \\ldots \\ldots \\infty\\)\\(=(1-1 / 2)-(1 / 2-1 / 3)+(1 / 3-1 / 4)-(1 / 4-1 / 5)+\\ldots \\ldots \\infty\\)\\(=2(1-1 / 2+1 / 3-1 / 4+\\ldots .)-1=2 \\log (1+1)-\\log _{e} e=\\log _{e}(4 / e)\\)\\(S=\\log _{e}(4 / e)\\)\\(e^{S}=4 / e\\)"
+  },
+  {
+    "id": 13,
+    "question": "The sum upto infinity of the series \\(1+2\\left(1-\frac{1}{n}\right)+3\\left(1-\frac{1}{n}\right)^{2}+\\ldots .\\) is",
+    "options": [
+      "n2",
+      "n (n + 1)",
+      "\\(n\\left(1+\frac{1}{n}\right)^{2}\\)",
+      "None of these"
+    ],
+    "answer": 0,
+    "solution": "Let&nbsp;...(1)Multiplying both sides by&nbsp;&nbsp;we get...(2)Subtracting equation (2) from equation (1), we geti.e.,&nbsp;, Where&nbsp;"
+  },
+  {
+    "id": 14,
+    "question": "Which term of the series \\(5,8,11,14, \\ldots\\) is \\(320 ?\\)",
+    "options": [
+      "\\(106^{\text {th }}\\)",
+      "\\(105^{\text {th }}\\)",
+      "\\(107^{\text {th }}\\)",
+      "\\(104^{\text {th }}\\)"
+    ],
+    "answer": 0,
+    "solution": "Given:\\(5,8,11,14, \\ldots\\) is \\(320\\)Let, \\(n^{\text {th }}\\) term of the series is \\(320\\).Therefore,\\(a=5, d=3, T_{n}=320\\)\\(\because T_{n}=a+(n-1) d\\)\\(320=5+(n-1) \times 3\\)\\(\\Rightarrow 105=n-1\\)\\(\\Rightarrow n=106\\)"
+  },
+  {
+    "id": 15,
+    "question": "If \\(a \\in(0, \frac\\pi2)\\), then minimum value of \\(2 x+\frac{\tan ^{2} \u0007lpha}{2 x}\\) is:",
+    "options": [
+      "\\(\tan \u0007lpha\\)",
+      "\\(0\\)",
+      "\\(2 \tan \u0007lpha\\)",
+      "None of these"
+    ],
+    "answer": 2,
+    "solution": "We know that:If \\(A\\) is the arithmetic mean,\\(\\Rightarrow A=\frac{a+b}{2}\\)If \\( {G}\\) is the geometric mean,\\(\\Rightarrow {G}=\\sqrt{ {ab}}\\)Relation between \\(AM\\), and \\(GM\\),\\( {AM} \\geq {GM}\\)Given:\\(2 x+\frac{\tan ^{2} \u0007lpha}{2 x}\\)Let \\(a=2 x, b=\frac{\tan ^{2} \u0007lpha}{2 x}\\)So,\\(\frac{2 x+\frac{\tan ^{2}\u0007lpha}{2 x}}{2} \\geq \\sqrt{2 x \times \frac{\tan ^{2} \u0007lpha}{2 x}}\\)\\(\\Rightarrow 2 x+\frac{\tan ^{2} \u0007lpha}{2 x} \\geq 2 \tan \u0007lpha\\)\\(\\Rightarrow 2 x+\frac{\tan ^{2} \u0007lpha}{2 x} \\in[2 \tan \u0007lpha, \\infty)\\)Therefore, the minimum value is \\(2 \tan \u0007lpha\\)."
+  },
+  {
+    "id": 16,
+    "question": "A person is to count 4500 currency notes. Let an denote the number of notes he counts in the nth minute. If a1 = a2 = ... = a10 = 150 and a10, a11, ... are in an A.P. with common difference – 2, then the time taken by him to count all the notes is",
+    "options": [
+      "125 minutes",
+      "135 minutes",
+      "24 minutes",
+      "34 minutes"
+    ],
+    "answer": 3,
+    "solution": "Suppose he takes \\(n\\) minutes to count 4500 notes. We have \\(a_{1}+a_{2}+\\ldots+a_{10}=10(150), a_{11}=148\\) and\\(a_{11}, a_{12}, \\ldots, a_{n}\\) is an A.P. with common difference \\(d=-2\\) We are given\\(a_{1}+a_{2}+\\ldots+a_{10}+a_{11}+\\ldots+a_{n}=4500\\)\\(\\Rightarrow a_{11}+a_{12}+\\ldots+a_{n}=3000\\)\\(\\Rightarrow \frac{n-10}{2}\\left[a_{11}+a_{n}\right]=3000\\)\\(\\Rightarrow \frac{1}{2}(n-10)[148+148+(n-11)(-2)]=3000\\)\\(\\Rightarrow (n-10)(148-n+11)=3000\\)\\(\\Rightarrow (n-10)(159-n)=3000\\)\\(\\Rightarrow n^{2}-169 n+4590=0\\)\\(\\Rightarrow n^{2}-135 n-34 n+4590=0\\)\\(\\Rightarrow(n-135)(n-34)=0 \\Rightarrow n=135,34\\)All the notes get counted in 34 minutes."
+  },
+  {
+    "id": 17,
+    "question": "If the sum of n terms of an AP is an(n&nbsp;- 1), then the sum of the squares of these terms is",
+    "options": [
+      "\\(a^{2} n^{2}(n-1)^{2}\\)",
+      "\\(\frac{a^{2}}{6} n(n-1)(2 n-1)\\)",
+      "\\(\frac{2 a^{2}}{3} n(n-1)(2 n-1)\\)",
+      "\\(\frac{2 a^{2}}{3} n(n+1)(2 n+1)\\)"
+    ],
+    "answer": 2,
+    "solution": "Let A be the first term and D be the common difference of the AP. Then, Sn = an(n&nbsp;- 1)⇒&nbsp;[2A + (n&nbsp;- 1)(D)] = an(n&nbsp;- 1)⇒&nbsp;2A + (n&nbsp;- 1)D = 2an&nbsp;- 2aCompare the coefficient of n and constant term on both sides.⇒&nbsp;2A - D =&nbsp;-2a and D = 2a⇒ D = 2a ⇒ A = 0Sum of squares of n terms of the sequence,&nbsp;S = A2 + (A + D)2 + (A + 2D)2 + ... + (A + (n&nbsp;- 1)D)2= D2(12 + 22 + 32 +.......+ (n&nbsp;- 1)2)\\(=4 a^{2} \frac{n(n-1)(2 n-1)}{6}=\frac{2 a^{2}}{3} n(n-1)(2 n-1)\\)"
+  },
+  {
+    "id": 18,
+    "question": "The three successive terms of a G.P. will form the sides of a triangle if the common ratio r satisfies the inequality",
+    "options": [
+      "\\(\frac{\\sqrt{3}-1}{2}&lt;r&lt;\frac{\\sqrt{3}+1}{2}\\)",
+      "\\(\frac{\\sqrt{5}-1}{2}&lt;r&lt;\frac{\\sqrt{5}+1}{2}\\)",
+      "\\(\frac{\\sqrt{2}-1}{2}&lt;r&lt;\frac{\\sqrt{2}+1}{2}\\)",
+      "None of these"
+    ],
+    "answer": 1,
+    "solution": "Let the sides of the triangle be a, ar and ar \\(^{2}\\)1. If \\(r=1\\), then the triangle is equilateral and the inequality is satisfied.2. If \\(r&gt;1,\\) then \\(a+a r&gt;a r^{2} \\Rightarrow r^{2}-r-1&lt;0 \\Rightarrow \frac{\\sqrt{5}-1}{2}&lt;r&lt;\frac{\\sqrt{5}+1}{2}\\)3. If \\(r&lt;1\\), then \\(ar+ar^2&gt;a \\Rightarrow r^2 +r-1&gt;0 \\Rightarrow \frac{\\sqrt{5}-1}{2}&lt;r&lt;1\\)\\(\therefore \frac{\\sqrt{5}-1}{2}&lt;r&lt;\frac{\\sqrt{5}+1}{2}\\)So, the option is correct."
+  },
+  {
+    "id": 19,
+    "question": "Let a, b, c be distinct numbers in G.P. such that a2 + b2 + c2 = s2 and a + b + c = s. The sum of common ratio and its reciprocal is t. The value of t in terms of &nbsp;is",
+    "options": [
+      "\\(\frac{\u0007lpha^{2}+1}{\u0007lpha^{2}-1}\\)",
+      "\\(\frac{\u0007lpha^{2}+1}{1-\u0007lpha^{2}}\\)",
+      "\\(\frac{\u0007lpha^{2}-1}{\u0007lpha^{2}+1}\\)",
+      "\\(\frac{1-\u0007lpha^{2}}{1+\u0007lpha^{2}}\\)"
+    ],
+    "answer": 0,
+    "solution": "It is given that \\(a^{2}+b^{2}+c^{2}=s^{2}, a+b+c=\u0007lpha\\). \\(a, b, c\\) are distinct numbers in G.P, \\(t=r+\frac{1}{r}\\)where r is common ratio of GP \\(\\Rightarrow \frac{(a+b+c)^{2}}{a^{2}+b^{2}+c^{2}}=\u0007lpha^{2} \\Rightarrow \frac{\u0007lpha^{2}+1}{\u0007lpha^{2}-1}=t\\)\\(\therefore\\) The option is correct."
+  },
+  {
+    "id": 20,
+    "question": "Suppose \\(\frac{a-x}{p x}=\frac{a-y}{q y}=\frac{a-z}{r z}\\)Statement - 1: If p, q and r are in AP, then \\(x\\), y and \\(z\\) are in \\(HP\\).&nbsp;Statement - 2: If p, q and r are in HP, then x, y and z are in GP.",
+    "options": [
+      "Statement – 1 is True, statement – 2 is True and statement – 2 is the correct explanation for statement – 1.",
+      "Statement – 1 is True, statement – 2 is True and statement – 2 is not the correct explanation for statement – 1.",
+      "Statement – 1 is True, statement – 2 is False.",
+      "Statement – 1 is False, statement – 2 is True."
+    ],
+    "answer": 2,
+    "solution": "Suppose\\(\frac{a-x}{p x}=\frac{a-y}{q y}=\frac{a-z}{r z}=k(\\) say \\()\\)\\(\\Rightarrow p=\frac{a-x}{k x}, q=\frac{a-y}{k y}, r=\frac{a-z}{k z}\\)Now, \\(p, q, r\\) are in A.P.\\(\\Rightarrow \frac{a-x}{k x}, \frac{a-y}{k y}, \frac{a-z}{k z}\\) are in A.P.\\(\\Rightarrow \frac{a}{x}-1, \frac{a}{y}-1, \frac{a}{z}-1\\) are in A.P.\\(\\Rightarrow \\ \frac{a}{x}, \frac{a}{y}, \frac{a}{z}\\) are in A.P. \\(\\Rightarrow x, y, z\\) are in H.P.Next, \\(p, q, r\\) are in H.P.\\(\\Rightarrow \frac{k x}{a-x}, \frac{k y}{a-y}, \frac{k z}{a-z}\\) are in A.P.\\(\\Rightarrow \frac{x}{a-x}, \frac{y}{a-y}, \frac{z}{a-z}\\) are in A.P.\\(\\Rightarrow \frac{x}{a-x}+1, \frac{y}{a-y}+1, \frac{z}{a-z}+1\\) are in A.P.Next, \\(p, q, r\\) are in H.P.\\(\\Rightarrow \\quad \frac{k x}{a-x}, \frac{k y}{a-y}, \frac{k z}{a-z}\\) are in \\(A.P.\\)\\(\\Rightarrow \\quad \frac{x}{a-x}, \frac{y}{a-y}, \frac{z}{a-z}\\) are in A.P.\\(\\Rightarrow \frac{x}{a-x}+1, \frac{y}{a-y}+1, \frac{z}{a-z}+1\\) are in A.P.\\(\\Rightarrow \\quad a-x, a-y, a-z\\) are in \\(H.P.\\)Nothing can be said about \\(x, y, z .\\)"
+  },
+  {
+    "id": 21,
+    "question": "If \\(H _{1}, H _{2}, \\ldots, H _{ n }\\) are n harmonic means between a and \\(b (\neq a ),\\) then the value of \\(\frac{ H _{1}+ a }{ H _{1}- a }+\frac{ H _{ n }+ b }{ H _{ n }- b }\\) is equal to",
+    "options": [
+      "n + 1",
+      "n – 1",
+      "2n",
+      "2n + 3"
+    ],
+    "answer": 2,
+    "solution": "As \\(a, H_{1}, H_{2}, \\ldots, H_{n}, b\\) are in H.P.,\\(\frac{1}{a} \\cdot \frac{1}{H_{1}}, \frac{1}{H_{2}} \\cdots \frac{1}{H_{n}}, \frac{1}{b}\\) are in \\(A.P.\\)Let \\(d\\) be the common difference of this A.P., then\\(\frac{1}{b} =\frac{1}{a}+(n+1) d \\)and \\(\frac{1}{H_{n}}-\frac{1}{H_{1}} =(n-1) d \\)Now, \\( \frac{H_{1}+a}{H_{1}-a} =\frac{1 / a+1 / H_{1}}{1 / a-1 / H_{1}}=\frac{1 / a+1 / H_{1}}{-d}\\)and \\(\frac{H_{n}+b}{H_{n}-b}=\frac{1 / b+1 / H_{n}}{1 / b-1 / H_{n}}=\frac{1 / b+1 / H_{n}}{d} \\)\\(\therefore \frac{H_{1}+a}{H_{1}-a}+\frac{H_{n}+b}{H_{n}-b} =\frac{1 / a+1 / H_{1}}{-d}+\frac{1 / b+1 / H_{n}}{d} \\)\\(=\frac{1}{d}\\left[\\left(\frac{1}{b}-\frac{1}{a}\right)+\\left(\frac{1}{H_{n}}-\frac{1}{H_{1}}\right)\right]=2 n\\)Hence, option (c) is correct."
+  },
+  {
+    "id": 22,
+    "question": "If&nbsp;&nbsp;is an infinite AP, then&nbsp;&nbsp;is equal to:",
+    "options": [
+      "\\(\frac{n}{2 n-1}\\left(a_{1}^{2}-a_{2 n}^{2}\right)\\)",
+      "\\(\frac{2 n}{n-1}\\left(a_{2}^{2}-a_{1}^{2}\right)\\)",
+      "\\(\frac{n}{n+1}\\left(a_{1}^{2}+a_{2 n}^{2}\right)\\)",
+      "None of these"
+    ],
+    "answer": 0,
+    "solution": "Let&nbsp;&nbsp;be the common difference of the A.P. Then,Now,&nbsp;Hence, the correct option is (a)."
+  },
+  {
+    "id": 23,
+    "question": "The value of , for which &nbsp;upto  terms&nbsp; upto  terms, can be:",
+    "options": [
+      "5",
+      "3",
+      "4",
+      "10"
+    ],
+    "answer": 0,
+    "solution": "For LHS&nbsp;For RHS&nbsp;Sum of&nbsp;&nbsp;terms of GPHence, the correct option is (a)."
+  },
+  {
+    "id": 24,
+    "question": "If&nbsp; denotes the greatest integer function,&nbsp;then the value of &nbsp;is:",
+    "options": [
+      "59000",
+      "58750",
+      "59730",
+      "65138"
+    ],
+    "answer": 2,
+    "solution": "For any positive integer&nbsp;&nbsp;and&nbsp;, we have&nbsp;for&nbsp;&nbsp;for&nbsp;&nbsp;for&nbsp;&nbsp;for&nbsp;Thus,&nbsp;Hence, the correct option is (c)."
+  },
+  {
+    "id": 25,
+    "question": "If , then &nbsp;equals:",
+    "options": [
+      "\\(\frac{1}{2} n(n+1)\\)",
+      "\\(\frac{1}{2} n(n+2)\\)",
+      "\\(\frac{1}{2} n(n+3)\\)",
+      "\\(\frac{1}{2} n(n+5)\\)"
+    ],
+    "answer": 2,
+    "solution": "We haveAlso,&nbsp;Hence, the correct option is (c)."
+  },
+  {
+    "id": 26,
+    "question": "A sequence of numbers \\(x_{0}\\) is determined by the equality \\(x_{n}=\frac{x_{n-1}+x_{n-2}}{2}\\) and the values \\(x_{0}\\) and \\(x_{1}\\). Compute in terms of \\(x_{0}, x_{1}\\). Also, prove that \\(\\lim _{n \rightarrow \\infty} x_{n}=\frac{x_{0}+2 x_{1}}{3}\\)",
+    "options": [],
+    "answer": "-",
+    "solution": "Given: \\(x_{n}=\frac{x_{n-1}+x_{n-2}}{2}\\)\\(\therefore x_{2}=\frac{x_{i}+x_{0}}{2} ; x_{3}=\frac{x_{2}+x_{1}}{2}, x_{4}=\frac{x_{3}+x_{2}}{2}\\) etc.Now, \\(x_{2}-x_{1}=\frac{x_{0}-x_{1}}{2}\\)\\(\\Rightarrow x_{3}-x_{2}=\frac{x_{1}-x_{2}}{2}=-\frac{\\left(x_{0}-x_{1}\right)}{2^{2}}\\)\\(\\Rightarrow x_{4}-x_{3}=\frac{x_{2}-x_{3}}{2}=+\frac{\\left(x_{0}-x_{1}\right)}{2^{3}}\\)\\(\\Rightarrow x_{5}-x_{4}=\frac{x_{3}-x_{4}}{2}=-\frac{\\left(x_{0}-x_{1}\right)}{2^{4}}\\)\\(\\Rightarrow x_{0}-x_{n-1}=\frac{x_{n-2}-x_{n-1}}{2}=(-1)^{n} \\cdot \frac{\\left(x_{0}-x_{1}\right)}{2^{n}}\\)Adding\\(x_{2}-x_{1}\\)\\(=\frac{x_{0}-x_{1}}{2}\\left[1-\frac{1}{2}+\frac{1}{2^{2}}-\frac{1}{2^{3}}+\\ldots+(-1)^{n}\right.\\left.\frac{1}{2^{n-2}}\right]\\)\\(\\lim _{n \rightarrow \\infty}\\left(x_{n}-x_{1}\right)=\\lim _{n \rightarrow \\infty} \frac{x_{0}-x_{1}}{2}\\left[\frac{1}{1+(1 / 2)}\right]\\)\\(\\lim _{n \rightarrow \\infty} x_{n}-x_{1}=\frac{x_{0}-x_{1}}{2} \times \frac{2}{3}\\)\\(\\lim _{n \rightarrow \\infty} x_{n}=\frac{x_{0}-x_{1}}{3}+x_{1}=\frac{x_{0}+2 x_{1}}{3}\\)Hence, the correct answer is \\((-1)^{n} \\cdot \frac{\\left(x_{0}-x_{1}\right)}{2^{n}}\\)"
+  },
+  {
+    "id": 27,
+    "question": "If exp {(tan2 x – tan4 x + tan6 x – tan8 x +...) loge 16}, 0 &lt; x &lt; , satisfies the quadratic equation x2 – 3x + 2 = 0, then the value of cos2 x + cos4 x is",
+    "options": [
+      "4/5",
+      "21/16",
+      "17/11",
+      "19/31"
+    ],
+    "answer": 1,
+    "solution": "\\(\tan ^{2} x+\tan ^{4} x+\tan ^{6} x+\\ldots \\infty=\frac{\tan ^{2} x}{1-\tan ^{2} x}\\)Thus, \\(16^{\frac{\\cos ^{2} \u0007lpha}{1-\tan ^{2} \u0007lpha}}\\) satisfies the quadratic equation\\(\\Rightarrow \frac{\tan ^{2} x}{1-\tan ^{2} x}=0, \frac{1}{4}\\)Now, \\(0Hence, \\(\frac{\tan ^{2} x}{1-\tan ^{2} x}=\frac{1}{4}\\)\\(\\Rightarrow 5 \tan ^{2} x=1\\)\\(\\Rightarrow \\cos ^{2} x=\frac{5}{6}\\)\\(\therefore \\cos ^{2} x+\\cos ^{4} x=\\cos ^{2} x\\left(1+\\cos ^{2} x\right)=\frac{55}{36}\\)"
+  },
+  {
+    "id": 28,
+    "question": "Directions: The answer to the following question is a single digit integer ranging from  to . Enter the correct digit in the box given below.Find the value of&nbsp;&nbsp;where,&nbsp;.",
+    "options": [],
+    "answer": "-",
+    "solution": "&nbsp;Sum when&nbsp;&nbsp;are independent&nbsp;&nbsp;(Sum when any two of&nbsp;&nbsp;are equal)&nbsp;&nbsp;(Sum when&nbsp;&nbsp;)"
+  },
+  {
+    "id": 29,
+    "question": "Directions: The answer to the following question is a single digit integer ranging from 0 to 9. Enter the correct digit in the box given below.For&nbsp;, let&nbsp;&nbsp;and . Then&nbsp;&nbsp;is equal to:",
+    "options": [],
+    "answer": "-",
+    "solution": "705c5ef42b79487b954d8e03d134d72e"
+  },
+  {
+    "id": 30,
+    "question": "The coefficient of  in the expansion of  is:",
+    "options": [
+      "\\((-1)^{n}\\left(\frac{2^{n}+1}{n}\right)\\)",
+      "\\(\frac{(-1)^{n+1}}{n}\\left(2^{n}+1\right)\\)",
+      "\\(\frac{2^{n}+1}{n}\\)",
+      "None of these"
+    ],
+    "answer": 1,
+    "solution": "We have,Coefficient of&nbsp;Hence, the correct option is (b)."
+  },
+  {
+    "id": 31,
+    "question": "If the sum upto infinite terms of the series, sin x, sin2x, sin3x,...,sinnx is 1 then the value of x in&nbsp;degrees is?",
+    "options": [
+      "15°",
+      "30°",
+      "45°",
+      "90°"
+    ],
+    "answer": 1,
+    "solution": "The common ratio of the series is sin x.Now, -1≤sin x≤1For the sum of infinite series to exist the common ratio must be within -1 and 1So, sin x is not equal to either 1 or -1"
+  },
+  {
+    "id": 32,
+    "question": "&nbsp;Find common ratio if 1st term is 7, last term is&nbsp;",
+    "options": [
+      "0.6",
+      "0.8",
+      "1.2",
+      "1.5"
+    ],
+    "answer": 0,
+    "solution": "According to the question,Also,Take&nbsp;&nbsp;&nbsp;and solve as:"
+  },
+  {
+    "id": 33,
+    "question": "The value of&nbsp;&nbsp;&nbsp;is equal to?",
+    "options": [
+      "4n",
+      "&nbsp;4n+1",
+      "2n+4",
+      "4n+4"
+    ],
+    "answer": 3,
+    "solution": "c4ded5cf119846edb82a90acea886ae8"
+  },
+  {
+    "id": 34,
+    "question": "Find the number of cases possible for coefficient of 𝑥16 in (1 + 𝑥2 + 𝑥3)7 ?",
+    "options": [
+      "3",
+      "2",
+      "5",
+      "4"
+    ],
+    "answer": 1,
+    "solution": "Let the terms be&nbsp;2 cases"
+  },
+  {
+    "id": 35,
+    "question": "The sum of n terms of the series&nbsp;",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 1,
+    "solution": "12cd14ef8033477c9791326ced74198b"
+  },
+  {
+    "id": 36,
+    "question": "If nth term of an arithmetic progression is denoted by an such that 2a5=a10 and a5+5=a15 then the common difference of the progression is given by?",
+    "options": [
+      "0.5",
+      "0.4",
+      "0.3",
+      "0.2"
+    ],
+    "answer": 0,
+    "solution": "Given,Also"
+  },
+  {
+    "id": 37,
+    "question": "If the product of 1st and 5th term of A.P is 24; 3rd and 4th term is 28, find value of largest term among the first 5 terms. It is given that the 7th term of A.P. is 2?",
+    "options": [
+      "4",
+      "2",
+      "-2",
+      "0"
+    ],
+    "answer": 2,
+    "solution": "According to the question,Substitute d=2 to get value of a as:𝑎 = 2 − 6𝑑= 2 − 12= −10Therefore, first 5 terms are -10,-8,-6,-4,-2The largest term is -2."
+  },
+  {
+    "id": 38,
+    "question": "The following AGP series is the outcome of the foster result of an equation such that the two&nbsp;integers a and b are the result of the foster form of a series Find the two positive numbers whose&nbsp;Arithmetic means increased by 2 than the geometric means and their difference is 12?",
+    "options": [
+      "12, 4",
+      "16, 8",
+      "16, 4",
+      "10, 8"
+    ],
+    "answer": 2,
+    "solution": "Let the two numbers be a and b. Then,𝑎 − 𝑏 = 12GivenAM-GM=2Now a-b=12Solving (i) and (ii) we get a=16, b=4Hence the required numbers 16, 4"
+  },
+  {
+    "id": 39,
+    "question": "Find real solutions of 𝑎 + 𝑏 + 𝑐 = 3, 𝑎𝑏𝑐 − 𝑑2 = 1 ?",
+    "options": [
+      "𝑎 = 1, 𝑏 = 1, 𝑐 = 1, 𝑑 = 1",
+      "𝑎 = 1, 𝑏 = 1, 𝑐 = 1, 𝑑 = 0",
+      "𝑎 = 0, 𝑏 = 2, 𝑐 = 1, 𝑑 = 1",
+      "𝑎 = 2, 𝑏 = 1, 𝑐 = 0, 𝑑 = 1"
+    ],
+    "answer": 1,
+    "solution": "According to the relation 𝐴. 𝑀 ≥ 𝐺. 𝑀.But according to the question, 𝑎𝑏𝑐 − 𝑑2 = 1Therefore, 𝑑2 = 0 𝑜𝑟 𝑑 = 0So, relation changes to 𝑎𝑏𝑐 = 1 resulting in 𝑎 = 1, 𝑏 = 1, 𝑐 = 1.Ans is 𝑎 = 1, 𝑏 = 1, 𝑐 = 1, 𝑑 = 0"
+  },
+  {
+    "id": 40,
+    "question": "&nbsp;If sum of the series&nbsp;",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 2,
+    "solution": "3573b09d223144e0b669a8c58b638f1d"
+  },
+  {
+    "id": 41,
+    "question": "&nbsp;If the sum of n terms of an A.P. is cn(n-1) , where c is not equal to 0, then sum of cube of&nbsp;these terms is?",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 3,
+    "solution": "If Tr be the rth term of A.P thenAnd we want to find"
+  },
+  {
+    "id": 42,
+    "question": "If sum of \\(n\\) terms is an A.P is given by \\(S_n=3 n^2+2 n\\) then find the \\(10^{\text {th }}\\) term.",
+    "options": [
+      "55",
+      "64",
+      "59",
+      "49"
+    ],
+    "answer": 2,
+    "solution": "Given that \\(S_n=3 n^2+2 n\\). For \\(S_{n-1}\\), we will put (n-1) at the place of \\(n\\). \\( \\Rightarrow T_n=S_n-S_{n-1}=\\left(3 n^2+2 n\right)-\\left\\{3(n-1)^2+2(n-1)\right\\} \\) \\( \\Rightarrow T_n=3 n^2+2 n-\\left\\{3\\left(n^2-2 n+1\right)+2 n-2\right\\} \\) \\( \\Rightarrow T_n=3 n^2+2 n-\\left\\{3 n^2-6 n+3+2 n-2\right\\} \\) \\( \\Rightarrow T_n=3 n^2+2 n-3 n^2+4 n-1 \\) \\( \\Rightarrow T_n=6 n-1\\) Therefore, \\(T_{10}=6 \times 10-1=59\\)"
+  },
+  {
+    "id": 43,
+    "question": "The sum of 3rd and 5th term of a G.P. series is 272 and the 1st term is 1. Find the common ratio?",
+    "options": [
+      "±4",
+      "−4",
+      "4",
+      "±√17, ±4"
+    ],
+    "answer": 0,
+    "solution": "The 3rd term is 𝑎𝑟2&nbsp;and 5th term is 𝑎𝑟4Find the common ratio as:"
+  },
+  {
+    "id": 44,
+    "question": "Find the sum to \\(n\\) terms: \\(3+33+333+3333+\\ldots\\)",
+    "options": [
+      "\\(\frac{10^{10}-100}{27}\\)",
+      "\\(\frac{10^{11}-90}{27}\\)",
+      "\\(\frac{10^{\\mathrm{n}+1}-10-9 \\mathrm{n}}{27}\\)",
+      "\\(\frac{10^{10}-90}{27}\\)"
+    ],
+    "answer": 2,
+    "solution": "From the given series, take common factor 3.&nbsp;Thus,&nbsp;\\(\\mathrm{S}=3(1+11+111+1111+\\ldots \\ldots \\ldots \\ldots . .\\) nth term \\()\\)Or\\(\\mathrm{S}=3\\{1+(1+10)+(1+10+100)+(1+10+100+1000)+\\ldots\\) to \\(\\mathrm{n}\\) terms \\(\\}\\)Thus the n th term.&nbsp;\\(\\mathrm{t}_{\\mathrm{n}}=1+10+100+\\ldots \\ldots \\ldots \\ldots .+10^{\\mathrm{n}-1}\\)This is a G.P. where first term is 1 and common ratio is 10 .Thus sum of \\(n\\) terms is:&nbsp;\\(\\mathrm{t}_{\\mathrm{n}}=\frac{1\\left(1-10^{\\mathrm{n}}\right)}{1-10}\\)\\(\\Rightarrow \\mathrm{t}_{\\mathrm{n}}=\frac{\\left(10^{\\mathrm{n}}-1\right)}{9}\\)Thus,&nbsp;\\(\\mathrm{S}=3 \\sum_{\\mathrm{i}=1}^{\\mathrm{n}} \\mathrm{t}_{\\mathrm{n}}=3 \\sum_{\\mathrm{i}=1}^{\\mathrm{n}} \frac{10^{\\mathrm{n}}-1}{9}\\)So, the sum,&nbsp;\\(\\mathrm{S}=3 \\sum \frac{10^{\\mathrm{n}}}{9}-3 \\sum \frac{1}{9}\\)\\(\\Rightarrow \\mathrm{S}=3\\left\\{\frac{10\\left(1-10^{\\mathrm{n}}\right)}{(1-10) .9}-\\left(\frac{1}{9}\right) \\cdot \\mathrm{n}\right\\}\\)\\(\\Rightarrow \\mathrm{S}=3\\left\\{10 \\cdot \frac{\\left(10^{\\mathrm{n}}-1\right)}{81}-\frac{\\mathrm{n}}{9}\right\\}\\)\\(\\Rightarrow \\mathrm{S}=\\left\\{10 . \frac{\\left(10^{\\mathrm{n}}-1\right)}{27}-\frac{\\mathrm{n}}{3}\right\\}\\)\\(\\Rightarrow \\mathrm{S}=\frac{10^{\\mathrm{n}+1}-10-9 \\mathrm{n}}{27}\\)"
+  },
+  {
+    "id": 45,
+    "question": "Let a1, a2,........., a2n be in GP. If the sum of a1, a3,......, a2n-1&nbsp;is 'a' times the total sum of the series, then the common ratio is?",
+    "options": [
+      "(1-a)/a",
+      "a",
+      "(1+a)/a",
+      "1/a"
+    ],
+    "answer": 0,
+    "solution": "sum of even terms = rsum of odd termsSeven + Sodd = S"
+  },
+  {
+    "id": 46,
+    "question": "A .P. and G.P. have same 1st term. If addition of corresponding terms is 6,18,57, find common&nbsp;ratio of increasing G.P.?",
+    "options": [
+      "4 𝑜𝑟 − 2",
+      "2",
+      "4",
+      "-2"
+    ],
+    "answer": 0,
+    "solution": "Let the numbers in G.P. be 𝑎, 𝑎𝑟. 𝑎𝑟2According to the question,𝑎 + 𝑎 = 6𝑎 = 3Also,(𝑎 + 𝑑) + 𝑎𝑟 = 183 + 𝑑 + 3𝑟 = 18𝑑 + 3𝑟 = 15 (𝐼)Also,(𝑎 + 2𝑑) + 𝑎𝑟2 = 573 + 2𝑑 + 3𝑟2 = 572𝑑 + 3𝑟2 = 54 (𝐼𝐼)Now subtract twice of (I) from (II) as:3𝑟2 − 6𝑟 = 24𝑟2 − 2𝑟 = 8𝑟2 − 4𝑟 + 2𝑟 − 8 = 0(𝑟 − 4)(𝑟 + 2) = 0𝑟 = 4 𝑜𝑟 𝑟 = −2The common ratio is 4 because G.P. is increasing"
+  },
+  {
+    "id": 47,
+    "question": "Sum of 1st 5 terms of A.P. is 100 and sum of 1st 2terms is of G.P. is 25. First term of A.P. is equal&nbsp;to common ratio of G.P. and 1st term of G.P. is equal to common difference between A.P. Find&nbsp;1st term of A.P.?",
+    "options": [
+      "1.74 𝑜𝑟 17.26",
+      "17.26",
+      "1.74",
+      "&nbsp;Cannot be determined"
+    ],
+    "answer": 0,
+    "solution": "Let the 1st term of A.P. be x and common difference be d and 1st term of G.P. be a and common ratio&nbsp;be rAccording to the question,[2𝑥 + 4𝑑] = 100𝑥 + 2𝑑 = 20Also,𝑎 + 𝑎𝑟 = 25𝑎(1 + 𝑟) = 25Also, it is given,𝑎 = 𝑑 𝑎𝑛𝑑 𝑥 = 𝑟Therefore,Put this in the 1st equation to get x as:"
+  },
+  {
+    "id": 48,
+    "question": "&nbsp;A GP has 1st term a and common ratio r and the sum of infinity terms is 7. A second GP has&nbsp;1st term 3a and common ratio r2 and sum of infinity term is 15. Then values of a and r are?",
+    "options": [
+      "a=21/5 and r = 2/5",
+      "a = 2/5 and r = 21/5",
+      "a = 21/2 and r = 1/5",
+      "a = 49/5 and r = -2/5"
+    ],
+    "answer": 0,
+    "solution": "We know that sum if infinite term of GP is given byNow for 1st GP the sum is equal to 7, thenAnd for 2nd GP sum is 15 and 1st term is 3a, common ratio is r2&nbsp;, thenPut value of a from equation (1)and"
+  },
+  {
+    "id": 49,
+    "question": "If&nbsp;&nbsp;, find the value of&nbsp;&nbsp;?",
+    "options": [
+      "480",
+      "680",
+      "200",
+      "400"
+    ],
+    "answer": 1,
+    "solution": "According to the questionThe value of the series"
+  },
+  {
+    "id": 50,
+    "question": "There are 3 types of balls red, yellow and green. Each type has 3 balls which are in A.P.If A.M.&nbsp;of red balls is equal to smallest yellow ball , A.M. of yellow balls is equal to smallest green ball and&nbsp;mean of 2nd and 3rd yellow ball is 6, find middle red ball given that 1st yellow ball is twice of 1st green&nbsp;ball?",
+    "options": [
+      "24",
+      "28",
+      "30",
+      "20"
+    ],
+    "answer": 0,
+    "solution": "Let the red balls be 𝑟1, 𝑟2, 𝑟3; yellow balls be 𝑦1, 𝑦2, 𝑦3 and green balls be 𝑔1, 𝑔2, 𝑔3&nbsp;According to the question,Replace&nbsp;Now"
+  },
+  {
+    "id": 51,
+    "question": "If&nbsp;&nbsp;are in AP, then x equals?",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 1,
+    "solution": "9200700c5b7f438bb0bdafa87967f0e8"
+  },
+  {
+    "id": 52,
+    "question": "Find the value of&nbsp;",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 1,
+    "solution": "Write the value as:"
+  },
+  {
+    "id": 53,
+    "question": "Find the value of&nbsp;",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 3,
+    "solution": "Solve the equation&nbsp;"
+  },
+  {
+    "id": 54,
+    "question": "If mth term is q, qth term is 1+m in A.P, find the first term?",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 2,
+    "solution": "According to the question,Subtracting 2nd equation from 1st we get:Substitute the value of d in (I) to get a as:"
+  },
+  {
+    "id": 55,
+    "question": "𝑎, 𝑏, 𝑑, 𝑔, 𝑘, . .. Find 11th term of the series if the series repeats itself from a once it reaches z?",
+    "options": [
+      "d",
+      "k",
+      "g",
+      "p"
+    ],
+    "answer": 0,
+    "solution": "Find the numerical difference between each term of the series as:b-a=1d-b=2g-d=3k-g=4The difference is in A.P. series.To get the 11th term of the given series, find sum of the A.P series till 10th term and add it to the&nbsp;1st term of the series.Sum of A.P. series till 10th term is:Now, divide it by 26 because there are 26 letters in English alphabets. Therefore, 55%26 = 3The term is a+3=d"
+  },
+  {
+    "id": 56,
+    "question": "Ujjwal has 300 toys. He gives x toys to Sheetal and y toys to Nancy. Now, 3 of them have toys&nbsp;in increasing A.P. Find the number of toys Sheetal has if she has 50 more toys than Nancy?",
+    "options": [
+      "100",
+      "50",
+      "150",
+      "200"
+    ],
+    "answer": 0,
+    "solution": "Number of toys Ujjwal has is 300-x-yAccording to the question,y-x=50This means common difference is 50 as Sheetal and Nancy have toys in A.P.A.M of the 3 terms&nbsp;Therefore,Sheetal has 100 toys.Therefore, Nancy has 150 toys."
+  },
+  {
+    "id": 57,
+    "question": "The ratio of the 7th and (m-1)th Arithmetic means of the m arithmetic means between 1 and 31 is 5:9 then m=?",
+    "options": [
+      "12",
+      "15",
+      "14",
+      "17"
+    ],
+    "answer": 2,
+    "solution": "so we get m=14"
+  },
+  {
+    "id": 58,
+    "question": "If pth term of an arithmetic progression is q and the qth term is p, then 10th term is?",
+    "options": [
+      "p-q+10",
+      "&nbsp;p+q+11",
+      "p+q-9",
+      "p+q-10"
+    ],
+    "answer": 3,
+    "solution": "ce99058e4c8942c9b17d740f54c80b20"
+  },
+  {
+    "id": 59,
+    "question": "if a2, b2, c2 are in AP, then which of the following is also an AP?",
+    "options": [
+      "sin𝐴 , sin𝐵 , sinC",
+      "&nbsp;tan 𝐴 , tan𝐵 ,tan C",
+      "cot𝐴 , cot𝐵 , cot 𝐶",
+      "𝑁𝑜𝑛𝑒 𝑜𝑓 𝑡ℎ𝑒𝑠e"
+    ],
+    "answer": 2,
+    "solution": "8985191a220641bd8608c11a81a8b512"
+  },
+  {
+    "id": 60,
+    "question": "The sum of first three terms of a GP is 7/9 and their product is -8/ 27. Find the&nbsp;common ratio of the series?",
+    "options": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "answer": 0,
+    "solution": "85ac4b15a5d148d6b31992e8639013f3"
+  },
+  {
+    "id": 61,
+    "question": "If \\(a, b, c\\) are in \\(A P,\\) then \\(\frac{a(b+c)}{b c}, \frac{b(c+a)}{c a}, \frac{c(a+b)}{a b}\\) are in",
+    "options": [
+      "AP",
+      "GP",
+      "HP",
+      "None of these"
+    ],
+    "answer": 0,
+    "solution": "Given: a, b, c are in AP.Dividing each term by abc,\\(\\Rightarrow \frac{a}{a b c}, \frac{b}{a b c}, \frac{c}{a b c}\\) are in \\(A P\\)\\(\\Rightarrow \frac{1}{b c}, \frac{1}{a c}, \frac{1}{a b}\\) are in \\(AP\\)\\(\\Rightarrow \frac{a b+b c+c a}{b c}, \frac{a b+b c+c a}{a c}, \frac{a b+b c+c a}{a b}\\) are in \\(A P\\)\\(\\Rightarrow \frac{a b+c a}{b c}+1, \frac{a b+b c}{a c}+1, \frac{b c+c a}{a b}+1\\) are in \\(A P\\)\\(\\Rightarrow \frac{a b+c a}{b c}, \frac{a b+b c}{a c}, \frac{b c+c a}{a b}\\) are in \\(AP\\)\\(\\Rightarrow \frac{a(b+c)}{b c}, \frac{b(a+c)}{a c}, \frac{c(a+b)}{a b}\\) are in \\(AP\\)Hence, the correct option is (a)."
+  },
+  {
+    "id": 62,
+    "question": "Find the sum of the series:\\(2+6+18+54+\\ldots+4374\\)",
+    "options": [
+      "\\(6561\\)",
+      "\\(6560\\)",
+      "\\(6559\\)",
+      "None of the above"
+    ],
+    "answer": 1,
+    "solution": "Given:\\(2+6+18+54+\\ldots+4374\\)Here,\\(a=2\\)\\(r=3\\)Let, \\(a_{n}=4374\\)As we know, the general term of a GP is given by,\\(a_{n}=a r^{n-1}\\)\\(\\Rightarrow 4374=(2) \\cdot(3)^{n-1}\\)\\(\\Rightarrow 3^{n-1}=2187\\)\\(\\Rightarrow 3^{n-1}=3^{7}\\)\\(\therefore n-1=7\\)\\(\\Rightarrow n=8\\)As we know that,Sum of \\(n\\) terms of GP,\\({S}_{{n}}=\frac{{a}\\left({r}^{{n}}-1\right)}{{r}-1}\\)Where \\(r&gt;1\\)\\(\therefore S_{n}=\frac{2\\left(3^{8}-1\right)}{3-1}\\)\\(=3^{8}-1\\)\\(=6560\\)"
+  },
+  {
+    "id": 63,
+    "question": "The sum to infinity of the series \\(S=1+\frac{2}{3}+\frac{6}{3^{2}}+\frac{10}{3^{3}}+\frac{14}{3^{4}}+\\ldots\\) is",
+    "options": [
+      "4",
+      "6",
+      "2",
+      "3"
+    ],
+    "answer": 3,
+    "solution": "Let \\( S =1+\frac{2}{3}+\frac{6}{3^{2}}+\frac{10}{3^{3}}+\frac{14}{3^{4}}+\\ldots \\)\\( \frac{1}{3} S =\frac{1}{3}+\frac{2}{3^{2}}+\frac{6}{3^{3}}+\frac{10}{3^{4}}+\\ldots \\)\\( \frac{2}{3} S =1+\frac{1}{3}+\frac{4}{3^{2}}+\frac{4}{3^{3}}+\frac{4}{3^{4}}+\\ldots \\) \\(=1+\frac{1}{3}+\frac{4 / 3^{2}}{1-1 / 3}=\frac{4}{3}+\frac{2}{3}=2 \\)\\( S =3\\)"
+  },
+  {
+    "id": 64,
+    "question": "If the sum of \\(n\\) numbers in the GP \\(5,10,20, \\ldots\\) is \\(1275\\) then \\(n\\) is:",
+    "options": [
+      "\\(6\\)",
+      "\\(7\\)",
+      "\\(8\\)",
+      "\\(9\\)"
+    ],
+    "answer": 2,
+    "solution": "Given:\\(5,10,20, \\ldots\\)Here, \\(a=5, r=2\\)Sum of \\(n\\) numbers \\(=S_{n}=1275\\)As we know that, Sum of \\(n\\) terms of GP,\\(S_{n}=\frac{a\\left(r^{n}-1\right)}{r-1}\\)Where, \\(r&gt;1\\)\\(\therefore S_{n}=\frac{5\\left(2^{{n}}-1\right)}{2-1}\\)\\(1275=5 \times\\left(2^{n}-1\right)\\)\\(\\Rightarrow 255=\\left(2^{n}-1\right)\\)\\(\\Rightarrow 2^{n}=256\\)\\(\\Rightarrow 2^{n}=2^{8}\\)\\(\therefore n=8\\)"
+  },
+  {
+    "id": 65,
+    "question": "Suppose \\(a^{2}, b^{2}, c^{2}\\) are in \\(A . P .\\) Statement \\(-1: \frac{a}{b+c}, \frac{b}{c+a}, \frac{c}{a+b}\\) are in H.P.Statement \\(-2: b+c, c+a, a+b\\) are in H.P.",
+    "options": [
+      "Statement – 1 is True, statement – 2 is True and statement – 2 is the correct explanation for statement – 1.",
+      "Statement – 1 is True, statement – 2 is True and statement – 2 is not the correct explanation for Statement – 1.",
+      "Statement – 1 is True, statement – 2 is False.",
+      "Statement – 1 is False, statement – 2 is True."
+    ],
+    "answer": 3,
+    "solution": "\\(a^{2}, b^{2}, c^{2}\\) are in A.P. \\( \\Rightarrow a^{2}+b c+c a+a b, b^{2}+b c+c a+a b, c^{2}+a b+ b c+c a\\) are in A.P. \\(\\Rightarrow (a+b)(a+c),(b+a)(b+c),(c+a)(c+b)\\) are in A.P.Dividing by \\((b+c)(c+a)(a+b),\\) we get\\(\frac{1}{b+c}, \frac{1}{c+a}, \frac{1}{a+b}\\) are in A.P....(1)\\(\\Rightarrow b+c, c+a, a+b\\) are in \\(H.P.\\)and \\( \frac{a+b+c}{b+c}, \frac{a+b+c}{c+a}, \frac{a+b+c}{a+b}\\) are in A.P.\\(\\Rightarrow \frac{a}{b+c}+1, \frac{b}{c+a}+1, \frac{c}{a+b}+1\\) are in A.P.\\(\\Rightarrow \frac{a}{b+c}, \frac{b}{c+a}, \frac{c}{a+b}\\) are in A.P."
+  },
+  {
+    "id": 66,
+    "question": "Let a1, a2, …, a10 be in A.P. and h1, h2, …, h10 be in H.P. If a1 = h1 = 2 and a10 = h10 = 3, then a4 h7 is",
+    "options": [
+      "2",
+      "3",
+      "5",
+      "6"
+    ],
+    "answer": 3,
+    "solution": "Let \\(d\\) be the common difference of the A.P., then\\(3=a_{10}=2+9 d \\Rightarrow d=1 / 9\\)\\(\therefore \\quad a_{4}=2+3 d=7 / 3\\)Next, let \\(D\\) be the common difference of the A.P. \\(\frac{1}{h_{1}}, \frac{1}{h_{2}}, \\ldots, \frac{1}{h_{10}}\\) Then\\(\frac{1}{3}=\frac{1}{h_{10}}=\frac{1}{2}+9 D \\Rightarrow D=-\frac{1}{54}\\)\\(\therefore \frac{1}{h_{7}}=\frac{1}{h_{1}}+6 D=\frac{7}{18} \\Rightarrow h_{7}=\frac{18}{7}\\)Hence, \\(a_{4} h_{7}=(7 / 3)(18 / 7)=6\\)"
+  },
+  {
+    "id": 67,
+    "question": "Sum of three numbers in a GP is 14. If 1 is added to the first and second terms and 1 is subtracted from the third term, the new numbers are in AP. The smallest number among these numbers is",
+    "options": [
+      "2",
+      "4",
+      "3",
+      "8"
+    ],
+    "answer": 0,
+    "solution": "Let the numbers be  Then,  (given) ...(A).Now,  are in AP&nbsp;&nbsp;(ar ) &nbsp;....(B). From (A) and (B),&nbsp;2ar + 2 = 14&nbsp;- ar&nbsp;3ar = 12 &nbsp;ar = 4 ...(C).From (A), a + 4 + 4r = 14&nbsp;&nbsp;a + 4r = 10 ...(D).From (C) and (D), Therefore, the smallest number is .Hence, the correct option is (a)."
+  },
+  {
+    "id": 68,
+    "question": "If A = 1 + ra + r2a + r3a + … upto &nbsp;and B = 1 + rb + r2b + r3b + … upto , then &nbsp;is equal to",
+    "options": [
+      "\\(\frac{\\log (1+A)}{\\log (1+B)}\\)",
+      "\\(\frac{\\log (A-1)}{\\log (B-1)}\\)",
+      "logBA",
+      "None of these"
+    ],
+    "answer": 3,
+    "solution": "\\(A=\frac{1}{1-r^{a}}, B=\frac{1}{1-r^{b}}\\)\\(\\Rightarrow \\quad 1-r^{a}=\frac{1}{A}, 1-r^{b}=\frac{1}{B}\\)\\(\\Rightarrow \\quad a \\log r=\\log (1-1 / A)\\) and\\( b \\log r=\\log (1-1 / B)\\)\\(\therefore \frac{a}{b}=\frac{\\log \\left(1-A^{-1}\right)}{\\log \\left(1-B^{-1}\right)}\\)"
+  },
+  {
+    "id": 69,
+    "question": "Sum to \\(n\\) terms of the series \\(\frac{1}{1.2 .3}+\frac{3}{2.3 .4}+\frac{5}{3.4 .5}+\frac{7}{4.5 .6}+\\ldots .\\) is",
+    "options": [
+      "\\(\frac{n(n+1)}{2(n+2)(n+3)}\\)",
+      "\\(\frac{n(3 n+1)}{4(n+1)(n+2)}\\)",
+      "\\(\frac{1}{6}-\frac{5}{(n+1)(n+4)}\\)",
+      "None of these"
+    ],
+    "answer": 1,
+    "solution": "We have \\(t_{r}=\frac{2 r-1}{r(r+1)(r+2)}\\) and\\(t_{r+1}=\frac{2 r+1}{(r+1)(r+2)(r+3)}\\)\\(\\Rightarrow r t_{r}=\frac{2 r-1}{(r+1)(r+2)},(r+3) t_{r+1}=\frac{2 r+1}{(r+1)(r+2)}\\)\\(\\Rightarrow r t_{r}-(r+3) t_{r+1}=\frac{-2}{(r+1)(r+2)}\\)\\(\\Rightarrow r t_{r}-(r+1) t_{r+1}+2\\left(\frac{1}{r+1}-\frac{1}{r+2}\right)=2 t_{r+1}\\)\\(\\Rightarrow \\sum_{r=1}^{n-1}\\left[r t_{r}-(r+1) t_{r+1}\right]+2 \\sum_{r=1}^{n-1}\\left(\frac{1}{r+1}-\frac{1}{r+2}\right)=2 \\sum_{r=1}^{n-1} t_{r+1}\\)\\(\\Rightarrow t_{1}-n t_{n}+1-\frac{2}{n+1}=2\\left(t_{2}+t_{3}+\\ldots+t_{n}\right)\\)\\(\\Rightarrow 3 t_{1}-n t_{n}+1-\frac{2}{n+1}=2 \\sum_{r=1}^{n} t_{r}\\)\\(\frac{1}{2}-\frac{n(2 n-1)}{n(n+1)(n+2)}+\frac{n-1}{n+1}=2 \\sum_{r=1}^{n} t_{r}\\)\\(\therefore 2 \\sum_{r=1}^{n} t_{r}=\frac{(n+1)(n+2)-2(2 n-1)+2(n-1)(n+2)}{2(n+1)(n+2)}\\)\\(\\Rightarrow \\sum_{r=1}^{n} t_{r}=\frac{n(3 n+1)}{4(n+1)(n+2)}\\)"
+  },
+  {
+    "id": 70,
+    "question": "If \\(\\log _{10} 2, \\log _{10}\\left(2^{x}-1\right)\\) and \\(\\log _{10}\\left(2^{x}+3\right)\\) are three consecutive terms of an \\(A P\\), then the value of \\({x}\\) is:",
+    "options": [
+      "\\(1\\)",
+      "\\(\\log _{5} 2\\)",
+      "\\(\\log _{2} 5\\)",
+      "\\(\\log _{10} 5\\)"
+    ],
+    "answer": 2,
+    "solution": "Given:\\(\\log _{10} 2, \\log _{10}\\left(2^{x}-1\right)\\) and \\(\\log _{10}\\left(2^{x}+3\right)\\) are three consecutive terms of an AP.We know that if&nbsp;\\(a, b, c\\) are in A.P than,\\(2 b=a+c\\)\\(\\Rightarrow 2 \times \\log _{10}\\left(2^{x}-1\right)=\\log _{10} 2+\\log _{10}\\left(2^{x}+3\right)\\)\\(\\Rightarrow \\log _{10}\\left(2^{x}-1\right)^{2}=\\log _{10}\\left(2 \times\\left(2^{x}+3\right)\right)\\)\\(\\Rightarrow\\left(2^{x}-1\right)^{2}=2 \times\\left(2^{x}+3\right)\\)Let \\(2^{x}=t\\)\\(({t}-1)^{2}=2 \times({t}+3)\\)\\(\\Rightarrow t^{2}-2 t+1=2 t+6\\)\\(\\Rightarrow t^{2}-4 t-5=0\\)\\(\\Rightarrow t^{2}-5 t+t-5=0\\)\\(\\Rightarrow t(t-5)+1(t-5)=0\\)\\(\\Rightarrow(t-5)(t+1)=0\\)\\(\therefore t=5,-1\\)\\(\because 2^{x}&gt;0\\)\\(\\Rightarrow 2^{x} \neq-1\\)Now,\\(2^{x}=5\\)\\(\therefore x=\\log _{2} 5\\)"
+  },
+  {
+    "id": 71,
+    "question": "If \\(a_{n+1}=\frac{1}{1-a_{n}}\\) for \\(n \\geq 1\\) and \\(a_{3}=a_{1},\\) then \\(\\left(a_{2010}\right)^{2010}\\) equals",
+    "options": [
+      "– 1",
+      "1",
+      "0",
+      "None of these"
+    ],
+    "answer": 1,
+    "solution": "We have \\(a_{2}=\frac{1}{1-a_{1}}\\) and\\(a_{3}=\frac{1}{1-a_{2}}=\frac{1}{1-1 /\\left(1-a_{1}\right)}=\frac{1-a_{1}}{-a_{1}}\\)since \\(a_{3}=a_{1},\\) we get \\(-a_{1}^{2}=1-a_{1}\\)\\(\\Rightarrow a_{1}^{2}-a_{1}+1=0 \\Rightarrow a_{1}=-\\omega\\) or \\(-\\omega^{2}\\)We have\\(a_{5} =\frac{1}{1-a_{4}}=\frac{1}{1-1 /\\left(1-a_{3}\right)}=\frac{1-a_{3}}{-a_{3}}=\frac{1-a_{1}}{-a_{1}} \\)\\(=a_{3}=a_{1}\\)Continuing in this way we obtain \\(a_{1}=a_{3}=a_{5}=a_{7}=a_{9}=a_{11}=\\ldots=a_{2010}\\)Thus, \\(\\left(a_{2010}\right)^{2010}=(-\\omega)^{2010}\\) or \\(\\left(-\\omega^{2}\right)^{2010}=1\\)"
+  },
+  {
+    "id": 72,
+    "question": "Which term of the GP \\(2,6,18,54,\\cdots\\), is \\(4374 ?\\)",
+    "options": [
+      "\\(6^{\text {th }}\\)",
+      "\\(7^{t h}\\)",
+      "\\(8^{\text {th }}\\)",
+      "\\(9^{\text {th }}\\)"
+    ],
+    "answer": 2,
+    "solution": "Given:The sequence \\(2,6,18,54, \\ldots .\\) is a GP.Here, we have to find which term of the given sequence is \\(4374\\).As we know, the general term of a GP is given by:\\(a_{n}=a r^{n-1}\\)Here, \\(a=2, r=3\\) and let \\(a_{n}=4374\\)\\(4374=(2) \\cdot(3)^{n-1}\\)\\(\\Rightarrow 3^{n-1}=2187\\)\\(\\Rightarrow 3^{n-1}=3^{7}\\)\\(\\Rightarrow n-1=7\\)\\(\\Rightarrow n=8\\)Therefore, \\(4374\\) is the \\(8^{\text {th }}\\) term of the given sequence."
+  },
+  {
+    "id": 73,
+    "question": "In a G.P, the \\(5\\)th term is \\(96\\) and the \\(8\\)th term is \\(768\\), then the \\(3\\)rd term of G.P is:",
+    "options": [
+      "\\(16\\)",
+      "\\(48\\)",
+      "\\(24\\)",
+      "\\(36\\)"
+    ],
+    "answer": 2,
+    "solution": "Given:\\(5\\)th term of G.P is \\(96 .\\)i.e.,\\(a_{5}=a r^{5-1}\\)\\(\\Rightarrow a_{5}=a r^{4}\\)\\(\\Rightarrow 96=a r^{4}\\quad \\ldots(1)\\)And,\\(8\\)th term is \\(768\\).\\(\\Rightarrow a_{8}=a r^{7}\\)\\(\\Rightarrow768=a r^{7}\\quad \\ldots (2)\\)Divide equation \\((2)\\) by equation \\((1)\\), we get,\\(8=r^{3}\\)\\(\\Rightarrow r=2\\)Putting this in equation \\((1)\\), we get,\\(a=6\\)We know that, \\({n}\\)th term of G.P.\\(a_{n}=a r^{n-1}\\)So,\\(a_{3}=6 \times 2^{3-1}\\)\\(\\Rightarrow a_{3}=24\\)"
+  },
+  {
+    "id": 74,
+    "question": "If \\(\frac{1}{1^{2}}+\frac{1}{2^{2}}+\frac{1}{3^{2}}+\\ldots\\) upto \\(\\infty=\frac{\\pi^{2}}{6},\\) then the value of \\(\frac{1}{1^{2}}+\frac{1}{3^{2}}+\frac{1}{5^{2}}+\\ldots\\) upto \\(^{\\infty}\\) is",
+    "options": [
+      "\\(\frac{\\pi^{2}}{4}\\)",
+      "\\(\frac{\\pi^{2}}{6}\\)",
+      "\\(\frac{\\pi^{2}}{8}\\)",
+      "\\(\frac{\\pi^{2}}{12}\\)"
+    ],
+    "answer": 2,
+    "solution": "\\(\frac{\\pi^{2}}{6}=\frac{1}{1^{2}}+\frac{1}{2^{2}}+\frac{1}{3^{2}}+\\ldots .\\) Upto \\(\\infty \rightarrow(I)\\)Multiplying by \\(\\left(\frac{-1}{2^{2}}\right)\\) Both sides \\(-\frac{1}{4}\\left(\frac{\\pi^{2}}{6}\right)=\frac{-1}{2^{2}}\\left[\frac{1}{1^{2}}+\frac{1}{2^{2}}+\frac{1}{3^{2}}+\\ldots .\right.\\) Upto \\(\\left.\\infty\right] \rightarrow(II)\\)By adding (I) and (II) we get \\(\frac{\\pi^{2}}{6}-\frac{1}{4}\\left(\frac{\\pi^{2}}{6}\right)=\frac{\\pi^{2}}{8}=\\left[\frac{1}{1^{2}}+\frac{1}{3^{2}}+\frac{1}{5^{2}}+\\ldots . \\infty\right]\\)"
+  },
+  {
+    "id": 75,
+    "question": "If \\(\frac{e^{5 x}+e^{x}}{e^{3 x}}\\) is expanded in a series of ascending powers of \\(x\\) and \\(n\\) is an odd natural number, the coefficient of \\(x^{n}\\) is",
+    "options": [
+      "\\(\frac{2^{n}}{n !}\\)",
+      "\\(\frac{2^{n+1}}{(2 n) !}\\)",
+      "\\(\frac{2^{2 n}}{(2 n) !}\\)",
+      "None of these"
+    ],
+    "answer": 3,
+    "solution": "We have \\(\frac{e^{5 x}+e^{x}}{e^{3 x}}=e^{2 x}+e^{-2 x}=2\\left(1+\frac{2^{2} x^{2}}{2}+\frac{2^{4} x^{4}}{4 !}+\\ldots\right)\\)The expansion does not contain any odd power at \\(x\\). Therefore, coefficient of \\(x^{n}\\) is zero."
+  }
+]

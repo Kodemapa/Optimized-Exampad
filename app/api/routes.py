@@ -12,6 +12,39 @@ from app.models import db, Subject, Topic, Question
 
 bp = Blueprint('api', __name__)
 
+def convert_options_for_frontend(question):
+    """
+    Convert options from A,B,C,D dict format to array for frontend compatibility.
+    Also converts correct_answer from letter to index.
+    Returns tuple: (options_array, correct_answer_index)
+    """
+    options_dict = question.get_options()
+    options_array = []
+    correct_answer_letter = question.correct_answer
+    
+    if isinstance(options_dict, dict):
+        # Convert from {"A": "option1", "B": "option2", ...} to ["option1", "option2", ...]
+        for letter in ['A', 'B', 'C', 'D']:
+            if letter in options_dict:
+                options_array.append(options_dict[letter])
+            else:
+                options_array.append("")  # Empty if missing option
+        
+        # Convert correct answer from letter to index (A=0, B=1, C=2, D=3)
+        if correct_answer_letter in ['A', 'B', 'C', 'D']:
+            correct_answer_index = ord(correct_answer_letter) - ord('A')
+        else:
+            correct_answer_index = 0  # Default to A if invalid
+    else:
+        # Fallback for old format (if any still exist)
+        options_array = options_dict if isinstance(options_dict, list) else []
+        try:
+            correct_answer_index = int(correct_answer_letter) - 1 if correct_answer_letter.isdigit() else 0
+        except:
+            correct_answer_index = 0
+    
+    return options_array, correct_answer_index
+
 # API Routes (database-backed)
 @bp.route('/classes', methods=['GET'])
 def get_classes():
@@ -95,12 +128,15 @@ def get_sample_questions():
             topic = Topic.query.get(q.topic_id)
             subject = Subject.query.get(topic.subject_id) if topic else None
             
+            # Convert options for frontend compatibility
+            options_array, correct_answer_index = convert_options_for_frontend(q)
+            
             question_data = {
                 'id': q.id,
                 'qid': q.qid,
                 'question': q.question_text,
-                'options': q.get_options(),
-                'answer': q.correct_answer,
+                'options': options_array,
+                'answer': correct_answer_index,
                 'explanation': q.explanation,
                 'difficulty_level': q.difficulty_level,
                 'max_marks': q.max_marks,
@@ -178,12 +214,16 @@ def get_random_questions():
         questions_data = []
         for q in sample_questions:
             subject = Subject.query.get(topic.subject_id)
+            
+            # Convert options for frontend compatibility
+            options_array, correct_answer_index = convert_options_for_frontend(q)
+            
             question_data = {
                 'id': q.id,
                 'qid': q.qid,
                 'question': q.question_text,
-                'options': q.get_options(),
-                'answer': q.correct_answer,
+                'options': options_array,
+                'answer': correct_answer_index,
                 'explanation': q.explanation,
                 'difficulty_level': q.difficulty_level,
                 'max_marks': q.max_marks,
@@ -296,18 +336,21 @@ def evaluate_answers():
             topic = Topic.query.get(question.topic_id)
             subject = Subject.query.get(topic.subject_id) if topic else None
             
+            # Convert options for frontend compatibility
+            options_array, correct_answer_index = convert_options_for_frontend(question)
+            
             result_item = {
                 'question_id': question_id,
                 'qid': question.qid,
                 'submitted_answer': submitted_answer,
-                'correct_answer': correct_answer,
+                'correct_answer': correct_answer_index,
                 'is_correct': is_correct,
                 'score': score,
                 'max_marks': max_marks,
                 'time_taken': time_taken,
                 'difficulty_level': question.difficulty_level,
                 'question_text': question.question_text,
-                'options': question.get_options(),
+                'options': options_array,
                 'explanation': question.explanation,
                 'topic': {
                     'id': topic.id,
@@ -537,12 +580,15 @@ def get_practice_questions():
             topic = Topic.query.get(q.topic_id)
             subject = Subject.query.get(topic.subject_id) if topic else None
             
+            # Convert options for frontend compatibility
+            options_array, correct_answer_index = convert_options_for_frontend(q)
+            
             question_data = {
                 'id': q.id,
                 'qid': q.qid,
                 'question': q.question_text,
-                'options': q.get_options(),
-                'correct_answer': q.correct_answer,
+                'options': options_array,
+                'correct_answer': correct_answer_index,
                 'explanation': q.explanation,
                 'difficulty_level': q.difficulty_level,
                 'max_marks': q.max_marks,
@@ -585,6 +631,9 @@ def submit_practice_test():
             
             question = Question.query.get(question_id)
             if question:
+                # Convert options for frontend compatibility
+                options_array, correct_answer_index = convert_options_for_frontend(question)
+                
                 is_correct = question.correct_answer == user_answer
                 if is_correct:
                     correct_answers += 1
@@ -592,9 +641,9 @@ def submit_practice_test():
                 detailed_results.append({
                     'question_id': question_id,
                     'question': question.question_text,
-                    'options': question.get_options(),
+                    'options': options_array,
                     'user_answer': user_answer,
-                    'correct_answer': question.correct_answer,
+                    'correct_answer': correct_answer_index,
                     'is_correct': is_correct,
                     'explanation': question.explanation
                 })

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Import Tool</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .subject-columns {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .subject-column {
+            flex: 1 1 350px;
+            min-width: 320px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        .subject-card {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            border-radius: 10px;
+            width: 100%;
+            padding: 18px 20px;
+            margin-bottom: 0;
+        }
+        @media (max-width: 900px) {
+            .subject-columns {
+                flex-direction: column;
+                gap: 0;
+            }
+            .subject-column {
+                max-width: 100%;
+                margin-bottom: 32px;
+            }
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        select, input[type="file"], input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+        .alert-success {
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        #topic-section {
+            display: none;
+        }
+        #new-topic-section {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Question Import Tool</h1>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="jsonfile">Select JSON File(s):</label>
+                <input type="file" id="jsonfile" name="jsonfile" accept=".json" multiple required>
+                <small style="color: #666; font-size: 12px; margin-top: 5px; display: block;">
+                    💡 Tip: Hold Ctrl (Windows) or Cmd (Mac) to select multiple files at once
+                </small>
+            </div>
+
+            <div class="form-group">
+                <label for="subject">Select Subject:</label>
+                <select id="subject" name="subject" required onchange="loadTopics()">
+                    <option value="">-- Select Subject --</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject[0] }}">{{ subject[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group" id="topic-section">
+                <label for="topic">Select Topic:</label>
+                <select id="topic" name="topic" onchange="toggleNewTopic()">
+                    <option value="">-- Select Topic --</option>
+                </select>
+                <label>
+                    <input type="checkbox" id="add-new-topic" onchange="toggleNewTopic()"> Add New Topic
+                </label>
+            </div>
+
+            <div class="form-group" id="new-topic-section">
+                <label for="new_topic">New Topic Name:</label>
+                <input type="text" id="new_topic" name="new_topic" placeholder="Enter new topic name">
+            </div>
+
+            <button type="submit">Upload and Import Questions</button>
+
+        </form>
+
+        <hr>
+        <h2 style="margin-top:40px; text-align:center;">Manage Subjects & Topics</h2>
+        <div class="subject-columns">
+            <div class="subject-column">
+                <h3 style="text-align:center; color:#007bff; margin-bottom:18px;">Class XI Subjects</h3>
+                {% for subject in xi_subjects %}
+                    <div class="subject-card">
+                        <div style="display:flex; align-items:center; justify-content:space-between;">
+                            <span style="font-size:1.2em; font-weight:600; color:#007bff;">{{ subject[1] }}</span>
+                            <form action="/delete_subject/{{ subject[0] }}" method="post" style="display:inline;" onsubmit="return confirm('Delete this subject and all its topics/questions?');">
+                                <button type="submit" title="Delete Subject" style="background-color:#dc3545; color:white; padding:4px 12px; border:none; border-radius:5px; font-size:15px; margin-left:10px;">🗑</button>
+                            </form>
+                        </div>
+                        <div style="margin-top:14px;">
+                            <span style="font-size:1em; color:#555; font-weight:500;">Topics:</span>
+                            <ul style="list-style:none; padding-left:0; margin-top:8px;">
+                                {% for topic in subject_topics[subject[0]] %}
+                                    <li style="margin-bottom:10px; display:flex; align-items:center;">
+                                        <form action="/edit_topic/{{ topic[0] }}" method="post" style="display:flex; align-items:center; gap:6px;">
+                                            <input type="text" name="new_name" value="{{ topic[1] }}" style="width:140px; padding:3px 8px; font-size:15px; border:1px solid #ddd; border-radius:4px;">
+                                            <button type="submit" title="Edit Topic" style="background-color:#ffc107; color:black; padding:2px 10px; border:none; border-radius:4px; font-size:14px;">✏️</button>
+                                        </form>
+                                        <form action="/delete_topic/{{ topic[0] }}" method="post" style="display:inline; margin-left:8px;" onsubmit="return confirm('Delete this topic and all its questions?');">
+                                            <button type="submit" title="Delete Topic" style="background-color:#dc3545; color:white; padding:2px 10px; border:none; border-radius:4px; font-size:14px;">🗑</button>
+                                        </form>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div style="width:2px; background:#e0e0e0; min-height:40px; align-self:stretch; margin:0 18px;"></div>
+            <div class="subject-column">
+                <h3 style="text-align:center; color:#007bff; margin-bottom:18px;">Class XII Subjects</h3>
+                {% for subject in xii_subjects %}
+                    <div class="subject-card">
+                        <div style="display:flex; align-items:center; justify-content:space-between;">
+                            <span style="font-size:1.2em; font-weight:600; color:#007bff;">{{ subject[1] }}</span>
+                            <form action="/delete_subject/{{ subject[0] }}" method="post" style="display:inline;" onsubmit="return confirm('Delete this subject and all its topics/questions?');">
+                                <button type="submit" title="Delete Subject" style="background-color:#dc3545; color:white; padding:4px 12px; border:none; border-radius:5px; font-size:15px; margin-left:10px;">🗑</button>
+                            </form>
+                        </div>
+                        <div style="margin-top:14px;">
+                            <span style="font-size:1em; color:#555; font-weight:500;">Topics:</span>
+                            <ul style="list-style:none; padding-left:0; margin-top:8px;">
+                                {% for topic in subject_topics[subject[0]] %}
+                                    <li style="margin-bottom:10px; display:flex; align-items:center;">
+                                        <form action="/edit_topic/{{ topic[0] }}" method="post" style="display:flex; align-items:center; gap:6px;">
+                                            <input type="text" name="new_name" value="{{ topic[1] }}" style="width:140px; padding:3px 8px; font-size:15px; border:1px solid #ddd; border-radius:4px;">
+                                            <button type="submit" title="Edit Topic" style="background-color:#ffc107; color:black; padding:2px 10px; border:none; border-radius:4px; font-size:14px;">✏️</button>
+                                        </form>
+                                        <form action="/delete_topic/{{ topic[0] }}" method="post" style="display:inline; margin-left:8px;" onsubmit="return confirm('Delete this topic and all its questions?');">
+                                            <button type="submit" title="Delete Topic" style="background-color:#dc3545; color:white; padding:2px 10px; border:none; border-radius:4px; font-size:14px;">🗑</button>
+                                        </form>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    <script>
+        function loadTopics() {
+            const subjectId = document.getElementById('subject').value;
+            const topicSection = document.getElementById('topic-section');
+            const topicSelect = document.getElementById('topic');
+            
+            if (subjectId) {
+                fetch(`/topics/${subjectId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        topicSelect.innerHTML = '<option value="">-- Select Topic --</option>';
+                        data.topics.forEach(topic => {
+                            topicSelect.innerHTML += `<option value="${topic[0]}">${topic[1]}</option>`;
+                        });
+                        topicSection.style.display = 'block';
+                    })
+                    .catch(error => {
+                        console.error('Error loading topics:', error);
+                        topicSection.style.display = 'none';
+                    });
+            } else {
+                topicSection.style.display = 'none';
+            }
+        }
+
+        function toggleNewTopic() {
+            const addNewTopicCheckbox = document.getElementById('add-new-topic');
+            const newTopicSection = document.getElementById('new-topic-section');
+            const topicSelect = document.getElementById('topic');
+            const newTopicInput = document.getElementById('new_topic');
+            
+            if (addNewTopicCheckbox.checked) {
+                newTopicSection.style.display = 'block';
+                topicSelect.required = false;
+                newTopicInput.required = true;
+                topicSelect.value = '';
+            } else {
+                newTopicSection.style.display = 'none';
+                topicSelect.required = true;
+                newTopicInput.required = false;
+                newTopicInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

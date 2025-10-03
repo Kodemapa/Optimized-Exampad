@@ -1,0 +1,6 @@
+{
+  "questions": [
+    ["", "", "What is shown in this image? <img src=\"static/images/test.png\" alt=\"Test\">", ["Option A", "Option B with <img src='static/media/image.jpg'>", "Option C", "Option D"], [1], "", "This is an explanation with a link to static/files/solution.pdf"],
+    ["", "", "Another question with background: url(static/css/bg.png)", ["static/option1.txt", "Option 2", "Option 3", "Option 4"], [2], "", "Check static/docs/manual.html for details"]
+  ]
+}

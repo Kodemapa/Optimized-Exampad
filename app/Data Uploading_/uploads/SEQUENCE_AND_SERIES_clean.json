@@ -1,0 +1,2405 @@
+{
+"msg": "",
+"status": true,
+"code": 200,
+"result": {
+"user": {
+"level": 4,
+"name": "Soladi Prashitha"
+},
+"data": {
+"passages": null,
+"sol_passage": null,
+"shuffling": true,
+"qc_ids": {},
+"sec_questions": [
+[
+1,
+null,
+"A person is to count 4500 currency notes. Let a<sub>n</sub> denote the number of notes he counts in the n<sup>th</sup> minute. If a<sub>1</sub> = a<sub>2</sub> = ... = a<sub>10</sub> = 150 and a<sub>10</sub>, a<sub>11</sub>, ... are in an A.P. with common difference – 2, then the time taken by him to count all the notes is",
+[
+"125 minutes",
+"135 minutes",
+"24 minutes",
+"34 minutes"
+],
+[
+3
+],
+null,
+"<div>Suppose he takes \\(n\\) minutes to count 4500 notes. We have<br> \\(a_{1}+a_{2}+\\ldots+a_{10}=10(150), a_{11}=148\\) and<br>\\(a_{11}, a_{12}, \\ldots, a_{n}\\) is an A.P. with common difference \\(d=-2\\) <br>We are given<br>\\(a_{1}+a_{2}+\\ldots+a_{10}+a_{11}+\\ldots+a_{n}=4500\\)<br>\\(\\Rightarrow a_{11}+a_{12}+\\ldots+a_{n}=3000\\)<br>\\(\\Rightarrow \frac{n-10}{2}\\left[a_{11}+a_{n}\right]=3000\\)<br>\\(\\Rightarrow \frac{1}{2}(n-10)[148+148+(n-11)(-2)]=3000\\)<br>\\(\\Rightarrow (n-10)(148-n+11)=3000\\)<br>\\(\\Rightarrow (n-10)(159-n)=3000\\)<br>\\(\\Rightarrow n^{2}-169 n+4590=0\\)<br>\\(\\Rightarrow n^{2}-135 n-34 n+4590=0\\)<br>\\(\\Rightarrow(n-135)(n-34)=0 \\Rightarrow n=135,34\\)<br>All the notes get counted in 34 minutes.</div>",
+null,
+null,
+[
+0,
+0
+],
+1,
+3.013000011444092,
+"a76728608e684436857ac811a1e27d10",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+2,
+null,
+"If the sum of n terms of an AP is an(n&nbsp;- 1), then the sum of the squares of these terms is",
+[
+"<div>\\(a^{2} n^{2}(n-1)^{2}\\)</div>",
+"<div>\\(\frac{a^{2}}{6} n(n-1)(2 n-1)\\)</div>",
+"<div>\\(\frac{2 a^{2}}{3} n(n-1)(2 n-1)\\)</div>",
+"<div>\\(\frac{2 a^{2}}{3} n(n+1)(2 n+1)\\)</div>"
+],
+[
+2
+],
+null,
+"Let A be the first term and D be the common difference of the AP. <br>Then, S<sub>n</sub> = an(n&nbsp;- 1)<br>⇒&nbsp;<sup><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/f67e14c145008f114ac219ca49a2028c.png" class="img-responsive" style="display: inline;"></span></sup>[2A + (n&nbsp;- 1)(D)] = an(n&nbsp;- 1)<br>⇒&nbsp;2A + (n&nbsp;- 1)D = 2an&nbsp;- 2a<br>Compare the coefficient of n and constant term on both sides.<br>⇒&nbsp;2A - D =&nbsp;-2a and D = 2a<br>⇒ D = 2a <br>⇒ A = 0<br>Sum of squares of n terms of the sequence,&nbsp;S = A<sup>2</sup> + (A + D)<sup>2</sup> + (A + 2D)<sup>2</sup> + ... + (A + (n&nbsp;- 1)D)<sup>2</sup><br>= D<sup>2</sup>(1<sup>2</sup> + 2<sup>2</sup> + 3<sup>2</sup> +.......+ (n&nbsp;- 1)<sup>2</sup>)<br><div>\\(=4 a^{2} \frac{n(n-1)(2 n-1)}{6}=\frac{2 a^{2}}{3} n(n-1)(2 n-1)\\)</div>",
+null,
+null,
+[
+1,
+1
+],
+1,
+0,
+"0f4bfcbff676418594b3c355f2a70339",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+3,
+null,
+"The three successive terms of a G.P. will form the sides of a triangle if the common ratio r satisfies the inequality",
+[
+"<p>\\(\frac{\\sqrt{3}-1}{2}&lt;r&lt;\frac{\\sqrt{3}+1}{2}\\)</p>",
+"<p>\\(\frac{\\sqrt{5}-1}{2}&lt;r&lt;\frac{\\sqrt{5}+1}{2}\\)</p>",
+"<p>\\(\frac{\\sqrt{2}-1}{2}&lt;r&lt;\frac{\\sqrt{2}+1}{2}\\)</p>",
+"None of these"
+],
+[
+1
+],
+null,
+"<p>Let the sides of the triangle be a, ar and ar \\(^{2}\\)</p><p>1. If \\(r=1\\), then the triangle is equilateral and the inequality is satisfied.</p><p>2. If \\(r&gt;1,\\) then \\(a+a r&gt;a r^{2} \\Rightarrow r^{2}-r-1&lt;0 \\Rightarrow \frac{\\sqrt{5}-1}{2}&lt;r&lt;\frac{\\sqrt{5}+1}{2}\\)</p><p>3. If \\(r&lt;1\\), then \\(ar+ar^2&gt;a \\Rightarrow r^2 +r-1&gt;0 \\Rightarrow \frac{\\sqrt{5}-1}{2}&lt;r&lt;1\\)</p><p>\\(\therefore \frac{\\sqrt{5}-1}{2}&lt;r&lt;\frac{\\sqrt{5}+1}{2}\\)</p><p>So, the option is correct.</p>",
+null,
+null,
+[
+2,
+2
+],
+1,
+0,
+"ca696a47e20b417e90c6727ac0058bdc",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+4,
+null,
+"Let a, b, c be distinct numbers in G.P. such that a<sup>2</sup> + b<sup>2</sup> + c<sup>2</sup> = s<sup>2</sup> and a + b + c = <sup><sub><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/4633bee3f4d66bf46035b37cb4ecec5f.png" class="img-responsive" style="display: inline;"></span></sub></sup>s. The sum of common ratio and its reciprocal is t. The value of t in terms of <sup><sub><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/8a457d094ba81eccf6074a343a05fa0c.png" class="img-responsive" style="display: inline;"></span></sub></sup>&nbsp;is",
+[
+"<div>\\(\frac{\\alpha^{2}+1}{\\alpha^{2}-1}\\)</div>",
+"<div>\\(\frac{\\alpha^{2}+1}{1-\\alpha^{2}}\\)</div>",
+"<div>\\(\frac{\\alpha^{2}-1}{\\alpha^{2}+1}\\)</div>",
+"<div>\\(\frac{1-\\alpha^{2}}{1+\\alpha^{2}}\\)</div>"
+],
+[
+0
+],
+null,
+"<div>It is given that \\(a^{2}+b^{2}+c^{2}=s^{2}, a+b+c=\\alpha\\). <br>\\(a, b, c\\) are distinct numbers in G.P, \\(t=r+\frac{1}{r}\\)<br>where r is common ratio of GP <br>\\(\\Rightarrow \frac{(a+b+c)^{2}}{a^{2}+b^{2}+c^{2}}=\\alpha^{2} \\Rightarrow \frac{\\alpha^{2}+1}{\\alpha^{2}-1}=t\\)<br>\\(\therefore\\) The option is correct.</div>",
+null,
+null,
+[
+3,
+3
+],
+1,
+0,
+"616354ef7dd34537b54d43261899060e",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+5,
+null,
+"<div>Suppose \\(\frac{a-x}{p x}=\frac{a-y}{q y}=\frac{a-z}{r z}\\)<br>Statement - 1: If p, q and r are in AP, then \\(x\\), y and \\(z\\) are in \\(HP\\).&nbsp;</div><div>Statement - 2: If p, q and r are in HP, then x, y and z are in GP.</div>",
+[
+"Statement – 1 is true, statement – 2 is true and statement – 2 is the correct explanation for statement – 1.",
+"Statement – 1 is true, statement – 2 is true and statement – 2 is not the correct explanation for statement – 1.",
+"Statement – 1 is true, statement – 2 is false.",
+"Statement – 1 is false, statement – 2 is true."
+],
+[
+2
+],
+null,
+"<div>Suppose<br>\\(\frac{a-x}{p x}=\frac{a-y}{q y}=\frac{a-z}{r z}=k(\\) say \\()\\)<br>\\(\\Rightarrow p=\frac{a-x}{k x}, q=\frac{a-y}{k y}, r=\frac{a-z}{k z}\\)<br>Now, \\(p, q, r\\) are in A.P.<br>\\(\\Rightarrow \frac{a-x}{k x}, \frac{a-y}{k y}, \frac{a-z}{k z}\\) are in A.P.<br>\\(\\Rightarrow \frac{a}{x}-1, \frac{a}{y}-1, \frac{a}{z}-1\\) are in A.P.<br>\\(\\Rightarrow \\ \frac{a}{x}, \frac{a}{y}, \frac{a}{z}\\) are in A.P. \\(\\Rightarrow x, y, z\\) are in H.P.<br>Next, \\(p, q, r\\) are in H.P.<br>\\(\\Rightarrow \frac{k x}{a-x}, \frac{k y}{a-y}, \frac{k z}{a-z}\\) are in A.P.<br>\\(\\Rightarrow \frac{x}{a-x}, \frac{y}{a-y}, \frac{z}{a-z}\\) are in A.P.<br>\\(\\Rightarrow \frac{x}{a-x}+1, \frac{y}{a-y}+1, \frac{z}{a-z}+1\\) are in A.P.</div><div>Next, \\(p, q, r\\) are in H.P.<br>\\(\\Rightarrow \\quad \frac{k x}{a-x}, \frac{k y}{a-y}, \frac{k z}{a-z}\\) are in \\(A.P.\\)<br>\\(\\Rightarrow \\quad \frac{x}{a-x}, \frac{y}{a-y}, \frac{z}{a-z}\\) are in A.P.<br>\\(\\Rightarrow \frac{x}{a-x}+1, \frac{y}{a-y}+1, \frac{z}{a-z}+1\\) are in A.P.<br>\\(\\Rightarrow \\quad a-x, a-y, a-z\\) are in \\(H.P.\\)<br>Nothing can be said about \\(x, y, z .\\)</div>",
+null,
+null,
+[
+4,
+4
+],
+1,
+0,
+"b04d2c6016db46e085aa95ef797d1470",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+6,
+null,
+"<div>If \\(H _{1}, H _{2}, \\ldots, H _{ n }\\) are n harmonic means between a and \\(b (\neq a ),\\) then the value of \\(\frac{ H _{1}+ a }{ H _{1}- a }+\frac{ H _{ n }+ b }{ H _{ n }- b }\\) is equal to</div>",
+[
+"n + 1",
+"n – 1",
+"2n",
+"2n + 3"
+],
+[
+2
+],
+null,
+"<div>As \\(a, H_{1}, H_{2}, \\ldots, H_{n}, b\\) are in H.P.,<br>\\(\frac{1}{a} \\cdot \frac{1}{H_{1}}, \frac{1}{H_{2}} \\cdots \frac{1}{H_{n}}, \frac{1}{b}\\) are in \\(A.P.\\)<br>Let \\(d\\) be the common difference of this A.P., then<br>\\(\frac{1}{b} =\frac{1}{a}+(n+1) d \\)<br>and \\(\frac{1}{H_{n}}-\frac{1}{H_{1}} =(n-1) d \\)<br>Now, \\( \frac{H_{1}+a}{H_{1}-a} =\frac{1 / a+1 / H_{1}}{1 / a-1 / H_{1}}=\frac{1 / a+1 / H_{1}}{-d}\\)<br>and \\(\frac{H_{n}+b}{H_{n}-b}=\frac{1 / b+1 / H_{n}}{1 / b-1 / H_{n}}=\frac{1 / b+1 / H_{n}}{d} \\)<br>\\(\therefore \frac{H_{1}+a}{H_{1}-a}+\frac{H_{n}+b}{H_{n}-b} =\frac{1 / a+1 / H_{1}}{-d}+\frac{1 / b+1 / H_{n}}{d} \\)<br>\\(=\frac{1}{d}\\left[\\left(\frac{1}{b}-\frac{1}{a}\right)+\\left(\frac{1}{H_{n}}-\frac{1}{H_{1}}\right)\right]=2 n\\)<br>Hence, option (c) is correct.</div>",
+null,
+null,
+[
+5,
+5
+],
+1,
+0,
+"e43a0e7bc5fd479d9077df6ea9dadd33",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+7,
+null,
+"If&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mn>1</mn></msub><mo>,</mo><mo>&nbsp;</mo><msub><mi>a</mi><mn>2</mn></msub><mo>,</mo><mo>&nbsp;</mo><msub><mi>a</mi><mn>3</mn></msub><mo>,</mo><mo>&nbsp;</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>,</mo><mo>&nbsp;</mo><msub><mi>a</mi><mi>n</mi></msub><mo>,</mo><mo>.</mo><mo>.</mo><mo>.</mo></math></span>&nbsp;is an infinite AP, then&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msubsup><mi>a</mi><mn>1</mn><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>a</mi><mn>3</mn><mn>2</mn></msubsup><mo>-</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi><mo>-</mo><mn>1</mn></mrow><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow><mn>2</mn></msubsup></math></span>&nbsp;is equal to:",
+[
+"<div>\\(\frac{n}{2 n-1}\\left(a_{1}^{2}-a_{2 n}^{2}\right)\\)</div>",
+"<div>\\(\frac{2 n}{n-1}\\left(a_{2}^{2}-a_{1}^{2}\right)\\)</div>",
+"<div>\\(\frac{n}{n+1}\\left(a_{1}^{2}+a_{2 n}^{2}\right)\\)</div>",
+"None of these"
+],
+[
+0
+],
+null,
+"<p>Let&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi></math></span>&nbsp;be the common difference of the A.P. Then,</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>=</mo><msub><mi>a</mi><mn>2</mn></msub><mo>-</mo><msub><mi>a</mi><mn>1</mn></msub><mo>=</mo><msub><mi>a</mi><mn>3</mn></msub><mo>-</mo><msub><mi>a</mi><mn>2</mn></msub><mo>=</mo><msub><mi>a</mi><mn>4</mn></msub><mo>-</mo><msub><mi>a</mi><mn>3</mn></msub><mo>=</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>=</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub><mo>-</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub><mo>-</mo><mn>1</mn></math></span><br></p><p>Now,&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msubsup><mi>a</mi><mn>1</mn><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mn>2</mn><mn>2</mn></msubsup><mo>+</mo><msubsup><mi>a</mi><mn>3</mn><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mn>4</mn><mn>2</mn></msubsup><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi><mo>-</mo><mn>1</mn></mrow><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow><mn>2</mn></msubsup></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfenced><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mn>2</mn></msub></mrow></mfenced><mfenced><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>-</mo><msub><mi>a</mi><mn>2</mn></msub></mrow></mfenced><mo>+</mo><mfenced><mrow><msub><mi>a</mi><mn>3</mn></msub><mo>+</mo><msub><mi>a</mi><mn>4</mn></msub></mrow></mfenced><mfenced><mrow><msub><mi>a</mi><mn>3</mn></msub><mo>-</mo><msub><mi>a</mi><mn>4</mn></msub></mrow></mfenced><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mfenced><mrow><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub><mo>-</mo><mn>1</mn><mo>+</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub></mrow></mfenced><mfenced><mrow><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub><mo>-</mo><mn>1</mn><mo>-</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mo>-</mo><mi>d</mi><mfenced><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mn>2</mn></msub><mo>+</mo><msub><mi>a</mi><mn>3</mn></msub><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mo>-</mo><mi>d</mi><mi>n</mi><mfenced><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>+</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub></mrow></mfenced><mo>=</mo><mo>-</mo><mi>d</mi><mi>n</mi><mfrac><mfenced><mrow><msubsup><mi>a</mi><mn>1</mn><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow><mn>2</mn></msubsup></mrow></mfenced><mrow><msub><mi>a</mi><mn>1</mn></msub><mo>-</mo><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mrow><mi>d</mi><mi>n</mi><mfenced><mrow><msubsup><mi>a</mi><mn>1</mn><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow><mn>2</mn></msubsup></mrow></mfenced></mrow><mrow><msub><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow></msub><mo>-</mo><msub><mi>a</mi><mn>1</mn></msub></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>n</mi><mfenced><mrow><msubsup><mi>a</mi><mn>1</mn><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow><mn>2</mn></msubsup></mrow></mfenced></mrow><mrow><mfenced><mrow><mn>2</mn><mi>n</mi><mo>-</mo><mn>1</mn></mrow></mfenced><mi>d</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>n</mi><mfenced><mrow><msubsup><mi>a</mi><mn>1</mn><mn>2</mn></msubsup><mo>-</mo><msubsup><mi>a</mi><mrow><mn>2</mn><mi>n</mi></mrow><mn>2</mn></msubsup></mrow></mfenced></mrow><mfenced><mrow><mn>2</mn><mi>n</mi><mo>-</mo><mn>1</mn></mrow></mfenced></mfrac></math></span><br></p><p>Hence, the correct option is (a).</p>",
+null,
+null,
+[
+6,
+6
+],
+1,
+0,
+"d2e38a09701b4d49ae1f9f87bc2bf26e",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+8,
+null,
+"The value of <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span>, for which <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>704</mn><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mfenced><mn>704</mn></mfenced><mo>+</mo><mfrac><mn>1</mn><mn>4</mn></mfrac><mfenced><mn>704</mn></mfenced><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo></math></span>&nbsp;upto <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span> terms&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mn>1984</mn><mo>-</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mfenced><mn>1984</mn></mfenced><mo>+</mo><mfrac><mn>1</mn><msup><mn>2</mn><mn>2</mn></msup></mfrac><mfenced><mn>1984</mn></mfenced><mo>-</mo><mo>&nbsp;</mo><mo>.</mo><mo>.</mo><mo>.</mo></math></span> upto <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span> terms, can be:",
+[
+"5",
+"3",
+"4",
+"10"
+],
+[
+0
+],
+null,
+"<p>For LHS&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>=</mo><mn>704</mn><mo>,</mo><mo>&nbsp;</mo><mi>r</mi><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></math></span></p><p>For RHS&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>=</mo><mn>1984</mn><mo>,</mo><mo>&nbsp;</mo><mi>r</mi><mo>=</mo><mo>-</mo><mfrac><mn>1</mn><mn>2</mn></mfrac></math></span></p><p>Sum of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi></math></span>&nbsp;terms of GP</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><mfrac><mrow><mi>a</mi><mfenced><mrow><mn>1</mn><mo>-</mo><mi>r</mi><mi>n</mi></mrow></mfenced></mrow><mfenced><mrow><mn>1</mn><mo>-</mo><mi>r</mi></mrow></mfenced></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>704</mn><mfrac><mfenced open="[" close="]"><mrow><mn>1</mn><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mi>n</mi></mrow></mfenced><mfenced open="[" close="]"><mrow><mn>1</mn><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mrow></mfenced></mfrac><mo>=</mo><mn>1984</mn><mfrac><mfenced open="[" close="]"><mrow><mn>1</mn><mfenced><mrow><mo>-</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mrow></mfenced><mi>n</mi></mrow></mfenced><mfenced open="[" close="]"><mrow><mn>1</mn><mfenced><mrow><mo>-</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></mrow></mfenced></mrow></mfenced></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>704</mn><mo>×</mo><mn>2</mn><mfenced><mrow><mn>1</mn><mfrac><mn>1</mn><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></mrow></mfenced><mo>=</mo><mn>1984</mn><mo>×</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>×</mo><mfenced open="[" close="]"><mrow><mn>1</mn><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mfrac><mi>n</mi><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>704</mn><mo>×</mo><mn>6</mn><mfenced><mrow><mn>1</mn><mfrac><mn>1</mn><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></mrow></mfenced><mo>=</mo><mn>1984</mn><mo>×</mo><mn>2</mn><mfenced open="[" close="]"><mrow><mn>1</mn><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mfrac><mi>n</mi><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mfrac><mn>42244224</mn><mrow><mn>2</mn><mi>n</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>3968</mn><mo>-</mo><mn>3968</mn><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mi>n</mi></mrow><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>4224</mn><mo>-</mo><mn>3968</mn><mo>=</mo><mfrac><mn>4224</mn><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mo>-</mo><mfrac><mrow><mn>3968</mn><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mi>n</mi></mrow><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>256</mn><mo>=</mo><mfrac><mn>4224</mn><mrow><mn>2</mn><mi>n</mi></mrow></mfrac><mo>-</mo><mfrac><mrow><mn>3968</mn><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mi>n</mi></mrow><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>128</mn><mo>=</mo><mfrac><mn>2112</mn><mrow><mn>2</mn><mi>n</mi></mrow></mfrac><mo>-</mo><mfrac><mrow><mn>1984</mn><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mi>n</mi></mrow><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>128</mn><mo>=</mo><mfrac><mfenced><mrow><mn>2112</mn><mo>+</mo><mn>1984</mn></mrow></mfenced><mrow><mn>2</mn><mi>n</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>2</mn><mi>n</mi><mo>=</mo><mfrac><mn>4096</mn><mn>128</mn></mfrac><mo>=</mo><mfrac><mn>1024</mn><mn>32</mn></mfrac><mo>=</mo><mfrac><mn>128</mn><mn>4</mn></mfrac><mo>=</mo><mn>32</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>2</mn><mi>n</mi><mo>=</mo><mn>32</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>∴</mo><mi>n</mi><mo>=</mo><mn>5</mn></math></span><br></p><p>Hence, the correct option is (a).</p>",
+null,
+null,
+[
+7,
+7
+],
+1,
+0,
+"68db44eff5b040dbb8c2cbaf5a43446f",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+9,
+null,
+"If&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>[</mo><mo>&nbsp;</mo><mo>]</mo></math></span> denotes the greatest integer function,&nbsp;then the value of <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi><mo>=</mo><mfenced open="|" close="|"><msqrt><mn>1</mn></msqrt></mfenced><mo>+</mo><mfenced open="|" close="|"><msqrt><mn>2</mn></msqrt></mfenced><mo>+</mo><mfenced open="|" close="|"><msqrt><mn>3</mn></msqrt></mfenced><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mfenced open="[" close="]"><msqrt><mn>2024</mn></msqrt></mfenced></math></span>&nbsp;is:",
+[
+"59000",
+"58750",
+"59730",
+"65138"
+],
+[
+2
+],
+null,
+"<p>For any positive integer&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi></math></span>&nbsp;and&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi></math></span>, we have</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msqrt><mi>x</mi></msqrt><mo>=</mo><mi>k</mi><mo>⇔</mo><msup><mi>k</mi><mn>2</mn></msup><mo>≤</mo><mi>x</mi><mo>&lt;</mo><msup><mfenced><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mfenced><mn>2</mn></msup><mo>⇔</mo><mi>x</mi><mo>∈</mo><mfenced open="[" close="]"><mrow><msup><mi>k</mi><mn>2</mn></msup><mo>,</mo><mo>&nbsp;</mo><msup><mi>k</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>k</mi></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>∴</mo><mfenced open="[" close="]"><msqrt><mi>x</mi></msqrt></mfenced><mo>=</mo><mn>1</mn></math></span>&nbsp;for&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>=</mo><mn>1</mn><mo>,</mo><mo>&nbsp;</mo><mn>2</mn><mo>,</mo><mo>&nbsp;</mo><mn>3</mn><mo>,</mo><mo>&nbsp;</mo><mfenced open="[" close="]"><msqrt><mi>x</mi></msqrt></mfenced><mo>=</mo><mn>2</mn></math></span>&nbsp;for&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>=</mo><mn>4</mn><mo>,</mo><mo>&nbsp;</mo><mn>5</mn><mo>,</mo><mo>&nbsp;</mo><mn>6</mn><mo>,</mo><mo>&nbsp;</mo><mn>7</mn><mo>,</mo><mo>&nbsp;</mo><mn>8</mn><mo>,</mo><mo>&nbsp;</mo><mfenced open="[" close="]"><msqrt><mi>x</mi></msqrt></mfenced><mo>=</mo><mn>3</mn></math></span>&nbsp;for&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>=</mo><mn>9</mn><mo>,</mo><mo>&nbsp;</mo><mn>10</mn><mo>,</mo><mo>&nbsp;</mo><mn>11</mn><mo>,</mo><mo>&nbsp;</mo><mn>12</mn><mo>,</mo><mo>&nbsp;</mo><mn>13</mn><mo>,</mo><mo>&nbsp;</mo><mn>14</mn><mo>,</mo><mo>&nbsp;</mo><mn>15</mn></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfenced open="[" close="]"><msqrt><mi>x</mi></msqrt></mfenced><mo>=</mo><mn>44</mn></math></span>&nbsp;for&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>=</mo><mn>1936</mn><mo>,</mo><mo>&nbsp;</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>,</mo><mo>&nbsp;</mo><mn>2024</mn></math></span></p><p>Thus,&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi><mo>=</mo><mfenced><mn>1</mn></mfenced><mfenced><mn>3</mn></mfenced><mo>+</mo><mfenced><mn>2</mn></mfenced><mfenced><mn>5</mn></mfenced><mo>+</mo><mfenced><mn>3</mn></mfenced><mfenced><mn>7</mn></mfenced><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mn>44</mn><mfenced><mn>89</mn></mfenced></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mstyle displaystyle="false"><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mn>44</mn></munderover></mstyle><mfenced><mi>k</mi></mfenced><mfenced><mrow><mn>2</mn><mi>k</mi><mo>+</mo><mn>1</mn></mrow></mfenced><mo>=</mo><mn>2</mn><mstyle displaystyle="false"><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mn>44</mn></munderover></mstyle><msup><mfenced><mi>k</mi></mfenced><mn>2</mn></msup><mo>+</mo><mstyle displaystyle="false"><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mn>44</mn></munderover></mstyle><mfenced><mi>k</mi></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mn>2</mn><mn>6</mn></mfrac><mfenced><mn>44</mn></mfenced><mfenced><mn>45</mn></mfenced><mfenced><mn>89</mn></mfenced><mo>+</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mfenced><mn>44</mn></mfenced><mfenced><mn>45</mn></mfenced><mo>=</mo><mn>59730</mn></math></span><br></p><p>Hence, the correct option is (c).</p>",
+null,
+null,
+[
+8,
+8
+],
+1,
+0,
+"8a08493a61894e9380777b44b3939496",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+10,
+null,
+"If <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>r</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>t</mi><mi>r</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mi>n</mi><mfenced><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mn>9</mn><mi>n</mi><mo>+</mo><mn>13</mn></mrow></mfenced></math></span>, then <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><munderover><mo>∑</mo><mrow><mi>r</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msqrt><msub><mi>t</mi><mi>r</mi></msub></msqrt></math></span>&nbsp;equals:",
+[
+"<div>\\(\frac{1}{2} n(n+1)\\)</div>",
+"<div>\\(\frac{1}{2} n(n+2)\\)</div>",
+"<div>\\(\frac{1}{2} n(n+3)\\)</div>",
+"<div>\\(\frac{1}{2} n(n+5)\\)</div>"
+],
+[
+2
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>r</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>t</mi><mi>r</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mi>n</mi><mfenced><mrow><mn>2</mn><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mn>9</mn><mi>n</mi><mo>+</mo><mn>13</mn></mrow></mfenced></math></span></p><p>We have</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>t</mi><mi>n</mi></msub><mo>=</mo><msub><mi>S</mi><mi>n</mi></msub><mo>-</mo><msub><mi>S</mi><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msub><mo>∀</mo><mi>n</mi><mo>≥</mo><mn>2</mn></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>∴</mo><msub><mi>t</mi><mi>n</mi></msub><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mfenced open="[" close="]"><mrow><mn>2</mn><mfenced><mrow><msup><mi>n</mi><mn>3</mn></msup><mo>-</mo><msup><mfenced><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></mfenced><mn>3</mn></msup></mrow></mfenced><mo>+</mo><mn>9</mn><mfenced><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>-</mo><msup><mfenced><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></mfenced><mn>2</mn></msup></mrow></mfenced><mo>+</mo><mn>13</mn><mfenced><mrow><mi>n</mi><mo>-</mo><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfenced></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mfenced open="[" close="]"><mrow><mn>6</mn><msup><mi>n</mi><mn>2</mn></msup><mo>-</mo><mn>6</mn><mi>n</mi><mo>+</mo><mn>2</mn><mo>+</mo><mn>9</mn><mfenced><mrow><mn>2</mn><mi>n</mi><mo>-</mo><mn>1</mn></mrow></mfenced><mo>+</mo><mn>13</mn></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mn>1</mn><mn>6</mn></mfrac><mfenced><mrow><mn>6</mn><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mn>12</mn><mi>n</mi><mo>+</mo><mn>6</mn></mrow></mfenced><mo>=</mo><msup><mfenced><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfenced><mn>2</mn></msup></math></span><br></p><p>Also,&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>t</mi><mn>1</mn></msub><mo>=</mo><msub><mi>S</mi><mn>1</mn></msub><mo>=</mo><mn>4</mn><mo>=</mo><msup><mfenced><mrow><mn>1</mn><mo>+</mo><mn>1</mn></mrow></mfenced><mn>2</mn></msup></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>∴</mo><munderover><mo>∑</mo><mrow><mi>r</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msqrt><msub><mi>t</mi><mi>r</mi></msub></msqrt><mo>=</mo><munderover><mo>∑</mo><mrow><mi>r</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfenced><mrow><mi>r</mi><mo>+</mo><mn>1</mn></mrow></mfenced><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mfenced><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfenced><mfenced><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></mfenced><mo>-</mo><mn>1</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><mi>n</mi><mfenced><mrow><mi>n</mi><mo>+</mo><mn>3</mn></mrow></mfenced></math></span><br></p><p>Hence, the correct option is (c).</p>",
+null,
+null,
+[
+9,
+9
+],
+1,
+0,
+"82300428c9824a4193d0f7d6c959e01e",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+11,
+null,
+"<div>A sequence of numbers \\(x_{0}\\) is determined by the equality \\(x_{n}=\frac{x_{n-1}+x_{n-2}}{2}\\) and the values \\(x_{0}\\) and \\(x_{1}\\). Compute in terms of \\(x_{0}, x_{1}\\). Also, prove that \\(\\lim _{n \rightarrow \\infty} x_{n}=\frac{x_{0}+2 x_{1}}{3}\\)</div>",
+[],
+[
+"-"
+],
+null,
+"<div>Given: \\(x_{n}=\frac{x_{n-1}+x_{n-2}}{2}\\)<br>\\(\therefore x_{2}=\frac{x_{i}+x_{0}}{2} ; x_{3}=\frac{x_{2}+x_{1}}{2}, x_{4}=\frac{x_{3}+x_{2}}{2}\\) etc.<br>Now, \\(x_{2}-x_{1}=\frac{x_{0}-x_{1}}{2}\\)<br>\\(\\Rightarrow x_{3}-x_{2}=\frac{x_{1}-x_{2}}{2}=-\frac{\\left(x_{0}-x_{1}\right)}{2^{2}}\\)<br>\\(\\Rightarrow x_{4}-x_{3}=\frac{x_{2}-x_{3}}{2}=+\frac{\\left(x_{0}-x_{1}\right)}{2^{3}}\\)</div><div>\\(\\Rightarrow x_{5}-x_{4}=\frac{x_{3}-x_{4}}{2}=-\frac{\\left(x_{0}-x_{1}\right)}{2^{4}}\\)<br>\\(\\Rightarrow x_{0}-x_{n-1}=\frac{x_{n-2}-x_{n-1}}{2}=(-1)^{n} \\cdot \frac{\\left(x_{0}-x_{1}\right)}{2^{n}}\\)<br>Adding<br>\\(x_{2}-x_{1}\\)<br>\\(=\frac{x_{0}-x_{1}}{2}\\left[1-\frac{1}{2}+\frac{1}{2^{2}}-\frac{1}{2^{3}}+\\ldots+(-1)^{n}\right.\\left.\frac{1}{2^{n-2}}\right]\\)<br>\\(\\lim _{n \rightarrow \\infty}\\left(x_{n}-x_{1}\right)=\\lim _{n \rightarrow \\infty} \frac{x_{0}-x_{1}}{2}\\left[\frac{1}{1+(1 / 2)}\right]\\)<br>\\(\\lim _{n \rightarrow \\infty} x_{n}-x_{1}=\frac{x_{0}-x_{1}}{2} \times \frac{2}{3}\\)</div><div>\\(\\lim _{n \rightarrow \\infty} x_{n}=\frac{x_{0}-x_{1}}{3}+x_{1}=\frac{x_{0}+2 x_{1}}{3}\\)</div><div>Hence, the correct answer is \\((-1)^{n} \\cdot \frac{\\left(x_{0}-x_{1}\right)}{2^{n}}\\)</div>",
+null,
+null,
+[
+10,
+10
+],
+5,
+0,
+"1927d911810b44ec84fa380b13e53388",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+12,
+null,
+"If exp {(tan<sup>2</sup> x – tan<sup>4</sup> x + tan<sup>6</sup> x – tan<sup>8</sup> x +...) log<sub>e</sub> 16}, 0 &lt; x &lt; <sup><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/64f6d15d2e20e900566e2a58ad0e0361.png" class="img-responsive" style="display: inline;"></span></sup>, satisfies the quadratic equation x<sup>2</sup> – 3x + 2 = 0, then the value of cos<sup>2</sup> x + cos<sup>4</sup> x is",
+[
+"4/5",
+"21/16",
+"17/11",
+"19/31"
+],
+[
+1
+],
+null,
+"<div>\\(\tan ^{2} x+\tan ^{4} x+\tan ^{6} x+\\ldots \\infty=\frac{\tan ^{2} x}{1-\tan ^{2} x}\\)<br>Thus, \\(16^{\frac{\\cos ^{2} \\alpha}{1-\tan ^{2} \\alpha}}\\) satisfies the quadratic equation<br>\\(\\Rightarrow \frac{\tan ^{2} x}{1-\tan ^{2} x}=0, \frac{1}{4}\\)<br>Now, \\(0<x<\frac{\\pi}{4} \rightarrow="" 0<\tan="" x<1\\)<br=""></x<\frac{\\pi}{4}>Hence, \\(\frac{\tan ^{2} x}{1-\tan ^{2} x}=\frac{1}{4}\\)<br>\\(\\Rightarrow 5 \tan ^{2} x=1\\)</div><div>\\(\\Rightarrow \\cos ^{2} x=\frac{5}{6}\\)<br>\\(\therefore \\cos ^{2} x+\\cos ^{4} x=\\cos ^{2} x\\left(1+\\cos ^{2} x\right)=\frac{55}{36}\\)</div>",
+null,
+null,
+[
+11,
+11
+],
+1,
+0,
+"cf496e4540d343c2951a8b84a46eba7b",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+13,
+null,
+"<b style="mso-bidi-font-weight:normal"><u>Directions:</u></b> The answer to the following question is a single digit integer ranging from <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0</mn></math></span> to <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>9</mn></math></span>. Enter the correct digit in the box given below.<br><br>Find the value of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><mfrac><mn>1</mn><mrow><msup><mn>3</mn><mi>i</mi></msup><msup><mn>3</mn><mi>j</mi></msup><msup><mn>3</mn><mi>k</mi></msup></mrow></mfrac></math></span>&nbsp;where,&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi><mo>≠</mo><mi>j</mi><mo>≠</mo><mi>k</mi></math></span>.",
+[],
+[
+"-"
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><mfrac><mn>1</mn><mrow><msup><mn>3</mn><mi>i</mi></msup><msup><mn>3</mn><mi>j</mi></msup><msup><mn>3</mn><mi>k</mi></msup></mrow></mfrac></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo></math></span>&nbsp;Sum when&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi><mo>,</mo><mo>&nbsp;</mo><mi>j</mi><mo>,</mo><mo>&nbsp;</mo><mi>k</mi></math></span>&nbsp;are independent&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>-</mo><mn>3</mn><mo>×</mo></math></span>&nbsp;(Sum when any two of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi><mo>,</mo><mo>&nbsp;</mo><mi>j</mi><mo>,</mo><mo>&nbsp;</mo><mi>k</mi></math></span>&nbsp;are equal)&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>+</mo><mn>2</mn><mo>×</mo></math></span>&nbsp;(Sum when&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>i</mi><mo>=</mo><mi>j</mi><mo>=</mo><mi>k</mi></math></span>&nbsp;)</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><mfrac><mn>1</mn><mrow><msup><mn>3</mn><mi>i</mi></msup><msup><mn>3</mn><mi>j</mi></msup><msup><mn>3</mn><mi>k</mi></msup></mrow></mfrac><mo>-</mo><mn>3</mn><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mo>&nbsp;</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mfrac><mn>1</mn><mrow><msup><mn>9</mn><mi>i</mi></msup><msup><mn>3</mn><mi>k</mi></msup></mrow></mfrac><mo>+</mo><mn>2</mn><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mfrac><mn>1</mn><msup><mn>27</mn><mi>i</mi></msup></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><msup><mfenced><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mfrac><mn>1</mn><msup><mn>3</mn><mi>i</mi></msup></mfrac></mrow></mfenced><mn>3</mn></msup><mo>-</mo><mn>3</mn><mfenced><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mfrac><mn>1</mn><msup><mn>9</mn><mi>j</mi></msup></mfrac></mrow></mfenced><mfenced><mrow><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mfrac><mn>1</mn><msup><mn>3</mn><mi>k</mi></msup></mfrac></mrow></mfenced><mo>+</mo><mn>2</mn><mfenced><mrow><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mo>∞</mo></munderover><mfrac><mn>1</mn><msup><mn>27</mn><mi>i</mi></msup></mfrac></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><msup><mfenced><mfrac><mn>3</mn><mn>2</mn></mfrac></mfenced><mn>3</mn></msup><mo>-</mo><mn>3</mn><mfenced><mfrac><mn>9</mn><mn>8</mn></mfrac></mfenced><mfenced><mfrac><mn>3</mn><mn>2</mn></mfrac></mfenced><mo>+</mo><mn>2</mn><mfenced><mfrac><mn>27</mn><mn>26</mn></mfrac></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mn>81</mn><mn>208</mn></mfrac></math></span><br></p><br>",
+null,
+null,
+[
+12,
+12
+],
+5,
+0,
+"6011fd65f13b4eff96eee36f75e6570f",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+14,
+null,
+"<p><b><u>Directions:</u></b> The answer to the following question is a single digit integer ranging from 0 to 9. Enter the correct digit in the box given below.</p><br><p>For&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>∈</mo><mi>N</mi></math></span>, let&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo>&nbsp;</mo><mn>2</mn><mi>k</mi></math></span>&nbsp;and <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfenced><mrow><mn>2</mn><mi>k</mi><mo>-</mo><mn>1</mn></mrow></mfenced></math></span>. Then&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><munder><mi>lim</mi><mrow><mi>n</mi><mo>→</mo><mo>∞</mo></mrow></munder><mfenced><mrow><msqrt><msub><mi>a</mi><mi>n</mi></msub></msqrt><mo>-</mo><msqrt><msub><mi>b</mi><mi>n</mi></msub></msqrt></mrow></mfenced></math></span>&nbsp;is equal to:</p>",
+[],
+[
+"-"
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mo>&nbsp;</mo><mn>2</mn><mi>k</mi></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mn>2</mn><mo>+</mo><mn>2</mn><mo>.</mo><mn>2</mn><mo>+</mo><mn>2</mn><mo>.</mo><mn>3</mn><mo>+</mo><mn>2</mn><mo>.</mo><mn>4</mn><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mn>2</mn><mo>.</mo><mi>n</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mn>2</mn><mfenced><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn><mo>+</mo><mn>4</mn><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mi>n</mi></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mn>2</mn><mo>&nbsp;</mo><mfrac><mrow><mi>n</mi><mfenced><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfenced></mrow><mn>2</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mfenced><mrow><mn>2</mn><mi>k</mi><mo>-</mo><mn>1</mn></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mn>2</mn><mo>-</mo><mn>1</mn><mo>+</mo><mn>2</mn><mo>.</mo><mn>2</mn><mo>-</mo><mn>1</mn><mo>+</mo><mn>2</mn><mo>.</mo><mn>3</mn><mo>-</mo><mn>1</mn><mo>+</mo><mn>2</mn><mo>.</mo><mn>4</mn><mo>-</mo><mn>1</mn><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mn>2</mn><mi>n</mi><mo>-</mo><mn>1</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mn>2</mn><mfenced><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>3</mn><mo>+</mo><mn>4</mn><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mi>n</mi></mrow></mfenced><mo>-</mo><mi>n</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><mn>2</mn><mfenced><mfrac><mrow><mi>n</mi><mfenced><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfenced></mrow><mn>2</mn></mfrac></mfenced><mo>-</mo><mi>n</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi><mo>-</mo><mi>n</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>∴</mo><msub><mi>b</mi><mi>n</mi></msub><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>l</mi><mo>=</mo><munder><mi>lim</mi><mrow><mi>n</mi><mo>→</mo><mo>∞</mo></mrow></munder><mfenced><mrow><msqrt><msub><mi>a</mi><mi>n</mi></msub></msqrt><mo>-</mo><msqrt><msub><mi>b</mi><mi>n</mi></msub></msqrt></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><munder><mi>lim</mi><mrow><mi>n</mi><mo>→</mo><mo>∞</mo></mrow></munder><mfenced><mrow><msqrt><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi></msqrt><mo>-</mo><msqrt><msup><mi>n</mi><mn>2</mn></msup></msqrt></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><munder><mi>lim</mi><mrow><mi>n</mi><mo>→</mo><mo>∞</mo></mrow></munder><mfenced><mrow><msqrt><msup><mi>n</mi><mn>2</mn></msup><mo>+</mo><mi>n</mi></msqrt><mo>-</mo><mi>n</mi></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><munder><mi>lim</mi><mrow><mi>n</mi><mo>→</mo><mo>∞</mo></mrow></munder><mi>n</mi><mfenced><mrow><msqrt><mn>1</mn><mo>+</mo><mfrac bevelled="true"><mn>1</mn><mi>n</mi></mfrac></msqrt><mo>-</mo><mn>1</mn></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>l</mi><mo>=</mo><munder><mi>lim</mi><mrow><mi>n</mi><mo>→</mo><mo>∞</mo></mrow></munder><mfrac><mrow><msqrt><mn>1</mn><mo>+</mo><mstyle displaystyle="true"><mfrac bevelled="true"><mn>1</mn><mi>n</mi></mfrac></mstyle></msqrt><mo>-</mo><mn>1</mn></mrow><mstyle displaystyle="true"><mfrac bevelled="true"><mn>1</mn><mi>n</mi></mfrac></mstyle></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>l</mi><mo>=</mo><munder><mi>lim</mi><mrow><maction actiontype="argument"><mrow></mrow></maction><mo>→</mo><mo>∞</mo></mrow></munder><mfrac><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><msqrt><mn>1</mn><mo>+</mo><mstyle displaystyle="true"><mfrac bevelled="true"><mn>1</mn><mi>n</mi></mfrac></mstyle></msqrt></mrow></mfrac></mstyle><mfenced><mstyle displaystyle="true"><mfrac bevelled="true"><mrow><mo>-</mo><mn>1</mn></mrow><msup><mi>n</mi><mn>2</mn></msup></mfrac></mstyle></mfenced><mo>-</mo><mn>0</mn></mrow><mfenced><mstyle displaystyle="true"><mfrac bevelled="true"><mrow><mo>-</mo><mn>1</mn></mrow><msup><mi>n</mi><mn>2</mn></msup></mfrac></mstyle></mfenced></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac bevelled="true"><mn>1</mn><mn>2</mn></mfrac></math></span><br></p>",
+null,
+null,
+[
+13,
+13
+],
+5,
+0,
+"705c5ef42b79487b954d8e03d134d72e",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+15,
+null,
+"The coefficient of <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mi>n</mi></msup></math></span><sup></sup> in the expansion of <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>log</mi><mo>&nbsp;</mo><mo>(</mo><mn>1</mn><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>3</mn><mi>x</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>)</mo></math></span> is:",
+[
+"<div>\\((-1)^{n}\\left(\frac{2^{n}+1}{n}\right)\\)</div>",
+"<div>\\(\frac{(-1)^{n+1}}{n}\\left(2^{n}+1\right)\\)</div>",
+"<div>\\(\frac{2^{n}+1}{n}\\)</div>",
+"None of these"
+],
+[
+1
+],
+null,
+"<p>We have,</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>log</mi><mo>&nbsp;</mo><mo>(</mo><mn>1</mn><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>3</mn><mi>x</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>2</mn><msup><mi>x</mi><mn>2</mn></msup><mo>)</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mi>log</mi><mfenced><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></mfenced><mo>+</mo><mi>log</mi><mfenced><mrow><mn>1</mn><mo>+</mo><mn>2</mn><mi>x</mi></mrow></mfenced></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mo>∞</mo></munderover><msup><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup><mfrac><msup><mi>x</mi><mi>n</mi></msup><mi>n</mi></mfrac><mo>+</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mo>∞</mo></munderover><msup><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup><mfrac><msup><mfenced><mrow><mn>2</mn><mi>x</mi></mrow></mfenced><mi>n</mi></msup><mi>n</mi></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mo>∞</mo></munderover><msup><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup><mfenced><mrow><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>+</mo><mfrac><msup><mn>2</mn><mi>n</mi></msup><mi>n</mi></mfrac></mrow></mfenced><msup><mi>x</mi><mi>n</mi></msup></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><munderover><mo>∑</mo><mrow><mi>n</mi><mo>=</mo><mn>1</mn></mrow><mo>∞</mo></munderover><msup><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup><mfenced><mfrac><mrow><mn>1</mn><mo>+</mo><msup><mn>2</mn><mi>n</mi></msup></mrow><mi>n</mi></mfrac></mfenced><msup><mi>x</mi><mi>n</mi></msup></math></span><br></p><p>Coefficient of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mi>n</mi></msup><mo>=</mo><msup><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mrow><mi>n</mi><mo>-</mo><mn>1</mn></mrow></msup><mfenced><mfrac><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>+</mo><mn>1</mn></mrow><mi>n</mi></mfrac></mfenced><mo>=</mo><mfrac><mrow><msup><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mfenced><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>+</mo><mn>1</mn></mrow></mfenced></mrow><mi>n</mi></mfrac></math></span></p><p>Hence, the correct option is (b).</p>",
+null,
+null,
+[
+14,
+14
+],
+1,
+0,
+"fc76a4aefbcf44c4bb5e920ba0ef5ce9",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+16,
+null,
+"<div>If \\(a, b, c\\) are in \\(A P,\\) then \\(\frac{a(b+c)}{b c}, \frac{b(c+a)}{c a}, \frac{c(a+b)}{a b}\\) are in</div>",
+[
+"AP",
+"GP",
+"HP",
+"None of these"
+],
+[
+0
+],
+null,
+"<div>Given: a, b, c are in AP.<br>Dividing each term by abc,<br>\\(\\Rightarrow \frac{a}{a b c}, \frac{b}{a b c}, \frac{c}{a b c}\\) are in \\(A P\\)<br>\\(\\Rightarrow \frac{1}{b c}, \frac{1}{a c}, \frac{1}{a b}\\) are in \\(AP\\)<br>\\(\\Rightarrow \frac{a b+b c+c a}{b c}, \frac{a b+b c+c a}{a c}, \frac{a b+b c+c a}{a b}\\) are in \\(A P\\)<br>\\(\\Rightarrow \frac{a b+c a}{b c}+1, \frac{a b+b c}{a c}+1, \frac{b c+c a}{a b}+1\\) are in \\(A P\\)<br>\\(\\Rightarrow \frac{a b+c a}{b c}, \frac{a b+b c}{a c}, \frac{b c+c a}{a b}\\) are in \\(AP\\)<br>\\(\\Rightarrow \frac{a(b+c)}{b c}, \frac{b(a+c)}{a c}, \frac{c(a+b)}{a b}\\) are in \\(AP\\)<br>Hence, the correct option is (a).</div>",
+null,
+null,
+[
+15,
+15
+],
+1,
+0,
+"0e378d48f0ce49d08c119093f4ed23fa",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+17,
+null,
+"<p>Find the sum of the series:</p><p>\\(2+6+18+54+\\ldots+4374\\)</p>",
+[
+"<p>\\(6561\\)</p>",
+"<p>\\(6560\\)</p>",
+"<p>\\(6559\\)</p>",
+"<p>None of the above<br></p>"
+],
+[
+1
+],
+null,
+"<p>Given:</p><p>\\(2+6+18+54+\\ldots+4374\\)<br></p><p>Here,<br></p><p>\\(a=2\\)</p><p>\\(r=3\\)</p><p>Let, \\(a_{n}=4374\\)<br></p><p>As we know, the general term of a GP is given by,<br></p><p>\\(a_{n}=a r^{n-1}\\)</p><p>\\(\\Rightarrow 4374=(2) \\cdot(3)^{n-1}\\)</p><p>\\(\\Rightarrow 3^{n-1}=2187\\)</p><p>\\(\\Rightarrow 3^{n-1}=3^{7}\\)</p><p>\\(\therefore n-1=7\\)</p><p>\\(\\Rightarrow n=8\\)</p><p>As we know that,<br></p><p>Sum of \\(n\\) terms of GP,<br></p><p>\\({S}_{{n}}=\frac{{a}\\left({r}^{{n}}-1\right)}{{r}-1}\\)<br></p><p>Where \\(r&gt;1\\)<br></p><p>\\(\therefore S_{n}=\frac{2\\left(3^{8}-1\right)}{3-1}\\)</p><p>\\(=3^{8}-1\\)</p><p>\\(=6560\\)</p>",
+null,
+null,
+[
+16,
+16
+],
+1,
+0,
+"256b752ab6304b2192217c4c21a79e08",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+18,
+null,
+"<div>The sum to infinity of the series \\(S=1+\frac{2}{3}+\frac{6}{3^{2}}+\frac{10}{3^{3}}+\frac{14}{3^{4}}+\\ldots\\) is</div>",
+[
+"4",
+"6",
+"2",
+"3"
+],
+[
+3
+],
+null,
+"<div>Let \\( S =1+\frac{2}{3}+\frac{6}{3^{2}}+\frac{10}{3^{3}}+\frac{14}{3^{4}}+\\ldots \\)<br>\\( \frac{1}{3} S =\frac{1}{3}+\frac{2}{3^{2}}+\frac{6}{3^{3}}+\frac{10}{3^{4}}+\\ldots \\)<br>\\( \frac{2}{3} S =1+\frac{1}{3}+\frac{4}{3^{2}}+\frac{4}{3^{3}}+\frac{4}{3^{4}}+\\ldots \\) <br>\\(=1+\frac{1}{3}+\frac{4 / 3^{2}}{1-1 / 3}=\frac{4}{3}+\frac{2}{3}=2 \\)<br>\\( S =3\\)</div>",
+null,
+null,
+[
+17,
+17
+],
+1,
+0,
+"243bb6998c2249b1a907a6cbe71cf7bf",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+19,
+null,
+"<div>If the sum of \\(n\\) numbers in the GP \\(5,10,20, \\ldots\\) is \\(1275\\) then \\(n\\) is:</div>",
+[
+"<p>\\(6\\)</p>",
+"<p>\\(7\\)</p>",
+"<p>\\(8\\)</p>",
+"<p>\\(9\\)</p>"
+],
+[
+2
+],
+null,
+"<p>Given:</p><p>\\(5,10,20, \\ldots\\)<br></p><p>Here, \\(a=5, r=2\\)<br></p><p>Sum of \\(n\\) numbers \\(=S_{n}=1275\\)<br></p><p>As we know that, Sum of \\(n\\) terms of GP,<br></p><p>\\(S_{n}=\frac{a\\left(r^{n}-1\right)}{r-1}\\)<br></p><p>Where, \\(r&gt;1\\)<br></p><p>\\(\therefore S_{n}=\frac{5\\left(2^{{n}}-1\right)}{2-1}\\)</p><p>\\(1275=5 \times\\left(2^{n}-1\right)\\)</p><p>\\(\\Rightarrow 255=\\left(2^{n}-1\right)\\)</p><p>\\(\\Rightarrow 2^{n}=256\\)</p><p>\\(\\Rightarrow 2^{n}=2^{8}\\)</p><p>\\(\therefore n=8\\)</p>",
+null,
+null,
+[
+18,
+18
+],
+1,
+0,
+"2418c65ba05c490c99a0d8dfef5e634b",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+20,
+null,
+"<div>Suppose \\(a^{2}, b^{2}, c^{2}\\) are in \\(A . P .\\) <br>Statement \\(-1: \frac{a}{b+c}, \frac{b}{c+a}, \frac{c}{a+b}\\) are in H.P.<br>Statement \\(-2: b+c, c+a, a+b\\) are in H.P.</div>",
+[
+"Statement – 1 is true, statement – 2 is true and statement – 2 is the correct explanation for statement – 1.",
+"Statement – 1 is true, statement – 2 is true and statement – 2 is not the correct explanation for Statement – 1.",
+"Statement – 1 is true, statement – 2 is false.",
+"Statement – 1 is false, statement – 2 is true."
+],
+[
+3
+],
+null,
+"<div>\\(a^{2}, b^{2}, c^{2}\\) are in A.P. <br>\\( \\Rightarrow a^{2}+b c+c a+a b, b^{2}+b c+c a+a b, c^{2}+a b+ b c+c a\\) are in A.P.<br> \\(\\Rightarrow (a+b)(a+c),(b+a)(b+c),(c+a)(c+b)\\) are in A.P.<br>Dividing by \\((b+c)(c+a)(a+b),\\) we get<br>\\(\frac{1}{b+c}, \frac{1}{c+a}, \frac{1}{a+b}\\) are in A.P....(1)<br>\\(\\Rightarrow b+c, c+a, a+b\\) are in \\(H.P.\\)<br>and \\( \frac{a+b+c}{b+c}, \frac{a+b+c}{c+a}, \frac{a+b+c}{a+b}\\) are in A.P.<br>\\(\\Rightarrow \frac{a}{b+c}+1, \frac{b}{c+a}+1, \frac{c}{a+b}+1\\) are in A.P.<br>\\(\\Rightarrow \frac{a}{b+c}, \frac{b}{c+a}, \frac{c}{a+b}\\) are in A.P.</div>",
+null,
+null,
+[
+19,
+19
+],
+1,
+0,
+"2c4eb0c34bf241a2acc3323412164dab",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+21,
+null,
+"Let a<sub>1</sub>, a<sub>2</sub>, …, a<sub>10</sub> be in A.P. and h<sub>1</sub>, h<sub>2</sub>, …, h<sub>10</sub> be in H.P. If a<sub>1</sub> = h<sub>1</sub> = 2 and a<sub>10</sub> = h<sub>10</sub> = 3, then a<sub>4</sub> h<sub>7</sub> is",
+[
+"2",
+"3",
+"5",
+"6"
+],
+[
+3
+],
+null,
+"<div>Let \\(d\\) be the common difference of the A.P., then<br>\\(3=a_{10}=2+9 d \\Rightarrow d=1 / 9\\)<br>\\(\therefore \\quad a_{4}=2+3 d=7 / 3\\)<br>Next, let \\(D\\) be the common difference of the A.P. \\(\frac{1}{h_{1}}, \frac{1}{h_{2}}, \\ldots, \frac{1}{h_{10}}\\) Then<br>\\(\frac{1}{3}=\frac{1}{h_{10}}=\frac{1}{2}+9 D \\Rightarrow D=-\frac{1}{54}\\)<br>\\(\therefore \frac{1}{h_{7}}=\frac{1}{h_{1}}+6 D=\frac{7}{18} \\Rightarrow h_{7}=\frac{18}{7}\\)<br>Hence, \\(a_{4} h_{7}=(7 / 3)(18 / 7)=6\\)</div>",
+null,
+null,
+[
+20,
+20
+],
+1,
+0,
+"fd8fca8d0de14a7281bce016aa1bc98d",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+22,
+null,
+"Sum of three numbers in a GP is 14. If 1 is added to the first and second terms and 1 is subtracted from the third term, the new numbers are in AP. The smallest number among these numbers is",
+[
+"2",
+"4",
+"3",
+"8"
+],
+[
+0
+],
+null,
+"<p>Let the numbers be <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>,</mo><mo>&nbsp;</mo><mi>a</mi><mi>r</mi><mo>,</mo><mo>&nbsp;</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup></math></span> </p><p>Then, <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mi>a</mi><mi>r</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>=</mo><mo>&nbsp;</mo><mn>14</mn></math></span> (given) ...(A).</p><p>Now, <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>1</mn><mo>,</mo><mo>&nbsp;</mo><mi>a</mi><mi>r</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>1</mn><mo>,</mo><mo>&nbsp;</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>&nbsp;</mo><mo>-</mo><mn>1</mn></math></span> are in AP&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo><mn>2</mn></math></span>&nbsp;(ar <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>+</mo><mn>1</mn></math></span>) <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mo>&nbsp;</mo><mi>a</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>1</mn><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>&nbsp;</mo><mo>-</mo><mo>&nbsp;</mo><mn>1</mn><mo>⇒</mo><mo>&nbsp;</mo><mn>2</mn><mi>a</mi><mi>r</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mn>2</mn><mo>&nbsp;</mo><mo>=</mo><mo>&nbsp;</mo><mi>a</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mi>a</mi><msup><mi>r</mi><mn>2</mn></msup><mo>&nbsp;</mo></math></span><sup>&nbsp;....</sup>(B). </p><p>From (A) and (B),&nbsp;</p><p>2ar + 2 = 14&nbsp;- ar&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo></math></span>3ar = 12 <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo></math></span>&nbsp;ar = 4 ...(C).</p><p>From (A), a + 4 + 4r = 14&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>⇒</mo></math></span>&nbsp;a + 4r = 10 ...(D).</p><p>From (C) and (D),</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>&nbsp;</mo><mo>+</mo><mo>&nbsp;</mo><mfrac><mn>16</mn><mi>a</mi></mfrac><mo>=</mo><mo>&nbsp;</mo><mn>10</mn><mo>&nbsp;</mo><mo>⇒</mo><mo>&nbsp;</mo><mi>a</mi><mo>&nbsp;</mo><mo>=</mo><mo>&nbsp;</mo><mn>2</mn><mo>,</mo><mo>&nbsp;</mo><mn>8</mn></math></span> </p><p>Therefore, the smallest number is <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn></math></span>.</p><p>Hence, the correct option is (a).</p>",
+null,
+null,
+[
+21,
+21
+],
+1,
+0,
+"5ac500922aad43178fa27c64c4cce09d",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+23,
+null,
+"If A = 1 + r<sup>a</sup> + r<sup>2a</sup> + r<sup>3a</sup> + … upto <sup><sub><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/9f91a3f670bc089c90dccd673ab12ce7.png" class="img-responsive" style="display: inline;"></span></sub></sup>&nbsp;and B = 1 + r<sup>b</sup> + r<sup>2b</sup> + r<sup>3b</sup> + … upto <span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/399f3a15802545f2c196d8eb7cf08ef5.png" class="img-responsive" style="display: inline;"></span>, then <sup><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/90b05fbbe6335c9913370ceca6829942.png" class="img-responsive" style="display: inline;"></span></sup>&nbsp;is equal to",
+[
+"<div>\\(\frac{\\log (1+A)}{\\log (1+B)}\\)</div>",
+"<div>\\(\frac{\\log (A-1)}{\\log (B-1)}\\)</div>",
+"log<sub>B</sub>A",
+"None of these"
+],
+[
+3
+],
+null,
+"<div>\\(A=\frac{1}{1-r^{a}}, B=\frac{1}{1-r^{b}}\\)<br>\\(\\Rightarrow \\quad 1-r^{a}=\frac{1}{A}, 1-r^{b}=\frac{1}{B}\\)<br>\\(\\Rightarrow \\quad a \\log r=\\log (1-1 / A)\\) and<br>\\( b \\log r=\\log (1-1 / B)\\)<br>\\(\therefore \frac{a}{b}=\frac{\\log \\left(1-A^{-1}\right)}{\\log \\left(1-B^{-1}\right)}\\)</div>",
+null,
+null,
+[
+22,
+22
+],
+1,
+0,
+"343bcd69d6334206b1019a9c420108ef",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+24,
+null,
+"Sum to \\(n\\) terms of the series \\(\frac{1}{1.2 .3}+\frac{3}{2.3 .4}+\frac{5}{3.4 .5}+\frac{7}{4.5 .6}+\\ldots .\\) is<br>",
+[
+"<div>\\(\frac{n(n+1)}{2(n+2)(n+3)}\\)</div>",
+"<div>\\(\frac{n(3 n+1)}{4(n+1)(n+2)}\\)</div>",
+"<div>\\(\frac{1}{6}-\frac{5}{(n+1)(n+4)}\\)</div>",
+"None of these"
+],
+[
+1
+],
+null,
+"<div>We have \\(t_{r}=\frac{2 r-1}{r(r+1)(r+2)}\\) and<br>\\(t_{r+1}=\frac{2 r+1}{(r+1)(r+2)(r+3)}\\)<br>\\(\\Rightarrow r t_{r}=\frac{2 r-1}{(r+1)(r+2)},(r+3) t_{r+1}=\frac{2 r+1}{(r+1)(r+2)}\\)<br>\\(\\Rightarrow r t_{r}-(r+3) t_{r+1}=\frac{-2}{(r+1)(r+2)}\\)<br>\\(\\Rightarrow r t_{r}-(r+1) t_{r+1}+2\\left(\frac{1}{r+1}-\frac{1}{r+2}\right)=2 t_{r+1}\\)<br>\\(\\Rightarrow \\sum_{r=1}^{n-1}\\left[r t_{r}-(r+1) t_{r+1}\right]+2 \\sum_{r=1}^{n-1}\\left(\frac{1}{r+1}-\frac{1}{r+2}\right)=2 \\sum_{r=1}^{n-1} t_{r+1}\\)<br>\\(\\Rightarrow t_{1}-n t_{n}+1-\frac{2}{n+1}=2\\left(t_{2}+t_{3}+\\ldots+t_{n}\right)\\)<br>\\(\\Rightarrow 3 t_{1}-n t_{n}+1-\frac{2}{n+1}=2 \\sum_{r=1}^{n} t_{r}\\)</div><div>\\(\frac{1}{2}-\frac{n(2 n-1)}{n(n+1)(n+2)}+\frac{n-1}{n+1}=2 \\sum_{r=1}^{n} t_{r}\\)<br>\\(\therefore 2 \\sum_{r=1}^{n} t_{r}=\frac{(n+1)(n+2)-2(2 n-1)+2(n-1)(n+2)}{2(n+1)(n+2)}\\)<br>\\(\\Rightarrow \\sum_{r=1}^{n} t_{r}=\frac{n(3 n+1)}{4(n+1)(n+2)}\\)</div>",
+null,
+null,
+[
+23,
+23
+],
+1,
+0,
+"9659fc5ea9544658860825ea7da07494",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+25,
+null,
+"<p>If \\(\\log _{10} 2, \\log _{10}\\left(2^{x}-1\right)\\) and \\(\\log _{10}\\left(2^{x}+3\right)\\) are three consecutive terms of an \\(A P\\), then the value of \\({x}\\) is:<br></p>",
+[
+"<p>\\(1\\)</p>",
+"<p>\\(\\log _{5} 2\\)</p>",
+"<p>\\(\\log _{2} 5\\)</p>",
+"<p>\\(\\log _{10} 5\\)<br></p>"
+],
+[
+2
+],
+null,
+"<p>Given:</p><p>\\(\\log _{10} 2, \\log _{10}\\left(2^{x}-1\right)\\) and \\(\\log _{10}\\left(2^{x}+3\right)\\) are three consecutive terms of an AP.<br></p><p>We know that if&nbsp;<span>\\(a, b, c\\) are in A.P than,</span></p><p><span>\\(2 b=a+c\\)</span></p><p>\\(\\Rightarrow 2 \times \\log _{10}\\left(2^{x}-1\right)=\\log _{10} 2+\\log _{10}\\left(2^{x}+3\right)\\)</p><p>\\(\\Rightarrow \\log _{10}\\left(2^{x}-1\right)^{2}=\\log _{10}\\left(2 \times\\left(2^{x}+3\right)\right)\\)</p><p>\\(\\Rightarrow\\left(2^{x}-1\right)^{2}=2 \times\\left(2^{x}+3\right)\\)</p><p>Let \\(2^{x}=t\\)<br></p><p>\\(({t}-1)^{2}=2 \times({t}+3)\\)</p><p>\\(\\Rightarrow t^{2}-2 t+1=2 t+6\\)</p><p>\\(\\Rightarrow t^{2}-4 t-5=0\\)</p><p>\\(\\Rightarrow t^{2}-5 t+t-5=0\\)</p><p>\\(\\Rightarrow t(t-5)+1(t-5)=0\\)</p><p>\\(\\Rightarrow(t-5)(t+1)=0\\)</p><p>\\(\therefore t=5,-1\\)</p><p>\\(\because 2^{x}&gt;0\\)</p><p>\\(\\Rightarrow 2^{x} \neq-1\\)</p><p>Now,<br></p><p>\\(2^{x}=5\\)</p><p>\\(\therefore x=\\log _{2} 5\\)</p>",
+null,
+null,
+[
+24,
+24
+],
+1,
+0,
+"cf5166f852f745da8d45e9bcf5f8cc12",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+26,
+null,
+"<div>If \\(a_{n+1}=\frac{1}{1-a_{n}}\\) for \\(n \\geq 1\\) and \\(a_{3}=a_{1},\\) then \\(\\left(a_{2010}\right)^{2010}\\) equals</div>",
+[
+"– 1",
+"1",
+"0",
+"None of these"
+],
+[
+1
+],
+null,
+"<div>We have \\(a_{2}=\frac{1}{1-a_{1}}\\) and<br>\\(a_{3}=\frac{1}{1-a_{2}}=\frac{1}{1-1 /\\left(1-a_{1}\right)}=\frac{1-a_{1}}{-a_{1}}\\)<br>since \\(a_{3}=a_{1},\\) we get \\(-a_{1}^{2}=1-a_{1}\\)<br>\\(\\Rightarrow a_{1}^{2}-a_{1}+1=0 \\Rightarrow a_{1}=-\\omega\\) or \\(-\\omega^{2}\\)<br>We have<br>\\(a_{5} =\frac{1}{1-a_{4}}=\frac{1}{1-1 /\\left(1-a_{3}\right)}=\frac{1-a_{3}}{-a_{3}}=\frac{1-a_{1}}{-a_{1}} \\)<br>\\(=a_{3}=a_{1}\\)<br>Continuing in this way we obtain \\(a_{1}=a_{3}=a_{5}=a_{7}=a_{9}=a_{11}=\\ldots=a_{2010}\\)<br>Thus, \\(\\left(a_{2010}\right)^{2010}=(-\\omega)^{2010}\\) or \\(\\left(-\\omega^{2}\right)^{2010}=1\\)</div>",
+null,
+null,
+[
+25,
+25
+],
+1,
+0,
+"7ad87d3189784c3cae3f9ddb29a5138d",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+27,
+null,
+"<p>Which term of the GP \\(2,6,18,54,\\cdots\\), is \\(4374 ?\\)</p>",
+[
+"<p>\\(6^{\text {th }}\\)</p>",
+"<p>\\(7^{t h}\\)</p>",
+"<p>\\(8^{\text {th }}\\)</p>",
+"<p>\\(9^{\text {th }}\\)<br></p>"
+],
+[
+2
+],
+null,
+"<p>Given:</p><p>The sequence \\(2,6,18,54, \\ldots .\\) is a GP.<br></p><p>Here, we have to find which term of the given sequence is \\(4374\\).<br></p><p>As we know, the general term of a GP is given by:<br></p><p>\\(a_{n}=a r^{n-1}\\)<br></p><p>Here, \\(a=2, r=3\\) and let \\(a_{n}=4374\\)<br></p><p>\\(4374=(2) \\cdot(3)^{n-1}\\)</p><p>\\(\\Rightarrow 3^{n-1}=2187\\)</p><p>\\(\\Rightarrow 3^{n-1}=3^{7}\\)</p><p>\\(\\Rightarrow n-1=7\\)</p><p>\\(\\Rightarrow n=8\\)</p><p>Therefore, \\(4374\\) is the \\(8^{\text {th }}\\) term of the given sequence.</p>",
+null,
+null,
+[
+26,
+26
+],
+1,
+0,
+"0f0ad2bb855c4228817e8fb67c040ef4",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+28,
+null,
+"<p>In a G.P, the \\(5\\)th term is \\(96\\) and the \\(8\\)th term is \\(768\\), then the \\(3\\)rd term of G.P is:<br></p>",
+[
+"<p>\\(16\\)</p>",
+"<p>\\(48\\)</p>",
+"<p>\\(24\\)</p>",
+"<p>\\(36\\)</p>"
+],
+[
+2
+],
+null,
+"<p><span>Given:</span></p><p><span>\\(5\\)th term of G.P is \\(96 .\\)</span><br></p><p>i.e.,</p><p>\\(a_{5}=a r^{5-1}\\)</p><p>\\(\\Rightarrow a_{5}=a r^{4}\\)</p><p>\\(\\Rightarrow 96=a r^{4}\\quad \\ldots(1)\\)</p><p>And,</p><p>\\(8\\)th term is \\(768\\).<br></p><p>\\(\\Rightarrow a_{8}=a r^{7}\\)</p><p>\\(\\Rightarrow768=a r^{7}\\quad \\ldots (2)\\)</p><p>Divide equation \\((2)\\) by equation \\((1)\\), we get,<br></p><p>\\(8=r^{3}\\)</p><p>\\(\\Rightarrow r=2\\)</p><p>Putting this in equation \\((1)\\), we get,<br></p><p>\\(a=6\\)<br></p><p>We know that, \\({n}\\)th term of G.P.<br></p><p>\\(a_{n}=a r^{n-1}\\)</p><p>So,</p><p>\\(a_{3}=6 \times 2^{3-1}\\)</p><p>\\(\\Rightarrow a_{3}=24\\)</p>",
+null,
+null,
+[
+27,
+27
+],
+1,
+0,
+"14da38bca2224e84a5ee4a03d4647bed",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+29,
+null,
+"If \\(\frac{1}{1^{2}}+\frac{1}{2^{2}}+\frac{1}{3^{2}}+\\ldots\\) upto \\(\\infty=\frac{\\pi^{2}}{6},\\) then the value of \\(\frac{1}{1^{2}}+\frac{1}{3^{2}}+\frac{1}{5^{2}}+\\ldots\\) upto \\(^{\\infty}\\) is<br>",
+[
+"<div>\\(\frac{\\pi^{2}}{4}\\)</div>",
+"<div>\\(\frac{\\pi^{2}}{6}\\)</div>",
+"<div>\\(\frac{\\pi^{2}}{8}\\)</div>",
+"<div>\\(\frac{\\pi^{2}}{12}\\)</div>"
+],
+[
+2
+],
+null,
+"<div>\\(\frac{\\pi^{2}}{6}=\frac{1}{1^{2}}+\frac{1}{2^{2}}+\frac{1}{3^{2}}+\\ldots .\\) Upto \\(\\infty \rightarrow(I)\\)<br>Multiplying by \\(\\left(\frac{-1}{2^{2}}\right)\\) Both sides<br> \\(-\frac{1}{4}\\left(\frac{\\pi^{2}}{6}\right)=\frac{-1}{2^{2}}\\left[\frac{1}{1^{2}}+\frac{1}{2^{2}}+\frac{1}{3^{2}}+\\ldots .\right.\\) Upto \\(\\left.\\infty\right] \rightarrow(II)\\)<br>By adding (I) and (II) we get <br>\\(\frac{\\pi^{2}}{6}-\frac{1}{4}\\left(\frac{\\pi^{2}}{6}\right)=\frac{\\pi^{2}}{8}=\\left[\frac{1}{1^{2}}+\frac{1}{3^{2}}+\frac{1}{5^{2}}+\\ldots . \\infty\right]\\)</div>",
+null,
+null,
+[
+28,
+28
+],
+1,
+0,
+"4480ec270046419595df2706b8486e00",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+30,
+null,
+"If \\(\frac{e^{5 x}+e^{x}}{e^{3 x}}\\) is expanded in a series of ascending powers of \\(x\\) and \\(n\\) is an odd natural number, the coefficient of \\(x^{n}\\) is<br>",
+[
+"<div>\\(\frac{2^{n}}{n !}\\)</div>",
+"<div>\\(\frac{2^{n+1}}{(2 n) !}\\)</div>",
+"<div>\\(\frac{2^{2 n}}{(2 n) !}\\)</div>",
+"None of these"
+],
+[
+3
+],
+null,
+"<div>We have \\(\frac{e^{5 x}+e^{x}}{e^{3 x}}=e^{2 x}+e^{-2 x}=2\\left(1+\frac{2^{2} x^{2}}{2}+\frac{2^{4} x^{4}}{4 !}+\\ldots\right)\\)<br>The expansion does not contain any odd power at \\(x\\). Therefore, coefficient of \\(x^{n}\\) is zero.</div>",
+null,
+null,
+[
+29,
+29
+],
+1,
+0,
+"f8b13b1cd13c43f6a5b33f66edaa1f96",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+31,
+null,
+"<p>If the sum upto infinite terms of the series, sin x, sin<sup>2</sup><span style="">x, sin<sup>3</sup></span><span style="">x,...,sin<sup>n</sup></span><span style="">x is 1 then the value of x in&nbsp;</span><span style="">degrees is?</span></p>",
+[
+"<p>15°</p>",
+"<p>30°</p>",
+"<p>45°</p>",
+"<p>90°</p>"
+],
+[
+1
+],
+null,
+"<p>The common ratio of the series is sin x.</p><p>Now, -1≤sin x≤1</p><p>For the sum of infinite series to exist the common ratio must be within -1 and 1</p><p>So, sin x is not equal to either 1 or -1</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mfrac><mrow><mi>x</mi><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><mrow><mn>1</mn><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow></mfrac><mo>=</mo><mn>1</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mn>1</mn><mo>−</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>sin</mi><mo>⁡</mo><mi>x</mi><mo>=</mo><mn>1</mn><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mn>2</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>x</mi><mo>=</mo><msup><mn>30</mn><mrow class="MJX-TeXAtom-ORD"><mo>∘</mo></mrow></msup></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+30,
+30
+],
+1,
+0,
+"0e2caf0043104b2a87eb370808dd6248",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+32,
+null,
+"<p>&nbsp;Find common ratio if 1st term is 7, last term is&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>1701</mn><mn>3125</mn></mfrac><mo>&nbsp;</mo><mi>a</mi><mi>n</mi><mi>d</mi><mo>&nbsp;</mo><mi>s</mi><mi>u</mi><mi>m</mi><mo>&nbsp;</mo><mi>i</mi><mi>s</mi><mo>&nbsp;</mo><mfrac><mn>52136</mn><mn>3125</mn></mfrac><mo>?</mo></math></span></p>",
+[
+"0.6",
+"0.8",
+"1.2",
+"1.5"
+],
+[
+0
+],
+null,
+"<p>According to the question,</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mn>1701</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>7</mn><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mn>1701</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mfrac><mn>243</mn><mn>3125</mn></mfrac></math></span><br></p><p>Also,</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mfrac><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mrow><mi>r</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>=</mo><mfrac><mn>52136</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mfrac><mrow><mfrac><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup><mi>r</mi></mfrac><mo>−</mo><mfrac><mn>1</mn><mi>r</mi></mfrac></mrow><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>r</mi></mfrac></mrow></mfrac><mo>=</mo><mfrac><mn>52136</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>7</mn><mfrac><mrow><mfrac><mn>243</mn><mn>3125</mn></mfrac><mo>−</mo><mfrac><mn>1</mn><mi>r</mi></mfrac></mrow><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>r</mi></mfrac></mrow></mfrac><mo>=</mo><mfrac><mn>52136</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mfrac><mn>243</mn><mn>3125</mn></mfrac><mo>−</mo><mfrac><mn>1</mn><mi>r</mi></mfrac></mrow><mrow><mn>1</mn><mo>−</mo><mfrac><mn>1</mn><mi>r</mi></mfrac></mrow></mfrac><mo>=</mo><mfrac><mn>7448</mn><mn>3125</mn></mfrac></math></span><br></p><p>Take&nbsp;&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>1</mn><mi>r</mi></mfrac><mo>=</mo><mi>x</mi></math></span>&nbsp;and solve as:</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mfrac><mn>243</mn><mn>3125</mn></mfrac><mo>−</mo><mi>x</mi></mrow><mrow><mn>1</mn><mo>−</mo><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mn>7448</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>243</mn><mn>3125</mn></mfrac><mo>−</mo><mi>x</mi><mo>=</mo><mfrac><mn>7448</mn><mn>3125</mn></mfrac><mo>(</mo><mn>1</mn><mo>−</mo><mi>x</mi><mo>)</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>243</mn><mn>3125</mn></mfrac><mo>−</mo><mi>x</mi><mo>=</mo><mfrac><mn>7448</mn><mn>3125</mn></mfrac><mo>−</mo><mfrac><mn>7448</mn><mn>3125</mn></mfrac><mi>x</mi></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>7448</mn><mn>3125</mn></mfrac><mi>x</mi><mo>−</mo><mi>x</mi><mo>=</mo><mfrac><mn>7448</mn><mn>3125</mn></mfrac><mo>−</mo><mfrac><mn>243</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mn>7448</mn><mi>x</mi><mo>−</mo><mn>3125</mn><mi>x</mi></mrow><mn>3125</mn></mfrac><mo>=</mo><mfrac><mn>7205</mn><mn>3125</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>4323</mn><mi>x</mi><mo>=</mo><mn>7205</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>=</mo><mfrac><mn>7205</mn><mn>4323</mn></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mfrac><mn>1</mn><mi>x</mi></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>0.6</mn></math></span><br></p>",
+null,
+null,
+[
+31,
+31
+],
+1,
+0,
+"c9912d701b9143318ad9347dca92b5c0",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+33,
+null,
+"<p>The value of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>n</mi><mo>+</mo><mn>2</mn><mo>)</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>0</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></msubsup><mo>−</mo><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></mrow></msubsup><mo>+</mo><mi>n</mi><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></msubsup><mo>+</mo><mo>…</mo><mo>.</mo></math></span>&nbsp;&nbsp;is equal to?</p>",
+[
+"<p>4n</p>",
+"<p>&nbsp;4n+1</p>",
+"<p>2n+4</p>",
+"<p>4n+4</p>"
+],
+[
+3
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup><mo>=</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>0</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></mrow></msubsup><mo>−</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></msubsup><mo>…</mo></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup><mo>=</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>0</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msup></mrow></msubsup><mo>−</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></msubsup><mo>…</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mi>i</mi><mi>f</mi><mi>f</mi><mi>e</mi><mi>r</mi><mi>e</mi><mi>n</mi><mi>t</mi><mi>i</mi><mi>a</mi><mi>t</mi><mi>i</mi><mi>n</mi><mi>g</mi><mo>&nbsp;</mo><mo>&nbsp;</mo><mi>w</mi><mo>.</mo><mi>r</mi><mo>.</mo><mi>t</mi><mo>.</mo><mo>&nbsp;</mo><mi>x</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><mi>x</mi><mo>(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup><mo>+</mo><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mi>n</mi><mo>(</mo><mi>x</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>=</mo><mo>(</mo><mi>n</mi><mo>+</mo><mn>2</mn><mo>)</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>0</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></msubsup><mo>−</mo><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></mrow></msubsup><mo>+</mo><mo>…</mo><mo>.</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>P</mi><mi>u</mi><mi>t</mi><mo>&nbsp;</mo><mi>x</mi><mo>=</mo><mn>2</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>n</mi><mo>+</mo><mn>2</mn><mo>)</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>0</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></msubsup><mo>−</mo><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></mrow></msubsup><mo>+</mo><mi>n</mi><msubsup><mi>C</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow><mrow class="MJX-TeXAtom-ORD"><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mrow></msubsup><mo>+</mo><mo>…</mo><mo>.</mo><mo>=</mo><mn>4</mn><mi>n</mi><mo>+</mo><mn>4</mn></math></span><br></p>",
+null,
+null,
+[
+32,
+32
+],
+1,
+0,
+"c4ded5cf119846edb82a90acea886ae8",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+34,
+null,
+"<p>Find the number of cases possible for coefficient of 𝑥<span style=""><sup>16</sup> in (1 + 𝑥</span><span style=""><sup>2 </sup>+ 𝑥</span><span style=""><sup>3</sup></span><span style="">)<sup>7</sup> ?</span></p>",
+[
+"3",
+"2",
+"5",
+"4"
+],
+[
+1
+],
+null,
+"<p>Let the terms be&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>1</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi></mrow></msup><mo>,</mo><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn><mi>b</mi></mrow></msup><mo>,</mo><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn><mi>c</mi></mrow></msup></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><mi>b</mi><mo>+</mo><mn>3</mn><mi>c</mi><mo>=</mo><mn>16</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi><mo>=</mo><mn>7</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>c</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>b</mi><mo>=</mo><mn>5</mn><mo>,</mo><mi>a</mi><mo>=</mo><mn>0</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>c</mi><mo>=</mo><mn>4</mn><mo>,</mo><mi>b</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>a</mi><mo>=</mo><mn>1</mn></math></span><br></p><p>2 cases</p>",
+null,
+null,
+[
+33,
+33
+],
+1,
+0,
+"45b814461f02455cbb784277600ee405",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+35,
+null,
+"<p>The sum of n terms of the series&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><munderover><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>x</mi><mo>−</mo><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></munderover><mi>log</mi><mo>⁡</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac><mo>&nbsp;</mo><mo>?</mo></math></span></p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>log</mi><mo>⁡</mo><msup><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mfrac><mi>n</mi><mn>2</mn></mfrac></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>log</mi><mo>⁡</mo><msup><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mfrac><mi>n</mi><mn>2</mn></mfrac></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>log</mi><mo>⁡</mo><msup><mrow><mo>(</mo><mfrac><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mfrac><mi>n</mi><mn>2</mn></mfrac></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>log</mi><mo>⁡</mo><msup><mrow><mo>(</mo><mfrac><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mfrac><mi>n</mi><mn>2</mn></mfrac></mrow></msup></math></span>"
+],
+[
+1
+],
+null,
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><munderover><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>x</mi><mo>−</mo><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></munderover><mi>log</mi><mo>⁡</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac><mo>=</mo><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>0</mn></mrow></msup></mfrac><mo>)</mo></mrow><mo>+</mo><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msup></mfrac><mo>)</mo></mrow><mo>+</mo><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></mfrac><mo>)</mo></mrow><mo>+</mo><mo>…</mo><mo>…</mo><mo>+</mo><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><mrow><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msup><mo>×</mo><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>×</mo><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>×</mo><mo>…</mo><mo>…</mo><mo>×</mo><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></mrow><mrow><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msup><mo>×</mo><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>×</mo><mo>…</mo><mo>…</mo><mo>×</mo><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mrow></mfrac><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mo>⋯</mo><mo>⋅</mo><mi>n</mi></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn><mo>+</mo><mn>2</mn><mo>+</mo><mo>⋯</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow></msup></mfrac><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>log</mi><mo>⁡</mo><mrow><mo>(</mo><mfrac><mrow><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup><mfrac><mrow><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac></mrow><mrow><mn>3</mn><mfrac><mrow><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>n</mi><mo>)</mo></mrow><mn>2</mn></mfrac></mrow></mfrac><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>log</mi><mo>⁡</mo><msup><mrow><mo>(</mo><mfrac><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msup></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mfrac><mi>n</mi><mn>2</mn></mfrac></mrow></msup></mtd></mtr></mtable></math></span>",
+null,
+null,
+[
+34,
+34
+],
+1,
+0,
+"12cd14ef8033477c9791326ced74198b",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+36,
+null,
+"<div>If n<sup>th</sup> term of an arithmetic progression is denoted by an such that 2a<sub>5</sub>=a<sub>10 </sub>and a<sub>5</sub>+5=a<sub>15</sub> then the common difference of the progression is given by?</div>",
+[
+"0.5",
+"0.4",
+"0.3",
+"0.2"
+],
+[
+0
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msub><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn><mi>n</mi></mrow></msub><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mn>2</mn><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn><mi>n</mi></mrow></msub><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mn>3</mn><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi></math></span><br></p><p>Given,</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>5</mn></mrow></msub><mo>=</mo><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>10</mn></mrow></msub></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">⇒</mo><mn>2</mn><mi>a</mi><mo>+</mo><mn>2</mn><mo>(</mo><mn>4</mn><mo>)</mo><mi>d</mi><mo>=</mo><mi>a</mi><mo>+</mo><mn>9</mn><mi>d</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">⇒</mo><mi>a</mi><mo>=</mo><mi>d</mi></math></span><br></p><p>Also</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>5</mn></mrow></msub><mo>+</mo><mn>5</mn><mo>=</mo><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>15</mn></mrow></msub></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">⇒</mo><mi>a</mi><mo>+</mo><mn>4</mn><mi>d</mi><mo>+</mo><mn>5</mn><mo>=</mo><mi>a</mi><mo>+</mo><mn>14</mn><mi>d</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">⇒</mo><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">d</mi></mrow><mo>=</mo><mn>5</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">⇒</mo><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">d</mi></mrow><mo>=</mo><mn>0.5</mn></math></span><br></p>",
+null,
+null,
+[
+35,
+35
+],
+1,
+0,
+"4e2a3ff6fcee46889e8902e07dcd9311",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+37,
+null,
+"<div>If the product of 1<sup>st</sup> and 5<sup>th</sup> term of A.P is 24; 3<sup>rd </sup>and 4<sup>th</sup> term is 28, find value of largest term among the first 5 terms. It is given that the 7<sup>th</sup> term of A.P. is 2?</div>",
+[
+"4",
+"2",
+"-2",
+"0"
+],
+[
+2
+],
+null,
+"<p>According to the question,</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>a</mi><mo>)</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>4</mn><mi>d</mi><mo>)</mo><mo>=</mo><mn>24</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>4</mn><mi>a</mi><mi>d</mi><mo>=</mo><mn>24</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mn>24</mn><mo>−</mo><mn>4</mn><mi>a</mi><mi>d</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>A</mi><mi>l</mi><mi>s</mi><mi>o</mi><mo>,</mo><mo>&nbsp;</mo><mi>t</mi><mi>h</mi><mi>e</mi><mo>&nbsp;</mo><msup><mn>7</mn><mrow class="MJX-TeXAtom-ORD"><mtext>th&nbsp;</mtext></mrow></msup><mo>&nbsp;</mo><mi>t</mi><mi>e</mi><mi>r</mi><mi>m</mi><mo>&nbsp;</mo><mi>i</mi><mi>s</mi><mo>&nbsp;</mo><mn>2</mn><mo>&nbsp;</mo><mi>t</mi><mi>h</mi><mi>a</mi><mi>t</mi><mo>&nbsp;</mo><mi>i</mi><mi>s</mi><mo>&nbsp;</mo><mi>a</mi><mo>+</mo><mn>6</mn><mi>d</mi><mo>=</mo><mn>2</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>a</mi><mo>+</mo><mn>2</mn><mi>d</mi><mo>)</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>3</mn><mi>d</mi><mo>)</mo><mo>=</mo><mn>28</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>5</mn><mi>a</mi><mi>d</mi><mo>+</mo><mn>6</mn><msup><mi>d</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mn>28</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mn>24</mn><mo>−</mo><mn>4</mn><mi>a</mi><mi>d</mi><mo>+</mo><mn>5</mn><mi>a</mi><mi>d</mi><mo>+</mo><mn>6</mn><msup><mi>d</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mn>28</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mi>d</mi><mo>+</mo><mn>6</mn><msup><mi>d</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mn>4</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>d</mi><mo>(</mo><mi>a</mi><mo>+</mo><mn>6</mn><mi>d</mi><mo>)</mo><mo>=</mo><mn>4</mn></mtd></mtr><mtr><mtd></mtd><mtd><msup><mi>d</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mn>4</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>d</mi><mo>=</mo><mn>2</mn></mtd></mtr></mtable></math></span><br></p><p>Substitute d=2 to get value of a as:</p><p>𝑎 = 2 − 6𝑑</p><p>= 2 − 12</p><p>= −10</p><p>Therefore, first 5 terms are -10,-8,-6,-4,-2</p><p>The largest term is -2.</p>",
+null,
+null,
+[
+36,
+36
+],
+1,
+0,
+"ba585b10e3a64e7f86c67d357347c6a8",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+38,
+null,
+"<p>The following AGP series is the outcome of the foster result of an equation such that the two&nbsp;<span style="">integers a and b are the result of the foster form of a series Find the two positive numbers whose&nbsp;</span><span style="">Arithmetic means increased by 2 than the geometric means and their difference is 12?</span></p>",
+[
+"<p>12, 4</p>",
+"<p>16, 8</p>",
+"<p>16, 4</p>",
+"<p>10, 8</p>"
+],
+[
+2
+],
+null,
+"<p>Let the two numbers be a and b. Then,</p><p>𝑎 − 𝑏 = 12</p><p>Given</p><p>AM-GM=2</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow><mn>2</mn></mfrac><mo>−</mo><msqrt><mi>a</mi><mi>b</mi></msqrt><mo>=</mo><mn>2</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mo>+</mo><mi>b</mi><mo>−</mo><mn>2</mn><msqrt><mi>a</mi><mi>b</mi></msqrt><mo>=</mo><mn>4</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo>(</mo><msqrt><mi>a</mi></msqrt><mo>−</mo><msqrt><mi>b</mi></msqrt><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mn>4</mn></mtd></mtr><mtr><mtd></mtd><mtd><msqrt><mi>a</mi></msqrt><mo>−</mo><msqrt><mi>b</mi></msqrt><mo>=</mo><mo>±</mo><mn>2</mn><mo>…</mo><mo>…</mo><mo>…</mo><mo>…</mo><mo>…</mo><mo>.</mo><mo>(</mo><mi>i</mi><mo>)</mo></mtd></mtr></mtable></math></span><br></p><p>Now a-b=12<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mo>(</mo><msqrt><mi>a</mi></msqrt><mo>−</mo><msqrt><mi>b</mi></msqrt><mo>)</mo><mo>(</mo><msqrt><mi>a</mi></msqrt><mo>−</mo><msqrt><mi>b</mi></msqrt><mo>)</mo><mo>=</mo><mn>12</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo>(</mo><msqrt><mi>a</mi></msqrt><mo>+</mo><msqrt><mi>b</mi></msqrt><mo>)</mo><mo>=</mo><mo>±</mo><mn>6</mn><mo>…</mo><mo>…</mo><mo>…</mo><mo>…</mo><mtext>&nbsp;(&nbsp;</mtext><mi>i</mi><mi>i</mi><mo>)</mo></mtd></mtr></mtable></math></span><br></p><p>Solving (i) and (ii) we get a=16, b=4</p><p>Hence the required numbers 16, 4</p>",
+null,
+null,
+[
+37,
+37
+],
+1,
+0,
+"7a00253ac8f44c88ba7dc3276ecd52b6",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+39,
+null,
+"<p>Find real solutions of 𝑎 + 𝑏 + 𝑐 = 3, 𝑎𝑏𝑐 − 𝑑<span style=""><sup>2 </sup>= 1 ?</span></p>",
+[
+"<p>𝑎 = 1, 𝑏 = 1, 𝑐 = 1, 𝑑 = 1</p>",
+"<p>𝑎 = 1, 𝑏 = 1, 𝑐 = 1, 𝑑 = 0</p>",
+"<p>𝑎 = 0, 𝑏 = 2, 𝑐 = 1, 𝑑 = 1</p>",
+"<p>𝑎 = 2, 𝑏 = 1, 𝑐 = 0, 𝑑 = 1</p>"
+],
+[
+1
+],
+null,
+"<p>According to the relation 𝐴. 𝑀 ≥ 𝐺. 𝑀.</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mfrac><mrow><mi>a</mi><mo>+</mo><mi>b</mi><mo>+</mo><mi>c</mi></mrow><mn>3</mn></mfrac><mo>≥</mo><mroot><mrow><mi>a</mi><mi>b</mi><mi>c</mi></mrow><mn>3</mn></mroot></mtd></mtr><mtr><mtd></mtd><mtd><mfrac><mn>3</mn><mn>3</mn></mfrac><mo>≥</mo><mroot><mrow><mi>a</mi><mi>b</mi><mi>c</mi></mrow><mn>3</mn></mroot></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mi>b</mi><mi>c</mi><mo>≤</mo><mn>1</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mi>b</mi><mi>c</mi><mo>−</mo><msup><mi>d</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>≤</mo><mn>1</mn><mo>−</mo><msup><mi>d</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></mtd></mtr></mtable></math></span><br></p><p>But according to the question, 𝑎𝑏𝑐 − 𝑑<span style=""><sup>2 </sup>= 1</span></p><p>Therefore, 𝑑<span style=""><sup>2 </sup>= 0 𝑜𝑟 𝑑 = 0</span></p><p>So, relation changes to 𝑎𝑏𝑐 = 1 resulting in 𝑎 = 1, 𝑏 = 1, 𝑐 = 1.</p><p>Ans is 𝑎 = 1, 𝑏 = 1, 𝑐 = 1, 𝑑 = 0</p>",
+null,
+null,
+[
+38,
+38
+],
+1,
+0,
+"390f47dfc08a4374a9511654dcef36a4",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+40,
+null,
+"<p>&nbsp;If sum of the series&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="normal">Σ</mi><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>=</mo><mi>n</mi><mrow><mo>(</mo><mn>2</mn><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>9</mn><mi>n</mi><mo>+</mo><mn>13</mn><mo>)</mo></mrow><mo>,</mo><mo>&nbsp;</mo><mi>t</mi><mi>h</mi><mi>e</mi><mi>n</mi><mo>&nbsp;</mo><mi mathvariant="normal">Σ</mi><msqrt><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub></msqrt><mo>=</mo><mo>?</mo></math></span></p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>(</mo><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mi>n</mi><mo>)</mo></mrow><msqrt><mo>(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>)</mo></msqrt></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>(</mo><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>2</mn><mi>n</mi><mo>)</mo></mrow><msqrt><mo>(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>)</mo></msqrt></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>(</mo><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>3</mn><mi>n</mi><mo>)</mo></mrow><msqrt><mo>(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>)</mo></msqrt></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mo>(</mo><mn>2</mn><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mi>n</mi><mo>)</mo></mrow><msqrt><mo>(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>)</mo></msqrt></math></span>"
+],
+[
+2
+],
+null,
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>=</mo><msub><mi>S</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>−</mo><msub><mi>S</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mn>6</mn><mo>(</mo><mi>r</mi><mo>+</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><msqrt><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub></msqrt><mo>=</mo><msqrt><mn>6</mn></msqrt><mo>(</mo><mi>r</mi><mo>+</mo><mn>1</mn><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi mathvariant="normal">Σ</mi><msqrt><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub></msqrt><mo>=</mo><msqrt><mn>6</mn></msqrt><mo>(</mo><mi>n</mi><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mn>2</mn><mo>+</mo><mi>n</mi><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mrow><mo>(</mo><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>3</mn><mi>n</mi><mo>)</mo></mrow><msqrt><mo>(</mo><mfrac><mn>3</mn><mn>2</mn></mfrac><mo>)</mo></msqrt></mtd></mtr></mtable></math></span>",
+null,
+null,
+[
+39,
+39
+],
+1,
+0,
+"3573b09d223144e0b669a8c58b638f1d",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+41,
+null,
+"<p>&nbsp;If the sum of n terms of an A.P. is cn(n-1) , where c is not equal to 0, then sum of cube of&nbsp;<span style="">these terms is?</span></p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><msup><mi>c</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><msup><mi>c</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><msup><mi>c</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>(</mo><mi>n</mi><mo>+</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><msup><mi>c</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></math></span>"
+],
+[
+3
+],
+null,
+"<p>If T<sub>r</sub> be the r<sup>th</sup> term of A.P then</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>=</mo><msub><mi>S</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>−</mo><msub><mi>S</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>=</mo><mi>c</mi><mi>r</mi><mo>(</mo><mi>r</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>−</mo><mi>c</mi><mo>(</mo><mi>r</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>r</mi><mo>−</mo><mn>2</mn><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>=</mo><mi>c</mi><mo>(</mo><mi>r</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>r</mi><mo>−</mo><mi>r</mi><mo>+</mo><mn>2</mn><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>r</mi></mrow></msub><mo>=</mo><mn>2</mn><mi>c</mi><mo>(</mo><mi>r</mi><mo>−</mo><mn>1</mn><mo>)</mo></mtd></mtr></mtable></math></span><br></p><p>And we want to find<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>S</mi><mo>=</mo><msubsup><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msubsup><mo>+</mo><msubsup><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msubsup><mo>+</mo><msubsup><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msubsup><mo>+</mo><mo>…</mo><mo>+</mo><msubsup><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msubsup></mtd></mtr><mtr><mtd></mtd><mtd><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">S</mi></mrow><mo>=</mo><mn>8</mn><msup><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">c</mi></mrow><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mrow><mo>[</mo><msup><mn>0</mn><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>+</mo><msup><mn>1</mn><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>+</mo><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>+</mo><mo>…</mo><mo>+</mo><mo>(</mo><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">n</mi></mrow><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mi>S</mi><mo>=</mo><mn>8</mn><msup><mi>c</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mrow><mo>[</mo><msup><mn>1</mn><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>+</mo><msup><mn>2</mn><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>+</mo><mo>⋯</mo><mo>+</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>]</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mn>8</mn><msup><mi>c</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><msup><mrow><mo>(</mo><mfrac><mrow><mi>n</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mn>2</mn><msup><mi>c</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><msup><mi>n</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></mtd></mtr></mtable></math></span></p>",
+null,
+null,
+[
+40,
+40
+],
+1,
+0,
+"c2a85d6fd4ca430aaae6d265746aa254",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+42,
+null,
+"<p>If sum of \\(n\\) terms is an A.P is given by \\(S_n=3 n^2+2 n\\) then find the \\(10^{\text {th }}\\) term.</p>",
+[
+"<p><span>55</span></p>",
+"<p><span>64</span></p>",
+"<p><span>59</span></p>",
+"<p><span>49</span></p>"
+],
+[
+2
+],
+null,
+"<p>Given that \\(S_n=3 n^2+2 n\\).</p> <p>For \\(S_{n-1}\\), we will put (n-1) at the place of \\(n\\).</p> <p>\\( \\Rightarrow T_n=S_n-S_{n-1}=\\left(3 n^2+2 n\right)-\\left\\{3(n-1)^2+2(n-1)\right\\} \\)</p> <p>\\( \\Rightarrow T_n=3 n^2+2 n-\\left\\{3\\left(n^2-2 n+1\right)+2 n-2\right\\} \\)</p> <p>\\( \\Rightarrow T_n=3 n^2+2 n-\\left\\{3 n^2-6 n+3+2 n-2\right\\} \\)</p> <p>\\( \\Rightarrow T_n=3 n^2+2 n-3 n^2+4 n-1 \\)</p> <p>\\( \\Rightarrow T_n=6 n-1\\)</p> <p>Therefore, \\(T_{10}=6 \times 10-1=59\\)</p>",
+null,
+null,
+[
+41,
+41
+],
+1,
+0,
+"3c3a5c416dfe4472a6290f61fd1c136e",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+43,
+null,
+"<p>The sum of 3<sup>rd</sup><sub> </sub>and 5<sup>th</sup><sub> </sub>term of a G.P. series is 272 and the 1<sup>st </sup>term is 1. Find the common ratio?</p>",
+[
+"<p>±4</p>",
+"<p>−4</p>",
+"4",
+"<p>±√17, ±4</p>"
+],
+[
+0
+],
+null,
+"<p>The 3<sup>rd</sup> term is 𝑎𝑟<span style=""><sup>2&nbsp;</sup></span><span style="">and 5<sup>th </sup>term is 𝑎𝑟</span><span style=""><sup>4</sup></span></p><p>Find the common ratio as:</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>a</mi><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mi>a</mi><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>4</mn></mrow></msup><mo>=</mo><mn>272</mn></mtd></mtr><mtr><mtd></mtd><mtd><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>4</mn></mrow></msup><mo>+</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>−</mo><mn>272</mn><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>4</mn></mrow></msup><mo>+</mo><mn>17</mn><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>−</mo><mn>16</mn><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>−</mo><mn>272</mn><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mrow><mo>(</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>17</mn><mo>)</mo></mrow><mo>−</mo><mn>16</mn><mrow><mo>(</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>17</mn><mo>)</mo></mrow><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><mrow><mo>(</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>−</mo><mn>16</mn><mo>)</mo></mrow><mrow><mo>(</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>17</mn><mo>)</mo></mrow><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mn>16</mn><mo>,</mo><mo>−</mo><mn>17</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>r</mi><mo>=</mo><mo>±</mo><mn>4</mn></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+42,
+42
+],
+1,
+0,
+"159d84ee02ab4a088a05facf5f162ff2",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+44,
+null,
+"<p>Find the sum to \\(n\\) terms: \\(3+33+333+3333+\\ldots\\)</p>",
+[
+"<p>\\(\frac{10^{10}-100}{27}\\)</p>",
+"<p>\\(\frac{10^{11}-90}{27}\\)</p>",
+"<p>\\(\frac{10^{\\mathrm{n}+1}-10-9 \\mathrm{n}}{27}\\)</p>",
+"<p>\\(\frac{10^{10}-90}{27}\\)</p>"
+],
+[
+2
+],
+null,
+"<p>From the given series, take common factor 3.</p><p>&nbsp;Thus,</p><p>&nbsp;\\(\\mathrm{S}=3(1+11+111+1111+\\ldots \\ldots \\ldots \\ldots . .\\) nth term \\()\\)</p><p>Or</p><p>\\(\\mathrm{S}=3\\{1+(1+10)+(1+10+100)+(1+10+100+1000)+\\ldots\\) to \\(\\mathrm{n}\\) terms \\(\\}\\)</p><p>Thus the n th term.</p><p>&nbsp;\\(\\mathrm{t}_{\\mathrm{n}}=1+10+100+\\ldots \\ldots \\ldots \\ldots .+10^{\\mathrm{n}-1}\\)</p><p>This is a G.P. where first term is 1 and common ratio is 10 .</p><p>Thus sum of \\(n\\) terms is:</p><p>&nbsp;\\(\\mathrm{t}_{\\mathrm{n}}=\frac{1\\left(1-10^{\\mathrm{n}}\right)}{1-10}\\)</p><p>\\(\\Rightarrow \\mathrm{t}_{\\mathrm{n}}=\frac{\\left(10^{\\mathrm{n}}-1\right)}{9}\\)</p><p>Thus,</p><p>&nbsp;\\(\\mathrm{S}=3 \\sum_{\\mathrm{i}=1}^{\\mathrm{n}} \\mathrm{t}_{\\mathrm{n}}=3 \\sum_{\\mathrm{i}=1}^{\\mathrm{n}} \frac{10^{\\mathrm{n}}-1}{9}\\)</p><p>So, the sum,</p><p>&nbsp;\\(\\mathrm{S}=3 \\sum \frac{10^{\\mathrm{n}}}{9}-3 \\sum \frac{1}{9}\\)</p><p>\\(\\Rightarrow \\mathrm{S}=3\\left\\{\frac{10\\left(1-10^{\\mathrm{n}}\right)}{(1-10) .9}-\\left(\frac{1}{9}\right) \\cdot \\mathrm{n}\right\\}\\)</p><p>\\(\\Rightarrow \\mathrm{S}=3\\left\\{10 \\cdot \frac{\\left(10^{\\mathrm{n}}-1\right)}{81}-\frac{\\mathrm{n}}{9}\right\\}\\)</p><p>\\(\\Rightarrow \\mathrm{S}=\\left\\{10 . \frac{\\left(10^{\\mathrm{n}}-1\right)}{27}-\frac{\\mathrm{n}}{3}\right\\}\\)</p><p>\\(\\Rightarrow \\mathrm{S}=\frac{10^{\\mathrm{n}+1}-10-9 \\mathrm{n}}{27}\\)</p>",
+null,
+null,
+[
+43,
+43
+],
+1,
+0,
+"bd7d7b31f3184380aefa5d8da89bb4e0",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+45,
+null,
+"<div>Let a<sub>1</sub>, a<sub>2</sub>,........., a<sub>2n </sub>be in GP. If the sum of a<sub>1</sub>, a<sub>3</sub>,......, a<sub>2n-1&nbsp;</sub>is 'a' times the total sum of the series, then the common ratio is?</div>",
+[
+"<p>(1-a)/a</p>",
+"a",
+"<p>(1+a)/a</p>",
+"<p>1/a</p>"
+],
+[
+0
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>=</mo><mi>r</mi><mo>×</mo><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>4</mn></mrow></msub><mo>=</mo><mi>r</mi><mo>×</mo><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn><mi>n</mi></mrow></msub><mo>=</mo><mi>r</mi><mo>×</mo><msub><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub></mtd></mtr></mtable></math></span></p><p>sum of even terms = r<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>×</mo></math></span>sum of odd terms</p><p>Seven + Sodd = S</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>a</mi><mo>×</mo><mi>S</mi><mo>+</mo><mi>r</mi><mo>×</mo><mi>a</mi><mo>×</mo><mi>S</mi><mo>=</mo><mi>S</mi></mtd></mtr><mtr><mtd></mtd><mtd><mi>r</mi><mo>=</mo><mn>1</mn><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mi>a</mi><mo>−</mo><mn>1</mn><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>a</mi><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mi>a</mi></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+44,
+44
+],
+1,
+0,
+"8e6007f13c0b47c296b8543b63a1e940",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+46,
+null,
+"<p>A .P. and G.P. have same 1<sup>st</sup> term. If addition of corresponding terms is 6,18,57, find common&nbsp;<span style="">ratio of increasing G.P.?</span></p>",
+[
+"<p>4 𝑜𝑟 − 2</p>",
+"2",
+"4",
+"-2"
+],
+[
+0
+],
+null,
+"<p>Let the numbers in G.P. be 𝑎, 𝑎𝑟. 𝑎𝑟<span><sup>2</sup></span></p><p>According to the question,</p><p>𝑎 + 𝑎 = 6</p><p>𝑎 = 3</p><p>Also,</p><p>(𝑎 + 𝑑) + 𝑎𝑟 = 18</p><p>3 + 𝑑 + 3𝑟 = 18</p><p>𝑑 + 3𝑟 = 15 (𝐼)</p><p>Also,</p><p>(𝑎 + 2𝑑) + 𝑎𝑟</p><p>2 = 57</p><p>3 + 2𝑑 + 3𝑟</p><p>2 = 57</p><p>2𝑑 + 3𝑟</p><p>2 = 54 (𝐼𝐼)</p><p>Now subtract twice of (I) from (II) as:</p><p>3𝑟<span><sup>2</sup> − 6𝑟 = 24</span><span>𝑟</span><span><sup>2</sup> − 2𝑟 = 8</span><span>𝑟</span></p><p>2 − 4𝑟 + 2𝑟 − 8 = 0</p><p>(𝑟 − 4)(𝑟 + 2) = 0</p><p>𝑟 = 4 𝑜𝑟 𝑟 = −2</p><p>The common ratio is 4 because G.P. is increasing</p>",
+null,
+null,
+[
+45,
+45
+],
+1,
+0,
+"722f22567b7146638fe8c846dddad239",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+47,
+null,
+"<p>Sum of 1<sup>st</sup> 5 terms of A.P. is 100 and sum of 1<sup>st</sup> 2terms is of G.P. is 25. First term of A.P. is equal&nbsp;<span style="">to common ratio of G.P. and 1<sup>st </sup>term of G.P. is equal to common difference between A.P. Find&nbsp;</span><span style="">1</span><span style=""><sup>st</sup> term of A.P.?</span></p>",
+[
+"<p>1.74 𝑜𝑟 17.26</p>",
+"<p>17.26</p>",
+"<p>1.74</p>",
+"<p>&nbsp;Cannot be determined</p>"
+],
+[
+0
+],
+null,
+"<p>Let the 1<sup>st </sup>term of A.P. be x and common difference be d and 1<sup>st</sup> term of G.P. be a and common ratio&nbsp;<span>be r</span></p><p>According to the question,</p><p><span><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>5</mn><mn>2</mn></mfrac></math></span>[2𝑥 + 4𝑑] = 100</span></p><p>𝑥 + 2𝑑 = 20</p><p>Also,</p><p>𝑎 + 𝑎𝑟 = 25</p><p>𝑎(1 + 𝑟) = 25</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>=</mo><mfrac><mn>25</mn><mrow><mn>1</mn><mo>+</mo><mi>r</mi></mrow></mfrac></math></span><br></p><p>Also, it is given,</p><p>𝑎 = 𝑑 𝑎𝑛𝑑 𝑥 = 𝑟</p><p>Therefore,<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>=</mo><mfrac><mn>25</mn><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></mfrac></math></span></p><p>Put this in the 1<sup>st</sup> equation to get x as:<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>x</mi><mo>+</mo><mn>2</mn><mrow><mo>(</mo><mfrac><mn>25</mn><mrow><mn>1</mn><mo>+</mo><mi>x</mi></mrow></mfrac><mo>)</mo></mrow><mo>=</mo><mn>20</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>x</mi><mo>+</mo><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mn>50</mn><mo>=</mo><mn>20</mn><mo>+</mo><mn>20</mn><mi>x</mi></mtd></mtr><mtr><mtd></mtd><mtd><msup><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>−</mo><mn>19</mn><mi>x</mi><mo>+</mo><mn>30</mn><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>x</mi><mo>=</mo><mn>1.74</mn><mtext>&nbsp;or&nbsp;</mtext><mn>17.26</mn></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+46,
+46
+],
+1,
+0,
+"48b9418969c046259ec7a71efa071de0",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+48,
+null,
+"<p>&nbsp;A GP has 1<sup>st</sup> term a and common ratio r and the sum of infinity terms is 7. A second GP has&nbsp;<span style="">1<sup>st</sup> term 3a and common ratio r<sup>2</sup> and sum of infinity term is 15. Then values of a and r are?</span></p>",
+[
+"<p>a=21/5 and r = 2/5</p>",
+"<p>a = 2/5 and r = 21/5</p>",
+"<p>a = 21/2 and r = 1/5</p>",
+"<p>a = 49/5 and r = -2/5</p>"
+],
+[
+0
+],
+null,
+"<p>We know that sum if infinite term of GP is given by</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi><mo>=</mo><mfrac><mi>a</mi><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></math></span><br></p><p>Now for 1<sup>st</sup> GP the sum is equal to 7, then<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi><mo>=</mo><mfrac><mi>a</mi><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>7</mn><mo>=</mo><mfrac><mi>a</mi><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>&nbsp;</mo><mo>=</mo><mo>&nbsp;</mo><mn>7</mn><mfenced><mrow><mn>1</mn><mo>-</mo><mi>r</mi></mrow></mfenced></math></span><br></p><p>And for 2<sup>nd </sup>GP sum is 15 and 1<sup>st</sup> term is 3a, common ratio is r<sup>2&nbsp;</sup><span>, then</span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>S</mi><mo>=</mo><mfrac><mi>a</mi><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mn>15</mn><mo>=</mo><mfrac><mrow><mn>3</mn><mi>a</mi></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mn>5</mn><mo>=</mo><mfrac><mi>a</mi><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>r</mi><mo>)</mo></mrow></mfrac></mtd></mtr></mtable></math></span></p><p>Put value of a from equation (1)<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mn>5</mn><mo>=</mo><mfrac><mi>a</mi><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>r</mi><mo>)</mo></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mn>5</mn><mo>=</mo><mfrac><mrow><mn>7</mn><mo>(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo>)</mo></mrow><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>r</mi><mo>)</mo></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mn>5</mn><mo>=</mo><mfrac><mn>7</mn><mrow><mn>1</mn><mo>+</mo><mi>r</mi></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mn>1</mn><mo>+</mo><mi>r</mi><mo>=</mo><mfrac><mn>7</mn><mn>5</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mi>r</mi><mo>=</mo><mfrac><mn>7</mn><mn>5</mn></mfrac><mo>−</mo><mn>1</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>r</mi><mo>=</mo><mfrac><mn>2</mn><mn>5</mn></mfrac></mtd></mtr></mtable></math></span><br></p><p>and</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>a</mi><mo>=</mo><mn>7</mn><mo>(</mo><mn>1</mn><mo>−</mo><mi>r</mi><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mo>=</mo><mn>7</mn><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mfrac><mn>2</mn><mn>5</mn></mfrac><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mo>=</mo><mn>7</mn><mo>×</mo><mfrac><mn>21</mn><mn>5</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mo>=</mo><mfrac><mn>21</mn><mn>5</mn></mfrac></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+47,
+47
+],
+1,
+0,
+"d9b462d4a5994525bd02670b03ed63b4",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+49,
+null,
+"<p>If&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>5</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>9</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>13</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>17</mn></mrow></msub><mo>=</mo><mn>200</mn></math></span>&nbsp;, find the value of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>17</mn></mrow></msub></mtd></mtr></mtable></math></span>&nbsp;?</p>",
+[
+"480",
+"680",
+"200",
+"400"
+],
+[
+1
+],
+null,
+"<p>According to the question</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="1em" rowspacing="4pt" columnalign="left"><mtr><mtd><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>5</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>9</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>13</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>17</mn></mrow></msub><mo>=</mo><mn>200</mn></mtd></mtr><mtr><mtd><mo stretchy="false">⇒</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>4</mn><mi>d</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>8</mn><mi>d</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>12</mn><mi>d</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>16</mn><mi>d</mi><mo>)</mo><mo>=</mo><mn>200</mn></mtd></mtr><mtr><mtd><mo stretchy="false">⇒</mo><mn>5</mn><mi>a</mi><mo>+</mo><mn>40</mn><mi>d</mi><mo>=</mo><mn>200</mn></mtd></mtr><mtr><mtd><mo stretchy="false">⇒</mo><mi>a</mi><mo>+</mo><mn>8</mn><mi>d</mi><mo>=</mo><mn>40</mn></mtd></mtr></mtable></math></span><br></p><p>The value of the series<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>x</mi><mrow class="MJX-TeXAtom-ORD"><mn>17</mn></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mo>(</mo><mn>17</mn><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mn>2</mn><mo>)</mo><mo>(</mo><mn>2</mn><mi>a</mi><mo>+</mo><mn>16</mn><mi>d</mi><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mn>17</mn><mo>(</mo><mi>a</mi><mo>+</mo><mn>8</mn><mi>d</mi><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mn>17</mn><mo>×</mo><mn>40</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mn>680</mn></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+48,
+48
+],
+1,
+0,
+"627d5fd032ee4f42b53fcbe9eebe768a",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+50,
+null,
+"<p>There are 3 types of balls red, yellow and green. Each type has 3 balls which are in A.P.If A.M.&nbsp;<span style="">of red balls is equal to smallest yellow ball , A.M. of yellow balls is equal to smallest green ball and&nbsp;</span><span style="">mean of 2</span><sup>nd</sup><span style=""> and 3</span><sup>rd</sup><span style=""> yellow ball is 6, find middle red ball given that 1</span><span style=""><sup>st </sup>yellow ball is twice of 1st green&nbsp;</span><span style="">ball?</span></p>",
+[
+"24",
+"28",
+"30",
+"20"
+],
+[
+0
+],
+null,
+"<p>Let the red balls be 𝑟<sub>1</sub>, 𝑟<sub>2</sub>, 𝑟<sub>3</sub>; yellow balls be 𝑦<sub>1</sub>, 𝑦<sub>2</sub>, 𝑦<sub>3</sub> and green balls be 𝑔<sub>1</sub>, 𝑔<sub>2</sub>, 𝑔<sub>3</sub>&nbsp;</p><p><span style="">According to the question,</span></p><p><span style=""><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub></mrow><mn>3</mn></mfrac><mo>=</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub></mrow><mn>3</mn></mfrac><mo>=</mo><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub></mrow><mn>2</mn></mfrac><mo>=</mo><mn>6</mn><mo>,</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mn>2</mn><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub></math></span><br></span></p><p><span style="">Replace&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>=</mo><mn>12</mn><mo>&nbsp;</mo><mi>i</mi><mi>n</mi><mo>&nbsp;</mo><mfrac><mrow><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub></mrow><mn>3</mn></mfrac><mo>=</mo><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>&nbsp;</mo><mi>t</mi><mi>o</mi><mo>&nbsp;</mo><mi>g</mi><mi>e</mi><mi>t</mi><mo>:</mo></math></span><br></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mn>3</mn><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>−</mo><mn>12</mn></math></span><span style=""><br></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>s</mi><mi>o</mi><mi>l</mi><mi>v</mi><mi>e</mi><mo>&nbsp;</mo><mo>&nbsp;</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><mn>12</mn><mo>=</mo><mn>3</mn><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>&nbsp;</mo><mi>a</mi><mi>n</mi><mi>d</mi><mo>&nbsp;</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mn>2</mn><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>&nbsp;</mo><mi>t</mi><mi>o</mi><mo>&nbsp;</mo><mi>g</mi><mi>e</mi><mi>t</mi><mo>&nbsp;</mo><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mn>12</mn></math></span><span style=""><br></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mn>2</mn><msub><mi>g</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>=</mo><mn>24</mn></math></span><span style=""><br></span></p><p><span style=""><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>L</mi><mi>e</mi><mi>t</mi><mo>&nbsp;</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>,</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>,</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>&nbsp;</mo><mi>b</mi><mi>e</mi><mo>&nbsp;</mo><mo>&nbsp;</mo><mi>a</mi><mo>−</mo><mi>d</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>a</mi><mo>+</mo><mi>d</mi></math></span><br></span></p><p><span style="">Now</span></p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mo>=</mo><mfrac><mrow><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub></mrow><mn>3</mn></mfrac><mo>=</mo><msub><mi>y</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mfrac><mrow><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub></mrow><mn>3</mn></mfrac><mo>=</mo><mn>24</mn></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>=</mo><mn>72</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mo>−</mo><mi>d</mi><mo>+</mo><mi>a</mi><mo>+</mo><mi>a</mi><mo>+</mo><mi>d</mi><mo>=</mo><mn>72</mn></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mo>=</mo><mn>24</mn></mtd></mtr></mtable></math></span><span style=""><br></span>",
+null,
+null,
+[
+49,
+49
+],
+1,
+0,
+"54b45c46f730471fb5047acf20414ff5",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+51,
+null,
+"<p>If&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>,</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><msqrt><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn><mo>−</mo><mi>x</mi></mrow></msup><mo>+</mo><mn>2</mn></msqrt><mo>,</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mrow><mo>(</mo><msup><mn>4.3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mo>&nbsp;</mo></math></span>&nbsp;are in AP, then x equals?</p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mn>4</mn></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>−</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mn>4</mn></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>−</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>4</mn></mrow></msub><mo>⁡</mo><mn>3</mn></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>4</mn></mrow></msub><mo>⁡</mo><mn>3</mn></math></span>"
+],
+[
+1
+],
+null,
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mo>∵</mo><mn>1</mn><mo>,</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><msqrt><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn><mo>−</mo><mi>x</mi></mrow></msup></msqrt><mo>+</mo><mn>2</mn><mo>,</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mrow><mo>(</mo><msup><mn>4.3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mtext>&nbsp;are in&nbsp;</mtext><mi>A</mi><mi>P</mi></mtd></mtr><mtr><mtd></mtd><mtd><mo>∴</mo><mn>2</mn><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><msup><mrow><mo>(</mo><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn><mo>−</mo><mi>x</mi></mrow></msup><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mfrac><mn>1</mn><mn>2</mn></mfrac></mrow></msup><mo>=</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mn>3</mn><mo>+</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mrow><mo>(</mo><msup><mn>4.3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mrow><mo>(</mo><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn><mo>−</mo><mi>x</mi></mrow></msup><mo>+</mo><mn>2</mn><mo>)</mo></mrow><mo>=</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mn>3</mn><mrow><mo>(</mo><msup><mn>4.3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mn>1</mn><mo>−</mo><mi>x</mi></mrow></msup><mo>+</mo><mn>2</mn><mo>=</mo><msup><mn>12.3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><mo>−</mo><mn>3</mn></mtd></mtr><mtr><mtd></mtd><mtd><mtext>&nbsp;let&nbsp;</mtext><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><mo>=</mo><mi>t</mi></mtd></mtr><mtr><mtd></mtd><mtd><mo>∴</mo><mfrac><mn>3</mn><mi>t</mi></mfrac><mo>+</mo><mn>2</mn><mo>=</mo><mn>12</mn><mi>t</mi><mo>−</mo><mn>3</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mn>12</mn><msup><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>−</mo><mn>5</mn><mi>t</mi><mo>−</mo><mn>3</mn><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mo>(</mo><mn>3</mn><mi>t</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>(</mo><mn>4</mn><mi>t</mi><mo>−</mo><mn>3</mn><mo>)</mo><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>t</mi><mo>=</mo><mo>−</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>,</mo><mfrac><mn>3</mn><mn>4</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><msup><mn>3</mn><mrow class="MJX-TeXAtom-ORD"><mi>x</mi></mrow></msup><mo>=</mo><mfrac><mn>3</mn><mn>4</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mrow><mo>(</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><mo>)</mo></mrow><mo>=</mo><mi>x</mi></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>x</mi><mo>=</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mn>3</mn><mo>−</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mn>4</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo>−</mo><msub><mi>log</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>⁡</mo><mn>4</mn></mtd></mtr></mtable></math></span>",
+null,
+null,
+[
+50,
+50
+],
+1,
+0,
+"9200700c5b7f438bb0bdafa87967f0e8",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+52,
+null,
+"<p>Find the value of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi></mrow></msup><mo>+</mo><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi><mo>+</mo><mi>b</mi></mrow></msup><mo>+</mo><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi><mo>+</mo><mn>2</mn><mi>b</mi></mrow></msup><mo>+</mo><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi><mo>+</mo><mn>3</mn><mi>b</mi></mrow></msup><mo>+</mo><mo>…</mo><mi>n</mi><mo>&nbsp;</mo><mo>?</mo></math></span></p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mi>n</mi><mi>a</mi><mo>+</mo><mi>n</mi><mi>b</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mn>2</mn><mi>n</mi><mi>a</mi><mo>+</mo><mi>n</mi><mi>b</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mn>2</mn><mi>n</mi><mi>a</mi><mo>+</mo><mi>n</mi><mi>b</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo>)</mo></mrow><mn>2</mn></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mrow><mn>2</mn><mi>n</mi><mi>b</mi><mo>+</mo><mi>n</mi><mi>a</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac></math></span>"
+],
+[
+1
+],
+null,
+"<p>Write the value as:</p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi></mrow></msup><mo>+</mo><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi><mo>+</mo><mi>b</mi></mrow></msup><mo>+</mo><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi><mo>+</mo><mn>2</mn><mi>b</mi></mrow></msup><mo>+</mo><mi>log</mi><mo>⁡</mo><msup><mn>10</mn><mrow class="MJX-TeXAtom-ORD"><mi>a</mi><mo>+</mo><mn>3</mn><mi>b</mi></mrow></msup><mo>+</mo><mo>…</mo><mi>n</mi></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>a</mi><mo>+</mo><mi>b</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>2</mn><mi>b</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>a</mi><mo>+</mo><mn>3</mn><mi>b</mi><mo>)</mo><mo>+</mo><mo>…</mo><mi>n</mi></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>n</mi><mi>a</mi><mo>+</mo><mfrac><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>[</mo><mn>2</mn><mi>b</mi><mo>+</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>−</mo><mn>1</mn><mo>)</mo><mi>b</mi><mo>]</mo></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>n</mi><mi>a</mi><mo>+</mo><mfrac><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>[</mo><mn>2</mn><mi>b</mi><mo>+</mo><mi>n</mi><mi>b</mi><mo>−</mo><mn>2</mn><mi>b</mi><mo>]</mo></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mi>n</mi><mi>a</mi><mo>+</mo><mfrac><mrow><mi>n</mi><mi>b</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mfrac><mrow><mn>2</mn><mi>n</mi><mi>a</mi><mo>+</mo><mi>n</mi><mi>b</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mn>2</mn></mfrac></mtd></mtr></mtable></math></span><br>",
+null,
+null,
+[
+51,
+51
+],
+1,
+0,
+"f22b0951af2a44d0a45d726a68581e25",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+53,
+null,
+"<p>Find the value of&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>34</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>41</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>48</mn></mrow></msup><mo>⋅</mo><mo>…</mo><mo>.</mo><mi>n</mi><mo>&nbsp;</mo><mo>?</mo></math></span></p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn><mi>n</mi></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mfrac><mn>7</mn><mn>2</mn></mfrac></mrow></msup><mo>)</mo></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mrow><msup><mrow><mo>(</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mo>(</mo><mi>n</mi><mo>)</mo></mrow></msup><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mfrac><mn>7</mn><mn>2</mn></mfrac></mrow></msup><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mrow><mo>(</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mn>27</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mfrac><mn>7</mn><mn>2</mn></mfrac></mrow></msup></mrow></msup><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn><mi>n</mi></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><msup><mrow><mi>n</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mfrac><mn>7</mn><mn>2</mn></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></mrow></msup></math></span>"
+],
+[
+3
+],
+null,
+"<p>Solve the equation&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>34</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>41</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>48</mn></mrow></msup><mo>⋅</mo><mo>…</mo><mo>.</mo><mi>n</mi><mo>&nbsp;</mo><mi>a</mi><mi>s</mi><mo>&nbsp;</mo><mo>:</mo></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>34</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>41</mn></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>48</mn></mrow></msup><mo>⋅</mo><mo>…</mo><mo>.</mo><mi>n</mi></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn><mo>+</mo><mn>34</mn><mo>+</mo><mn>41</mn><mo>+</mo><mn>48</mn><mo>+</mo><mo>⋯</mo><mi>n</mi></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mfrac><mi>n</mi><mn>2</mn></mfrac><mo>[</mo><mn>2</mn><mo>×</mo><mn>27</mn><mo>+</mo><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mn>7</mn><mo>]</mo></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mo>[</mo><mn>27</mn><mi>n</mi><mo>+</mo><mi>n</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mfrac><mn>7</mn><mn>2</mn></mfrac><mo>]</mo></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn><mi>n</mi></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mfrac><mn>7</mn><mn>2</mn></mfrac></mrow></msup></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><msup><mrow><mo>(</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mn>27</mn><mi>n</mi></mrow></msup><mo>⋅</mo><msup><mi>e</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>)</mo><mfrac><mn>7</mn><mn>2</mn></mfrac></mrow></msup><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msup></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+52,
+52
+],
+1,
+0,
+"281f5327b25e4cdeb6c67f78f1b635af",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+54,
+null,
+"<p>If m<sup>th</sup> term is q, q<span style=""><sup>th</sup> term is 1+m in A.P, find the first term?</span></p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>q</mi><mo>+</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mfrac><mrow><mo>(</mo><mi>m</mi><mo>−</mo><mi>q</mi><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mn>1</mn></mrow></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>q</mi><mo>+</mo><mi>m</mi><mo>)</mo><mo>+</mo><mfrac><mrow><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>q</mi><mo>+</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mfrac><mrow><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>(</mo><mi>q</mi><mo>+</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mfrac><mrow><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi><mo>−</mo><mn>1</mn></mrow></mfrac></math></span>"
+],
+[
+2
+],
+null,
+"<p>According to the question,</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>q</mi><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi><mo>(</mo><mi>I</mi><mo>)</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>+</mo><mi>m</mi><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi><mo>(</mo><mi>I</mi><mi>I</mi><mo>)</mo></math></span><br></p><p>Subtracting 2<sup>nd</sup> equation from 1<sup>st</sup> we get:<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>q</mi><mo>−</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>=</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi><mo>−</mo><mo>(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>q</mi><mo>−</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>=</mo><mo>(</mo><mi>m</mi><mo>−</mo><mi>q</mi><mo>)</mo><mi>d</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>=</mo><mfrac><mrow><mi>q</mi><mo>−</mo><mi>m</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></math></span><br></p><p>Substitute the value of d in (I) to get a as:<br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mi>q</mi><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mrow><mo>(</mo><mfrac><mrow><mi>q</mi><mo>−</mo><mi>m</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mi>a</mi><mo>=</mo><mi>q</mi><mo>−</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mrow><mo>(</mo><mfrac><mrow><mi>q</mi><mo>−</mo><mi>m</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac><mo>)</mo></mrow></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mfrac><mrow><mi>q</mi><mo>(</mo><mi>m</mi><mo>−</mo><mi>q</mi><mo>)</mo><mo>−</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>q</mi><mo>−</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mfrac><mrow><mi>q</mi><mo>(</mo><mi>m</mi><mo>−</mo><mi>q</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>q</mi><mo>−</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mfrac><mrow><mi>q</mi><mo>(</mo><mi>m</mi><mo>−</mo><mi>q</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>m</mi><mo>−</mo><mi>q</mi><mo>)</mo><mo>+</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mfrac><mrow><mo>(</mo><mi>m</mi><mo>−</mo><mi>q</mi><mo>)</mo><mo>(</mo><mi>q</mi><mo>+</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo>=</mo><mo>(</mo><mi>q</mi><mo>+</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mfrac><mrow><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mrow><mi>m</mi><mo>−</mo><mi>q</mi></mrow></mfrac></mtd></mtr></mtable></math></span><br></p>",
+null,
+null,
+[
+53,
+53
+],
+1,
+0,
+"29fd4a2ee2a643a78473b0dc959d2b13",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+55,
+null,
+"<p>𝑎, 𝑏, 𝑑, 𝑔, 𝑘, . .. Find 11<sup>th</sup> term of the series if the series repeats itself from a once it reaches z?</p>",
+[
+"d",
+"k",
+"g",
+"p"
+],
+[
+0
+],
+null,
+"<p>Find the numerical difference between each term of the series as:</p><p>b-a=1</p><p>d-b=2</p><p>g-d=3</p><p>k-g=4</p><p>The difference is in A.P. series.</p><p>To get the 11<sup>th </sup>term of the given series, find sum of the A.P series till 10<sup>th </sup>term and add it to the&nbsp;<span>1</span><span><sup>st </sup>term of the series.</span></p><p>Sum of A.P. series till 10<sup>th</sup> term is:<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>10</mn><mn>2</mn></mfrac><mfenced open="[" close="]"><mrow><mn>2</mn><mo>+</mo><mn>9</mn></mrow></mfenced><mo>&nbsp;</mo><mo>=</mo><mo>&nbsp;</mo><mn>55</mn></math></span></p><p>Now, divide it by 26 because there are 26 letters in English alphabets. Therefore, 55%26 = 3</p><p>The term is a+3=d</p>",
+null,
+null,
+[
+54,
+54
+],
+1,
+0,
+"6c1785b677334ac5828bc167bf793de3",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+56,
+null,
+"<p>Ujjwal has 300 toys. He gives x toys to Sheetal and y toys to Nancy. Now, 3 of them have toys&nbsp;<span style="">in increasing A.P. Find the number of toys Sheetal has if she has 50 more toys than Nancy?</span></p>",
+[
+"100",
+"50",
+"150",
+"200"
+],
+[
+0
+],
+null,
+"<p>Number of toys Ujjwal has is 300-x-y</p><p>According to the question,</p><p>y-x=50</p><p>This means common difference is 50 as Sheetal and Nancy have toys in A.P.</p><p>A.M of the 3 terms&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mrow><mn>300</mn><mo>-</mo><mi>x</mi><mo>-</mo><mi>y</mi><mo>+</mo><mi>x</mi><mo>+</mo><mi>y</mi></mrow><mn>3</mn></mfrac><mo>&nbsp;</mo><mo>=</mo><mn>100</mn></math></span></p><p>Therefore,Sheetal has 100 toys.</p><p>Therefore, Nancy has 150 toys.</p>",
+null,
+null,
+[
+55,
+55
+],
+1,
+0,
+"1d4a91707fdd43428e87eab5c2a2a7a2",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+57,
+null,
+"<div>The ratio of the 7<sup>th </sup>and (m-1)<sup>th</sup> Arithmetic means of the m arithmetic means between 1 and 31 is 5:9 then m=?</div>",
+[
+"12",
+"15",
+"14",
+"17"
+],
+[
+2
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">d</mi></mrow><mo>=</mo><mn>30</mn><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mo>(</mo><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">m</mi></mrow><mo>+</mo><mn>1</mn><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>A</mi><mrow class="MJX-TeXAtom-ORD"><mn>7</mn></mrow></msub><mo>=</mo><mn>1</mn><mo>+</mo><mn>30</mn><mo>×</mo><mn>7</mn><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mo>(</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>A</mi><mrow class="MJX-TeXAtom-ORD"><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>1</mn><mo>+</mo><mn>30</mn><mo>×</mo><mo>(</mo><mi>m</mi><mo>−</mo><mn>1</mn><mo>)</mo><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mo>(</mo><mi>m</mi><mo>+</mo><mn>1</mn><mo>)</mo></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>A</mi><mrow class="MJX-TeXAtom-ORD"><mn>7</mn></mrow></msub><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><msub><mi>A</mi><mrow class="MJX-TeXAtom-ORD"><mi>m</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>=</mo><mn>5</mn><mrow class="MJX-TeXAtom-ORD"><mo>/</mo></mrow><mn>9</mn></mtd></mtr></mtable></math></span></p><p>so we get m=14<br></p>",
+null,
+null,
+[
+56,
+56
+],
+1,
+0,
+"d368affd107c476185ef1857f573b7e0",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+58,
+null,
+"<p>If p<sup>th</sup> term of an arithmetic progression is q and the q<sup>th</sup> term is p, then 10<sup>th</sup> term is?</p>",
+[
+"<p>p-q+10</p>",
+"<p>&nbsp;p+q+11</p>",
+"<p>p+q-9</p>",
+"<p>p+q-10</p>"
+],
+[
+3
+],
+null,
+"<p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>p</mi></mrow></msub><mo>=</mo><mi>q</mi></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi><mo>=</mo><mi>q</mi><mo>⋯</mo><mo>(</mo><mi>I</mi><mo>)</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mi>p</mi></mrow></msub><mo>=</mo><mi>p</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">⇒</mo><mi>a</mi><mo>+</mo><mo>(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>d</mi><mo>=</mo><mi>q</mi><mo>⋯</mo><mo>(</mo><mi>I</mi><mi>I</mi><mo>)</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>&nbsp;</mo><mi>f</mi><mi>r</mi><mi>o</mi><mi>m</mi><mo>&nbsp;</mo><mo>(</mo><mi>I</mi><mtext>&nbsp;) &amp; (&nbsp;</mtext><mi>I</mi><mi>I</mi><mo>)</mo></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>d</mi><mo>=</mo><mo>−</mo><mn>1</mn><mi mathvariant="normal">&amp;</mi><mi>a</mi><mo>=</mo><mi>p</mi><mo>+</mo><mi>q</mi><mo>−</mo><mn>1</mn></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>10</mn></mrow></msub><mo>=</mo><mi>a</mi><mo>+</mo><mn>9</mn><mi>d</mi><mo>=</mo><mi>p</mi><mo>+</mo><mi>q</mi><mo>−</mo><mn>10</mn></math></span></p>",
+null,
+null,
+[
+57,
+57
+],
+1,
+0,
+"ce99058e4c8942c9b17d740f54c80b20",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+59,
+null,
+"<p>if a<sup>2</sup><span style="">, b<sup>2</sup></span><span style="">, c<sup>2</sup> are in AP, then which of the following is also an AP?</span></p>",
+[
+"<p>sin𝐴 , sin𝐵 , sinC</p>",
+"<p>&nbsp;tan 𝐴 , tan𝐵 ,tan C</p>",
+"<p>cot𝐴 , cot𝐵 , cot 𝐶</p>",
+"<p>𝑁𝑜𝑛𝑒 𝑜𝑓 𝑡ℎ𝑒𝑠e</p>"
+],
+[
+2
+],
+null,
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="1em" rowspacing="4pt" columnalign="left"><mtr><mtd><msup><mi>sin</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>⁡</mo><mi>B</mi><mo>−</mo><msup><mi>sin</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>⁡</mo><mi>A</mi><mo>=</mo><msup><mi>sin</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>⁡</mo><mi>C</mi><mo>−</mo><msup><mi>sin</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>⁡</mo><mi>B</mi></mtd></mtr><mtr><mtd><mo stretchy="false">⇒</mo><mi>sin</mi><mo>⁡</mo><mo>(</mo><mi>B</mi><mo>−</mo><mi>A</mi><mo>)</mo><mi>sin</mi><mo>⁡</mo><mo>(</mo><mi>B</mi><mo>+</mo><mi>A</mi><mo>)</mo><mo>=</mo><mi>sin</mi><mo>⁡</mo><mo>(</mo><mi>C</mi><mo>−</mo><mi>B</mi><mo>)</mo><mi>sin</mi><mo>⁡</mo><mo>(</mo><mi>C</mi><mo>+</mo><mi>B</mi><mo>)</mo></mtd></mtr><mtr><mtd><mo stretchy="false">⇒</mo><mi>sin</mi><mo>⁡</mo><mi>C</mi><mo>[</mo><mi>sin</mi><mo>⁡</mo><mi>B</mi><mi>cos</mi><mo>⁡</mo><mi>A</mi><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>B</mi><mi>sin</mi><mo>⁡</mo><mi>A</mi><mo>]</mo></mtd></mtr><mtr><mtd><mo stretchy="false">⇒</mo><mi>sin</mi><mo>⁡</mo><mi>A</mi><mo>(</mo><mi>sin</mi><mo>⁡</mo><mi>C</mi><mi>cos</mi><mo>⁡</mo><mi>B</mi><mo>−</mo><mi>cos</mi><mo>⁡</mo><mi>C</mi><mi>sin</mi><mo>⁡</mo><mi>B</mi><mo>)</mo></mtd></mtr><mtr><mtd><mo stretchy="false">⇒</mo><mn>2</mn><mi>cot</mi><mo>⁡</mo><mi>B</mi><mo>=</mo><mi>cot</mi><mo>⁡</mo><mi>A</mi><mo>+</mo><mi>cot</mi><mo>⁡</mo><mi>C</mi></mtd></mtr></mtable></math></span>",
+null,
+null,
+[
+58,
+58
+],
+1,
+0,
+"8985191a220641bd8608c11a81a8b512",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+60,
+null,
+"<p>The sum of first three terms of a GP is 7/9 and their product is -8/ 27. Find the&nbsp;<span style="">common ratio of the series?</span></p>",
+[
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mo>−</mo><mfrac><mn>2</mn><mrow><mn>3</mn><mo>&nbsp;</mo></mrow></mfrac><mo>&nbsp;</mo><mi>o</mi><mi>r</mi><mo>&nbsp;</mo><mo>−</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mo>−</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>&nbsp;</mo><mi>o</mi><mi>r</mi><mo>&nbsp;</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>&nbsp;</mo><mi>o</mi><mi>r</mi><mo>−</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></math></span>",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mfrac><mn>2</mn><mn>3</mn></mfrac><mo>&nbsp;</mo><mi>o</mi><mi>r</mi><mo>&nbsp;</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></math></span>"
+],
+[
+0
+],
+null,
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" rowspacing="3pt" columnalign="right left right left right left right left right left right left"><mtr><mtd></mtd><mtd><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>+</mo><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>=</mo><mfrac><mn>7</mn><mn>9</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>a</mi><mo>+</mo><mi>a</mi><mi>r</mi><mo>+</mo><mi>a</mi><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mfrac><mn>7</mn><mn>9</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>a</mi><mrow><mo>(</mo><mn>1</mn><mo>+</mo><mi>r</mi><mo>+</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>)</mo></mrow><mo>=</mo><mfrac><mn>7</mn><mn>9</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><mo>⋅</mo><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><mo>⋅</mo><msub><mi>T</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msub><mo>=</mo><mfrac><mrow><mo>−</mo><mn>8</mn></mrow><mn>27</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>a</mi><mo>⋅</mo><mi>a</mi><mi>r</mi><mo>⋅</mo><mi>a</mi><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>=</mo><mfrac><mrow><mo>−</mo><mn>8</mn></mrow><mn>27</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><msup><mi>a</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>⋅</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>3</mn></mrow></msup><mo>=</mo><mfrac><mrow><mo>−</mo><mn>8</mn></mrow><mn>27</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>a</mi><mi>r</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mn>2</mn></mrow><mn>3</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mfrac><mrow><mn>1</mn><mo>+</mo><mi>r</mi><mo>+</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup></mrow><mi>r</mi></mfrac><mo>=</mo><mfrac><mfrac><mn>7</mn><mn>9</mn></mfrac><mfrac><mrow><mo>−</mo><mn>2</mn></mrow><mn>3</mn></mfrac></mfrac><mo>=</mo><mfrac><mrow><mo>−</mo><mn>7</mn></mrow><mn>6</mn></mfrac></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><msup><mi>r</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msup><mo>+</mo><mfrac><mn>13</mn><mn>6</mn></mfrac><mi>r</mi><mo>+</mo><mn>1</mn><mo>=</mo><mn>0</mn></mtd></mtr><mtr><mtd></mtd><mtd><mo stretchy="false">⇒</mo><mi>r</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mn>3</mn></mrow><mn>2</mn></mfrac><mtext>&nbsp;or&nbsp;</mtext></mtd></mtr><mtr><mtd></mtd><mtd><mi>r</mi><mo>=</mo><mfrac><mrow><mo>−</mo><mn>2</mn></mrow><mn>3</mn></mfrac></mtd></mtr></mtable></math></span>",
+null,
+null,
+[
+59,
+59
+],
+1,
+0,
+"85ac4b15a5d148d6b31992e8639013f3",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+61,
+null,
+"It is given that n arithmetic means are inserted between two sets of numbers a, 2b and 2a, b where a, b&nbsp;<span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/cf7932fc19868baed5d5365ff6b58ff7.png" class="img-responsive" style="display: inline;"></span>&nbsp;R. If the m<sup>th</sup> mean between these two sets of numbers is the same, then a : b equals",
+[
+"n - m + 1 : m",
+"n + m + 1 : m",
+"m : n - m + 1",
+"n : n - m + 1"
+],
+[
+2
+],
+null,
+"<div>since n A.M.'s are inserted between a and \\(2 b,\\) we have \\(a, A_{1}, A_{2}, \\ldots \\ldots . . A_{n}, 2 b,\\) then we have<br>\\(2 b=a+n+2)-1) d \\Rightarrow d=\frac{2 b-a}{n+1}\\)<sub><br></sub>So, m<sup>th </sup>mean \\(=a+((m+1)-1) d=a+\frac{m(2 b-a)}{n+1}\\)<sub><br></sub>Similarly, m<sup>th</sup> mean between \\(2 a\\) and \\(b=2 a+\frac{m(b-2 a)}{n+1}\\)<sub><br></sub>From the given condition: \\(a+\frac{m(2 b-a)}{n+1}=2 a+\frac{m(b-2 a}{n+1}\\)<br>\\( \\Rightarrow a =\frac{m}{n+1}(2 b-a-b+2 a) \\) <br>\\(=\frac{m}{n+1}(a+b) \\)<br>\\( \\Rightarrow a\\left(1-\frac{m}{n+1}\right)=\frac{m b}{n+1} \\)<br>\\( \\Rightarrow \frac{a(n+1-m)}{n+1}=\frac{m b}{n+1} \\Rightarrow \frac{a}{b}=\frac{m}{n-m+1}\\)<br>Hence, \\(a: b=m: n-m+1\\)</div>",
+null,
+null,
+[
+60,
+60
+],
+1,
+0,
+"39b2602b79944fc698785e0dd14ccda8",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+62,
+null,
+"If p<sup>th</sup>, q<sup>th</sup> and r<sup>th </sup>terms of an AP, respectively are a, b and c, then a(q - r) + b(r - p) + c(p - q) is equal to",
+[
+"1",
+"0",
+"a + b + c",
+"- 1"
+],
+[
+1
+],
+null,
+"Given: <br>p<sup>th </sup>term = a <sup><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/663c593fd73501bf7938d7d87de7d52f.png" class="img-responsive" style="display: inline;"></span></sup> t<sub>1</sub> + (p - 1)d = a … (1)<br>q<sup>th</sup> term = b <sup><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/09ffa22288071d8a5db503687504db6f.png" class="img-responsive" style="display: inline;"></span></sup> t<sub>1</sub> + (q - 1)d = b ... (2)<br>r<sup>th</sup> term = b <sup><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/64620d36aaa7015ad3e8c0c5517ad0d5.png" class="img-responsive" style="display: inline;"></span></sup> t<sub>1</sub> + (r - 1)d = c … (3)<br>The given expression is: a(q - r) + b(r - p) + c(p - q) <br>This is equivalent to: q(a - c) + r(b - a) + p(c - b)<br>Putting the values of a, b and c in terms of t<sub>1 </sub>and d in the given expression, we get<br>q[(p - 1)d - (r - 1)d] + r[(q - 1)d - (p - 1)d] + p[(r - 1)d - (q - 1)d]<br>= q[pd - d - rd + d] + r[qd - d - pd + d] + p[rd - d - qd + d]<br>= qpd - qrd + rqd - prd + prd - qpd = 0<br>a(q - r) + b(r - p) + c(p - q) = 0<br>Thus, answer option (2) is correct.",
+null,
+null,
+[
+61,
+61
+],
+1,
+0,
+"96f6bf82f9ed4434afc9d91adc124adc",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+63,
+null,
+"<p>If \\(p, q, r\\) are three positive integers such that, \\(27 p q r \\geq(p+q+r)^{3}\\) and \\(2 p+q+r=4\\) then:</p>",
+[
+"<p>\\(p=q=r=0\\)</p>",
+"<p>\\(p=q=r=1\\)</p>",
+"<p>\\(p=0, q=r=1\\)</p>",
+"<p>None of these</p>"
+],
+[
+1
+],
+null,
+"<p>We know that:</p><p>If \\(A\\) is the arithmetic mean,</p><p>\\(\\Rightarrow A=\frac{a+b}{2}\\)</p><p>If \\( {G}\\) is the geometric mean,</p><p>\\(\\Rightarrow {G}=\\sqrt{ {ab}}\\)</p><p>Relation between \\(AM\\), and \\(GM\\),</p><p>\\( {AM} \\geq {GM}\\)</p><p>Given:</p><p>\\(2 p+q+r=4\\quad\\dots(1)\\)</p><p>So,</p><p>\\(\\Rightarrow\frac{p+q+r}{3} \\geq(pqr)^{\frac{1}{3}}\\)</p><p>\\(\\Rightarrow \frac{(p+q+r)^{3}}{3^{3}} \\geq(pqr)\\)</p><p>\\(\\Rightarrow 27 p q r \\geq(p+q+r)^{3}\\)</p><p>This will be possible only if,<br></p><p>\\(p=q=r\\)<br></p><p>Therefore,&nbsp;from equation \\((1)\\),</p><p>\\(2 p+p+p=4\\)</p><p>\\(\\Rightarrow 4 p=4\\) or \\(p=1\\)</p><p>\\(\\Rightarrow p=q=r=1\\)</p>",
+null,
+null,
+[
+62,
+62
+],
+1,
+0,
+"8ea3f02d22804b8ba9b68d0d7eeefd0e",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+64,
+null,
+"Let S<sub>1</sub>, S<sub>2</sub>, … be squares such that for each n <span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>≥</mo></math></span>&nbsp;1, the length of a side of S<sub>n</sub> equals the length of a diagonal of S<sub>n + 1</sub>. If the length of a side of S<sub>1</sub> is 10 cm, then the smallest value of n for which Area (S<sub>n</sub>) &lt; 1 is",
+[
+"7",
+"8",
+"9",
+"10"
+],
+[
+1
+],
+null,
+"<div>Let \\(a_{n}\\) denote the length of a side of \\(S_{n} .\\) <br>We are given<br>Length of a side of \\(S_{n}=\\) Length of a diagonal of \\(S_{n+1}\\)<br>\\(\\Rightarrow a_{n}=\\sqrt{2} a_{n+1} \\Rightarrow \frac{a_{n+1}}{a_{n}}=\frac{1}{\\sqrt{2}}\\)<br>Thus, \\(a_{1}, a_{2}, a_{3}, \\ldots\\) is a G.P. with first term 10 and common ratio \\(1 / \\sqrt{2} .\\) Therefore,<br>\\(a_{n}=10(1 / \\sqrt{2})^{n-1}\\)<br>Also, Area \\(\\left(S_{n}\right)=a_{n}^{2}&lt;1\\)<br>\\(\\Rightarrow \\left[10(1 / \\sqrt{2})^{n-1}\right]^{2}&lt;1 \\Rightarrow 100&lt;2^{n-1}\\)<br>\\(\\Rightarrow\\) smallest possible value of n is \\(8\\).</div>",
+null,
+null,
+[
+63,
+63
+],
+1,
+0,
+"353738d2f9a84dc2825fea3a76d68c2b",
+"1",
+null,
+null,
+false,
+"0",
+null,
+null
+],
+[
+65,
+null,
+"<p>Suppose \\(a, b, c,\\) are in A.P. and \\(-1&lt;a, b, c&lt;1\\). Let \\(x=\\sum_{n=0}^{\\infty} a^{n}, y=\\sum_{n=0}^{\\infty} b^{n}, z=\\sum_{n=0}^{\\infty} c^{n},\\) then \\(x, y, z\\) are in</p>",
+[
+"A.P.",
+"G.P.",
+"H.P.",
+"None of these"
+],
+[
+2
+],
+null,
+"Here, x, y, z are infinite GPs. Thus,&nbsp;<br><div>We have \\(x=\frac{1}{1-a}, y=\frac{1}{1-b}, z=\frac{1}{1-c}\\)<br>As \\(a, b, c\\) are in A.P. \\(-a,-b,-c\\) are in A.P. \\(\\Rightarrow 1-a, 1-b\\), \\(1-c\\) are in A.P.<br>\\(\\Rightarrow \frac{1}{1-a}, \frac{1}{1-b}, \frac{1}{1-c}\\) are in H.P.</div>",
+null,
+null,
+[
+64,
+64
+],
+1,
+0,
+"7ff028eab3934615938dd61d60af76a4",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+66,
+null,
+"<div>If \\( x&gt;1, y&gt;1, z&gt;1\\) are in G.P., then \\( \frac{1}{1+\\ln x} \\cdot \frac{1}{1+\\ln y} \\cdot \frac{1}{1+\\ln z}\\) are in</div>",
+[
+"A.P.",
+"G.P.",
+"H.P.",
+"None of these"
+],
+[
+2
+],
+null,
+"<div>As \\( x, y, z\\) are in G . P .\\( \\Rightarrow y^{2}=x z\\) <br>\\( \\Rightarrow \\ln \\left(y^{2}\right)=\\ln (x z) \\Rightarrow 2 \\ln (y)=\\ln (x)+\\ln (z)\\) <br>\\( \\Rightarrow 2(1+\\ln (y))=(1+\\ln (x))+(1+\\ln (z))\\) <br>\\( \\Rightarrow 1+\\ln (x), 1+\\ln (y), 1+\\ln (z)\\) are in A.P.<br>\\(\\Rightarrow \frac{1}{1+\\ln (x)}, \frac{1}{1+\\ln (y)}, \frac{1}{1+\\ln (z)}\\) are in H.P.</div>",
+null,
+null,
+[
+65,
+65
+],
+1,
+0,
+"a07b601430ca4722b5e80e2815a05ae2",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+67,
+null,
+"<div>Find the value of S.<br>\\(S=2012+\frac{1}{3}\\left(2011+\frac{1}{3}\\left(2010+\frac{1}{3}\\left(2009+\\ldots+\frac{1}{3}\\left(2+\frac{1}{3}(1)\right) \\ldots\right)\right.\right.\\)</div>",
+[
+"3018",
+"3017.5",
+"<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3017</mn><mo>.</mo><mn>25</mn><mo>-</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mfenced><mfrac><mn>1</mn><mn>3</mn></mfrac></mfenced><mn>2011</mn></msup></math></span>",
+"<div>\\(3018-\frac{1}{4}\\left(\frac{1}{3}\right)^{2011}\\)</div>"
+],
+[
+2
+],
+null,
+"<p>Given,&nbsp;</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>S</mi><mo>=</mo><mn>2012</mn><mo>+</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mfenced><mn>2011</mn></mfenced><mo>+</mo><mfrac><mn>1</mn><msup><mn>3</mn><mn>2</mn></msup></mfrac><mfenced><mn>2010</mn></mfenced><mo>+</mo><mfrac><mn>1</mn><msup><mn>3</mn><mn>3</mn></msup></mfrac><mfenced><mn>2009</mn></mfenced><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><mfrac><mn>1</mn><msup><mn>3</mn><mn>2011</mn></msup></mfrac></math></span></p><p>This is AGP.</p><p>Here,&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>a</mi><mo>=</mo><mn>2012</mn><mo>,</mo><mo>&nbsp;</mo><mi>b</mi><mo>=</mo><mn>1</mn><mo>,</mo><mo>&nbsp;</mo><mi>d</mi><mo>=</mo><mo>-</mo><mn>1</mn><mo>,</mo><mo>&nbsp;</mo><mi>r</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac></math></span>&nbsp;and&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>=</mo><mn>2012</mn></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>∴</mo><mi>S</mi><mo>=</mo><mfrac><mn>2012</mn><mrow><mn>1</mn><mo>-</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>3</mn></mfrac></mstyle></mrow></mfrac><mo>+</mo><mfrac><mrow><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced><mfenced><mn>1</mn></mfenced><mfenced close="}" open="{"><mrow><mn>1</mn><mo>-</mo><msup><mfenced><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>3</mn></mfrac></mstyle></mfenced><mn>2011</mn></msup></mrow></mfenced><mo>×</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>3</mn></mfrac></mstyle></mrow><msup><mfenced><mrow><mn>1</mn><mo>-</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>3</mn></mfrac></mstyle></mrow></mfenced><mn>2</mn></msup></mfrac><mo>&nbsp;</mo><mo>-</mo><mo>&nbsp;</mo><mfrac><mrow><mfenced close="]" open="["><mrow><mn>2012</mn><mo>+</mo><mfenced><mrow><mn>2012</mn><mo>-</mo><mn>1</mn></mrow></mfenced><mfenced><mrow><mo>-</mo><mn>1</mn></mrow></mfenced></mrow></mfenced><mfenced><mn>1</mn></mfenced><msup><mfenced><mfrac><mn>1</mn><mn>3</mn></mfrac></mfenced><mn>2012</mn></msup></mrow><mfenced><mrow><mn>1</mn><mo>-</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>3</mn></mfrac></mstyle></mrow></mfenced></mfrac></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mn>3018</mn><mo>-</mo><mfrac><mn>3</mn><mn>4</mn></mfrac><mfenced close="]" open="["><mrow><mn>1</mn><mo>-</mo><msup><mfenced><mfrac><mn>1</mn><mn>3</mn></mfrac></mfenced><mn>2011</mn></msup></mrow></mfenced><mo>-</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mfenced><mfrac><mn>1</mn><mn>3</mn></mfrac></mfenced><mn>2011</mn></msup></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mn>3017</mn><mo>.</mo><mn>25</mn><mo>-</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mfenced><mfrac><mn>1</mn><mn>3</mn></mfrac></mfenced><mn>2011</mn></msup></math></span><br></p>",
+null,
+null,
+[
+66,
+66
+],
+1,
+0,
+"5d84c5efb5e14610ab9ffc3f5806c294",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+68,
+null,
+"The positive integer n, for which 2 <sup><sub><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/9a11077bee5d35b5ed86fbc50d54d0c8.png" class="img-responsive" style="display: inline;"></span></sub></sup>&nbsp;2<sup>2</sup>&nbsp; + 3 <sup><sub><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/e0fb22461ad372285c473a2a81ab21bc.png" class="img-responsive" style="display: inline;"></span></sub></sup>&nbsp;2<sup>3</sup> + 4 <sup><sub><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/456192e578d90d03fabe10d707640236.png" class="img-responsive" style="display: inline;"></span></sub></sup>&nbsp;2<sup>4</sup> + … + n <sup><sub><span><img src="https://testseries.edugorilla.com/static/media/qdump/dd962b43da3e663bef2c213d7dbe3f88/1982cc9c93596d377b1c87881f8ed3e7.png" class="img-responsive" style="display: inline;"></span></sub></sup>&nbsp;2<sup>n</sup> = 2<sup>n +10</sup>, is",
+[
+"510",
+"511",
+"512",
+"513"
+],
+[
+3
+],
+null,
+"<div>We have<br>\\(2^{n+10} =2 \times 2^{2}+3 \times 2^{3}+4 \times 2^{4}+\\ldots+n \times 2^{n} \\)<br>\\(\\Rightarrow 2\\left(2^{n+10}\right) =2 \times 2^{3}+3 \times 2^{4}+\\ldots+(n-1) \times 2^{n}+ n \times 2^{n+1}\\)<br>Subtracting, we get<br>\\(-2^{n+10}= 2 \\cdot 2^{2}+2^{3}+2^{4}+\\ldots+2^{n}-n \\cdot 2^{n+1} \\)<br>\\(= 8+\frac{8\\left(2^{n-2}-1\right)}{2-1}-n \times 2^{n+1} \\)<br>\\(=2^{n+1}-(n) 2^{n+1}\\)<br>\\(\\Rightarrow 2^{10}=2 n-2 \\Rightarrow n=513\\)</div>",
+null,
+null,
+[
+67,
+67
+],
+1,
+0,
+"b5fdb453d851492283c1ed63863c120b",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+69,
+null,
+"<div>Statement - 1: The sum of the series \\(1+(1+2+4)+(4+6+9)+(9+12+16)+\\ldots+(361+380+400)\\) is 8000 .<br> Statement -2: \\(\\sum_{k=1}^{n}\\left(k^{3}-(k-1)^{3}\right)=n^{3}\\) for each natural number \\(n\\)</div>",
+[
+"Statement – 1 is true, Statement – 2 is true and statement – 2 is the correct explanation for Statement – 1.",
+"Statement – 1 is true, Statement – 2 is true and statement – 2 is not the correct explanation for Statement – 1.",
+"Statement – 1 is true, Statement – 2 is false.",
+"Statement – 1 is false, Statement – 2 is true."
+],
+[
+0
+],
+null,
+"<div>Statement- 2: is true since<br>\\(\\sum_{k=1}^{n}\\left(k^{3}-(k-1)^{3}\right)=\\left(1^{3}-0^{3}\right)+\\left(2^{3}-1^{3}\right)+\\ldots +\\left(n^{3}-(n-1)^{3}\right)=n^{3} \\)<br>\\(\\Rightarrow \\sum_{k=1}^{n}(k-(k-1))\\left(\\left(k^{2}+k(k-1)+(k-1)^{2}\right)=n^{3}\right. \\)<br>\\(\\Rightarrow \\sum_{k=1}^{n}\\left(k^{2}+k(k-1)+(k-1)^{2}\right)=n^{3}\\)<br>Putting \\(n=20,\\) we get<br> \\(\\sum_{k=1}^{20}\\left((k-1)^{2}+k(k-1)+k^{2}\right)=20^{3}\\)<br>\\(\\Rightarrow 1+(1+2+4)+(4+6+9)+\\ldots+ (361+380+400)=8000\\)<br>Thus, statement- 1 is also true and statement- 2 is a correct reason for it.</div>",
+null,
+null,
+[
+68,
+68
+],
+1,
+0,
+"80d5448ba6084b0490d9e00c97f92d1b",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+70,
+null,
+"<div>Let \\(x=\\sqrt{2012+\\sqrt{2012+\\sqrt{2012+\\ldots+\\sqrt{2012}}}},\\) where the number 2012 appears 2012 times. Then \\([x],\\) the greatest integer less than or equal to \\(x\\), equals</div>",
+[
+"42",
+"43",
+"44",
+"45"
+],
+[
+3
+],
+null,
+"<p>Let \\(a_{1}=\\sqrt{2012}\\) and for \\(n \\in N\\)</p> <p>\\(a_{n+1}=\\sqrt{2012+a_{n}}\\)</p> <p>As \\(44^{2}=1936&lt;2012&lt;2025=45^{2},\\) we get</p> <p>\\(44&lt;a_{1}&lt;45\\)</p> <p>Next, \\(2012+44&lt;2012+a_{1}&lt;2012+45\\)</p> <p>\\(\\Rightarrow 2056&lt;2012+a_{1}&lt;2057\\)</p> <p>\\(\\Rightarrow 45&lt;\\sqrt{2012+a_{1}}&lt;46\\)</p> <p>\\(\\Rightarrow 45&lt;a_{2}&lt;46\\)</p> <p>A similar argument shows that</p> <p> \\(45&lt;a_{n}&lt;46\\) for \\(2 \\leq n \\leq 2012\\)</p> <p>Thus \\(\\left[a_{2012}\right]=45\\)</p>",
+null,
+null,
+[
+69,
+69
+],
+1,
+0,
+"e9bfb786e84d481d933e14a2112f6dbb",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+71,
+null,
+"Suppose a, b and c are positive real numbers satisfying the system of equations<br>(a<sup>2</sup> + ab + b<sup>2</sup>) (b<sup>2</sup> + bc + c<sup>2</sup>) (c<sup>2</sup> + ca + a<sup>2</sup>) = abc &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<br>(a<sup>4</sup> + a<sup>2</sup>b<sup>2</sup> + b<sup>4</sup>) (b<sup>4</sup> + b<sup>2</sup>c<sup>2</sup> + c<sup>4</sup>) (c<sup>4</sup> + c<sup>2</sup>a<sup>2</sup> + a<sup>4</sup>) = a<sup>3</sup>b<sup>3</sup>c<sup>3</sup>. &nbsp; &nbsp;<br>Then,",
+[
+"a = b = c",
+"abc = 1",
+"<div>\\(\frac{1}{3}(a+b+c)=(a b c)^{1 / 2}\\)</div>",
+"None of these"
+],
+[
+0
+],
+null,
+"(a<sup>2</sup> + ab + b<sup>2</sup>) (b<sup>2</sup> + bc + c<sup>2</sup>) (c<sup>2 </sup>+ ca + a<sup>2</sup>) = abc &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ......... &nbsp;(1)<br>(a<sup>4</sup> + a<sup>2</sup>b<sup>2</sup> + b<sup>4)</sup> (b<sup>4 </sup>+ b<sup>2</sup>c<sup>2</sup> + c<sup>4</sup>) (c<sup>4</sup> + c<sup>2</sup>a<sup>2</sup> + a<sup>4</sup>) = a<sup>3</sup>b<sup>3</sup>c<sup>3</sup> ...........(2)<br><div>We have \\(a^{4}+a^{2} b^{2}+b^{4}=\\left(a^{2}+b^{2}\right)^{2}-a^{2} b^{2}\\)<br>\\(=\\left(a^{2}+a b+b^{2}\right)\\left(a^{2}-a b+b^{2}\right)\\) etc.<br>Thus dividing ( 2 ) by ( 1 ), we get<br>\\(\\left(a^{2}-a b+b^{2}\right)\\left(b^{2}-b c+c^{2}\right)\\left(c^{2}-c a+a^{2}\right)=a^{2} b^{2} c^{2}\\)..(3)<br>since \\(A.M. \\geq G.M\\)<br>\\(\\Rightarrow \frac{1}{2}\\left(x^{2}+y^{2}\right) \\geq x y\\)<br>\\(\\Rightarrow x^{2}-x y+y^{2} \\geq x y \forall x, y&gt;0\\)<br>and the equality holds if and only \\(x=y\\) <br>Thus, equality in (3) can hold if and only if \\(a=b=c\\).<br> Putting this in \\((1),\\) we obtain<br>\\(\\left(3 a^{2}\right)^{3}=a^{3} \\Rightarrow a^{3}=(1 / 3)^{3} \text { or } a=1 / 3\\)<br>\\(a=b=c=1 / 3\\)</div>",
+null,
+null,
+[
+70,
+70
+],
+1,
+0,
+"0520c3a3103241f798a05a1c454f5a39",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+72,
+null,
+"<div>If \\(S=\frac{1}{1.2}-\frac{1}{2.3}+\frac{1}{3.4}-\frac{1}{4.5}+\\ldots \\ldots . .+\\infty, e^{S}\\) is equal to</div>",
+[
+"log<sub>e</sub> (4/e)",
+"4/e",
+"log<sub>e</sub> (e/4)",
+"e/4"
+],
+[
+1
+],
+null,
+"<div>Let \\(T_{n}=\frac{1}{n(n+1)}\\). Then \\(T_{n}=\\left(1 / n-\frac{1}{n+1}\right)\\)<br>\\(\\Rightarrow S=\frac{1}{1.2}-\frac{1}{2.3}+\frac{1}{3.4}-\frac{1}{4.5}+\\ldots \\ldots \\infty\\)<br>\\(=T_{1}-T_{2}+T_{3}-T_{4}+\\ldots \\ldots \\ldots \\infty\\)<br>\\(=(1-1 / 2)-(1 / 2-1 / 3)+(1 / 3-1 / 4)-(1 / 4-1 / 5)+\\ldots \\ldots \\infty\\)<br>\\(=2(1-1 / 2+1 / 3-1 / 4+\\ldots .)-1=2 \\log (1+1)-\\log _{e} e=\\log _{e}(4 / e)\\)<br>\\(S=\\log _{e}(4 / e)\\)<br>\\(e^{S}=4 / e\\)</div>",
+null,
+null,
+[
+71,
+71
+],
+1,
+0,
+"e20ef893772246dcae5eab396126ef17",
+"1",
+null,
+null,
+false,
+"2",
+null,
+null
+],
+[
+73,
+null,
+"<div>The sum upto infinity of the series \\(1+2\\left(1-\frac{1}{n}\right)+3\\left(1-\frac{1}{n}\right)^{2}+\\ldots .\\) is</div>",
+[
+"n<sup>2</sup>",
+"n (n + 1)",
+"<div>\\(n\\left(1+\frac{1}{n}\right)^{2}\\)</div>",
+"None of these"
+],
+[
+0
+],
+null,
+"<p>Let&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>S</mi><mo>∞</mo></msub><mo>=</mo><mn>1</mn><mo>+</mo><mn>2</mn><mfenced><mrow><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><mo>+</mo><mn>3</mn><msup><mfenced><mrow><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><mn>2</mn></msup><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>∞</mo></math></span>...(1)</p><p>Multiplying both sides by&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></math></span>&nbsp;we get</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfenced><mrow><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><msub><mi>S</mi><mo>∞</mo></msub><mo>=</mo><mfenced><mrow><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><mo>+</mo><mn>2</mn><msup><mfenced><mrow><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><mn>2</mn></msup><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>∞</mo></math></span>...(2)</p><p>Subtracting equation (2) from equation (1), we get</p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfenced><mrow><mn>1</mn><mo>-</mo><mn>1</mn><mo>+</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><msub><mi>S</mi><mo>∞</mo></msub><mo>=</mo><mn>1</mn><mo>+</mo><mfenced><mrow><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><mo>+</mo><msup><mfenced><mrow><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac></mrow></mfenced><mn>2</mn></msup><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>∞</mo></math></span><br></p><p>i.e.,&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mfrac><mn>1</mn><mi>n</mi></mfrac><msub><mi>S</mi><mo>∞</mo></msub><mo>=</mo><mn>1</mn><mo>+</mo><mi>x</mi><mo>+</mo><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>∞</mo></math></span>, Where&nbsp;<span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>=</mo><mn>1</mn><mo>-</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo>&lt;</mo><mn>1</mn></math></span></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>-</mo><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mrow><mn>1</mn><mo>-</mo><mfenced><mrow><mn>1</mn><mo>-</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle></mrow></mfenced></mrow></mfrac><mo>=</mo><mfrac><mn>1</mn><mfenced><mstyle displaystyle="true"><mfrac><mn>1</mn><mi>n</mi></mfrac></mstyle></mfenced></mfrac><mo>=</mo><mi>n</mi></math></span><br></p><p><span class="mathMlContainer" contenteditable="false"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>∴</mo><msub><mi>S</mi><mo>∞</mo></msub><mo>=</mo><msup><mi>n</mi><mn>2</mn></msup></math></span><br></p>",
+null,
+null,
+[
+72,
+72
+],
+1,
+0,
+"5778681c838442418cc5bcf71d0e3f83",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+74,
+null,
+"<p>Which term of the series \\(5,8,11,14, \\ldots\\) is \\(320 ?\\)</p>",
+[
+"<p>\\(106^{\text {th }}\\)</p>",
+"<p>\\(105^{\text {th }}\\)</p>",
+"<p>\\(107^{\text {th }}\\)</p>",
+"<p>\\(104^{\text {th }}\\)</p>"
+],
+[
+0
+],
+null,
+"<p>Given:<br></p><p>\\(5,8,11,14, \\ldots\\) is \\(320\\)<br></p><p>Let, \\(n^{\text {th }}\\) term of the series is \\(320\\).<br></p><p>Therefore,<br></p><p>\\(a=5, d=3, T_{n}=320\\)<br></p><p>\\(\because T_{n}=a+(n-1) d\\)<br></p><p>\\(320=5+(n-1) \times 3\\)</p><p>\\(\\Rightarrow 105=n-1\\)</p><p>\\(\\Rightarrow n=106\\)</p>",
+null,
+null,
+[
+73,
+73
+],
+1,
+0,
+"9b11449824064783b135c024ebf89398",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+],
+[
+75,
+null,
+"<div>If \\(a \\in(0, \frac\\pi2)\\), then minimum value of \\(2 x+\frac{\tan ^{2} \\alpha}{2 x}\\) is:</div>",
+[
+"<p>\\(\tan \\alpha\\)</p>",
+"<div>\\(0\\)</div>",
+"<div>\\(2 \tan \\alpha\\)</div>",
+"<p>None of these</p>"
+],
+[
+2
+],
+null,
+"<p>We know that:</p><p>If \\(A\\) is the arithmetic mean,</p><p>\\(\\Rightarrow A=\frac{a+b}{2}\\)</p><p>If \\( {G}\\) is the geometric mean,</p><p>\\(\\Rightarrow {G}=\\sqrt{ {ab}}\\)</p><p>Relation between \\(AM\\), and \\(GM\\),</p><p>\\( {AM} \\geq {GM}\\)</p><p>Given:<br></p><p>\\(2 x+\frac{\tan ^{2} \\alpha}{2 x}\\)<br></p><p>Let \\(a=2 x, b=\frac{\tan ^{2} \\alpha}{2 x}\\)</p><p>So,</p><p>\\(\frac{2 x+\frac{\tan ^{2}\\alpha}{2 x}}{2} \\geq \\sqrt{2 x \times \frac{\tan ^{2} \\alpha}{2 x}}\\)</p><p>\\(\\Rightarrow 2 x+\frac{\tan ^{2} \\alpha}{2 x} \\geq 2 \tan \\alpha\\)</p><p>\\(\\Rightarrow 2 x+\frac{\tan ^{2} \\alpha}{2 x} \\in[2 \tan \\alpha, \\infty)\\)</p><p>Therefore, the minimum value is \\(2 \tan \\alpha\\).<br></p>",
+null,
+null,
+[
+74,
+74
+],
+1,
+0,
+"b92fb10c36ce4dc59d8b52ca75b26c2c",
+"1",
+null,
+null,
+false,
+"1",
+null,
+null
+]
+],
+"qp_ids": {}
+}
+}
+}

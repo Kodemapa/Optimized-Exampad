@@ -1,0 +1,9 @@
+{
+  "questions": [
+    ["", "", "What is the capital of France?", ["Paris", "London", "Berlin", "Madrid"], [1], "", "Paris is the capital of France"],
+    ["", "", "Which is the largest planet?", {"1": "Earth", "2": "Jupiter", "3": "Mars", "4": "Venus"}, [2], "", "Jupiter is the largest planet"],
+    ["", "", "Invalid question - answer out of range?", ["Option A", "Option B"], [5], "", "This should be skipped"],
+    ["", "", "What is 2+2?", ["3", "4", "5", "6"], [2], "", "2+2 equals 4"],
+    ["", "", "Another invalid question?", ["Only", "Two", "Options"], [3], "", "Should be skipped - answer 3 but only 2 options"]
+  ]
+}
