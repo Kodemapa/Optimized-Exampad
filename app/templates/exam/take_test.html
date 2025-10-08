@@ -3,37 +3,122 @@
 {% block title %}Take Test - KODEMAPA{% endblock %}
 
 {% block content %}
-<div class="container py-4">
+<div class="container-fluid py-4">
+  <div class="container">
     <h3 class="mb-1">{{ exam.title }}</h3>
     <div class="text-muted mb-3 d-flex justify-content-between align-items-center">
-        <span>{{ subject.name }} ({{ subject.class_level }}) • Duration: {{ exam.duration_minutes }} mins</span>
-        <span class="badge bg-dark" id="timer-badge">--:--</span>
+      <span>{{ subject.name }} ({{ subject.class_level }}) • Duration: {{ exam.duration_minutes }} mins</span>
+      <span class="badge bg-dark" id="timer-badge">--:--</span>
     </div>
 
-    <div id="test-container">
-        <ol id="question-list" style="padding-left: 1.25rem;">
+    <div class="row">
+      <!-- Left: Practice Settings -->
+      <aside class="col-lg-3 mb-4">
+        <div class="card shadow-sm rounded-4">
+          <div class="card-body p-4 bg-gradient-secondary" style="background: linear-gradient(135deg, rgba(37,150,190,0.12), rgba(32,115,129,0.04)); border-radius: 12px;">
+            <h5 class="card-title mb-3">Practice Settings</h5>
+
+            <div class="mb-3">
+              <label class="form-label small text-muted">Number of Questions</label>
+              <select class="form-select" id="num-questions-select">
+                <option selected>{{ questions|length }} Questions</option>
+                <option>5 Questions</option>
+                <option>10 Questions</option>
+                <option>20 Questions</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small text-muted">Difficulty Level</label>
+              <select class="form-select" id="difficulty-select">
+                <option selected>All Levels</option>
+                <option>Easy</option>
+                <option>Moderate</option>
+                <option>Hard</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label small text-muted">Practice Mode</label>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="practice_mode" id="mode-instant" checked>
+                <label class="form-check-label" for="mode-instant">Instant Feedback</label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="practice_mode" id="mode-test">
+                <label class="form-check-label" for="mode-test">Test Mode</label>
+              </div>
+            </div>
+
+            <div class="d-grid mt-4">
+              <button class="btn btn-primary btn-lg">Loading...</button>
+            </div>
+
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right: Question Panel -->
+      <section class="col-lg-9">
+        <div class="card shadow-sm rounded-4 p-3 mb-4">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <div style="width:70%;">
+              <div class="progress" style="height:12px; border-radius:8px;">
+                <div id="progress-bar" class="progress-bar" role="progressbar" style="width:0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <div class="text-muted small">1 / {{ questions|length }}</div>
+          </div>
+
+          <div class="mb-3">
+            <!-- Question navigator -->
+            <div class="d-flex flex-wrap gap-2" id="question-nav">
+              {% for q in questions %}
+                <a class="btn btn-sm btn-outline-secondary" href="#q_{{ q.id }}">{{ loop.index }}</a>
+              {% endfor %}
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Questions list (kept structure for existing JS) -->
+        <div class="card shadow-sm rounded-4 p-4">
+          <ol id="question-list" style="list-style: none; padding-left: 0; margin: 0;">
             {% for q in questions %}
-            <li class="mb-3" data-qid="{{ q.id }}">
-                <div class="fw-semibold mb-2">{{ q.question_text|safe }}</div>
-                <div>
-                    <div class="form-check">
-                        {% for opt in q.get_options() %}
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="q_{{ q.id }}" id="q_{{ q.id }}_{{ loop.index0 }}" value="{{ ['A','B','C','D'][loop.index0] if loop.length<=4 else loop.index0 }}">
-                            <label class="form-check-label" for="q_{{ q.id }}_{{ loop.index0 }}">{{ opt|safe }}</label>
-                        </div>
-                        {% endfor %}
-                    </div>
+            <li class="mb-4" data-qid="{{ q.id }}" id="q_{{ q.id }}">
+              <div class="bg-light rounded-3 p-4">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                  <h5 class="mb-0">Question {{ loop.index }}</h5>
+                  {% if q.difficulty %}
+                  <span class="badge bg-warning text-dark">{{ q.difficulty }}</span>
+                  {% endif %}
                 </div>
+
+                <div class="fw-semibold mb-3">{{ q.question_text|safe }}</div>
+
+                <div class="options-list">
+                  {% for opt in q.get_options() %}
+                  <div class="form-check mb-2">
+                    <input class="form-check-input" type="radio" name="q_{{ q.id }}" id="q_{{ q.id }}_{{ loop.index0 }}" value="{{ ['A','B','C','D'][loop.index0] if loop.length<=4 else loop.index0 }}">
+                    <label class="form-check-label" for="q_{{ q.id }}_{{ loop.index0 }}">{{ opt|safe }}</label>
+                  </div>
+                  {% endfor %}
+                </div>
+
+              </div>
             </li>
             {% endfor %}
-        </ol>
-    </div>
+          </ol>
 
-    <div class="d-flex justify-content-between align-items-center mt-4">
-        <div class="text-muted">Questions: {{ questions|length }}</div>
-        <button id="submit-test-btn" class="btn btn-primary">Submit Test</button>
+          <div class="d-flex justify-content-between align-items-center mt-4">
+            <div class="text-muted small">Questions: {{ questions|length }}</div>
+            <button id="submit-test-btn" class="btn btn-success">Submit Answer</button>
+          </div>
+        </div>
+
+      </section>
     </div>
+  </div>
 </div>
 
 <script>
