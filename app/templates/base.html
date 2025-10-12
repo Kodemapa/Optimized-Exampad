@@ -13,8 +13,8 @@
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <style>
       :root { 
-        --site-primary: {{ site_primary or '#2596be' }}; 
-        --site-secondary: {{ site_secondary or '#207381' }}; 
+        --site-primary: {{ site_primary or '#4dd0e1' }}; 
+        --site-secondary: {{ site_secondary or '#26c6da' }}; 
         /* Override ALL CSS variables with dynamic theme colors */
         --primary-color: var(--site-primary) !important;
         --secondary-color: var(--site-secondary) !important;
@@ -113,6 +113,24 @@
       .stats-card, .quick-actions-card, .class-card { transition: all 0.3s ease; }
       .access-card { transition: all 0.3s ease; }
       
+      /* Footer theming - matches header */
+      footer { 
+        background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%) !important; 
+        border-top: 1px solid rgba(255,255,255,0.2) !important;
+      }
+      footer h5 { color: white !important; }
+      footer p { color: rgba(255,255,255,0.8) !important; }
+      
+      /* Profile offcanvas text styling */
+      .offcanvas-body { 
+        background-color: white !important; 
+        color: #333 !important; 
+      }
+      .offcanvas-body h5 { color: #333 !important; }
+      .offcanvas-body p { color: #666 !important; }
+      .offcanvas-body strong { color: #333 !important; }
+      .offcanvas-body .text-muted { color: #888 !important; }
+      
       /* Override any hardcoded colors in utility classes */
       .text-gradient-primary, .text-gradient-cool, .text-gradient-electric { 
         background: linear-gradient(135deg, var(--site-primary), var(--site-secondary));
@@ -122,7 +140,7 @@
       }
       
       /* Transition for smooth color changes */
-      .card, .btn, .simple-header, .auth-header, .offcanvas-header, .card-header { 
+      .card, .btn, .simple-header, .auth-header, .offcanvas-header, .card-header, footer { 
         transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important; 
       }
     </style>
@@ -195,9 +213,22 @@
         {% if messages %}
             <div class="container mt-3">
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show shadow-sm" role="alert" style="border-left: 4px solid var(--site-primary);">
+                        <div class="d-flex align-items-center">
+                            {% if category == 'error' or category == 'danger' %}
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            {% elif category == 'warning' %}
+                                <i class="bi bi-shield-x me-2"></i>
+                            {% elif category == 'success' %}
+                                <i class="bi bi-check-circle-fill me-2"></i>
+                            {% else %}
+                                <i class="bi bi-info-circle-fill me-2"></i>
+                            {% endif %}
+                            <div class="flex-grow-1">
+                                {{ message }}
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 {% endfor %}
             </div>
@@ -210,18 +241,18 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-5 py-4" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border-top: 1px solid #e2e8f0;">
+    <footer class="mt-5 py-4" style="background: linear-gradient(135deg, var(--site-primary) 0%, var(--site-secondary) 100%); border-top: 1px solid rgba(255,255,255,0.2);">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 d-flex align-items-center">
                     <img src="{{ url_for('static', filename='uploads/logo.png') }}" alt="Logo" style="height: 40px; margin-right: 10px;">
                     <div>
-                        <h5 style="color: #334155; font-weight: 600;">{{ site_title or 'AKSHARASHREE' }} Exam Platform</h5>
-                        <p style="color: #64748b; margin-bottom: 0;">Comprehensive online examinations.</p>
+                        <h5 style="color: white; font-weight: 600;">{{ site_title or 'AKSHARASHREE' }} Exam Platform</h5>
+                        <p style="color: rgba(255,255,255,0.8); margin-bottom: 0;">Comprehensive online examinations.</p>
                     </div>
                 </div>
                 <div class="col-md-6 text-md-end">
-                    <p style="color: #64748b; margin-bottom: 0;">&copy; 2025 KODEMAPA. All rights reserved.</p>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 0;">&copy; 2025 KODEMAPA. All rights reserved.</p>
                 </div>
             </div>
 
@@ -279,7 +310,7 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- MathJax for LaTeX rendering -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <!-- Removed problematic polyfill.io - using more reliable alternatives -->
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
         window.MathJax = {

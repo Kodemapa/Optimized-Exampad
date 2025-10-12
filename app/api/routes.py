@@ -663,7 +663,7 @@ def submit_practice_test():
 
 @bp.route('/students', methods=['GET'])
 def get_students():
-    """Return list of all students for superadmin access with pagination."""
+    """Return list of all students for superadmin access with pagination and search."""
     from flask_login import current_user
     from app.models import User, StudentClass
     
@@ -672,14 +672,35 @@ def get_students():
         return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
     
     try:
-        # Get pagination parameters
+        # Get pagination and search parameters
         page = request.args.get('page', 1, type=int)
         per_page = 20  # Fixed to 20 users per page
+        search = request.args.get('search', '').strip()
+        class_filter = request.args.get('class', '').strip()
+        status_filter = request.args.get('status', '').strip()
         
         # Get paginated students with their class information
         students_query = db.session.query(User, StudentClass).outerjoin(
             StudentClass, User.id == StudentClass.user_id
         ).filter(User.role == 'student')
+        
+        # Apply search filter
+        if search:
+            students_query = students_query.filter(
+                (User.username.ilike(f'%{search}%')) |
+                (User.email.ilike(f'%{search}%'))
+            )
+        
+        # Apply class filter
+        if class_filter:
+            students_query = students_query.filter(StudentClass.class_level == class_filter)
+        
+        # Apply status filter
+        if status_filter:
+            if status_filter.lower() == 'active':
+                students_query = students_query.filter(User.is_active == True)
+            elif status_filter.lower() == 'inactive':
+                students_query = students_query.filter(User.is_active == False)
         
         # Get total count
         total_students = students_query.count()
@@ -713,11 +734,54 @@ def get_students():
                 'total_pages': total_pages,
                 'has_next': has_next,
                 'has_prev': has_prev
+            },
+            'filters': {
+                'search': search,
+                'class': class_filter,
+                'status': status_filter
             }
         })
         
     except Exception as e:
         return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
+
+@bp.route('/students/search-suggestions', methods=['GET'])
+def get_student_search_suggestions():
+    """Return search suggestions for students."""
+    from flask_login import current_user
+    from app.models import User
+    
+    # Check if current user is superadmin
+    if not current_user.is_authenticated or current_user.role != 'superadmin':
+        return jsonify({'error': 'Access denied. Superadmin role required.'}), 403
+    
+    try:
+        query = request.args.get('q', '').strip()
+        if not query or len(query) < 2:
+            return jsonify({'suggestions': []})
+        
+        # Search for students matching the query
+        students = User.query.filter(
+            User.role == 'student',
+            (User.username.ilike(f'%{query}%')) |
+            (User.email.ilike(f'%{query}%'))
+        ).limit(10).all()
+        
+        suggestions = []
+        for student in students:
+            suggestions.append({
+                'id': student.id,
+                'username': student.username,
+                'email': student.email,
+                'display': f"{student.username} ({student.email})"
+            })
+        
+        return jsonify({'suggestions': suggestions})
+        
+    except Exception as e:
+        return jsonify({'error': f'An error occurred: {str(e)}'}), 500
+
 
 @bp.route('/student/<int:student_id>/access-settings', methods=['GET'])
 def get_student_access_settings(student_id):
@@ -1012,31 +1076,52 @@ def delete_teacher(teacher_id):
         if not teacher:
             return jsonify({'error': 'Teacher not found'}), 404
         
-        # Delete associated access settings
+        # Store username for response before deletion
+        username = teacher.username
+        
+        # Step 1: Delete associated access settings
         access_settings = TeacherAccessSettings.query.filter_by(user_id=teacher_id).first()
         if access_settings:
             db.session.delete(access_settings)
         
-        # Delete associated custom tests created by this teacher
+        # Step 2: Delete ALL exams created by this teacher (comprehensive approach)
+        from app.models import ExamSession
+        all_teacher_exams = Exam.query.filter_by(created_by=teacher_id).all()
+        deleted_sessions_count = 0
+        deleted_exams_count = 0
+        
+        # Delete exam sessions first, then exams
+        for exam in all_teacher_exams:
+            # First delete all exam sessions that reference this exam
+            exam_sessions = ExamSession.query.filter_by(exam_id=exam.id).all()
+            for session in exam_sessions:
+                db.session.delete(session)
+                deleted_sessions_count += 1
+            
+            # Then delete the exam
+            db.session.delete(exam)
+            deleted_exams_count += 1
+        
+        # Step 3: Delete associated custom tests created by this teacher
         custom_tests = CustomTest.query.filter_by(created_by_user_id=teacher_id).all()
         for custom_test in custom_tests:
-            # Also delete the associated exam if it exists
-            if custom_test.exam_id:
-                exam = Exam.query.get(custom_test.exam_id)
-                if exam:
-                    db.session.delete(exam)
             db.session.delete(custom_test)
         
-        # Store username for response
-        username = teacher.username
-        
-        # Delete the teacher user account
+        # Step 4: Delete the teacher user account
         db.session.delete(teacher)
+        
+        # Commit all changes
         db.session.commit()
         
         return jsonify({
             'success': True,
-            'message': f'Teacher "{username}" and all associated data have been successfully deleted'
+            'message': f'Teacher "{username}" and all associated data have been successfully deleted',
+            'details': {
+                'teacher_access_settings_deleted': 1 if access_settings else 0,
+                'exams_deleted': deleted_exams_count,
+                'exam_sessions_deleted': deleted_sessions_count,
+                'custom_tests_deleted': len(custom_tests)
+            }
         })
         
     except Exception as e:

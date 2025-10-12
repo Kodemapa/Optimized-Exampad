@@ -189,8 +189,14 @@
         <div class="row align-items-center">
             <div class="col-md-4">
                 <label class="form-label fw-bold">Search Students</label>
-                <input type="text" class="form-control search-box" id="studentFilter" 
-                       placeholder="Search by username or email..." onkeyup="filterStudents()">
+                <div class="search-container">
+                    <input type="text" class="form-control search-box" id="studentFilter" 
+                           placeholder="Search by username or email..." 
+                           oninput="handleSearchInput(this.value)"
+                           onkeydown="handleSearchKeydown(event)"
+                           autocomplete="off">
+                    <div id="searchSuggestions" class="search-suggestions" style="display: none;"></div>
+                </div>
             </div>
             <div class="col-md-2">
                 <label class="form-label fw-bold">Class Filter</label>
@@ -280,7 +286,7 @@
             <i class="bi bi-exclamation-triangle text-danger" style="font-size: 3rem;"></i>
             <h5 class="mt-3">Error Loading Students</h5>
             <p class="text-muted">There was an error loading the student data. Please try again.</p>
-            <button class="btn btn-primary" onclick="loadStudentData(1)">
+            <button class="btn btn-primary" onclick="loadStudentData(1, currentSearchQuery, document.getElementById('classFilter').value, document.getElementById('statusFilter').value)">
                 <i class="bi bi-arrow-clockwise me-1"></i>Try Again
             </button>
         </div>
@@ -411,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadStudentData(1);
 });
 
-function loadStudentData(page = 1) {
+function loadStudentData(page = 1, search = '', classFilter = '', statusFilter = '') {
     const loadingIndicator = document.getElementById('studentLoadingIndicator');
     const tableContainer = document.getElementById('studentTableContainer');
     const errorContainer = document.getElementById('errorContainer');
@@ -423,9 +429,23 @@ function loadStudentData(page = 1) {
     errorContainer.style.display = 'none';
     
     currentPage = page;
+    
+    // Get current filter values if not provided
+    if (!search) search = document.getElementById('studentFilter').value.trim();
+    if (!classFilter) classFilter = document.getElementById('classFilter').value;
+    if (!statusFilter) statusFilter = document.getElementById('statusFilter').value;
+    
+    // Build query parameters
+    const params = new URLSearchParams({
+        page: page
+    });
+    
+    if (search) params.append('search', search);
+    if (classFilter) params.append('class', classFilter);
+    if (statusFilter) params.append('status', statusFilter);
 
-    // Fetch student data from backend with pagination
-    fetch(`/api/students?page=${page}`, {
+    // Fetch student data from backend with pagination and filters
+    fetch(`/api/students?${params.toString()}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -531,7 +551,7 @@ function updatePagination(pagination) {
     if (has_prev) {
         paginationHtml += `
             <li class="page-item">
-                <a class="page-link" href="#" onclick="loadStudentData(${page - 1}); return false;">
+                <a class="page-link" href="#" onclick="loadStudentData(${page - 1}, currentSearchQuery, document.getElementById('classFilter').value, document.getElementById('statusFilter').value); return false;">
                     <i class="bi bi-chevron-left"></i>
                 </a>
             </li>`;
@@ -547,7 +567,7 @@ function updatePagination(pagination) {
         if (i === page) {
             paginationHtml += `<li class="page-item active"><span class="page-link">${i}</span></li>`;
         } else {
-            paginationHtml += `<li class="page-item"><a class="page-link" href="#" onclick="loadStudentData(${i}); return false;">${i}</a></li>`;
+            paginationHtml += `<li class="page-item"><a class="page-link" href="#" onclick="loadStudentData(${i}, currentSearchQuery, document.getElementById('classFilter').value, document.getElementById('statusFilter').value); return false;">${i}</a></li>`;
         }
     }
     
@@ -555,7 +575,7 @@ function updatePagination(pagination) {
     if (has_next) {
         paginationHtml += `
             <li class="page-item">
-                <a class="page-link" href="#" onclick="loadStudentData(${page + 1}); return false;">
+                <a class="page-link" href="#" onclick="loadStudentData(${page + 1}, currentSearchQuery, document.getElementById('classFilter').value, document.getElementById('statusFilter').value); return false;">
                     <i class="bi bi-chevron-right"></i>
                 </a>
             </li>`;
@@ -595,35 +615,143 @@ function updateStatistics(totalCount) {
     });
 }
 
-function filterStudents() {
-    const searchFilter = document.getElementById('studentFilter').value.toLowerCase();
-    const classFilter = document.getElementById('classFilter').value;
-    const statusFilter = document.getElementById('statusFilter').value;
+let searchTimeout;
+let currentSearchQuery = '';
+let selectedSuggestionIndex = -1;
+
+function handleSearchInput(value) {
+    currentSearchQuery = value.trim();
+    selectedSuggestionIndex = -1;
     
-    const rows = document.querySelectorAll('#studentTable tbody tr');
-    let visibleCount = 0;
+    // Clear previous timeout
+    if (searchTimeout) {
+        clearTimeout(searchTimeout);
+    }
     
-    rows.forEach(row => {
-        const username = row.cells[0]?.textContent.toLowerCase() || '';
-        const email = row.cells[1]?.textContent.toLowerCase() || '';
-        const studentClass = row.cells[2]?.textContent || '';
-        const status = row.cells[3]?.textContent.toLowerCase() || '';
-        
-        const matchesSearch = username.includes(searchFilter) || email.includes(searchFilter);
-        const matchesClass = !classFilter || studentClass.includes(classFilter);
-        const matchesStatus = !statusFilter || status.includes(statusFilter);
-        
-        if (matchesSearch && matchesClass && matchesStatus) {
-            row.style.display = '';
-            visibleCount++;
+    // Debounce search
+    searchTimeout = setTimeout(() => {
+        if (currentSearchQuery.length >= 2) {
+            fetchSearchSuggestions(currentSearchQuery);
         } else {
-            row.style.display = 'none';
+            hideSuggestions();
+            if (currentSearchQuery.length === 0) {
+                // Reset to show all students
+                loadStudentData(1);
+            }
         }
+    }, 300);
+}
+
+function handleSearchKeydown(event) {
+    const suggestions = document.querySelectorAll('.suggestion-item');
+    
+    switch(event.key) {
+        case 'ArrowDown':
+            event.preventDefault();
+            selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, suggestions.length - 1);
+            updateSelectedSuggestion();
+            break;
+        case 'ArrowUp':
+            event.preventDefault();
+            selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, -1);
+            updateSelectedSuggestion();
+            break;
+        case 'Enter':
+            event.preventDefault();
+            if (selectedSuggestionIndex >= 0 && suggestions[selectedSuggestionIndex]) {
+                selectSuggestion(suggestions[selectedSuggestionIndex]);
+            } else {
+                performSearch(currentSearchQuery);
+            }
+            break;
+        case 'Escape':
+            hideSuggestions();
+            break;
+    }
+}
+
+function updateSelectedSuggestion() {
+    const suggestions = document.querySelectorAll('.suggestion-item');
+    suggestions.forEach((item, index) => {
+        item.classList.toggle('active', index === selectedSuggestionIndex);
+    });
+}
+
+function fetchSearchSuggestions(query) {
+    fetch(`/api/students/search-suggestions?q=${encodeURIComponent(query)}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.suggestions) {
+            displaySuggestions(data.suggestions);
+        }
+    })
+    .catch(error => {
+        console.error('Error fetching suggestions:', error);
+    });
+}
+
+function displaySuggestions(suggestions) {
+    const container = document.getElementById('searchSuggestions');
+    
+    if (suggestions.length === 0) {
+        hideSuggestions();
+        return;
+    }
+    
+    let html = '';
+    suggestions.forEach((suggestion, index) => {
+        html += `
+            <div class="suggestion-item" onclick="selectSuggestionByData('${suggestion.username}')">
+                <strong>${suggestion.username}</strong><br>
+                <small class="text-muted">${suggestion.email}</small>
+            </div>
+        `;
     });
     
-    // Update showing count
-    document.getElementById('showingCount').textContent = visibleCount;
+    container.innerHTML = html;
+    container.style.display = 'block';
 }
+
+function selectSuggestionByData(username) {
+    document.getElementById('studentFilter').value = username;
+    hideSuggestions();
+    performSearch(username);
+}
+
+function selectSuggestion(suggestionElement) {
+    const username = suggestionElement.querySelector('strong').textContent;
+    selectSuggestionByData(username);
+}
+
+function hideSuggestions() {
+    document.getElementById('searchSuggestions').style.display = 'none';
+    selectedSuggestionIndex = -1;
+}
+
+function performSearch(query) {
+    currentSearchQuery = query;
+    loadStudentData(1, query);
+    hideSuggestions();
+}
+
+function filterStudents() {
+    // This function is now called for class and status filters only
+    const classFilter = document.getElementById('classFilter').value;
+    const statusFilter = document.getElementById('statusFilter').value;
+    loadStudentData(1, currentSearchQuery, classFilter, statusFilter);
+}
+
+// Close suggestions when clicking outside
+document.addEventListener('click', function(event) {
+    if (!event.target.closest('.search-container')) {
+        hideSuggestions();
+    }
+});
 
 function viewStudentSessions(studentId) {
     // Redirect to admin student detail page
@@ -801,7 +929,7 @@ function deleteStudent(studentId, username) {
             alert(data.message);
             
             // Reload the current page to refresh the student list
-            loadStudentData(currentPage);
+            loadStudentData(currentPage, currentSearchQuery, document.getElementById('classFilter').value, document.getElementById('statusFilter').value);
         } else {
             // Show error message
             alert(`Error: ${data.error}`);

@@ -6,10 +6,87 @@
 <style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
+/* Custom Toast Styling */
+.toast-container {
+  z-index: 9999 !important;
+}
+
+.toast {
+  min-width: 300px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.toast-header.bg-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toast-body {
+  padding: 1rem;
+  background: white;
+}
+
 </style>
 {% endblock %}
 
 {% block content %}
+
+<!-- Access Denied Toast Function -->
+<script>
+// Function to show access denied toast popup
+window.showAccessDenied = function(featureName) {
+  // Create toast element if it doesn't exist
+  let toastContainer = document.getElementById('toastContainer');
+  if (!toastContainer) {
+    toastContainer = document.createElement('div');
+    toastContainer.id = 'toastContainer';
+    toastContainer.className = 'toast-container position-fixed top-0 end-0 p-3';
+    toastContainer.style.zIndex = '9999';
+    document.body.appendChild(toastContainer);
+  }
+  
+  // Create toast HTML
+  const toastId = 'accessDeniedToast_' + Date.now();
+  const toastHTML = `
+    <div id="${toastId}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-warning text-dark">
+        <i class="bi bi-shield-x me-2"></i>
+        <strong class="me-auto">Access Denied</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        <strong>${featureName}</strong> is currently disabled for your account.<br>
+        <small class="text-muted">Please contact your administrator for assistance.</small>
+      </div>
+    </div>
+  `;
+  
+  // Add toast to container
+  toastContainer.insertAdjacentHTML('beforeend', toastHTML);
+  
+  // Show toast
+  const toastElement = document.getElementById(toastId);
+  if (typeof bootstrap !== 'undefined') {
+    const toast = new bootstrap.Toast(toastElement, {
+      autohide: true,
+      delay: 5000
+    });
+    toast.show();
+    
+    // Remove toast element after it's hidden
+    toastElement.addEventListener('hidden.bs.toast', function() {
+      toastElement.remove();
+    });
+  } else {
+    // Fallback to alert if Bootstrap not loaded
+    alert('Access Denied: ' + featureName + ' is currently disabled for your account. Please contact your administrator for assistance.');
+  }
+};
+</script>
+
+
+
 <div class="dashboard-container">
     <!-- Left welcome vertical panel -->
     <aside class="welcome-panel">
@@ -75,28 +152,40 @@
           <i class="bi bi-clipboard-plus text-warning"></i>
           <h5>Create Test</h5>
           <p>Create a test for your students</p>
-          {% if current_user.teacher_access_settings and current_user.teacher_access_settings.create_test_access != False %}
+          {% if current_user.role == 'teacher' %}
+            {% if current_user.teacher_access_settings and current_user.teacher_access_settings.create_test_access %}
+            <a href="{{ url_for('exam.create_test') }}" class="btn btn-warning">
+              <i class="bi bi-plus-circle"></i> Create Test
+            </a>
+            {% else %}
+            <button class="btn btn-warning" onclick="showAccessDenied('Create Test')">
+              <i class="bi bi-plus-circle"></i> Create Test
+            </button>
+            {% endif %}
+          {% else %}
           <a href="{{ url_for('exam.create_test') }}" class="btn btn-warning">
             <i class="bi bi-plus-circle"></i> Create Test
           </a>
-          {% else %}
-          <button class="btn btn-warning" onclick="showAccessDenied('Create Test')">
-            <i class="bi bi-plus-circle"></i> Create Test
-          </button>
           {% endif %}
         </div>
         <div class="quick-actions-card">
           <i class="bi bi-card-list text-primary"></i>
           <h5>My Tests</h5>
           <p>Manage your custom tests</p>
-          {% if current_user.teacher_access_settings and current_user.teacher_access_settings.manage_tests_access != False %}
+          {% if current_user.role == 'teacher' %}
+            {% if current_user.teacher_access_settings and current_user.teacher_access_settings.manage_tests_access %}
+            <a href="{{ url_for('exam.my_tests') }}" class="btn btn-primary">
+              <i class="bi bi-folder2-open"></i> View All
+            </a>
+            {% else %}
+            <button class="btn btn-primary" onclick="showAccessDenied('My Tests')">
+              <i class="bi bi-folder2-open"></i> View All
+            </button>
+            {% endif %}
+          {% else %}
           <a href="{{ url_for('exam.my_tests') }}" class="btn btn-primary">
             <i class="bi bi-folder2-open"></i> View All
           </a>
-          {% else %}
-          <button class="btn btn-primary" onclick="showAccessDenied('My Tests')">
-            <i class="bi bi-folder2-open"></i> View All
-          </button>
           {% endif %}
         </div>
         <!--
@@ -205,8 +294,9 @@
         {% if current_user.role == 'superadmin' %}
         <!-- Access Management Section for SuperAdmin -->
         <section class="access-management-section mb-4">
+            <!-- First Row - 3 Cards -->
             <div class="row mb-4">
-                <div class="col-md-6">
+                <div class="col-md-4 mb-3">
                     <div class="access-card border rounded p-4 text-center h-100">
                         <i class="bi bi-people text-primary" style="font-size: 3rem;"></i>
                         <h4 class="mt-3 mb-2">Student Management</h4>
@@ -216,9 +306,9 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3">
                     <div class="access-card border rounded p-4 text-center h-100">
-                        <i class="bi bi-person-workspace text-warning" style="font-size: 3rem;"></i>
+                        <i class="bi bi-person-workspace text-primary" style="font-size: 3rem;"></i>
                         <h4 class="mt-3 mb-2">Teacher Management</h4>
                         <p class="text-muted mb-3">Access and manage all teacher accounts and permissions</p>
                         <a href="{{ url_for('main.teacher_access') }}" class="btn btn-primary">
@@ -226,8 +316,7 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
+                <div class="col-md-4 mb-3">
                     <div class="access-card border rounded p-4 text-center h-100">
                         <i class="bi bi-file-earmark-plus text-success" style="font-size: 3rem;"></i>
                         <h4 class="mt-3 mb-2">Add Questions</h4>
@@ -238,38 +327,35 @@
                     </div>
                 </div>
             </div>
-            <!-- Theme and Site Management Section -->
-            <div class="row">
-                <div class="col-md-6">
+            
+            <!-- Second Row - 3 Cards -->
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3">
                     <div class="access-card border rounded p-4 text-center h-100">
-                        <i class="bi bi-palette text-success" style="font-size: 3rem;"></i>
+                        <i class="bi bi-palette text-info" style="font-size: 3rem;"></i>
                         <h4 class="mt-3 mb-2">Theme Management</h4>
                         <p class="text-muted mb-3">Customize website colors and appearance for all users</p>
-                        <a href="{{ url_for('admin.theme_settings') }}" class="btn btn-success">
+                        <a href="{{ url_for('admin.theme_settings') }}" class="btn btn-info" style="color: white;">
                             <i class="bi bi-brush me-2"></i>Change Theme
                         </a>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4 mb-3">
                     <div class="access-card border rounded p-4 text-center h-100">
-                        <i class="bi bi-gear text-info" style="font-size: 3rem;"></i>
+                        <i class="bi bi-gear text-secondary" style="font-size: 3rem;"></i>
                         <h4 class="mt-3 mb-2">Site Settings</h4>
                         <p class="text-muted mb-3">Change website name and branding displayed in header and footer</p>
-                        <a href="{{ url_for('admin.site_settings') }}" class="btn btn-info" style="color: white;">
+                        <a href="{{ url_for('admin.site_settings') }}" class="btn btn-secondary" style="color: white;">
                             <i class="bi bi-pencil-square me-2"></i>Edit Name
                         </a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Logo Management Section -->
-            <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4 mb-3">
                     <div class="access-card border rounded p-4 text-center h-100">
-                        <i class="bi bi-image text-danger" style="font-size: 3rem;"></i>
+                        <i class="bi bi-image text-primary" style="font-size: 3rem;"></i>
                         <h4 class="mt-3 mb-2">Logo Management</h4>
                         <p class="text-muted mb-3">Upload and manage the website logo displayed in the header</p>
-                        <a href="{{ url_for('admin.logo_settings') }}" class="btn btn-danger">
+                        <a href="{{ url_for('admin.logo_settings') }}" class="btn btn-primary">
                             <i class="bi bi-upload me-2"></i>Manage Logo
                         </a>
                     </div>
@@ -429,7 +515,7 @@
           body: JSON.stringify({ class_level: classLevel })
         })
           .then(res => res.json())
-          .then data => {
+          .then(data => {
             if (data.success) {
               classModal.hide();
               location.reload();
@@ -444,10 +530,9 @@
     }
   });
 
-  // Function to show access denied alerts
-  function showAccessDenied(featureName) {
-    alert('Access Denied: ' + featureName + ' feature is currently disabled for your account. Please contact your administrator for assistance.');
-  }
+  // Simple access denied function is defined in the head section
+  
+  // ContactAdmin function removed - using simple alert instead
 
 
 </script>
