@@ -8,9 +8,79 @@ import json
 import os
 from flask import Blueprint, jsonify, request, send_file
 from html import unescape
-from app.models import db, Subject, Topic, Question
+from datetime import datetime
+from app.models import db, Subject, Topic, Question, StudentRegistration
 
 bp = Blueprint('api', __name__)
+
+@bp.route('/register-student', methods=['POST'])
+def register_student():
+    try:
+        data = request.get_json()
+
+        # Extract data from the request
+        application_no = data.get('application_no')
+        exam_date = datetime.strptime(data.get('exam_date'), '%d-%m-%Y').date() if data.get('exam_date') else None
+        student_name = data.get('student_name')
+        father_name = data.get('father_name')
+        student_class = data.get('class')
+        school = data.get('school')
+        board = data.get('board')
+        contact_1 = data.get('contact_1')
+        contact_2 = data.get('contact_2')
+        email = data.get('email')
+        address = data.get('address')
+        reference_1_name = data.get('reference_1_name')
+        reference_1_contact = data.get('reference_1_contact')
+        reference_2_name = data.get('reference_2_name')
+        reference_2_contact = data.get('reference_2_contact')
+
+        # Validate required fields
+        required_fields = ['application_no', 'student_name', 'contact_1']
+        for field in required_fields:
+            if not data.get(field):
+                return jsonify({
+                    'status': 'error',
+                    'message': f'{field.replace("_", " ").title()} is required'
+                }), 400
+
+        # Create new student registration
+        registration = StudentRegistration(
+            application_no=application_no,
+            exam_date=exam_date,
+            student_name=student_name,
+            father_name=father_name,
+            class_name=student_class,
+            school=school,
+            board=board,
+            contact_1=contact_1,
+            contact_2=contact_2,
+            email=email,
+            address=address,
+            reference_1_name=reference_1_name,
+            reference_1_contact=reference_1_contact,
+            reference_2_name=reference_2_name,
+            reference_2_contact=reference_2_contact
+        )
+
+        # Add to database
+        db.session.add(registration)
+        db.session.commit()
+
+        return jsonify({
+            'status': 'success',
+            'message': 'Student registration completed successfully',
+            'data': {
+                'application_no': application_no
+            }
+        }), 201
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
 
 def convert_options_for_frontend(question):
     """

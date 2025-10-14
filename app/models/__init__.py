@@ -309,6 +309,32 @@ class TeacherAccessSettings(db.Model):
         return f"<TeacherAccessSettings user_id={self.user_id}>"
 
 
+class StudentRegistration(db.Model):
+    """Student Registration model for storing student application details"""
+    __tablename__ = 'student_registrations'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    application_no = db.Column(db.String(20), unique=True, nullable=False)
+    exam_date = db.Column(db.Date, nullable=True)
+    student_name = db.Column(db.String(100), nullable=False)
+    father_name = db.Column(db.String(100), nullable=True)
+    class_name = db.Column('class', db.String(20), nullable=True)  # Using 'class' as column name
+    school = db.Column(db.String(200), nullable=True)
+    board = db.Column(db.String(100), nullable=True)
+    contact_1 = db.Column(db.String(15), nullable=False)
+    contact_2 = db.Column(db.String(15), nullable=True)
+    email = db.Column(db.String(120), nullable=True)
+    address = db.Column(db.Text, nullable=True)
+    reference_1_name = db.Column(db.String(100), nullable=True)
+    reference_1_contact = db.Column(db.String(15), nullable=True)
+    reference_2_name = db.Column(db.String(100), nullable=True)
+    reference_2_contact = db.Column(db.String(15), nullable=True)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f'<StudentRegistration {self.application_no}>'
+
+
 # Access Control Decorators
 def require_student_access(access_type):
     """
