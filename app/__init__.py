@@ -5,6 +5,7 @@ KODEMAPA-EXAMPAD Application Factory
 from flask import Flask
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
+from flask_cors import CORS
 from config import config
 
 # Import db from models to avoid circular imports
@@ -13,11 +14,22 @@ from app.models import db
 # Initialize other extensions
 login_manager = LoginManager()
 csrf = CSRFProtect()
+cors = CORS()
 
 def create_app(config_name='default'):
     """Application factory pattern"""
     app = Flask(__name__)
     app.config.from_object(config[config_name])
+    
+    # Configure CORS
+    app.config['CORS_HEADERS'] = 'Content-Type'
+    cors.init_app(app, resources={
+        r"/api/*": {
+            "origins": "*",  # In production, replace with specific origin
+            "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+            "allow_headers": ["Content-Type", "Authorization"]
+        }
+    })
     
     # Initialize extensions with app
     db.init_app(app)

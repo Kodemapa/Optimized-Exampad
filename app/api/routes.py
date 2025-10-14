@@ -9,11 +9,13 @@ import os
 from flask import Blueprint, jsonify, request, send_file
 from html import unescape
 from datetime import datetime
+from flask_cors import cross_origin
 from app.models import db, Subject, Topic, Question, StudentRegistration
 
 bp = Blueprint('api', __name__)
 
 @bp.route('/register-student', methods=['POST'])
+@cross_origin()
 def register_student():
     try:
         data = request.get_json()
