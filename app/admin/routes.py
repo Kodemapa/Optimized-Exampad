@@ -5,7 +5,7 @@ Admin Routes - Administrative dashboard and analytics
 from flask import render_template, request, jsonify, redirect, url_for, flash, current_app
 from flask_login import login_required, current_user
 from app.admin import bp
-from app.models import db, User, Subject, Topic, Question, Exam, ExamSession, CustomTest, SiteSetting
+from app.models import db, User, Subject, Topic, Question, Exam, ExamSession, CustomTest, SiteSetting, StudentRegistration
 from sqlalchemy import func, desc, and_
 from datetime import datetime, timedelta
 import json
@@ -21,6 +21,25 @@ def admin_required(f):
         return f(*args, **kwargs)
     decorated_function.__name__ = f.__name__
     return decorated_function
+
+@bp.route('/scholarship-management')
+@login_required
+@admin_required
+def scholarship_management():
+    """Scholarship management - display all student registrations"""
+    try:
+        # Get all student registrations
+        registrations = StudentRegistration.query.order_by(StudentRegistration.created_at.desc()).all()
+        
+        # Get statistics
+        total_registrations = len(registrations)
+        
+        return render_template('admin/scholarship_management.html',
+                             registrations=registrations,
+                             total_registrations=total_registrations)
+    except Exception as e:
+        flash(f'Error loading scholarship data: {str(e)}', 'error')
+        return redirect(url_for('admin.dashboard'))
 
 @bp.route('/all-submissions')
 @login_required
